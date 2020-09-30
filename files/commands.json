@@ -1,0 +1,4133 @@
+{
+	"java": {
+		"version": "1.16",
+		"fancy_name": "Java",
+		"commands": [
+			{
+				"command": "test",
+				"contents": {
+					"type": "component"
+				}
+			},
+			{
+				"command": "advancement",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "key",
+									"value": "grant"
+								},
+								{
+									"type": "key",
+									"value": "revoke"
+								}
+							]
+						},
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "everything"
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "from"
+										},
+										{
+											"type": "namespaced_id",
+											"disable_tags": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "only"
+										},
+										{
+											"type": "namespaced_id",
+											"disable_tags": true
+										},
+										{
+											"type": "text",
+											"text_type": "multi_word",
+											"optional": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "through"
+										},
+										{
+											"type": "namespaced_id",
+											"disable_tags": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "until"
+										},
+										{
+											"type": "namespaced_id",
+											"disable_tags": true
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "attribute",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"limited_to_one": true
+						},
+						{
+							"type": "namespaced_id",
+							"disable_tags": true
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "base"
+										},
+										{
+											"type": "alternative",
+											"values": [
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "get"
+														},
+														{
+															"type": "double",
+															"optional": true,
+															"disable_infinity": true
+														}
+													]
+												},
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "set"
+														},
+														{
+															"type": "double",
+															"disable_infinity": true
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "get"
+										},
+										{
+											"type": "double",
+											"optional": true,
+											"disable_infinity": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "modifier"
+										},
+										{
+											"type": "alternative",
+											"values": [
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "add"
+														},
+														{
+															"type": "uuid"
+														},
+														{
+															"type": "alternative",
+															"values": [
+																{
+																	"type": "text",
+																	"text_type": "quoted"
+																},
+																{
+																	"type": "text",
+																	"text_type": "word"
+																}
+															]
+														},
+														{
+															"type": "double",
+															"disable_infinity": true
+														},
+														{
+															"type": "alternative",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "add"
+																},
+																{
+																	"type": "key",
+																	"value": "multiply"
+																},
+																{
+																	"type": "key",
+																	"value": "multiply_base"
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "remove"
+														},
+														{
+															"type": "uuid"
+														}
+													]
+												},
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "value"
+														},
+														{
+															"type": "key",
+															"value": "get"
+														},
+														{
+															"type": "uuid"
+														},
+														{
+															"type": "double",
+															"optional": true
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "bossbar",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "add"
+								},
+								{
+									"type": "namespaced_id",
+									"disable_tags": true
+								},
+								{
+									"type": "component"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "get"
+								},
+								{
+									"type": "namespaced_id",
+									"disable_tags": true
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "max"
+										},
+										{
+											"type": "key",
+											"value": "players"
+										},
+										{
+											"type": "key",
+											"value": "value"
+										},
+										{
+											"type": "key",
+											"value": "visible"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "key",
+							"value": "list"
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "remove"
+								},
+								{
+									"type": "namespaced_id",
+									"disable_tags": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "set"
+								},
+								{
+									"type": "namespaced_id",
+									"disable_tags": true
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "color"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "blue"
+														},
+														{
+															"type": "key",
+															"value": "green"
+														},
+														{
+															"type": "key",
+															"value": "pink"
+														},
+														{
+															"type": "key",
+															"value": "purple"
+														},
+														{
+															"type": "key",
+															"value": "red"
+														},
+														{
+															"type": "key",
+															"value": "white"
+														},
+														{
+															"type": "key",
+															"value": "yellow"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "max"
+												},
+												{
+													"type": "integer",
+													"minimum": 0
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "name"
+												},
+												{
+													"type": "component"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "players"
+												},
+												{
+													"type": "entity",
+													"optional": true,
+													"players_only": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "style"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "notched_10"
+														},
+														{
+															"type": "key",
+															"value": "notched_12"
+														},
+														{
+															"type": "key",
+															"value": "notched_20"
+														},
+														{
+															"type": "key",
+															"value": "notched_6"
+														},
+														{
+															"type": "key",
+															"value": "progress"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "value"
+												},
+												{
+													"type": "integer",
+													"minimum": 0
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "visible"
+												},
+												{
+													"type": "boolean"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "clear",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"optional": true,
+							"players_only": true
+						},
+						{
+							"type": "item",
+							"optional": true
+						},
+						{
+							"type": "integer",
+							"optional": true,
+							"minimum": 0
+						}
+					]
+				}
+			},
+			{
+				"command": "clone",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "block_pos"
+						},
+						{
+							"type": "block_pos"
+						},
+						{
+							"type": "block_pos"
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "filtered"
+										},
+										{
+											"type": "block"
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "masked"
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "replace"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "key",
+									"value": "force"
+								},
+								{
+									"type": "key",
+									"value": "move"
+								},
+								{
+									"type": "key",
+									"value": "normal"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "data",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "get"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "block"
+												},
+												{
+													"type": "block_pos"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "entity"
+												},
+												{
+													"type": "entity",
+													"limited_to_one": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "storage"
+												},
+												{
+													"type": "namespaced_id",
+													"disable_tags": true
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "nbt_path",
+									"optional": true
+								},
+								{
+									"type": "double",
+									"optional": true,
+									"disable_infinity": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "merge"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "block"
+												},
+												{
+													"type": "block_pos"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "entity"
+												},
+												{
+													"type": "entity",
+													"limited_to_one": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "storage"
+												},
+												{
+													"type": "namespaced_id",
+													"disable_tags": true
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "nbt",
+									"forced_compound": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "modify"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "block"
+												},
+												{
+													"type": "block_pos"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "entity"
+												},
+												{
+													"type": "entity",
+													"limited_to_one": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "storage"
+												},
+												{
+													"type": "namespaced_id",
+													"disable_tags": true
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "nbt_path"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "append"
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "insert"
+												},
+												{
+													"type": "integer"
+												}
+											]
+										},
+										{
+											"type": "key",
+											"value": "merge"
+										},
+										{
+											"type": "key",
+											"value": "prepend"
+										},
+										{
+											"type": "key",
+											"value": "set"
+										}
+									]
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "from"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "block"
+																},
+																{
+																	"type": "block_pos"
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "entity"
+																},
+																{
+																	"type": "entity",
+																	"limited_to_one": true
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "storage"
+																},
+																{
+																	"type": "namespaced_id",
+																	"disable_tags": true
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "nbt_path"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "value"
+												},
+												{
+													"type": "nbt"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "remove"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "block"
+												},
+												{
+													"type": "block_pos"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "entity"
+												},
+												{
+													"type": "entity",
+													"limited_to_one": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "storage"
+												},
+												{
+													"type": "namespaced_id",
+													"disable_tags": true
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "nbt_path"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "datapack",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "disable"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "text",
+											"text_type": "quoted"
+										},
+										{
+											"type": "text",
+											"text_type": "word"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "enable"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "text",
+											"text_type": "quoted"
+										},
+										{
+											"type": "text",
+											"text_type": "word"
+										}
+									]
+								},
+								{
+									"type": "alternative",
+									"optional": true,
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "after"
+														},
+														{
+															"type": "key",
+															"value": "before"
+														}
+													]
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "text",
+															"text_type": "quoted"
+														},
+														{
+															"type": "text",
+															"text_type": "word"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "key",
+											"value": "first"
+										},
+										{
+											"type": "key",
+											"value": "last"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "list"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "available"
+										},
+										{
+											"type": "key",
+											"value": "enabled"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "debug",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "key",
+							"value": "report"
+						},
+						{
+							"type": "key",
+							"value": "start"
+						},
+						{
+							"type": "key",
+							"value": "stop"
+						}
+					]
+				}
+			},
+			{
+				"command": "defaultgamemode",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "key",
+							"value": "adventure"
+						},
+						{
+							"type": "key",
+							"value": "creative"
+						},
+						{
+							"type": "key",
+							"value": "spectator"
+						},
+						{
+							"type": "key",
+							"value": "survival"
+						}
+					]
+				}
+			},
+			{
+				"command": "difficulty",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "key",
+							"value": "easy"
+						},
+						{
+							"type": "key",
+							"value": "hard"
+						},
+						{
+							"type": "key",
+							"value": "normal"
+						},
+						{
+							"type": "key",
+							"value": "peaceful"
+						}
+					]
+				}
+			},
+			{
+				"command": "effect",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "clear"
+								},
+								{
+									"type": "entity",
+									"optional": true
+								},
+								{
+									"type": "effect",
+									"optional": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "give"
+								},
+								{
+									"type": "entity"
+								},
+								{
+									"type": "effect"
+								},
+								{
+									"type": "integer",
+									"optional": true,
+									"minimum": 1,
+									"maximum": 1000000
+								},
+								{
+									"type": "integer",
+									"optional": true,
+									"minimum": 0,
+									"maximum": 255
+								},
+								{
+									"type": "boolean",
+									"optional": true
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "enchant",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity"
+						},
+						{
+							"type": "enchantment"
+						},
+						{
+							"type": "integer",
+							"optional": true,
+							"minimum": 0
+						}
+					]
+				}
+			},
+			{
+				"command": "execute",
+				"loop_contents": true,
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "align"
+								},
+								{
+									"type": "swizzle",
+									"characters": [ "x", "y", "z" ]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "anchored"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "eyes"
+										},
+										{
+											"type": "key",
+											"value": "feet"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "as"
+								},
+								{
+									"type": "entity"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "at"
+								},
+								{
+									"type": "entity"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "facing"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "entity"
+												},
+												{
+													"type": "entity"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "eyes"
+														},
+														{
+															"type": "key",
+															"value": "feet"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "vec3"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "if"
+										},
+										{
+											"type": "key",
+											"value": "unless"
+										}
+									]
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "block"
+												},
+												{
+													"type": "block_pos"
+												},
+												{
+													"type": "block",
+													"may_escape_loop": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "blocks"
+												},
+												{
+													"type": "block_pos"
+												},
+												{
+													"type": "block_pos"
+												},
+												{
+													"type": "block_pos"
+												},
+												{
+													"type": "alternative",
+													"may_escape_loop": true,
+													"values": [
+														{
+															"type": "key",
+															"value": "all"
+														},
+														{
+															"type": "key",
+															"value": "masked"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "data"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "block"
+																},
+																{
+																	"type": "block_pos"
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "entity"
+																},
+																{
+																	"type": "entity",
+																	"limited_to_one": true
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "storage"
+																},
+																{
+																	"type": "namespaced_id",
+																	"disable_tags": true
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "nbt_path",
+													"may_escape_loop": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "entity"
+												},
+												{
+													"type": "entity",
+													"may_escape_loop": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "predicate"
+												},
+												{
+													"type": "namespaced_id",
+													"may_escape_loop": true,
+													"disable_tags": true,
+													"from":"predicate"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "score"
+												},
+												{
+													"type": "score_holder",
+													"limited_to_one": true
+												},
+												{
+													"type": "objective"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "alternative",
+																	"values": [
+																		{
+																			"type": "key",
+																			"value": "<"
+																		},
+																		{
+																			"type": "key",
+																			"value": "<="
+																		},
+																		{
+																			"type": "key",
+																			"value": "="
+																		},
+																		{
+																			"type": "key",
+																			"value": ">"
+																		},
+																		{
+																			"type": "key",
+																			"value": ">="
+																		}
+																	]
+																},
+																{
+																	"type": "score_holder",
+																	"limited_to_one": true
+																},
+																{
+																	"type": "objective",
+																	"may_escape_loop": true
+																},
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "matches"
+																},
+																{
+																	"type": "integer_range",
+																	"may_escape_loop": true
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "in"
+								},
+								{
+									"type": "namespaced_id",
+									"disable_tags": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "positioned"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "as"
+												},
+												{
+													"type": "entity"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "vec3"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "rotated"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "as"
+												},
+												{
+													"type": "entity"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "rotation"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"may_escape_loop": true,
+									"expect_command": true,
+									"value": "run"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "store"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "result"
+										},
+										{
+											"type": "key",
+											"value": "success"
+										}
+									]
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "block"
+																},
+																{
+																	"type": "block_pos"
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "entity"
+																},
+																{
+																	"type": "entity",
+																	"limited_to_one": true
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "storage"
+																},
+																{
+																	"type": "namespaced_id",
+																	"disable_tags": true
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "nbt_path"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "byte"
+														},
+														{
+															"type": "key",
+															"value": "double"
+														},
+														{
+															"type": "key",
+															"value": "float"
+														},
+														{
+															"type": "key",
+															"value": "int"
+														},
+														{
+															"type": "key",
+															"value": "long"
+														},
+														{
+															"type": "key",
+															"value": "short"
+														}
+													]
+												},
+												{
+													"type": "double",
+													"disable_infinity": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "bossbar"
+												},
+												{
+													"type": "namespaced_id",
+													"disable_tags": true
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "max"
+														},
+														{
+															"type": "key",
+															"value": "value"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "score"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "experience",
+				"aliases": [ "xp" ],
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "add"
+								},
+								{
+									"type": "entity",
+									"players_only": true
+								},
+								{
+									"type": "integer"
+								},
+								{
+									"type": "alternative",
+									"optional": true,
+									"values": [
+										{
+											"type": "key",
+											"value": "levels"
+										},
+										{
+											"type": "key",
+											"value": "points"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "set"
+								},
+								{
+									"type": "entity",
+									"players_only": true
+								},
+								{
+									"type": "integer",
+									"minimum": 0
+								},
+								{
+									"type": "alternative",
+									"optional": true,
+									"values": [
+										{
+											"type": "key",
+											"value": "levels"
+										},
+										{
+											"type": "key",
+											"value": "points"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "query"
+								},
+								{
+									"type": "entity",
+									"players_only": true,
+									"limited_to_one": true
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "levels"
+										},
+										{
+											"type": "key",
+											"value": "points"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "fill",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "block_pos"
+						},
+						{
+							"type": "block_pos"
+						},
+						{
+							"type": "block",
+							"disable_tags": true
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "key",
+									"value": "destroy"
+								},
+								{
+									"type": "key",
+									"value": "hollow"
+								},
+								{
+									"type": "key",
+									"value": "keep"
+								},
+								{
+									"type": "key",
+									"value": "outline"
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "replace"
+										},
+										{
+											"type": "block"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "forceload",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "add"
+								},
+								{
+									"type": "column_pos"
+								},
+								{
+									"type": "column_pos",
+									"optional": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "query"
+								},
+								{
+									"type": "column_pos",
+									"optional": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "remove"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "all"
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "column_pos"
+												},
+												{
+													"type": "column_pos",
+													"optional": true
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "function",
+				"contents": {
+					"type": "namespaced_id"
+				}
+			},
+			{
+				"command": "gamemode",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "key",
+									"value": "adventure"
+								},
+								{
+									"type": "key",
+									"value": "creative"
+								},
+								{
+									"type": "key",
+									"value": "spectator"
+								},
+								{
+									"type": "key",
+									"value": "survival"
+								}
+							]
+						},
+						{
+							"type": "entity",
+							"optional": true,
+							"players_only": true
+						}
+					]
+				}
+			},
+			{
+				"command": "gamerule",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "announceAdvancements"
+										},
+										{
+											"type": "key",
+											"value": "commandBlockOutput"
+										},
+										{
+											"type": "key",
+											"value": "disableElytraMovementCheck"
+										},
+										{
+											"type": "key",
+											"value": "disableRaids"
+										},
+										{
+											"type": "key",
+											"value": "doDaylightCycle"
+										},
+										{
+											"type": "key",
+											"value": "doEntityDrops"
+										},
+										{
+											"type": "key",
+											"value": "doFireTick"
+										},
+										{
+											"type": "key",
+											"value": "doImmediateRespawn"
+										},
+										{
+											"type": "key",
+											"value": "doInsomnia"
+										},
+										{
+											"type": "key",
+											"value": "doLimitedCrafting"
+										},
+										{
+											"type": "key",
+											"value": "doMobLoot"
+										},
+										{
+											"type": "key",
+											"value": "doMobSpawning"
+										},
+										{
+											"type": "key",
+											"value": "doPatrolSpawning"
+										},
+										{
+											"type": "key",
+											"value": "doTileDrops"
+										},
+										{
+											"type": "key",
+											"value": "doTraderSpawning"
+										},
+										{
+											"type": "key",
+											"value": "doWeatherCycle"
+										},
+										{
+											"type": "key",
+											"value": "drowningDamage"
+										},
+										{
+											"type": "key",
+											"value": "fallDamage"
+										},
+										{
+											"type": "key",
+											"value": "fireDamage"
+										},
+										{
+											"type": "key",
+											"value": "forgiveDeadPlayers"
+										},
+										{
+											"type": "key",
+											"value": "keepInventory"
+										},
+										{
+											"type": "key",
+											"value": "logAdminCommands"
+										},
+										{
+											"type": "key",
+											"value": "mobGriefing"
+										},
+										{
+											"type": "key",
+											"value": "naturalRegeneration"
+										},
+										{
+											"type": "key",
+											"value": "reducedDebugInfo"
+										},
+										{
+											"type": "key",
+											"value": "sendCommandFeedback"
+										},
+										{
+											"type": "key",
+											"value": "showDeathMessages"
+										},
+										{
+											"type": "key",
+											"value": "spectatorsGenerateChunks"
+										},
+										{
+											"type": "key",
+											"value": "universalAnger"
+										}
+									]
+								},
+								{
+									"type": "boolean",
+									"optional": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "maxCommandChainLength"
+										},
+										{
+											"type": "key",
+											"value": "maxEntityCramming"
+										},
+										{
+											"type": "key",
+											"value": "randomTickSpeed"
+										},
+										{
+											"type": "key",
+											"value": "spawnRadius"
+										}
+									]
+								},
+								{
+									"type": "integer",
+									"optional": true
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "give",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "item",
+							"disable_tags": true
+						},
+						{
+							"type": "integer",
+							"optional": true,
+							"minimum": 0
+						}
+					]
+				}
+			},
+			{
+				"command": "help",
+				"contents": {
+					"type": "text",
+					"optional": true,
+					"text_type": "multi_word"
+				}
+			},
+			{
+				"command": "kill",
+				"contents": {
+					"type": "entity",
+					"optional": true
+				}
+			},
+			{
+				"command": "list",
+				"contents": {
+					"type": "key",
+					"optional": true,
+					"value": "uuids"
+				}
+			},
+			{
+				"command": "locate",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "key",
+							"value": "bastion_remnant"
+						},
+						{
+							"type": "key",
+							"value": "buried_treasure"
+						},
+						{
+							"type": "key",
+							"value": "desert_pyramid"
+						},
+						{
+							"type": "key",
+							"value": "endcity"
+						},
+						{
+							"type": "key",
+							"value": "fortress"
+						},
+						{
+							"type": "key",
+							"value": "igloo"
+						},
+						{
+							"type": "key",
+							"value": "jungle_pyramid"
+						},
+						{
+							"type": "key",
+							"value": "mansion"
+						},
+						{
+							"type": "key",
+							"value": "mineshaft"
+						},
+						{
+							"type": "key",
+							"value": "monument"
+						},
+						{
+							"type": "key",
+							"value": "nether_fossil"
+						},
+						{
+							"type": "key",
+							"value": "ocean_ruin"
+						},
+						{
+							"type": "key",
+							"value": "pillager_output"
+						},
+						{
+							"type": "key",
+							"value": "ruined_portal"
+						},
+						{
+							"type": "key",
+							"value": "shipwreck"
+						},
+						{
+							"type": "key",
+							"value": "stronghold"
+						},
+						{
+							"type": "key",
+							"value": "swamp_hut"
+						},
+						{
+							"type": "key",
+							"value": "village"
+						}
+					]
+				}
+			},
+			{
+				"command": "locatebiome",
+				"contents": {
+					"type": "namespaced_id",
+					"disable_tags": true
+				}
+			},
+			{
+				"command": "loot",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "give"
+										},
+										{
+											"type": "entity",
+											"players_only": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "insert"
+										},
+										{
+											"type": "block_pos"
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "replace"
+										},
+										{
+											"type": "alternative",
+											"values": [
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "block"
+														},
+														{
+															"type": "block_pos"
+														}
+													]
+												},
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "entity"
+														},
+														{
+															"type": "entity"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "item_slot"
+										},
+										{
+											"type": "integer",
+											"may_be_skipped": true,
+											"minimum": 0
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "spawn"
+										},
+										{
+											"type": "vec3"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "alternative",
+											"values": [
+												{
+													"type": "requirements",
+													"values": [
+														{
+															"type": "key",
+															"value": "fish"
+														},
+														{
+															"type": "namespaced_id",
+															"disable_tags": true
+														}
+													]
+												},
+												{
+													"type": "key",
+													"value": "mine"
+												}
+											]
+										},
+										{
+											"type": "block_pos"
+										},
+										{
+											"type": "alternative",
+											"optional": true,
+											"values": [
+												{
+													"type": "key",
+													"value": "mainhand"
+												},
+												{
+													"type": "key",
+													"value": "offhand"
+												},
+												{
+													"type": "item",
+													"disable_tags": true
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "kill"
+										},
+										{
+											"type": "entity",
+											"limited_to_one": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "loot"
+										},
+										{
+											"type": "namespaced_id",
+											"disable_tags": true
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "me",
+				"contents": {
+					"type": "text",
+					"text_type": "multi_word"
+				}
+			},
+			{
+				"command": "msg",
+				"aliases": [ "tell", "w" ],
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "message"
+						}
+					]
+				}
+			},
+			{
+				"command": "particle",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "particle"
+						},
+						{
+							"type": "vec3",
+							"optional": true
+						},
+						{
+							"type": "vec3",
+							"optional": true
+						},
+						{
+							"type": "float",
+							"minimum": 0
+						},
+						{
+							"type": "integer",
+							"minimum": 0
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "key",
+									"value": "force"
+								},
+								{
+									"type": "key",
+									"value": "normal"
+								}
+							]
+						},
+						{
+							"type": "entity",
+							"optional": true,
+							"players_only": true
+						}
+					]
+				}
+			},
+			{
+				"command": "playsound",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "namespaced_id",
+							"disable_tags": true
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "key",
+									"value": "ambient"
+								},
+								{
+									"type": "key",
+									"value": "block"
+								},
+								{
+									"type": "key",
+									"value": "hostile"
+								},
+								{
+									"type": "key",
+									"value": "master"
+								},
+								{
+									"type": "key",
+									"value": "music"
+								},
+								{
+									"type": "key",
+									"value": "neutral"
+								},
+								{
+									"type": "key",
+									"value": "player"
+								},
+								{
+									"type": "key",
+									"value": "record"
+								},
+								{
+									"type": "key",
+									"value": "voice"
+								},
+								{
+									"type": "key",
+									"value": "weather"
+								}
+							]
+						},
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "vec3",
+							"optional": true
+						},
+						{
+							"type": "float",
+							"optional": true,
+							"minimum": 0,
+							"disable_infinity": true
+						},
+						{
+							"type": "float",
+							"optional": true,
+							"minimum": 0,
+							"maximum": 2
+						},
+						{
+							"type": "float",
+							"optional": true,
+							"minimum": 0,
+							"maximum": 1
+						}
+					]
+				}
+			},
+			{
+				"command": "recipe",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "key",
+									"value": "give"
+								},
+								{
+									"type": "key",
+									"value": "take"
+								}
+							]
+						},
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "key",
+									"value": "*"
+								},
+								{
+									"type": "namespaced_id",
+									"disable_tags": true
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "reload",
+				"contents": {}
+			},
+			{
+				"command": "replaceitem",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "block"
+										},
+										{
+											"type": "block_pos"
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "entity"
+										},
+										{
+											"type": "entity"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "item_slot"
+						},
+						{
+							"type": "item",
+							"disable_tags": true
+						},
+						{
+							"type": "integer",
+							"optional": true,
+							"minimum": 1,
+							"maximum": 64
+						}
+					]
+				}
+			},
+			{
+				"command": "say",
+				"contents": {
+					"type": "message"
+				}
+			},
+			{
+				"command": "schedule",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "clear"
+								},
+								{
+									"type": "text",
+									"text_type": "multi_word"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "function"
+								},
+								{
+									"type": "namespaced_id"
+								},
+								{
+									"type": "time"
+								},
+								{
+									"type": "alternative",
+									"optional": true,
+									"values": [
+										{
+											"type": "key",
+											"value": "append"
+										},
+										{
+											"type": "key",
+											"value": "replace"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "scoreboard",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "objectives"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "add"
+												},
+												{
+													"type": "text",
+													"text_type": "word"
+												},
+												{
+													"type": "scoreboard_criteria"
+												},
+												{
+													"type": "component",
+													"optional": true
+												}
+											]
+										},
+										{
+											"type": "key",
+											"value": "list"
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "modify"
+												},
+												{
+													"type": "objective"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "displayname"
+																},
+																{
+																	"type": "component"
+																}
+															]
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "rendertype"
+																},
+																{
+																	"type": "alternative",
+																	"values": [
+																		{
+																			"type": "key",
+																			"value": "hearts"
+																		},
+																		{
+																			"type": "key",
+																			"value": "integer"
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "remove"
+												},
+												{
+													"type": "objective"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "setdisplay"
+												},
+												{
+													"type": "scoreboard_slot"
+												},
+												{
+													"type": "objective",
+													"optional": true
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "players"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "add"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												},
+												{
+													"type": "integer",
+													"minimum": 0
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "enable"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "get"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "list"
+												},
+												{
+													"type": "score_holder",
+													"optional": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "operation"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "%="
+														},
+														{
+															"type": "key",
+															"value": "*="
+														},
+														{
+															"type": "key",
+															"value": "+="
+														},
+														{
+															"type": "key",
+															"value": "-="
+														},
+														{
+															"type": "key",
+															"value": "/="
+														},
+														{
+															"type": "key",
+															"value": "<"
+														},
+														{
+															"type": "key",
+															"value": "="
+														},
+														{
+															"type": "key",
+															"value": ">"
+														},
+														{
+															"type": "key",
+															"value": "><"
+														}
+													]
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "remove"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												},
+												{
+													"type": "integer",
+													"minimum": 0
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "reset"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective",
+													"optional": true
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "set"
+												},
+												{
+													"type": "score_holder"
+												},
+												{
+													"type": "objective"
+												},
+												{
+													"type": "integer"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "seed",
+				"contents": {}
+			},
+			{
+				"command": "setblock",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "block_pos"
+						},
+						{
+							"type": "block",
+							"disable_tags": true
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "key",
+									"value": "destroy"
+								},
+								{
+									"type": "key",
+									"value": "keep"
+								},
+								{
+									"type": "key",
+									"value": "replace"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "setworldspawn",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "block_pos",
+							"optional": true
+						},
+						{
+							"type": "angle",
+							"optional": true
+						}
+					]
+				}
+			},
+			{
+				"command": "spawnpoint",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"optional": true,
+							"players_only": true
+						},
+						{
+							"type": "block_pos",
+							"optional": true
+						},
+						{
+							"type": "angle",
+							"optional": true
+						}
+					]
+				}
+			},
+			{
+				"command": "spectate",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"optional": true,
+							"limited_to_one": true
+						},
+						{
+							"type": "entity",
+							"optional": true,
+							"players_only": true,
+							"limited_to_one": true
+						}
+					]
+				}
+			},
+			{
+				"command": "spreadplayers",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "vec2"
+						},
+						{
+							"type": "float",
+							"minimum": 0,
+							"disable_infinity": true
+						},
+						{
+							"type": "float",
+							"minimum": 1,
+							"disable_infinity": true
+						},
+						{
+							"type": "requirements",
+							"may_be_skipped": true,
+							"values": [
+								{
+									"type": "key",
+									"value": "under"
+								},
+								{
+									"type": "integer",
+									"minimum": 0
+								}
+							]
+						},
+						{
+							"type": "boolean"
+						},
+						{
+							"type": "entity"
+						}
+					]
+				}
+			},
+			{
+				"command": "stopsound",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "*"
+										},
+										{
+											"type": "namespaced_id",
+											"disable_tags": true
+										}
+									]
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "alternative",
+											"optional": true,
+											"values": [
+												{
+													"type": "key",
+													"value": "ambient"
+												},
+												{
+													"type": "key",
+													"value": "block"
+												},
+												{
+													"type": "key",
+													"value": "hostile"
+												},
+												{
+													"type": "key",
+													"value": "master"
+												},
+												{
+													"type": "key",
+													"value": "music"
+												},
+												{
+													"type": "key",
+													"value": "neutral"
+												},
+												{
+													"type": "key",
+													"value": "player"
+												},
+												{
+													"type": "key",
+													"value": "record"
+												},
+												{
+													"type": "key",
+													"value": "voice"
+												},
+												{
+													"type": "key",
+													"value": "weather"
+												}
+											]
+										},
+										{
+											"type": "namespaced_id",
+											"optional": true,
+											"disable_tags": true
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "summon",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity_summon"
+						},
+						{
+							"type": "vec3",
+							"optional": true
+						},
+						{
+							"type": "nbt",
+							"optional": true,
+							"forced_compound": true
+						}
+					]
+				}
+			},
+			{
+				"command": "tag",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity"
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "alternative",
+											"values": [
+												{
+													"type": "key",
+													"value": "add"
+												},
+												{
+													"type": "key",
+													"value": "remove"
+												}
+											]
+										},
+										{
+											"type": "text",
+											"text_type": "word"
+										}
+									]
+								},
+								{
+									"type": "key",
+									"value": "list"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "team",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "add"
+								},
+								{
+									"type": "text",
+									"text_type": "word"
+								},
+								{
+									"type": "component",
+									"optional": true,
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "empty"
+								},
+								{
+									"type": "text",
+									"text_type": "word"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "join"
+								},
+								{
+									"type": "text",
+									"text_type": "word"
+								},
+								{
+									"type": "entity",
+									"optional": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "join"
+								},
+								{
+									"type": "text",
+									"text_type": "word"
+								},
+								{
+									"type": "entity",
+									"optional": true
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "leave"
+								},
+								{
+									"type": "entity"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "list"
+								},
+								{
+									"type": "text",
+									"optional": true,
+									"text_type": "word"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "modify"
+								},
+								{
+									"type": "text",
+									"text_type": "word"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "collisionRule"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "always"
+														},
+														{
+															"type": "key",
+															"value": "never"
+														},
+														{
+															"type": "key",
+															"value": "pushOtherTeams"
+														},
+														{
+															"type": "key",
+															"value": "pushOwnTeam"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "color"
+												},
+												{
+													"type": "colour"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "deathMessageVisibility"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "always"
+														},
+														{
+															"type": "key",
+															"value": "hideForOtherTeams"
+														},
+														{
+															"type": "key",
+															"value": "hideForOwnTeam"
+														},
+														{
+															"type": "key",
+															"value": "never"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "displayName"
+												},
+												{
+													"type": "component"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "friendlyFire"
+												},
+												{
+													"type": "boolean"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "nametagVisibility"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "key",
+															"value": "always"
+														},
+														{
+															"type": "key",
+															"value": "hideForOtherTeams"
+														},
+														{
+															"type": "key",
+															"value": "hideForOwnTeam"
+														},
+														{
+															"type": "key",
+															"value": "never"
+														}
+													]
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "prefix"
+												},
+												{
+													"type": "component"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "seeFriendlyInvisibles"
+												},
+												{
+													"type": "boolean"
+												}
+											]
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "suffix"
+												},
+												{
+													"type": "component"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "remove"
+								},
+								{
+									"type": "text",
+									"text_type": "word"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "teammsg",
+				"aliases": [ "tm" ],
+				"contents": {
+					"type": "message"
+				}
+			},
+			{
+				"command": "teleport",
+				"aliases": [ "tp" ],
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"force_end_of_command": true,
+							"disable_forced_path": true,
+							"values": [
+								{
+									"type": "entity"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "vec3",
+										},
+										{
+											"type": "entity",
+											"limited_to_one": true
+										}
+									]
+								},
+								{
+									"type": "alternative",
+									"optional": true,
+									"values": [
+										{
+											"type": "rotation"
+										},
+										{
+											"type": "requirements",
+											"values": [
+												{
+													"type": "key",
+													"value": "facing"
+												},
+												{
+													"type": "alternative",
+													"values": [
+														{
+															"type": "vec3"
+														},
+														{
+															"type": "requirements",
+															"values": [
+																{
+																	"type": "key",
+																	"value": "entity"
+																},
+																{
+																	"type": "entity",
+																	"limited_to_one": true
+																},
+																{
+																	"type": "alternative",
+																	"optional": true,
+																	"values": [
+																		{
+																			"type": "key",
+																			"value": "eyes"
+																		},
+																		{
+																			"type": "key",
+																			"value": "feet"
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "vec3"
+						},
+						{
+							"type": "entity",
+							"limited_to_one": true
+						}
+					]
+				}
+			},
+			{
+				"command": "tellraw",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "component"
+						}
+					]
+				}
+			},
+			{
+				"command": "time",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "add"
+								},
+								{
+									"type": "time"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "query"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "day"
+										},
+										{
+											"type": "key",
+											"value": "daytime"
+										},
+										{
+											"type": "key",
+											"value": "gametime"
+										}
+									]
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "set"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "time"
+										},
+										{
+											"type": "key",
+											"value": "day"
+										},
+										{
+											"type": "key",
+											"value": "midnight"
+										},
+										{
+											"type": "key",
+											"value": "night"
+										},
+										{
+											"type": "key",
+											"value": "noon"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "title",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "entity",
+							"players_only": true
+						},
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "alternative",
+											"values": [
+												{
+													"type": "key",
+													"value": "actionbar"
+												},
+												{
+													"type": "key",
+													"value": "subtitle"
+												},
+												{
+													"type": "key",
+													"value": "title"
+												}
+											]
+										},
+										{
+											"type": "component"
+										}
+									]
+								},
+								{
+									"type": "key",
+									"value": "clear"
+								},
+								{
+									"type": "key",
+									"value": "reset"
+								},
+								{
+									"type": "requirements",
+									"values": [
+										{
+											"type": "key",
+											"value": "times"
+										},
+										{
+											"type": "integer",
+											"minimum": 0
+										},
+										{
+											"type": "integer",
+											"minimum": 0
+										},
+										{
+											"type": "integer",
+											"minimum": 0
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"command": "trigger",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "objective"
+						},
+						{
+							"type": "alternative",
+							"optional": true,
+							"values": [
+								{
+									"type": "key",
+									"value": "add"
+								},
+								{
+									"type": "key",
+									"value": "set"
+								}
+							]
+						},
+						{
+							"type": "integer"
+						}
+					]
+				}
+			},
+			{
+				"command": "weather",
+				"contents": {
+					"type": "requirements",
+					"values": [
+						{
+							"type": "alternative",
+							"values": [
+								{
+									"type": "key",
+									"value": "clear"
+								},
+								{
+									"type": "key",
+									"value": "rain"
+								},
+								{
+									"type": "key",
+									"value": "thunder"
+								}
+							]
+						},
+						{
+							"type": "integer",
+							"optional": true,
+							"minimum": 0
+						}
+					]
+				}
+			},
+			{
+				"command": "worldborder",
+				"contents": {
+					"type": "alternative",
+					"values": [
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "add"
+										},
+										{
+											"type": "key",
+											"value": "set"
+										}
+									]
+								},
+								{
+									"type": "float",
+									"minimum": -6E7,
+									"maximum": 6E7,
+								},
+								{
+									"type": "integer",
+									"optional": true,
+									"minimum": 0
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "center"
+								},
+								{
+									"type": "vec2"
+								}
+							]
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "damage"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "amount"
+										},
+										{
+											"type": "key",
+											"value": "buffer"
+										}
+									]
+								},
+								{
+									"type": "float",
+									"disable_infinity": true,
+									"minimum": 0
+								}
+							]
+						},
+						{
+							"type": "key",
+							"value": "get"
+						},
+						{
+							"type": "requirements",
+							"values": [
+								{
+									"type": "key",
+									"value": "warning"
+								},
+								{
+									"type": "alternative",
+									"values": [
+										{
+											"type": "key",
+											"value": "distance"
+										},
+										{
+											"type": "key",
+											"value": "time"
+										}
+									]
+								},
+								{
+									"type": "integer",
+									"minimum": 0
+								}
+							]
+						}
+					]
+				}
+			}
+		]
+	}
+}

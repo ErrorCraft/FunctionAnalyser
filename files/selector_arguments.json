@@ -1,0 +1,23 @@
+{
+	"advancements":{"encapsulated":true,"components":[{"type":"namespaced_id","disable_tags":true},{"type":"character","value":"="},{"type":"boolean"}]},
+	"distance":{"components":[{"type":"float_range","minimum":0}]},
+	"dx":{"components":[{"type":"double"}]},
+	"dy":{"components":[{"type":"double"}]},
+	"dz":{"components":[{"type":"double"}]},
+	"gamemode":{"allow_inverse":true,"components":[{"type":"alternative","values":[{"type":"key","check_outside":true,"value":"adventure"},{"type":"key","check_outside":true,"value":"creative"},{"type":"key","check_outside":true,"value":"spectator"},{"type":"key","check_outside":true,"value":"survival"}]}]},
+	"level":{"components":[{"type":"integer_range","minimum":0}]},
+	"limit":{"predicate":"set_limit"},
+	"name":{"allow_inverse":true,"components":[{"type":"alternative","values":[{"type":"text","text_type":"quoted"},{"type":"text","text_type":"word"}]}]},
+	"nbt":{"allow_inverse":true,"components":[{"type":"nbt"}]},
+	"predicate":{"allow_inverse":true,"components":[{"type":"namespaced_id","disable_tags":true,"from":"predicate"}]},
+	"scores":{"encapsulated":true,"components":[{"type":"objective"},{"type":"character","value":"="},{"type":"integer_range"}]},
+	"sort":{"components":[{"type":"alternative","values":[{"type":"key","check_outside":true,"value":"arbitrary"},{"type":"key","check_outside":true,"value":"furthest"},{"type":"key","check_outside":true,"value":"nearest"},{"type":"key","check_outside":true,"value":"random"}]}]},
+	"tag":{"allow_inverse":true,"components":[{"type":"text","text_type":"word"}]},
+	"team":{"allow_inverse":true,"components":[{"type":"text","text_type":"word"}]},
+	"type":{"predicate":"set_executor","allow_inverse":true},
+	"x":{"components":[{"type":"double"}]},
+	"x_rotation":{"components":[{"type":"double_range"}]},
+	"y":{"components":[{"type":"double"}]},
+	"y_rotation":{"components":[{"type":"double_range"}]},
+	"z":{"components":[{"type":"double"}]}
+}
