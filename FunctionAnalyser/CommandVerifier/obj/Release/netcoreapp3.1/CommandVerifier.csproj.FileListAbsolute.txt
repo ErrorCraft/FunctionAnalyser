@@ -1,0 +1,9 @@
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\bin\Release\netcoreapp3.1\CommandVerifier.deps.json
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\bin\Release\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\bin\Release\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Release\netcoreapp3.1\CommandVerifier.csprojAssemblyReference.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Release\netcoreapp3.1\CommandVerifier.AssemblyInfoInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Release\netcoreapp3.1\CommandVerifier.AssemblyInfo.cs
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Release\netcoreapp3.1\CommandVerifier.csproj.CoreCompileInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Release\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Release\netcoreapp3.1\CommandVerifier.pdb

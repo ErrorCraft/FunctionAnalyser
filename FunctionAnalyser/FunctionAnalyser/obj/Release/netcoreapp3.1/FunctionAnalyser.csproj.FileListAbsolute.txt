@@ -1,0 +1,12 @@
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\bin\Release\netcoreapp3.1\FunctionAnalyser.deps.json
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\bin\Release\netcoreapp3.1\FunctionAnalyser.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\bin\Release\netcoreapp3.1\FunctionAnalyser.pdb
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\bin\Release\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\bin\Release\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.csprojAssemblyReference.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.AssemblyInfoInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.AssemblyInfo.cs
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.csproj.CoreCompileInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.csproj.CopyComplete
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\FunctionAnalyser\obj\Release\netcoreapp3.1\FunctionAnalyser.pdb

@@ -1,0 +1,27 @@
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.deps.json
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.csprojAssemblyReference.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.AssemblyInfoInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.AssemblyInfo.cs
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.csproj.CoreCompileInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\CommandVerifier\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.deps.json
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.csprojAssemblyReference.cache
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.AssemblyInfoInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.AssemblyInfo.cs
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.csproj.CoreCompileInputs.cache
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Desktop\MCC and such\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.deps.json
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\bin\Debug\netcoreapp3.1\CommandVerifier.pdb
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.csprojAssemblyReference.cache
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.AssemblyInfoInputs.cache
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.AssemblyInfo.cs
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.csproj.CoreCompileInputs.cache
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandVerifier\obj\Debug\netcoreapp3.1\CommandVerifier.pdb

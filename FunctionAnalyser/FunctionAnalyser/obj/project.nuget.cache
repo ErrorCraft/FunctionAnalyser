@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MGUhDljzLzbgGXm6ujdTZNjR2UCMNgDUbVhe9IFG+HAL8NF2a6yCVQsYj/qxzUgXyKZRZRypiievrpWvcimH9Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ramon\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
