@@ -10,6 +10,7 @@ namespace UserInterface
     class TextWriter : IWriter
     {
         private readonly TextBlock Output;
+        private string Text;
 
         public TextWriter(TextBlock output)
         {
@@ -26,6 +27,8 @@ namespace UserInterface
                 FontWeight = textComponent.Bold ? FontWeights.Bold : FontWeights.Normal,
             };
         }
+
+        public string GetFlatOutput() => Text;
 
         public void Write(TextComponent textComponent)
         {
@@ -60,6 +63,16 @@ namespace UserInterface
         public void WriteLine(string text)
         {
             Output.Dispatcher.Invoke(() => Write(new TextComponent(text + "\n")));
+        }
+
+        public void WriteLine()
+        {
+            Output.Dispatcher.Invoke(() => Write(new TextComponent("\n")));
+        }
+
+        public void Reset()
+        {
+            //
         }
     }
 }

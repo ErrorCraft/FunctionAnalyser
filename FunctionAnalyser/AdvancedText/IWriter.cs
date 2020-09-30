@@ -7,5 +7,7 @@
         void Write(TextComponent[] textComponent);
         void Write(string text);
         void WriteLine(string text);
+        void WriteLine();
+        void Reset();
     }
 }

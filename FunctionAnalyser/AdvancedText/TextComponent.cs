@@ -4,6 +4,7 @@ namespace AdvancedText
 {
     public class TextComponent
     {
+        public static Colour DefaultColour { get; private set; } = Colour.BuiltinColours.BLACK;
         public string Text { get; set; }
         public Colour Colour { get; set; }
         public bool Italic { get; set; }
@@ -11,22 +12,14 @@ namespace AdvancedText
 
         public TextComponent(string text)
         {
-            this.Text = text;
-            this.Colour = Colour.BuiltinColours.BLACK;
+            Text = text;
+            Colour = DefaultColour;
         }
 
-        public TextComponent(string text, string colour)
-        {
-            this.Text = text;
-            this.Colour = colour;
-        }
-
-        public TextComponent(string text, string colour, bool italic, bool bold)
+        public TextComponent(string text, Colour colour)
         {
             Text = text;
             Colour = colour;
-            Italic = italic;
-            Bold = bold;
         }
 
         public TextComponent(string text, Colour colour, bool italic, bool bold)
@@ -40,6 +33,11 @@ namespace AdvancedText
         public void AddText(string text)
         {
             Text += text;
+        }
+
+        public static void SetDefaultColour(Colour colour)
+        {
+            DefaultColour = colour;
         }
     }
 }

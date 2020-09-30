@@ -27,49 +27,15 @@ namespace AdvancedText
             public static readonly Colour BLACK = new Colour(0, 0, 0);
         }
 
-        public readonly byte Red;
-        public readonly byte Green;
-        public readonly byte Blue;
+        public byte Red { get; }
+        public byte Green { get; }
+        public byte Blue { get; }
 
         public Colour(byte red, byte green, byte blue)
         {
             Red = red;
             Green = green;
             Blue = blue;
-        }
-
-        public static implicit operator Colour(string d)
-        {
-            if (string.IsNullOrEmpty(d)) return BuiltinColours.BLACK;
-            if (d.StartsWith('#'))
-            {
-                if (!int.TryParse(d.Substring(1), NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out int result)) return BuiltinColours.BLACK;
-                byte r = (byte)((result >> 16) % 256);
-                byte g = (byte)((result >> 8) % 256);
-                byte b = (byte)(result % 256);
-                return new Colour(r, g, b);
-            }
-
-            return d switch
-            {
-                "dark_blue" => BuiltinColours.DARK_BLUE,
-                "dark_green" => BuiltinColours.DARK_GREEN,
-                "dark_aqua" => BuiltinColours.DARK_AQUA,
-                "dark_red" => BuiltinColours.DARK_RED,
-                "dark_purple" => BuiltinColours.DARK_PURPLE,
-                "gold" => BuiltinColours.GOLD,
-                "grey" => BuiltinColours.GREY,
-                "dark_grey" => BuiltinColours.DARK_GREY,
-                "blue" => BuiltinColours.BLUE,
-                "green" => BuiltinColours.GREEN,
-                "aqua" => BuiltinColours.AQUA,
-                "red" => BuiltinColours.RED,
-                "light_purple" => BuiltinColours.LIGHT_PURPLE,
-                "yellow" => BuiltinColours.YELLOW,
-                "white" => BuiltinColours.WHITE,
-                "black" => BuiltinColours.BLACK,
-                _ => BuiltinColours.BLACK,
-            };
         }
     }
 }

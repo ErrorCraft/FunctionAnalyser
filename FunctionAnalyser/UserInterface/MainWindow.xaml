@@ -7,6 +7,34 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="Output"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="167"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="67"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="Folder" Grid.Row="0" Grid.Column="1" Background="#A5A5A5" VerticalContentAlignment="Center" BorderThickness="0"/>
+        <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Fill="#777777"></Rectangle>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="Output" TextWrapping="Wrap" FontFamily="Courier New" Background="#4C4C4C"/>
+        </ScrollViewer>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="67"></RowDefinition>
+                <RowDefinition Height="67"></RowDefinition>
+                <RowDefinition Height="67"></RowDefinition>
+                <RowDefinition Height="67"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="ExportButton" Grid.Row="1" Grid.Column="0" Content="Export Data" Click="ExportResults" IsEnabled="False"/>
+            <Button x:Name="FolderButton" Grid.Row="2" Grid.Column="0" Content="Select Folder" Click="SelectFolder"/>
+            <Button x:Name="AnalyseButton" Grid.Row="3" Grid.Column="0" Content="Analyse" Click="ReadFiles"/>
+        </Grid>
     </Grid>
 </Window>

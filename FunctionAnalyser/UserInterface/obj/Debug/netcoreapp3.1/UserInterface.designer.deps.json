@@ -13,6 +13,25 @@
             "fileVersion": "12.0.3.23909"
           }
         }
+      },
+      "WindowsAPICodePack-Core/1.1.1": {
+        "runtime": {
+          "lib/Microsoft.WindowsAPICodePack.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          }
+        }
+      },
+      "WindowsAPICodePack-Shell/1.1.1": {
+        "dependencies": {
+          "WindowsAPICodePack-Core": "1.1.1"
+        },
+        "runtime": {
+          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          }
+        }
       }
     }
   },
@@ -23,6 +42,20 @@
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "WindowsAPICodePack-Core/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GoURoQuE7ea7B7q24YRTBfZbsNO7ZtwSyBHbM8zO0ynwfjAGC0bbAmVrDvZ6HbWtqqOt6QTzdmYnj2WJglb5JQ==",
+      "path": "windowsapicodepack-core/1.1.1",
+      "hashPath": "windowsapicodepack-core.1.1.1.nupkg.sha512"
+    },
+    "WindowsAPICodePack-Shell/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CPFamhL3jPo8O6+ErGsLS4LK3DWP5ncxqhbzpPnYkIW9rjatunUij35iTjprbr9mlYR/5Pbguw21MwSmTOKR4g==",
+      "path": "windowsapicodepack-shell/1.1.1",
+      "hashPath": "windowsapicodepack-shell.1.1.1.nupkg.sha512"
     }
   }
 }
