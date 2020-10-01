@@ -1,5 +1,6 @@
 ﻿using AdvancedText;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -15,6 +16,7 @@ namespace UserInterface
         public TextWriter(TextBlock output)
         {
             Output = output;
+            Text = "";
         }
 
         private static Run GetRun(TextComponent textComponent)
@@ -32,7 +34,18 @@ namespace UserInterface
 
         public void Write(TextComponent textComponent)
         {
-            Output.Dispatcher.Invoke(() => Output.Inlines.Add(GetRun(textComponent)));
+            try
+            {
+                Output.Dispatcher.Invoke(() =>
+                {
+                    Output.Inlines.Add(GetRun(textComponent));
+                    Text += textComponent.Text;
+                });
+            }
+            catch (TaskCanceledException)
+            {
+                // empty
+            }
         }
 
         public void WriteLine(TextComponent textComponent)
@@ -72,7 +85,8 @@ namespace UserInterface
 
         public void Reset()
         {
-            //
+            Output.Inlines.Clear();
+            Text = "";
         }
     }
 }
