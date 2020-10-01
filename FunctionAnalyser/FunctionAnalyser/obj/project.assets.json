@@ -92,11 +92,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
+      "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
       "projectName": "FunctionAnalyser",
-      "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
+      "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
       "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\obj\\",
+      "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -115,11 +115,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
-              "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
             },
-            "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
-              "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
             }
           }
         }

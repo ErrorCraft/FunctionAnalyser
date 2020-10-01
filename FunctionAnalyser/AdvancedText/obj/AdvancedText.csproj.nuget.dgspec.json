@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {}
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
+        "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
         "projectName": "AdvancedText",
-        "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
+        "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
         "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\obj\\",
+        "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

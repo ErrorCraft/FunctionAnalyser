@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cuPJyt2A/HPaWp/dQ62KSt52XFe6xw9FoXVgihrsn7bOsiZ/AnKyybKvvKZgaIjhqFGkmDiORu3urQVYE00lTg==",
+  "dgSpecHash": "B6F2hAxZxTcJVZ/NYcqEXP/Eb+rBDiE4VHdpZ+XBvHvUZ+faVD16vf9zjtTe1WAbwy7aVG380IPQqFM+rm4PlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj",
+  "projectFilePath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ramon\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],

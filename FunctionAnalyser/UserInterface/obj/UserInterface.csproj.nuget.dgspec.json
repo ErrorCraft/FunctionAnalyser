@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj": {}
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
+        "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
         "projectName": "AdvancedText",
-        "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
+        "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj",
         "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\obj\\",
+        "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -59,14 +59,14 @@
         }
       }
     },
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj",
+        "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj",
         "projectName": "CommandVerifier",
-        "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj",
+        "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj",
         "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\obj\\",
+        "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -120,14 +120,14 @@
         }
       }
     },
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
+        "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
         "projectName": "FunctionAnalyser",
-        "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
+        "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj",
         "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\obj\\",
+        "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -146,11 +146,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
-                "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
+              "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
+                "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
               },
-              "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
-                "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
+              "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
+                "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
               }
             }
           }
@@ -182,14 +182,14 @@
         }
       }
     },
-    "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj": {
+    "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
+        "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
         "projectName": "UserInterface",
-        "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
+        "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
         "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\obj\\",
+        "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -208,8 +208,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
-                "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj"
+              "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
+                "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj"
               }
             }
           }

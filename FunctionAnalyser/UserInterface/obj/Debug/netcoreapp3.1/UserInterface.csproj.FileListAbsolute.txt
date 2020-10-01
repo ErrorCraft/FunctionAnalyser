@@ -79,3 +79,5 @@ C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\obj\
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\obj\Debug\netcoreapp3.1\UserInterface.dll
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\obj\Debug\netcoreapp3.1\UserInterface.pdb
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\obj\Debug\netcoreapp3.1\UserInterface.genruntimeconfig.cache
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\bin\Debug\netcoreapp3.1\Microsoft.WindowsAPICodePack.dll
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\bin\Debug\netcoreapp3.1\Microsoft.WindowsAPICodePack.Shell.dll

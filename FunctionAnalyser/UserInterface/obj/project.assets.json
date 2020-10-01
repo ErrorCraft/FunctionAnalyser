@@ -158,11 +158,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
+      "projectUniqueName": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
       "projectName": "UserInterface",
-      "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
+      "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\UserInterface.csproj",
       "packagesPath": "C:\\Users\\Ramon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\obj\\",
+      "outputPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\UserInterface\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -181,8 +181,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
-              "projectPath": "C:\\Users\\Ramon\\source\\repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj"
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj"
             }
           }
         }

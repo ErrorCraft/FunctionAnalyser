@@ -10,19 +10,19 @@ namespace CommandVerifier.Commands.Collections
 {
     public class EntitySelectorOption
     {
-        public enum OptionPredicate
+        public enum PredicateOption
         {
             [EnumMember(Value = "none")]
             None = 0,
             [EnumMember(Value = "set_limit")]
             SetLimit = 1,
             [EnumMember(Value = "set_executor")]
-            SetExecutor = 2
+            SetExecutor = 2,
+            [EnumMember(Value = "advancements")]
+            Advancements = 3,
+            [EnumMember(Value = "scores")]
+            Scores = 4
         }
-
-        [JsonProperty("encapsulated")]
-        [DefaultValue(false)]
-        public bool Encapsulated { get; set; }
 
         [JsonProperty("allow_inverse")]
         [DefaultValue(false)]
@@ -30,8 +30,8 @@ namespace CommandVerifier.Commands.Collections
 
         [JsonProperty("predicate", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        [DefaultValue(OptionPredicate.None)]
-        public OptionPredicate Predicate { get; set; }
+        [DefaultValue(PredicateOption.None)]
+        public PredicateOption Predicate { get; set; }
 
         [JsonProperty("components")]
         [JsonConverter(typeof(SubcommandConverter))]
@@ -51,38 +51,15 @@ namespace CommandVerifier.Commands.Collections
                 }
             }
 
-            if (Predicate != OptionPredicate.None)
+            reader.SkipWhitespace();
+            return Predicate switch
             {
-                return Predicate switch
-                {
-                    OptionPredicate.SetLimit => TrySetEntityLimit(reader, mayThrow, entitySelector),
-                    OptionPredicate.SetExecutor => TrySetExecutor(reader, mayThrow, entitySelector, negated),
-                    _ => false,
-                };
-            }
-
-            if (Encapsulated)
-            {
-                if (!reader.Expect('{', mayThrow)) return false;
-                while (reader.CanRead() && reader.Peek() != '}')
-                {
-                    if (CheckComponents(reader, mayThrow))
-                    {
-                        reader.SkipWhitespace();
-                        if (reader.CanRead())
-                        {
-                            char c = reader.Read();
-                            if (c == ',') continue;
-                            if (c == '}') return true;
-                        }
-                    }
-                    else return false;
-                }
-
-                reader.SkipWhitespace();
-                return reader.Expect('}', mayThrow);
-            }
-            else return CheckComponents(reader, mayThrow);
+                PredicateOption.SetLimit => TrySetEntityLimit(reader, mayThrow, entitySelector),
+                PredicateOption.SetExecutor => TrySetExecutor(reader, mayThrow, entitySelector, negated),
+                PredicateOption.Advancements => TryReadAdvancements(reader, mayThrow),
+                PredicateOption.Scores => TryReadScores(reader, mayThrow),
+                _ => CheckComponents(reader, mayThrow),
+            };
         }
 
         private bool CheckComponents(StringReader reader, bool mayThrow)
@@ -111,8 +88,104 @@ namespace CommandVerifier.Commands.Collections
         private bool TrySetExecutor(StringReader reader, bool mayThrow, EntitySelector entitySelector, bool negated)
         {
             if (!reader.TryReadNamespacedId(mayThrow, false, out Types.NamespacedId result)) return false;
+            
             if (PLAYER_ENTITY.Equals(result) && !negated) entitySelector.IncludesEntities = false;
+            else if (!result.IsDefaultNamespace() || !Entities.Options.Contains(result.Path))
+            {
+                if (mayThrow) CommandError.UnknownEntity(result.ToString()).AddWithContext(reader);
+                return false;
+            }
             return true;
+        }
+
+        private bool TryReadAdvancements(StringReader reader, bool mayThrow)
+        {
+            if (!reader.Expect('{', mayThrow)) return false;
+
+            reader.SkipWhitespace();
+            while (reader.CanRead() && reader.Peek() != '}')
+            {
+                reader.SkipWhitespace();
+                if (!reader.TryReadNamespacedId(mayThrow, true, out _)) return false;
+
+                reader.SkipWhitespace();
+                if (!reader.Expect('=', mayThrow)) return false;
+
+                reader.SkipWhitespace();
+                if (reader.CanRead() && reader.Peek() == '{')
+                {
+                    reader.Skip();
+                    reader.SkipWhitespace();
+                    while (reader.CanRead() && reader.Peek() != '}')
+                    {
+                        reader.SkipWhitespace();
+                        if (!reader.TryReadUnquotedString(out _)) return false;
+
+                        reader.SkipWhitespace();
+                        if (!reader.Expect('=', mayThrow)) return false;
+
+                        reader.SkipWhitespace();
+                        if (!reader.TryReadBoolean(mayThrow, out _)) return false;
+
+                        reader.SkipWhitespace();
+                        if (reader.CanRead())
+                        {
+                            char c = reader.Read();
+                            if (c == ',') continue;
+                            if (c == '}') break;
+                        }
+                    }
+                }
+                else if (!reader.TryReadBoolean(mayThrow, out _)) return false;
+
+                reader.SkipWhitespace();
+                if (reader.CanRead())
+                {
+                    char c = reader.Read();
+                    if (c == ',') continue;
+                    if (c == '}') return true;
+                }
+
+                if (mayThrow) CommandError.ExpectedCharacter('}').AddWithContext(reader);
+                return false;
+            }
+
+            reader.SkipWhitespace();
+            return reader.Expect('}', mayThrow);
+        }
+
+        private bool TryReadScores(StringReader reader, bool mayThrow)
+        {
+            if (!reader.Expect('{', mayThrow)) return false;
+
+            IntegerRange ir = new IntegerRange() { Minimum = int.MinValue, Maximum = int.MaxValue };
+
+            reader.SkipWhitespace();
+            while (reader.CanRead() && reader.Peek() != '}')
+            {
+                reader.SkipWhitespace();
+                if (!reader.TryReadUnquotedString(out _)) return false;
+
+                reader.SkipWhitespace();
+                if (!reader.Expect('=', mayThrow)) return false;
+
+                reader.SkipWhitespace();
+                if (!ir.Check(reader, mayThrow)) return false;
+
+                reader.SkipWhitespace();
+                if (reader.CanRead())
+                {
+                    char c = reader.Read();
+                    if (c == ',') continue;
+                    if (c == '}') return true;
+                }
+
+                if (mayThrow) CommandError.ExpectedCharacter('}').AddWithContext(reader);
+                return false;
+            }
+
+            reader.SkipWhitespace();
+            return reader.Expect('}', mayThrow);
         }
     }
 }
