@@ -9,15 +9,22 @@ namespace FunctionAnalyser
     public class FunctionReader
     {
         public readonly string BasePath;
-        private readonly CommandReader commandReader;
+        private readonly CommandReader Reader;
         public FunctionInformation Information { get; private set; }
         private readonly IWriter Output;
+
+        public static class Options
+        {
+            public static bool SkipFunctionOnError { get; set; } = true;
+            public static bool ShowCommandErrors { get; set; } = true;
+            public static bool ShowEmptyFunctions { get; set; } = true;
+        }
 
         public FunctionReader(string basePath, IWriter output)
         {
             BasePath = basePath;
             Output = output;
-            commandReader = new CommandReader();
+            Reader = new CommandReader();
             Information = new FunctionInformation();
         }
 
@@ -25,10 +32,13 @@ namespace FunctionAnalyser
         {
             lock (this)
             {
+                Output.Write("Analysing all functions in folder ");
+                Output.WriteLine(new TextComponent(BasePath, Colour.BuiltinColours.DARK_GREEN));
+                Output.WriteLine();
+
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
                 string[] files = Directory.GetFiles(BasePath, "*.mcfunction", SearchOption.AllDirectories);
-                Information.Functions = files.Length;
                 for (int i = 0; i < files.Length; i++)
                 {
                     FunctionInformation FileSpecificInformation = new FunctionInformation();
@@ -50,36 +60,78 @@ namespace FunctionAnalyser
                         {
                             // Read command
                             CommandVerifier.StringReader stringReader = new CommandVerifier.StringReader(command);
-                            if (commandReader.Parse(version, stringReader))
+                            if (Reader.Parse(version, stringReader))
                             {
                                 FileSpecificInformation.Commands += 1;
                                 FileSpecificInformation += stringReader.Information;
                             }
-                            else
-                            {
-                                Output.Write(new TextComponent("Errors found in ", Colour.BuiltinColours.DARK_RED));
-                                Output.WriteLine(".." + files[i].Substring(BasePath.Length));
-                                foreach (string error in CommandError.StoredErrors)
-                                    Output.WriteLine(new TextComponent(error, Colour.BuiltinColours.DARK_RED));
-                                CommandError.StoredErrors.Clear();
-                                FileSpecificInformation.Reset();
-                                break;
-                            }
+                            else if (Options.SkipFunctionOnError) break;
                         }
                     }
+
+                    if (CommandError.StoredErrors.Count > 0)
+                    {
+                        if (CommandError.StoredErrors.Count == 1) Output.Write(new TextComponent("Error found in ", Colour.BuiltinColours.RED));
+                        else Output.Write(new TextComponent(CommandError.StoredErrors.Count.ToString() + " errors found in ", Colour.BuiltinColours.RED));
+
+                        if (Options.SkipFunctionOnError)
+                        {
+                            Output.Write(".." + files[i].Substring(BasePath.Length));
+                            Output.WriteLine(new TextComponent(", skipping function", Colour.BuiltinColours.RED));
+                            ShowErrors();
+                            continue;
+                        }
+                        else
+                        {
+                            Output.WriteLine(".." + files[i].Substring(BasePath.Length));
+                            ShowErrors();
+                        }
+                    }
+                    else if (Options.ShowEmptyFunctions && FileSpecificInformation.Commands == 0)
+                    {
+                        Output.Write(new TextComponent("Empty function found at ", Colour.BuiltinColours.YELLOW));
+                        Output.WriteLine(".." + files[i].Substring(BasePath.Length));
+                    }
+
+                    Information.Functions++;
                     Information += FileSpecificInformation;
                 }
 
                 timer.Stop();
-                Output.WriteLine(new TextComponent("Time spent reading: " + (timer.ElapsedTicks / 10000.0d).ToString("0.0000") + "ms", Colour.BuiltinColours.AQUA, false, true));
-                Output.WriteLine(new TextComponent("Number of functions: " + Information.Functions, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("Number of commands: " + Information.Commands, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("Number of comments: " + Information.Comments, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("Number of empty lines: " + Information.EmptyLines, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("Usage of @e selectors: " + Information.EntitySelectors, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("NBT Access: " + Information.NbtAccess, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("Predicate Calls: " + Information.PredicateCalls, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("Time spent reading: " + (timer.ElapsedTicks / 10000.0d).ToString("0.0000") + "ms", Colour.BuiltinColours.DARK_AQUA, false, true));
+                Output.WriteLine();
+                Output.WriteLine(new TextComponent("Information:", Colour.BuiltinColours.BLACK, false, true));
+                Output.WriteLine(new TextComponent("  Number of functions: " + Information.Functions, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("  Number of commands: " + Information.Commands, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("  Number of comments: " + Information.Comments, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("  Number of empty lines: " + Information.EmptyLines, Colour.BuiltinColours.AQUA));
+
+                Output.Write(new TextComponent("  Usage of @e selectors: " + Information.EntitySelectors, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent(" " + GetAverage(Information.EntitySelectors), Colour.BuiltinColours.AQUA));
+
+                Output.Write(new TextComponent("  NBT Access: " + Information.NbtAccess, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent(" " + GetAverage(Information.NbtAccess), Colour.BuiltinColours.AQUA));
+
+                Output.Write(new TextComponent("  Predicate Calls: " + Information.PredicateCalls, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent(" " + GetAverage(Information.PredicateCalls), Colour.BuiltinColours.AQUA));
             }
+        }
+
+        private string GetAverage(int information)
+        {
+            return "(Average: " +
+                ((double)information / Information.Functions).ToString("0.00") + " per file, " +
+                ((double)information / Information.Commands).ToString("0.00") + " per command)";
+        }
+
+        private void ShowErrors()
+        {
+            if (Options.ShowCommandErrors)
+            {
+                for (int i = 0; i < CommandError.StoredErrors.Count; i++)
+                    Output.WriteLine(new TextComponent("  " + CommandError.StoredErrors[i], Colour.BuiltinColours.RED));
+            }
+            CommandError.StoredErrors.Clear();
         }
     }
 }
