@@ -44,7 +44,7 @@ namespace CommandVerifier.Commands.Converters
             "integer" => jObject.ToObject<Integer>(serializer),
             "float" => jObject.ToObject<Float>(serializer),
             "double" => jObject.ToObject<SubcommandTypes.Double>(serializer),
-            "text" => jObject.ToObject<Text>(serializer),
+            "string" => jObject.ToObject<SubcommandTypes.String>(serializer),
             "uuid" => jObject.ToObject<Uuid>(serializer),
             "swizzle" => jObject.ToObject<Swizzle>(serializer),
             "entity" => jObject.ToObject<Entity>(serializer),
