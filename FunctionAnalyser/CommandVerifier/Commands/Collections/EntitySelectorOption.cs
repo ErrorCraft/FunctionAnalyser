@@ -90,10 +90,13 @@ namespace CommandVerifier.Commands.Collections
             if (!reader.TryReadNamespacedId(mayThrow, false, out Types.NamespacedId result)) return false;
             
             if (PLAYER_ENTITY.Equals(result) && !negated) entitySelector.IncludesEntities = false;
-            else if (!result.IsDefaultNamespace() || !Entities.Options.Contains(result.Path))
+            else if (!result.IsTag)
             {
-                if (mayThrow) CommandError.UnknownEntity(result.ToString()).AddWithContext(reader);
-                return false;
+                if (!result.IsDefaultNamespace() || !Entities.Options.Contains(result.Path))
+                {
+                    if (mayThrow) CommandError.UnknownEntity(result.ToString()).AddWithContext(reader);
+                    return false;
+                }
             }
             return true;
         }

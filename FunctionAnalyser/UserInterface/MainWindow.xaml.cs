@@ -27,8 +27,7 @@ namespace UserInterface
         {
             InitializeComponent();
             Writer = new TextWriter(Output);
-            Writer.WriteLine(new TextComponent("hello world!", new Colour(255, 0, 0)));
-            Writer.WriteLine(new TextComponent("hello world!", Colour.BuiltinColours.GREEN));
+            TextComponent.SetDefaultColour(Colour.BuiltinColours.GREY);
         }
 
         private void SelectFolder(object sender, RoutedEventArgs e)
