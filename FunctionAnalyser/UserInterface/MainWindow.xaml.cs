@@ -32,7 +32,7 @@ namespace UserInterface
             InitializeComponent();
             Writer = new TextWriter(Output);
             FolderPath = "";
-            TextComponent.SetDefaultColour(Colour.BuiltinColours.GREY);
+            TextComponent.SetDefaultColour(Colour.BuiltinColours.WHITE);
             ApiHelper.Initialise();
         }
 
@@ -133,9 +133,9 @@ namespace UserInterface
 
         private async Task<string> GetFile(string file)
         {
-            Writer.Write("Getting ");
+            Writer.Write(new TextComponent("Getting ", Colour.BuiltinColours.GREY));
             Writer.Write(new TextComponent(file, Colour.BuiltinColours.GOLD));
-            Writer.WriteLine("...");
+            Writer.WriteLine(new TextComponent("...", Colour.BuiltinColours.GREY));
             return await FileProcessor.LoadFile(file);
         }
     }

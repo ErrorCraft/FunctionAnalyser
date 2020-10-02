@@ -32,9 +32,9 @@ namespace FunctionAnalyser
         {
             lock (this)
             {
-                Output.Write("Analysing all functions in folder ");
-                Output.Write(new TextComponent(BasePath, Colour.BuiltinColours.DARK_GREEN));
-                Output.WriteLine(" (" + CommandReader.GetFancyName(version) + ")");
+                Output.Write(new TextComponent("Analysing all functions in folder ", Colour.BuiltinColours.GREY));
+                Output.WriteLine(new TextComponent(BasePath, Colour.BuiltinColours.DARK_GREEN));
+                Output.WriteLine(new TextComponent("Version: " + CommandReader.GetFancyName(version), Colour.BuiltinColours.GREY));
                 Output.WriteLine();
 
                 Stopwatch timer = new Stopwatch();
