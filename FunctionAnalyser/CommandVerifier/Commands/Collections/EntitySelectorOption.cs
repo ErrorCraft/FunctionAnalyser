@@ -46,8 +46,8 @@ namespace CommandVerifier.Commands.Collections
             {
                 if (reader.CanRead() && reader.Peek() == '!')
                 {
-                    negated = true;
                     reader.Skip();
+                    negated = true;
                 }
             }
 
@@ -58,7 +58,7 @@ namespace CommandVerifier.Commands.Collections
                 PredicateOption.SetExecutor => TrySetExecutor(reader, mayThrow, entitySelector, negated),
                 PredicateOption.Advancements => TryReadAdvancements(reader, mayThrow),
                 PredicateOption.Scores => TryReadScores(reader, mayThrow),
-                _ => CheckComponents(reader, mayThrow),
+                _ => CheckComponents(reader, mayThrow)
             };
         }
 
@@ -161,7 +161,7 @@ namespace CommandVerifier.Commands.Collections
         {
             if (!reader.Expect('{', mayThrow)) return false;
 
-            IntegerRange ir = new IntegerRange() { Minimum = int.MinValue, Maximum = int.MaxValue };
+            IntegerRange integerRange = new IntegerRange() { Minimum = int.MinValue, Maximum = int.MaxValue };
 
             reader.SkipWhitespace();
             while (reader.CanRead() && reader.Peek() != '}')
@@ -173,7 +173,7 @@ namespace CommandVerifier.Commands.Collections
                 if (!reader.Expect('=', mayThrow)) return false;
 
                 reader.SkipWhitespace();
-                if (!ir.Check(reader, mayThrow)) return false;
+                if (!integerRange.Check(reader, mayThrow)) return false;
 
                 reader.SkipWhitespace();
                 if (reader.CanRead())
