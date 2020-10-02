@@ -18,11 +18,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CommandFilesApi;
+using CommandVerifier;
 
 namespace UserInterface
 {
     public partial class MainWindow : Window
     {
+        private const int PROGRAM_VERSION = 0;
         private readonly TextWriter Writer;
         public MainWindow()
         {
@@ -87,8 +89,9 @@ namespace UserInterface
 
         private async void GetFiles(object sender, RoutedEventArgs e)
         {
-            string version = await FileProcessor.LoadFile("version.json");
-            Writer.WriteLine(version);
+            string commandsJson = await FileProcessor.LoadFile("commands.json");
+            CommandReader.SetCommands(commandsJson);
+            //Writer.WriteLine(version);
         }
     }
 }

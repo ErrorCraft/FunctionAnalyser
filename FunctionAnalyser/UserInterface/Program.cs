@@ -19,7 +19,7 @@ namespace UserInterface
             // else
             //  Get files from the web (all)
 
-            string commands_json_path = @"C:\Users\Ramon\Desktop\MCC and such\commands.json";
+            /*string commands_json_path = @"C:\Users\Ramon\Desktop\MCC and such\commands.json";
             string entity_selector_arguments_json_path = @"C:\Users\Ramon\Desktop\MCC and such\selector_arguments.json";
             string particles_json_path = @"C:\Users\Ramon\Desktop\MCC and such\particles.json";
             string items_json_path = @"C:\Users\Ramon\Desktop\MCC and such\items.json";
@@ -50,7 +50,7 @@ namespace UserInterface
             ScoreboardSlots.SetOptions(scoreboard_slots_json);
             Blocks.SetOptions(blocks_json);
             Effects.SetOptions(effects_json);
-            Enchantments.SetOptions(enchantments_json);
+            Enchantments.SetOptions(enchantments_json);*/
 
             App app = new App();
             app.InitializeComponent();
