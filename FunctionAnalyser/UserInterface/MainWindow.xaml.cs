@@ -25,7 +25,7 @@ namespace UserInterface
 {
     public partial class MainWindow : Window
     {
-        private const int PROGRAM_VERSION = 0;
+        private const int PROGRAM_VERSION = -1;
         private readonly TextWriter Writer;
         private string FolderPath;
         public MainWindow()

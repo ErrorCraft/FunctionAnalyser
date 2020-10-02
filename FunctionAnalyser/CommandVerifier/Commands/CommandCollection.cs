@@ -8,8 +8,8 @@ namespace CommandVerifier.Commands
         [JsonProperty("version")]
         public string Version { get; set; }
 
-        [JsonProperty("fancy_name")]
-        public string FancyName { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         [JsonProperty("commands")]
         public List<Command> Commands { get; set; }
@@ -18,7 +18,7 @@ namespace CommandVerifier.Commands
         public CommandCollection()
         {
             Version = "";
-            FancyName = "";
+            Name = "";
             Commands = new List<Command>();
         }
 

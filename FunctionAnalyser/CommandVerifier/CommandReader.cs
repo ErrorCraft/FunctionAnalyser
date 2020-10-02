@@ -29,7 +29,7 @@ namespace CommandVerifier
 
         public static string GetFancyName(string version)
         {
-            return CommandCollections[version].FancyName;
+            return CommandCollections[version].Name;
         }
     }
 }
