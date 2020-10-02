@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CommandFilesApi;
 using CommandVerifier;
+using CommandVerifier.Commands.Collections;
 
 namespace UserInterface
 {
@@ -26,10 +27,12 @@ namespace UserInterface
     {
         private const int PROGRAM_VERSION = 0;
         private readonly TextWriter Writer;
+        private string FolderPath;
         public MainWindow()
         {
             InitializeComponent();
             Writer = new TextWriter(Output);
+            FolderPath = "";
             TextComponent.SetDefaultColour(Colour.BuiltinColours.GREY);
             ApiHelper.Initialise();
         }
@@ -39,7 +42,8 @@ namespace UserInterface
             CommonOpenFileDialog select = new CommonOpenFileDialog("Select a folder") { IsFolderPicker = true };
             if (select.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                Folder.Content = select.FileName;
+                FolderPath = select.FileName;
+                AnalyseButton.IsEnabled = true;
             }
         }
 
@@ -63,7 +67,7 @@ namespace UserInterface
             Writer.Reset();
 
             // Read functions
-            FunctionReader functionReader = new FunctionReader(Folder.Content.ToString(), Writer);
+            FunctionReader functionReader = new FunctionReader(FolderPath, Writer);
 
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             Task task = tcs.Task;
@@ -87,11 +91,53 @@ namespace UserInterface
             FolderButton.IsEnabled = true;
         }
 
-        private async void GetFiles(object sender, RoutedEventArgs e)
+        private async void LoadedWindow(object sender, RoutedEventArgs e)
         {
-            string commandsJson = await FileProcessor.LoadFile("commands.json");
+            await Task.Run(GetFiles);
+            FolderButton.IsEnabled = true;
+        }
+
+        private async Task GetFiles()
+        {
+            string commandsJson = await GetFile("commands.json");
             CommandReader.SetCommands(commandsJson);
-            //Writer.WriteLine(version);
+
+            string selectorsArgumentsJson = await GetFile("selector_arguments.json");
+            EntitySelectorOptions.SetOptions(selectorsArgumentsJson);
+
+            string particlesJson = await GetFile("particles.json");
+            Particles.SetOptions(particlesJson);
+
+            string itemsJson = await GetFile("items.json");
+            Items.SetOptions(itemsJson);
+
+            string entitiesJson = await GetFile("entities.json");
+            Entities.SetOptions(entitiesJson);
+
+            string scoreboardCriteriaJson = await GetFile("scoreboard_criteria.json");
+            ScoreboardCriteria.SetOptions(scoreboardCriteriaJson);
+
+            string scoreboardSlotsJson = await GetFile("scoreboard_slots.json");
+            ScoreboardSlots.SetOptions(scoreboardSlotsJson);
+
+            string blocksJson = await GetFile("blocks.json");
+            Blocks.SetOptions(blocksJson);
+
+            string effectsJson = await GetFile("effects.json");
+            Effects.SetOptions(effectsJson);
+
+            string enchantmentsJson = await GetFile("enchantments.json");
+            Enchantments.SetOptions(enchantmentsJson);
+
+            Writer.WriteLine(new TextComponent("All done!", Colour.BuiltinColours.GREEN));
+        }
+
+        private async Task<string> GetFile(string file)
+        {
+            Writer.Write("Getting ");
+            Writer.Write(new TextComponent(file, Colour.BuiltinColours.GOLD));
+            Writer.WriteLine("...");
+            return await FileProcessor.LoadFile(file);
         }
     }
 }

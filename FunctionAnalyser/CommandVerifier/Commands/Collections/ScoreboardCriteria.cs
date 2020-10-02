@@ -42,7 +42,7 @@ namespace CommandVerifier.Commands.Collections
             return NamespacedCriteria[values[0]].TryRead(values[1]);
         }
 
-        public static void SetSlots(string json)
+        public static void SetOptions(string json)
         {
             JsonConvert.DeserializeObject<ScoreboardCriteria>(json, new JsonSerializerSettings() { DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate });
         }

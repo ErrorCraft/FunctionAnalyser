@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserInterface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="GetFiles">
+        Title="MainWindow" Height="450" Width="800" Loaded="LoadedWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="167"></ColumnDefinition>
@@ -16,7 +16,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label x:Name="Folder" Grid.Row="0" Grid.Column="1" Background="#A5A5A5" VerticalContentAlignment="Center" BorderThickness="0"/>
+        <Rectangle Grid.Row="0" Grid.Column="1" Fill="#A5A5A5"/>
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Fill="#777777"></Rectangle>
 
         <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
@@ -33,8 +33,8 @@
             </Grid.RowDefinitions>
 
             <Button x:Name="ExportButton" Grid.Row="1" Grid.Column="0" Content="Export Data" Click="ExportResults" IsEnabled="False"/>
-            <Button x:Name="FolderButton" Grid.Row="2" Grid.Column="0" Content="Select Folder" Click="SelectFolder"/>
-            <Button x:Name="AnalyseButton" Grid.Row="3" Grid.Column="0" Content="Analyse" Click="ReadFiles"/>
+            <Button x:Name="FolderButton" Grid.Row="2" Grid.Column="0" Content="Select Folder" Click="SelectFolder" IsEnabled="False"/>
+            <Button x:Name="AnalyseButton" Grid.Row="3" Grid.Column="0" Content="Analyse" Click="ReadFiles" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>
