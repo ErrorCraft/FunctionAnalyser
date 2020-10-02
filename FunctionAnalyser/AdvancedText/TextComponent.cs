@@ -10,6 +10,14 @@ namespace AdvancedText
         public bool Italic { get; set; }
         public bool Bold { get; set; }
 
+        public TextComponent()
+        {
+            Text = "";
+            Colour = DefaultColour;
+            Italic = false;
+            Bold = false;
+        }
+
         public TextComponent(string text)
         {
             Text = text;
