@@ -70,7 +70,7 @@ namespace FunctionAnalyser
                         }
                     }
 
-                    if (CommandError.StoredErrors.Count > 0)
+                    if (CommandError.StoredErrors.Count > 0 && Options.ShowCommandErrors)
                     {
                         if (CommandError.StoredErrors.Count == 1) Output.Write(new TextComponent("Error found in ", Colour.BuiltinColours.RED));
                         else Output.Write(new TextComponent(CommandError.StoredErrors.Count.ToString() + " errors found in ", Colour.BuiltinColours.RED));
@@ -127,11 +127,8 @@ namespace FunctionAnalyser
 
         private void ShowErrors()
         {
-            if (Options.ShowCommandErrors)
-            {
-                for (int i = 0; i < CommandError.StoredErrors.Count; i++)
-                    Output.WriteLine(new TextComponent("  " + CommandError.StoredErrors[i], Colour.BuiltinColours.RED));
-            }
+            for (int i = 0; i < CommandError.StoredErrors.Count; i++)
+                Output.WriteLine(new TextComponent("  " + CommandError.StoredErrors[i], Colour.BuiltinColours.RED));
             CommandError.StoredErrors.Clear();
         }
     }
