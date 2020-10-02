@@ -1,6 +1,6 @@
 {
 	"java": {
-		"fancy_name": "Java 1.16",
+		"name": "Java 1.16",
 		"commands": [
 			{
 				"command": "test",
