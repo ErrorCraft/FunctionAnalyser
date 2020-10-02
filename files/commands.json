@@ -1,7 +1,6 @@
 {
 	"java": {
-		"version": "1.16",
-		"fancy_name": "Java",
+		"fancy_name": "Java 1.16",
 		"commands": [
 			{
 				"command": "test",
@@ -68,8 +67,8 @@
 											"disable_tags": true
 										},
 										{
-											"type": "text",
-											"text_type": "multi_word",
+											"type": "string",
+											"string_type": "greedy",
 											"optional": true
 										}
 									]
@@ -197,17 +196,8 @@
 															"type": "uuid"
 														},
 														{
-															"type": "alternative",
-															"values": [
-																{
-																	"type": "text",
-																	"text_type": "quoted"
-																},
-																{
-																	"type": "text",
-																	"text_type": "word"
-																}
-															]
+															"type": "string",
+															"string_type": "quotable"
 														},
 														{
 															"type": "double",
@@ -952,17 +942,8 @@
 									"value": "disable"
 								},
 								{
-									"type": "alternative",
-									"values": [
-										{
-											"type": "text",
-											"text_type": "quoted"
-										},
-										{
-											"type": "text",
-											"text_type": "word"
-										}
-									]
+									"type": "string",
+									"string_type": "quotable"
 								}
 							]
 						},
@@ -974,17 +955,8 @@
 									"value": "enable"
 								},
 								{
-									"type": "alternative",
-									"values": [
-										{
-											"type": "text",
-											"text_type": "quoted"
-										},
-										{
-											"type": "text",
-											"text_type": "word"
-										}
-									]
+									"type": "string",
+									"string_type": "quotable"
 								},
 								{
 									"type": "alternative",
@@ -1007,17 +979,8 @@
 													]
 												},
 												{
-													"type": "alternative",
-													"values": [
-														{
-															"type": "text",
-															"text_type": "quoted"
-														},
-														{
-															"type": "text",
-															"text_type": "word"
-														}
-													]
+													"type": "string",
+													"string_type": "quotable"
 												}
 											]
 										},
@@ -2230,9 +2193,9 @@
 			{
 				"command": "help",
 				"contents": {
-					"type": "text",
+					"type": "string",
 					"optional": true,
-					"text_type": "multi_word"
+					"string_type": "greedy"
 				}
 			},
 			{
@@ -2515,8 +2478,8 @@
 			{
 				"command": "me",
 				"contents": {
-					"type": "text",
-					"text_type": "multi_word"
+					"type": "string",
+					"string_type": "greedy"
 				}
 			},
 			{
@@ -2775,8 +2738,8 @@
 									"value": "clear"
 								},
 								{
-									"type": "text",
-									"text_type": "multi_word"
+									"type": "string",
+									"string_type": "greedy"
 								}
 							]
 						},
@@ -2835,8 +2798,8 @@
 													"value": "add"
 												},
 												{
-													"type": "text",
-													"text_type": "word"
+													"type": "string",
+													"string_type": "word"
 												},
 												{
 													"type": "scoreboard_criteria"
@@ -3397,8 +3360,8 @@
 											]
 										},
 										{
-											"type": "text",
-											"text_type": "word"
+											"type": "string",
+											"string_type": "word"
 										}
 									]
 								},
@@ -3424,8 +3387,8 @@
 									"value": "add"
 								},
 								{
-									"type": "text",
-									"text_type": "word"
+									"type": "string",
+									"string_type": "word"
 								},
 								{
 									"type": "component",
@@ -3441,8 +3404,8 @@
 									"value": "empty"
 								},
 								{
-									"type": "text",
-									"text_type": "word"
+									"type": "string",
+									"string_type": "word"
 								}
 							]
 						},
@@ -3454,8 +3417,8 @@
 									"value": "join"
 								},
 								{
-									"type": "text",
-									"text_type": "word"
+									"type": "string",
+									"string_type": "word"
 								},
 								{
 									"type": "entity",
@@ -3471,8 +3434,8 @@
 									"value": "join"
 								},
 								{
-									"type": "text",
-									"text_type": "word"
+									"type": "string",
+									"string_type": "word"
 								},
 								{
 									"type": "entity",
@@ -3500,9 +3463,9 @@
 									"value": "list"
 								},
 								{
-									"type": "text",
+									"type": "string",
 									"optional": true,
-									"text_type": "word"
+									"string_type": "word"
 								}
 							]
 						},
@@ -3514,8 +3477,8 @@
 									"value": "modify"
 								},
 								{
-									"type": "text",
-									"text_type": "word"
+									"type": "string",
+									"string_type": "word"
 								},
 								{
 									"type": "alternative",
@@ -3694,8 +3657,8 @@
 									"value": "remove"
 								},
 								{
-									"type": "text",
-									"text_type": "word"
+									"type": "string",
+									"string_type": "word"
 								}
 							]
 						}
