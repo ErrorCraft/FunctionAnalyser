@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommandFilesApi;
 
 namespace UserInterface
 {
@@ -28,6 +29,7 @@ namespace UserInterface
             InitializeComponent();
             Writer = new TextWriter(Output);
             TextComponent.SetDefaultColour(Colour.BuiltinColours.GREY);
+            ApiHelper.Initialise();
         }
 
         private void SelectFolder(object sender, RoutedEventArgs e)
@@ -81,6 +83,12 @@ namespace UserInterface
             AnalyseButton.IsEnabled = true;
             ExportButton.IsEnabled = true;
             FolderButton.IsEnabled = true;
+        }
+
+        private async void GetFiles(object sender, RoutedEventArgs e)
+        {
+            string version = await FileProcessor.LoadFile("version.json");
+            Writer.WriteLine(version);
         }
     }
 }

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CommandFilesApi\CommandFilesApi.csproj" />
     <ProjectReference Include="..\FunctionAnalyser\FunctionAnalyser.csproj" />
   </ItemGroup>
 
