@@ -15,7 +15,7 @@ namespace FunctionAnalyser
 
         public static class Options
         {
-            public static bool SkipFunctionOnError { get; set; } = true;
+            public static bool SkipFunctionOnError { get; set; } = false;
             public static bool ShowCommandErrors { get; set; } = true;
             public static bool ShowEmptyFunctions { get; set; } = true;
         }

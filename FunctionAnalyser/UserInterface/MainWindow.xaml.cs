@@ -30,6 +30,7 @@ namespace UserInterface
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowModel();
             Writer = new TextWriter(Output);
             FolderPath = "";
             TextComponent.SetDefaultColour(Colour.BuiltinColours.WHITE);
