@@ -1,4 +1,4 @@
 {
 	"version": 0,
-	"description": [{"text":"Hello there..."}]
+	"description": [{"text":"Hello there... ","colour":"green"},{"text":"test test test","colour":"red","bold":true,"italic":true}]
 }
