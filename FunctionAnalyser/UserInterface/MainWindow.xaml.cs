@@ -25,7 +25,6 @@ namespace UserInterface
 {
     public partial class MainWindow : Window
     {
-        private const int PROGRAM_VERSION = -1;
         private readonly TextWriter Writer;
         private string FolderPath;
         public MainWindow()
@@ -53,7 +52,6 @@ namespace UserInterface
             if (save.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 await IO::File.WriteAllTextAsync(save.FileName, Writer.GetFlatOutput());
-                MessageBox.Show("Exported!");
             }
         }
 
@@ -93,21 +91,8 @@ namespace UserInterface
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)
         {
-            await Task.Run(async () =>
-            {
-                string versionJson = await GetFile("version.json");
-                Newtonsoft.Json.JsonConvert.DeserializeObject<Version>(versionJson);
-            });
-
-            if (Version.ProgramVersion > PROGRAM_VERSION)
-            {
-                // Outdated program, make user download new version
-                Writer.WriteLine(new TextComponent("A new version of the program is available!", Colour.BuiltinColours.GREEN));
-            } else
-            {
-                await Task.Run(GetFiles);
-                FolderButton.IsEnabled = true;
-            }
+            await Task.Run(GetFiles);
+            FolderButton.IsEnabled = true;
         }
 
         private async Task GetFiles()
@@ -143,9 +128,6 @@ namespace UserInterface
             Enchantments.SetOptions(enchantmentsJson);
 
             Writer.WriteLine(new TextComponent("All done!", Colour.BuiltinColours.GREEN));
-
-            Writer.WriteLine();
-            Writer.Write(Version.Description);
         }
 
         private async Task<string> GetFile(string file)

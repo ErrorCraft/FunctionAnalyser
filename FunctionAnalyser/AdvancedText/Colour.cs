@@ -37,29 +37,5 @@ namespace AdvancedText
             Green = green;
             Blue = blue;
         }
-
-        public static implicit operator Colour(string s)
-        {
-            return s switch
-            {
-                "dark_blue" => BuiltinColours.DARK_BLUE,
-                "dark_green" => BuiltinColours.DARK_GREEN,
-                "dark_aqua" => BuiltinColours.DARK_AQUA,
-                "dark_red" => BuiltinColours.DARK_RED,
-                "dark_purple" => BuiltinColours.DARK_PURPLE,
-                "gold" => BuiltinColours.GOLD,
-                "grey" => BuiltinColours.GREY,
-                "dark_grey" => BuiltinColours.DARK_GREY,
-                "blue" => BuiltinColours.BLUE,
-                "green" => BuiltinColours.GREEN,
-                "aqua" => BuiltinColours.AQUA,
-                "red" => BuiltinColours.RED,
-                "light_purple" => BuiltinColours.LIGHT_PURPLE,
-                "yellow" => BuiltinColours.YELLOW,
-                "white" => BuiltinColours.WHITE,
-                "black" => BuiltinColours.BLACK,
-                _ => TextComponent.DefaultColour
-            };
-        }
     }
 }
