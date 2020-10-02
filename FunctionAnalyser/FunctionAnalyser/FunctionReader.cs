@@ -101,7 +101,7 @@ namespace FunctionAnalyser
                 timer.Stop();
                 Output.WriteLine(new TextComponent("Time spent reading: " + (timer.ElapsedTicks / 10000.0d).ToString("0.0000") + "ms", Colour.BuiltinColours.DARK_AQUA, false, true));
                 Output.WriteLine();
-                Output.WriteLine(new TextComponent("Information:", Colour.BuiltinColours.BLACK, false, true));
+                Output.WriteLine(new TextComponent("Information:", Colour.BuiltinColours.GREY, false, true));
                 Output.WriteLine(new TextComponent("  Number of functions: " + Information.Functions, Colour.BuiltinColours.AQUA));
                 Output.WriteLine(new TextComponent("  Number of commands: " + Information.Commands, Colour.BuiltinColours.AQUA));
                 Output.WriteLine(new TextComponent("  Number of comments: " + Information.Comments, Colour.BuiltinColours.AQUA));
