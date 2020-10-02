@@ -49,6 +49,7 @@ namespace UserInterface
         private async void ExportResults(object sender, RoutedEventArgs e)
         {
             CommonSaveFileDialog save = new CommonSaveFileDialog("Export results") { DefaultExtension = "txt", AlwaysAppendDefaultExtension = true };
+            save.Filters.Add(new CommonFileDialogFilter("Text Files", "*.txt"));
             if (save.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 await IO::File.WriteAllTextAsync(save.FileName, Writer.GetFlatOutput());
