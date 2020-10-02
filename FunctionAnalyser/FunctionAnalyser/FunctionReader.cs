@@ -2,7 +2,7 @@
 using CommandVerifier;
 using CommandVerifier.Commands;
 using System.Diagnostics;
-using System.IO;
+using IO = System.IO;
 
 namespace FunctionAnalyser
 {
@@ -33,16 +33,17 @@ namespace FunctionAnalyser
             lock (this)
             {
                 Output.Write("Analysing all functions in folder ");
-                Output.WriteLine(new TextComponent(BasePath, Colour.BuiltinColours.DARK_GREEN));
+                Output.Write(new TextComponent(BasePath, Colour.BuiltinColours.DARK_GREEN));
+                Output.WriteLine(" (" + CommandReader.GetFancyName(version) + ")");
                 Output.WriteLine();
 
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
-                string[] files = Directory.GetFiles(BasePath, "*.mcfunction", SearchOption.AllDirectories);
+                string[] files = IO::Directory.GetFiles(BasePath, "*.mcfunction", IO::SearchOption.AllDirectories);
                 for (int i = 0; i < files.Length; i++)
                 {
                     FunctionInformation FileSpecificInformation = new FunctionInformation();
-                    string[] lines = File.ReadAllLines(files[i]);
+                    string[] lines = IO::File.ReadAllLines(files[i]);
                     for (int j = 0; j < lines.Length; j++)
                     {
                         string command = lines[j].Trim();
@@ -59,7 +60,7 @@ namespace FunctionAnalyser
                         else
                         {
                             // Read command
-                            CommandVerifier.StringReader stringReader = new CommandVerifier.StringReader(command);
+                            StringReader stringReader = new StringReader(command);
                             if (Reader.Parse(version, stringReader))
                             {
                                 FileSpecificInformation.Commands += 1;

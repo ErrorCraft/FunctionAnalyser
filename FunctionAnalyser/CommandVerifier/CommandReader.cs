@@ -26,5 +26,10 @@ namespace CommandVerifier
             if (!CommandCollections.ContainsKey(version)) return false;
             return CommandCollections[version].Parse(reader);
         }
+
+        public static string GetFancyName(string version)
+        {
+            return CommandCollections[version].FancyName;
+        }
     }
 }
