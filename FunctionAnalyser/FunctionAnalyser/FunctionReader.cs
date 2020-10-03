@@ -70,23 +70,26 @@ namespace FunctionAnalyser
                         }
                     }
 
-                    if (CommandError.StoredErrors.Count > 0 && Options.ShowCommandErrors)
+                    if (CommandError.StoredErrors.Count > 0)
                     {
-                        if (CommandError.StoredErrors.Count == 1) Output.Write(new TextComponent("Error found in ", Colour.BuiltinColours.RED));
-                        else Output.Write(new TextComponent(CommandError.StoredErrors.Count.ToString() + " errors found in ", Colour.BuiltinColours.RED));
+                        if (Options.ShowCommandErrors)
+                        {
+                            if (CommandError.StoredErrors.Count == 1) Output.Write(new TextComponent("Error found in ", Colour.BuiltinColours.RED));
+                            else Output.Write(new TextComponent(CommandError.StoredErrors.Count.ToString() + " errors found in ", Colour.BuiltinColours.RED));
 
-                        if (Options.SkipFunctionOnError)
-                        {
-                            Output.Write(".." + files[i].Substring(BasePath.Length));
-                            Output.WriteLine(new TextComponent(", skipping function", Colour.BuiltinColours.RED));
-                            ShowErrors();
-                            continue;
-                        }
-                        else
-                        {
-                            Output.WriteLine(".." + files[i].Substring(BasePath.Length));
-                            ShowErrors();
-                        }
+                            if (Options.SkipFunctionOnError)
+                            {
+                                Output.Write(".." + files[i].Substring(BasePath.Length));
+                                Output.WriteLine(new TextComponent(", skipping function", Colour.BuiltinColours.RED));
+                                ShowErrors();
+                                continue;
+                            }
+                            else
+                            {
+                                Output.WriteLine(".." + files[i].Substring(BasePath.Length));
+                                ShowErrors();
+                            }
+                        } else CommandError.StoredErrors.Clear();
                     }
                     else if (Options.ShowEmptyFunctions && FileSpecificInformation.Commands == 0)
                     {
