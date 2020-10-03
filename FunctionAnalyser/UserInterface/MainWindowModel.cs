@@ -1,13 +1,16 @@
 ﻿using FunctionAnalyser;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace UserInterface
 {
     public class MainWindowModel
     {
-        public bool SkipFunctionOnError
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
+
+        public static bool SkipFunctionOnError
         {
             get { return FunctionReader.Options.SkipFunctionOnError; }
             set
@@ -19,7 +22,7 @@ namespace UserInterface
             }
         }
 
-        public bool ShowCommandErrors
+        public static bool ShowCommandErrors
         {
             get { return FunctionReader.Options.ShowCommandErrors; }
             set
@@ -31,7 +34,7 @@ namespace UserInterface
             }
         }
 
-        public bool ShowEmptyFunctions
+        public static bool ShowEmptyFunctions
         {
             get { return FunctionReader.Options.ShowEmptyFunctions; }
             set
@@ -40,6 +43,17 @@ namespace UserInterface
                 {
                     FunctionReader.Options.ShowEmptyFunctions = value;
                 }
+            }
+        }
+
+        private static bool _EnableOptions = true;
+        public static bool EnableOptions
+        {
+            get { return _EnableOptions; }
+            set
+            {
+                _EnableOptions = value;
+                StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(EnableOptions)));
             }
         }
     }

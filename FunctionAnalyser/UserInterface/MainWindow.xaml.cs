@@ -59,6 +59,7 @@ namespace UserInterface
 
         private async void ReadFiles(object sender, RoutedEventArgs e)
         {
+            MainWindowModel.EnableOptions = false;
             AnalyseButton.IsEnabled = false;
             ExportButton.IsEnabled = false;
             FolderButton.IsEnabled = false;
@@ -86,6 +87,7 @@ namespace UserInterface
             functionThread.Start();
             await Task.WhenAll(task);
 
+            MainWindowModel.EnableOptions = true;
             AnalyseButton.IsEnabled = true;
             ExportButton.IsEnabled = true;
             FolderButton.IsEnabled = true;
