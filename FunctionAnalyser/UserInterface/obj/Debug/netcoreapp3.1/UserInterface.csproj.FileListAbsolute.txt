@@ -85,3 +85,4 @@ C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\bin\
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\bin\Debug\netcoreapp3.1\CommandFilesApi.dll
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\bin\Debug\netcoreapp3.1\CommandFilesApi.pdb
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\obj\Debug\netcoreapp3.1\App.baml
