@@ -12,20 +12,17 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="67"></RowDefinition>
+            <RowDefinition Height="34"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="1" Background="#A5A5A5">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#A5A5A5">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="167"></ColumnDefinition>
                 <ColumnDefinition Width="167"></ColumnDefinition>
                 <ColumnDefinition Width="167"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.ColumnDefinitions>
@@ -37,7 +34,7 @@
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Skip function on error"></Label>
             </Grid>
 
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="34"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -47,7 +44,7 @@
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Show command errors"></Label>
             </Grid>
 
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid Grid.Row="0" Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="34"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -57,25 +54,24 @@
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Show empty functions"></Label>
             </Grid>
         </Grid>
-        
-        <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Fill="#777777"></Rectangle>
+
+        <Rectangle Grid.Column="0" Grid.Row="1" Fill="#606060"></Rectangle>
 
         <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="Output" TextWrapping="Wrap" FontFamily="Courier New" Background="#4C4C4C"/>
         </ScrollViewer>
 
-        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+        <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="67"></RowDefinition>
                 <RowDefinition Height="67"></RowDefinition>
                 <RowDefinition Height="67"></RowDefinition>
                 <RowDefinition Height="67"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ExportButton" Grid.Row="1" Grid.Column="0" Content="Export Data" Click="ExportResults" IsEnabled="False"/>
-            <Button x:Name="FolderButton" Grid.Row="2" Grid.Column="0" Content="Select Folder" Click="SelectFolder" IsEnabled="False"/>
-            <Button x:Name="AnalyseButton" Grid.Row="3" Grid.Column="0" Content="Analyse" Click="ReadFiles" IsEnabled="False"/>
+            <Button x:Name="ExportButton" Grid.Row="0" Grid.Column="0" Content="Export Data" Click="ExportResults" IsEnabled="False"/>
+            <Button x:Name="FolderButton" Grid.Row="1" Grid.Column="0" Content="Select Folder" Click="SelectFolder" IsEnabled="False"/>
+            <Button x:Name="AnalyseButton" Grid.Row="2" Grid.Column="0" Content="Analyse" Click="ReadFiles" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>

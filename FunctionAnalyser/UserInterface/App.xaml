@@ -6,6 +6,7 @@
     <Application.Resources>
         <Style TargetType="ToggleButton">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#909090"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
@@ -13,12 +14,38 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Background" Value="Orange"></Setter>
-                            </Trigger>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter Property="Content" Value="✔"></Setter>
-                                <Setter Property="Background" Value="Green"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#858585"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#858585"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsEnabled" Value="True"></Condition>
+                                    <Condition Property="IsMouseOver" Value="True"></Condition>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="#909090"></Setter>
+                            </MultiTrigger>
+                            
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#707070"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
