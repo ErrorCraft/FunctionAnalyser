@@ -10,3 +10,5 @@ C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\ob
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bin\Debug\netcoreapp3.1\AdvancedText.dll
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bin\Debug\netcoreapp3.1\AdvancedText.pdb
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\obj\Debug\netcoreapp3.1\CommandFilesApi.csproj.CopyComplete
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bin\Debug\netcoreapp3.1\CommandVerifier.dll
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bin\Debug\netcoreapp3.1\CommandVerifier.pdb

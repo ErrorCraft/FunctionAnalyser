@@ -1261,6 +1261,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "AdvancedText": "1.0.0",
+          "CommandVerifier": "1.0.0",
           "Microsoft.AspNet.WebApi.Client": "5.2.7"
         },
         "compile": {

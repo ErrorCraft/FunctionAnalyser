@@ -87,6 +87,9 @@
             "projectReferences": {
               "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
                 "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
+              },
+              "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
+                "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
               }
             }
           }
