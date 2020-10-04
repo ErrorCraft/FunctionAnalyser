@@ -56,13 +56,7 @@
             </Grid>
         </Grid>
 
-        <Rectangle Grid.Column="0" Grid.Row="1" Fill="#606060"></Rectangle>
-
-        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="Output" TextWrapping="Wrap" FontFamily="Courier New" Background="#4C4C4C"/>
-        </ScrollViewer>
-
-        <Grid Grid.Row="1" Grid.Column="0">
+        <Grid Grid.Row="1" Grid.Column="0" Background="#606060">
             <Grid.RowDefinitions>
                 <RowDefinition Height="67"></RowDefinition>
                 <RowDefinition Height="67"></RowDefinition>
@@ -73,6 +67,18 @@
             <Button x:Name="ExportButton" Grid.Row="0" Grid.Column="0" Content="Export Data" Click="ExportResults" IsEnabled="False"/>
             <Button x:Name="FolderButton" Grid.Row="1" Grid.Column="0" Content="Select Folder" Click="SelectFolder" IsEnabled="False"/>
             <Button x:Name="AnalyseButton" Grid.Row="2" Grid.Column="0" Content="Analyse" Click="ReadFiles" IsEnabled="False"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Background="#4C4C4C">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="3"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="Output" TextWrapping="Wrap" FontFamily="Courier New"/>
+            </ScrollViewer>
+            <ProgressBar x:Name="Progress" Grid.Row="1" Background="White" BorderThickness="0" Minimum="0" Maximum="1"></ProgressBar>
         </Grid>
     </Grid>
 </Window>

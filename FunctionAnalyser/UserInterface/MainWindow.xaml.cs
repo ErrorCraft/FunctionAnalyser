@@ -68,7 +68,9 @@ namespace UserInterface
             Writer.Reset();
 
             // Read functions
-            FunctionReader functionReader = new FunctionReader(FolderPath, Writer);
+            Progress<double> progress = new Progress<double>();
+            progress.ProgressChanged += ReportProgress;
+            FunctionReader functionReader = new FunctionReader(FolderPath, Writer, progress);
 
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             Task task = tcs.Task;
@@ -91,6 +93,11 @@ namespace UserInterface
             AnalyseButton.IsEnabled = true;
             ExportButton.IsEnabled = true;
             FolderButton.IsEnabled = true;
+        }
+
+        private void ReportProgress(object sender, double e)
+        {
+            Progress.Value = e;
         }
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)

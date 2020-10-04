@@ -1,6 +1,7 @@
 ﻿using AdvancedText;
 using CommandVerifier;
 using CommandVerifier.Commands;
+using System;
 using System.Diagnostics;
 using IO = System.IO;
 
@@ -8,10 +9,11 @@ namespace FunctionAnalyser
 {
     public class FunctionReader
     {
-        public readonly string BasePath;
-        private readonly CommandReader Reader;
         public FunctionInformation Information { get; private set; }
+        private readonly string BasePath;
+        private readonly CommandReader Reader;
         private readonly IWriter Output;
+        private readonly IProgress<double> Progress;
 
         public static class Options
         {
@@ -20,12 +22,13 @@ namespace FunctionAnalyser
             public static bool ShowEmptyFunctions { get; set; } = true;
         }
 
-        public FunctionReader(string basePath, IWriter output)
+        public FunctionReader(string basePath, IWriter output, IProgress<double> progress)
         {
             BasePath = basePath;
             Output = output;
             Reader = new CommandReader();
             Information = new FunctionInformation();
+            Progress = progress;
         }
 
         public void ReadAllFunctions(string version)
@@ -70,6 +73,8 @@ namespace FunctionAnalyser
                         }
                     }
 
+                    Progress.Report((double)i/files.Length);
+
                     if (CommandError.StoredErrors.Count > 0)
                     {
                         if (Options.ShowCommandErrors)
@@ -102,6 +107,7 @@ namespace FunctionAnalyser
                 }
 
                 timer.Stop();
+                Progress.Report(1.0);
                 Output.WriteLine(new TextComponent("Time spent reading: " + (timer.ElapsedTicks / 10000.0d).ToString("0.0000") + "ms", Colour.BuiltinColours.DARK_AQUA, false, true));
                 Output.WriteLine();
                 Output.WriteLine(new TextComponent("Information:", Colour.BuiltinColours.GREY, false, true));
