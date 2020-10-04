@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using CommandFilesApi;
 using CommandVerifier;
 using CommandVerifier.Commands.Collections;
+using System.Net.Http;
 
 namespace UserInterface
 {
@@ -102,8 +103,14 @@ namespace UserInterface
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)
         {
-            await Task.Run(GetFiles);
-            FolderButton.IsEnabled = true;
+            try
+            {
+                await Task.Run(GetFiles);
+                FolderButton.IsEnabled = true;
+            } catch (HttpRequestException)
+            {
+                // empty (everything is disabled)
+            }
         }
 
         private async Task GetFiles()
@@ -146,7 +153,7 @@ namespace UserInterface
             Writer.Write(new TextComponent("Getting ", Colour.BuiltinColours.GREY));
             Writer.Write(new TextComponent(file, Colour.BuiltinColours.GOLD));
             Writer.WriteLine(new TextComponent("...", Colour.BuiltinColours.GREY));
-            return await FileProcessor.LoadFile(file);
+            return await FileProcessor.LoadFile(file, Writer);
         }
     }
 }

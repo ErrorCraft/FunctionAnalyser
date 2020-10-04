@@ -84,7 +84,11 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
+                "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

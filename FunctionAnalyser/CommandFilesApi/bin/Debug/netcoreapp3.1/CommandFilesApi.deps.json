@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "CommandFilesApi/1.0.0": {
         "dependencies": {
+          "AdvancedText": "1.0.0",
           "Microsoft.AspNet.WebApi.Client": "5.2.7"
         },
         "runtime": {
@@ -858,6 +859,11 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "AdvancedText/1.0.0": {
+        "runtime": {
+          "AdvancedText.dll": {}
+        }
       }
     }
   },
@@ -1468,6 +1474,11 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "AdvancedText/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -1441,6 +1441,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "AdvancedText/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/AdvancedText.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AdvancedText.dll": {}
+        }
       }
     }
   },
@@ -5194,10 +5204,16 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "AdvancedText/1.0.0": {
+      "type": "project",
+      "path": "../AdvancedText/AdvancedText.csproj",
+      "msbuildProject": "../AdvancedText/AdvancedText.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "AdvancedText >= 1.0.0",
       "Microsoft.AspNet.WebApi.Client >= 5.2.7"
     ]
   },
@@ -5230,7 +5246,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -7,3 +7,6 @@ C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bi
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\obj\Debug\netcoreapp3.1\CommandFilesApi.csproj.CoreCompileInputs.cache
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\obj\Debug\netcoreapp3.1\CommandFilesApi.dll
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\obj\Debug\netcoreapp3.1\CommandFilesApi.pdb
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bin\Debug\netcoreapp3.1\AdvancedText.dll
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\bin\Debug\netcoreapp3.1\AdvancedText.pdb
+C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\CommandFilesApi\obj\Debug\netcoreapp3.1\CommandFilesApi.csproj.CopyComplete
