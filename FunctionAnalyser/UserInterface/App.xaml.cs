@@ -17,8 +17,7 @@ namespace UserInterface
     {
         private void Crash(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            //string basePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
-            string basePath = @"C:\Users\Ramon\Desktop\MCC and such\_test lol\";
+            string basePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
             string file = "FunctionAnalyser-Crash-" + DateTime.Now.ToString("yyyy-MM-dd_hh.mm.ss") + ".txt";
 
             using (StreamWriter writer = new StreamWriter(basePath + file))
