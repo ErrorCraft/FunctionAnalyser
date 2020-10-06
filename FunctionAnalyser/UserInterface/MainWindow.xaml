@@ -6,7 +6,36 @@
         xmlns:local="clr-namespace:UserInterface"
         mc:Ignorable="d"
         KeyboardNavigation.TabNavigation="None"
-        Title="Function Analyser" Height="450" Width="800" MinHeight="315" MinWidth="560" Loaded="LoadedWindow">
+        Title="Function Analyser" Height="450" Width="800" MinHeight="315" MinWidth="560" Loaded="LoadedWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#858585"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsEnabled" Value="True"></Condition>
+                                    <Condition Property="IsMouseOver" Value="True"></Condition>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="#909090"></Setter>
+                            </MultiTrigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#707070"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="167"></ColumnDefinition>
