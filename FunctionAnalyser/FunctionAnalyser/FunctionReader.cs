@@ -3,6 +3,7 @@ using CommandVerifier;
 using CommandVerifier.Commands;
 using System;
 using System.Diagnostics;
+using System.Text;
 using IO = System.IO;
 
 namespace FunctionAnalyser
@@ -127,11 +128,23 @@ namespace FunctionAnalyser
             }
         }
 
-        private string GetAverage(int information)
+        private string GetAverage(int item)
         {
-            return "(Average: " +
-                ((double)information / Information.Functions).ToString("0.00") + " per file, " +
-                ((double)information / Information.Commands).ToString("0.00") + " per command)";
+            if (Information.Functions == 0) return "";
+
+            StringBuilder sb = new StringBuilder("(Average: ");
+            sb.Append(((double)item / Information.Functions).ToString("0.00"));
+            sb.Append(" per file");
+
+            if (Information.Commands > 0)
+            {
+                sb.Append(", ");
+                sb.Append(((double)item / Information.Commands).ToString("0.00"));
+                sb.Append(" per command");
+            }
+
+            sb.Append(")");
+            return sb.ToString();
         }
 
         private void ShowErrors()
