@@ -3,8 +3,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using Coordinates = CommandVerifier.Commands.SubcommandTypes.Coordinates;
 
-namespace CommandVerifier.Commands.Converters
+namespace CommandVerifier.Converters
 {
     class SubcommandConverter : JsonConverter
     {
@@ -40,11 +41,11 @@ namespace CommandVerifier.Commands.Converters
             "key" => jObject.ToObject<Key>(serializer),
             "requirements" => jObject.ToObject<Requirements>(serializer),
             "alternative" => jObject.ToObject<Alternative>(serializer),
-            "boolean" => jObject.ToObject<SubcommandTypes.Boolean>(serializer),
+            "boolean" => jObject.ToObject<Commands.SubcommandTypes.Boolean>(serializer),
             "integer" => jObject.ToObject<Integer>(serializer),
             "float" => jObject.ToObject<Float>(serializer),
-            "double" => jObject.ToObject<SubcommandTypes.Double>(serializer),
-            "string" => jObject.ToObject<SubcommandTypes.String>(serializer),
+            "double" => jObject.ToObject<Commands.SubcommandTypes.Double>(serializer),
+            "string" => jObject.ToObject<Commands.SubcommandTypes.String>(serializer),
             "uuid" => jObject.ToObject<Uuid>(serializer),
             "swizzle" => jObject.ToObject<Swizzle>(serializer),
             "entity" => jObject.ToObject<Entity>(serializer),
@@ -59,11 +60,11 @@ namespace CommandVerifier.Commands.Converters
             "item" => jObject.ToObject<Item>(serializer),
             "block" => jObject.ToObject<Block>(serializer),
             "time" => jObject.ToObject<Time>(serializer),
-            "vec3" => jObject.ToObject<SubcommandTypes.Coordinates.Vec3>(serializer),
-            "vec2" => jObject.ToObject<SubcommandTypes.Coordinates.Vec2>(serializer),
-            "rotation" => jObject.ToObject<SubcommandTypes.Coordinates.Rotation>(serializer),
-            "block_pos" => jObject.ToObject<SubcommandTypes.Coordinates.BlockPos>(serializer),
-            "column_pos" => jObject.ToObject<SubcommandTypes.Coordinates.ColumnPos>(serializer),
+            "vec3" => jObject.ToObject<Coordinates::Vec3>(serializer),
+            "vec2" => jObject.ToObject<Coordinates::Vec2>(serializer),
+            "rotation" => jObject.ToObject<Coordinates::Rotation>(serializer),
+            "block_pos" => jObject.ToObject<Coordinates::BlockPos>(serializer),
+            "column_pos" => jObject.ToObject<Coordinates::ColumnPos>(serializer),
             "colour" => jObject.ToObject<Colour>(serializer),
             "angle" => jObject.ToObject<Angle>(serializer),
             "item_slot" => jObject.ToObject<Slot>(serializer),

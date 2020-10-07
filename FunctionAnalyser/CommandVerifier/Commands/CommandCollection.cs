@@ -6,13 +6,13 @@ namespace CommandVerifier.Commands
     class CommandCollection
     {
         [JsonProperty("version")]
-        public string Version { get; set; }
+        public string Version { get; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; }
 
         [JsonProperty("commands")]
-        public List<Command> Commands { get; set; }
+        public List<Command> Commands { get; }
 
         [JsonConstructor]
         public CommandCollection()
@@ -24,9 +24,9 @@ namespace CommandVerifier.Commands
 
         public bool Parse(StringReader reader)
         {
-            while (reader.commandData.ExpectCommand)
+            while (reader.Data.ExpectCommand)
             {
-                reader.commandData.Reset();
+                reader.Data.Reset();
                 int index = -1;
                 int start = reader.Cursor;
                 for (int i = 0; i < Commands.Count; i++)
@@ -34,7 +34,7 @@ namespace CommandVerifier.Commands
                     if (Commands[i].CommandMatches(reader))
                     {
                         index = i;
-                        reader.commandData.ExpectCommand = false;
+                        reader.Data.ExpectCommand = false;
                         break;
                     }
                     reader.SetCursor(start);
@@ -46,7 +46,7 @@ namespace CommandVerifier.Commands
                     if (Commands[index].Parse(reader))
                     {
                         // Out of loop, expect another command
-                        if (Commands[index].LoopContents && reader.commandData.ExpectCommand) continue;
+                        if (Commands[index].LoopContents && reader.Data.ExpectCommand) continue;
 
                         // Is not at the end of the command
                         if (reader.CanRead())

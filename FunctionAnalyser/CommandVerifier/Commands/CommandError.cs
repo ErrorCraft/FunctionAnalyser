@@ -105,7 +105,7 @@ namespace CommandVerifier.Commands
         public static CommandError InapplicableSelectorOption(string option) => new CommandError("Option '" + option + "' isn't applicable here");
 
         // NBT
-        public static CommandError NbtCannotInsert(NbtArgument value, NbtArgument into) => new CommandError("Can't insert " + value.Id + " into " + into.Id);
+        public static CommandError NbtCannotInsert(INbtArgument value, INbtArgument into) => new CommandError("Can't insert " + value.Id + " into " + into.Id);
         public static CommandError NbtPathInvalid() => new CommandError("Invalid NBT path element");
 
         // Coordinates

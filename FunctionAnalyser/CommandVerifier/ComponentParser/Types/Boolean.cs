@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CommandVerifier.ComponentParser.Types
+﻿namespace CommandVerifier.ComponentParser.Types
 {
     class Boolean : IComponent
     {
-        private bool _value;
+        private readonly bool _value;
         public Boolean(bool value)
         {
             _value = value;

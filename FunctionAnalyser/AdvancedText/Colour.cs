@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-
-namespace AdvancedText
+﻿namespace AdvancedText
 {
     public class Colour
     {

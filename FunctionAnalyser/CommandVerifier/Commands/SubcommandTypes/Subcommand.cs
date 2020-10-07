@@ -23,21 +23,21 @@ namespace CommandVerifier.Commands.SubcommandTypes
 
         private protected void SetLoopAttributes(StringReader reader)
         {
-            reader.commandData.PassedFirstRequirement = !reader.commandData.DisableForcedPath;
+            reader.Data.PassedFirstRequirement = !reader.Data.DisableForcedPath;
             if (MayEscapeLoop)
             {
                 if (ExpectCommand) // new command
                 {
-                    reader.commandData.EscapeLoop = true;
-                    reader.commandData.ExpectCommand = true;
+                    reader.Data.EscapeLoop = true;
+                    reader.Data.ExpectCommand = true;
                 } else if (reader.CanRead()) // keep on reading
                 {
-                    reader.commandData.EscapeLoop = false;
-                    reader.commandData.ExpectCommand = false;
+                    reader.Data.EscapeLoop = false;
+                    reader.Data.ExpectCommand = false;
                 } else // stop reading
                 {
-                    reader.commandData.EscapeLoop = true;
-                    reader.commandData.ExpectCommand = false;
+                    reader.Data.EscapeLoop = true;
+                    reader.Data.ExpectCommand = false;
                 }
             }
         }

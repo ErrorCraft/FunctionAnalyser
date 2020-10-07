@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace CommandVerifier.NbtParser.Types
 {
-    class NbtList : NbtCollection
+    class NbtList : INbtCollection
     {
-        public List<NbtArgument> Values { get; private set; }
+        public List<INbtArgument> Values { get; private set; }
         private readonly Type ListType;
 
         public NbtList(Type t)
         {
-            Values = new List<NbtArgument>();
+            Values = new List<INbtArgument>();
             ListType = t;
         }
 
-        public bool TryAdd(NbtArgument value)
+        public bool TryAdd(INbtArgument value)
         {
             if (ListType != value.GetType()) return false;
             Values.Add(value);

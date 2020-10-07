@@ -1,43 +1,41 @@
-﻿using CommandVerifier.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Text.RegularExpressions;
 
 namespace CommandVerifier.Types
 {
     public class NamespacedId
     {
-        public readonly string Namespace;
-        public readonly string Path;
-        public readonly bool IsTag;
+        public string Namespace { get; }
+        public string Path { get; }
+        public bool IsTag { get; }
         private static readonly char NAMESPACE_SEPARATOR = ':';
         private static readonly char TAG_CHARACTER = '#';
         private static readonly string DEFAULT_NAMESPACE = "minecraft";
         private static readonly Regex NAMESPACE_REGEX = new Regex("^[a-z0-9._-]*$");
+        public static NamespacedId PLAYER_ENTITY { get; } = new NamespacedId("player", false);
 
-        public NamespacedId(string Namespace, string Path, bool IsTag)
+        private NamespacedId(string @namespace, string path, bool isTag)
         {
-            this.Namespace = Namespace;
-            this.Path = Path;
-            this.IsTag = IsTag;
+            Namespace = @namespace;
+            Path = path;
+            IsTag = isTag;
         }
 
-        public NamespacedId(string Path, bool IsTag)
+        private NamespacedId(string Path, bool IsTag)
             : this(DEFAULT_NAMESPACE, Path, IsTag) { }
 
-        public static bool TryParse(string s, bool is_tag, out NamespacedId result)
+        public static bool TryParse(string s, bool isTag, out NamespacedId result)
         {
             result = null;
             string[] values = s.Split(NAMESPACE_SEPARATOR);
             if (values.Length > 2) return false;
             if (values.Length == 2)
             {
-                if (string.IsNullOrEmpty(values[0])) result = new NamespacedId(values[1], is_tag);
+                if (string.IsNullOrEmpty(values[0])) result = new NamespacedId(values[1], isTag);
                 else if (!NAMESPACE_REGEX.IsMatch(values[0])) return false;
-                else result = new NamespacedId(values[0], values[1], is_tag);
+                else result = new NamespacedId(values[0], values[1], isTag);
             }
-            else result = new NamespacedId(values[0], is_tag);
+            else result = new NamespacedId(values[0], isTag);
             return true;
         }
 

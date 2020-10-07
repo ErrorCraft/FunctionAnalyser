@@ -16,8 +16,8 @@ namespace CommandVerifier.Commands.SubcommandTypes
         public override bool Check(StringReader reader, bool throw_on_fail)
         {
             // Check all
-            reader.commandData.DisableForcedPath = DisableForcedPath;
-            reader.commandData.PassedAllRequirements = false;
+            reader.Data.DisableForcedPath = DisableForcedPath;
+            reader.Data.PassedAllRequirements = false;
             for (int i = 0; i < Values.Length; i++)
             {
                 if (Values[i].MayBeSkipped)
@@ -41,9 +41,9 @@ namespace CommandVerifier.Commands.SubcommandTypes
                 }
 
                 // Ended with optional
-                if (reader.commandData.EndedOptional) return true;
+                if (reader.Data.EndedOptional) return true;
 
-                if (!reader.commandData.PassedAllRequirements)
+                if (!reader.Data.PassedAllRequirements)
                 {
                     // Argument separator
                     if (!reader.IsEndOfArgument())
@@ -57,12 +57,12 @@ namespace CommandVerifier.Commands.SubcommandTypes
                 }
 
                 // Reset passing all requirements (in case of sub-requirements)
-                reader.commandData.PassedAllRequirements = false;
+                reader.Data.PassedAllRequirements = false;
             }
 
             //if (ForceEndOfCommand && reader.CanRead()) return false;
 
-            reader.commandData.PassedAllRequirements = true;
+            reader.Data.PassedAllRequirements = true;
             return true;
         }
     }

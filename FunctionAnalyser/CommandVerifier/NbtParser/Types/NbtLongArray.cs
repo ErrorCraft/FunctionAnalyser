@@ -2,7 +2,7 @@
 
 namespace CommandVerifier.NbtParser.Types
 {
-    class NbtLongArray : NbtCollection
+    class NbtLongArray : INbtCollection
     {
         public List<NbtLong> Values { get; private set; }
 
@@ -11,7 +11,7 @@ namespace CommandVerifier.NbtParser.Types
             Values = new List<NbtLong>();
         }
 
-        public bool TryAdd(NbtArgument value)
+        public bool TryAdd(INbtArgument value)
         {
             if (typeof(NbtLong) != value.GetType()) return false;
             Values.Add((NbtLong)value);

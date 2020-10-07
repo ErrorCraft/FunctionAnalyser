@@ -1,14 +1,14 @@
 ﻿namespace CommandVerifier.NbtParser.Types
 {
-    class NbtDouble : NbtArgument
+    class NbtDouble : INbtArgument
     {
-        readonly double _value;
+        private readonly double _value;
         public NbtDouble(double value)
         {
             _value = value;
         }
 
-        public string Get() => _value.ToString(NbtArgument.NbtNumberFormatInfo) + 'd';
+        public string Get() => _value.ToString(INbtArgument.NbtNumberFormatInfo) + 'd';
         public string Id { get; } = "TAG_Double";
 
         public static implicit operator double(NbtDouble d)

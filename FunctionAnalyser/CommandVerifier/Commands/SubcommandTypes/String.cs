@@ -26,7 +26,7 @@ namespace CommandVerifier.Commands.SubcommandTypes
             {
                 if (Optional)
                 {
-                    reader.commandData.EndedOptional = true;
+                    reader.Data.EndedOptional = true;
                     return true;
                 }
 

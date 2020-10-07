@@ -1,8 +1,6 @@
 ﻿using CommandVerifier.Commands;
 using CommandVerifier.Types;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CommandVerifier.ComponentParser.Types

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-
-namespace CommandVerifier.ComponentParser.Types
+﻿namespace CommandVerifier.ComponentParser.Types
 {
     class Number : IComponent
     {
-        private string _value;
+        private readonly string _value;
         public Number(string value)
         {
             _value = value;

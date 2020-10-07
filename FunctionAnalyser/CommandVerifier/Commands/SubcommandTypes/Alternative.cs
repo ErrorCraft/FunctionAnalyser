@@ -6,7 +6,7 @@
         {
             if (!reader.CanRead() && Optional)
             {
-                reader.commandData.EndedOptional = true;
+                reader.Data.EndedOptional = true;
                 return true;
             }
 
@@ -14,10 +14,10 @@
             int start = reader.Cursor;
 
             // Store if a previous requirement was passed
-            bool previous_pass = reader.commandData.PassedFirstRequirement;
+            bool previous_pass = reader.Data.PassedFirstRequirement;
 
             // Check all
-            reader.commandData.PassedFirstRequirement = false;
+            reader.Data.PassedFirstRequirement = false;
             for (int i = 0; i < Values.Length; i++)
             {
                 // Check passed
@@ -28,14 +28,14 @@
                 }
 
                 // Passed first requirement
-                if (reader.commandData.PassedFirstRequirement) return false;
+                if (reader.Data.PassedFirstRequirement) return false;
 
                 // Set cursor back
                 reader.SetCursor(start);
             }
 
             // Store requirement passed back
-            reader.commandData.PassedFirstRequirement = previous_pass;
+            reader.Data.PassedFirstRequirement = previous_pass;
 
             // Run first again, but allow errors to be logged
             if (Values.Length > 0 && throw_on_fail) Values[0].Check(reader, true);

@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CommandVerifier.NbtParser.Types
 {
-    class NbtCompound : NbtArgument
+    class NbtCompound : INbtArgument
     {
-        public Dictionary<string, NbtArgument> Values { get; private set; }
+        public Dictionary<string, INbtArgument> Values { get; private set; }
 
         public NbtCompound()
         {
-            Values = new Dictionary<string, NbtArgument>();
+            Values = new Dictionary<string, INbtArgument>();
         }
 
-        public void Add(string key, NbtArgument value)
+        public void Add(string key, INbtArgument value)
         {
             // Overwrite old values
             if (Values.ContainsKey(key)) Values[key] = value;
@@ -25,7 +23,7 @@ namespace CommandVerifier.NbtParser.Types
             string s = "{";
             foreach (string key in Values.Keys)
             {
-                s += NbtArgument.TryQuote(key) + ": " + Values[key].Get() + ", ";
+                s += INbtArgument.TryQuote(key) + ": " + Values[key].Get() + ", ";
             }
             return s.TrimEnd(new char[] { ',', ' ' }) + "}";
         }

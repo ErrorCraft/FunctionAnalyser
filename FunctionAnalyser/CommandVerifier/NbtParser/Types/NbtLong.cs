@@ -1,14 +1,14 @@
 ﻿namespace CommandVerifier.NbtParser.Types
 {
-    class NbtLong : NbtArgument
+    class NbtLong : INbtArgument
     {
-        readonly long _value;
+        private readonly long _value;
         public NbtLong(long value)
         {
             _value = value;
         }
 
-        public string Get() => _value.ToString(NbtArgument.NbtNumberFormatInfo) + 'L';
+        public string Get() => _value.ToString(INbtArgument.NbtNumberFormatInfo) + 'L';
         public string Id { get; } = "TAG_Long";
 
         public static implicit operator long(NbtLong d)

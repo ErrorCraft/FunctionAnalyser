@@ -1,4 +1,4 @@
-﻿using CommandVerifier.Commands.Converters;
+﻿using CommandVerifier.Converters;
 using CommandVerifier.Commands.SubcommandTypes;
 using CommandVerifier.Commands.SubcommandTypes.Selector;
 using Newtonsoft.Json;
@@ -36,8 +36,6 @@ namespace CommandVerifier.Commands.Collections
         [JsonProperty("components")]
         [JsonConverter(typeof(SubcommandConverter))]
         public Subcommand[] Components { get; set; }
-
-        private static readonly Types.NamespacedId PLAYER_ENTITY = new Types.NamespacedId("player", false);
 
         public bool Handle(StringReader reader, bool mayThrow, EntitySelector entitySelector)
         {
@@ -89,7 +87,7 @@ namespace CommandVerifier.Commands.Collections
         {
             if (!reader.TryReadNamespacedId(mayThrow, false, out Types.NamespacedId result)) return false;
             
-            if (PLAYER_ENTITY.Equals(result) && !negated) entitySelector.IncludesEntities = false;
+            if (Types.NamespacedId.PLAYER_ENTITY.Equals(result) && !negated) entitySelector.IncludesEntities = false;
             else if (!result.IsTag)
             {
                 if (!result.IsDefaultNamespace() || !Entities.Options.Contains(result.Path))

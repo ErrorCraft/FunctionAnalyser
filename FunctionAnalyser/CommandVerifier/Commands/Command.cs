@@ -1,4 +1,4 @@
-﻿using CommandVerifier.Commands.Converters;
+﻿using CommandVerifier.Converters;
 using CommandVerifier.Commands.SubcommandTypes;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ namespace CommandVerifier.Commands
     class Command
     {
         [JsonProperty("command", Required = Required.Always)]
-        public string command { get; set; }
+        public string Name { get; set; }
 
         [JsonConverter(typeof(SubcommandConverter))]
         [JsonProperty("contents", Required = Required.Always)]
@@ -24,10 +24,10 @@ namespace CommandVerifier.Commands
         public bool CommandMatches(StringReader reader)
         {
             int start = reader.Cursor;
-            if (reader.CanRead(command.Length))
+            if (reader.CanRead(Name.Length))
             {
-                string s = reader.Read(command.Length);
-                if (s == command && reader.IsEndOfArgument())
+                string s = reader.Read(Name.Length);
+                if (s == Name && reader.IsEndOfArgument())
                 {
                     if (reader.CanRead()) reader.Skip();
                     return true;
@@ -58,10 +58,10 @@ namespace CommandVerifier.Commands
         public bool Parse(StringReader reader)
         {
             if (Contents == null) return true;
-            reader.commandData.LoopContents = LoopContents;
+            reader.Data.LoopContents = LoopContents;
             if (LoopContents)
             {
-                while (!reader.commandData.EscapeLoop)
+                while (!reader.Data.EscapeLoop)
                 {
                     if (!Contents.Check(reader, true)) return false;
                     // add param for this check? (in both contents root and CommandData)

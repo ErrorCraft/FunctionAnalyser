@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AdvancedText
+﻿namespace AdvancedText
 {
     public class TextComponent
     {

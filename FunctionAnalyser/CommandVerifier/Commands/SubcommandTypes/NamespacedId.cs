@@ -27,7 +27,7 @@ namespace CommandVerifier.Commands.SubcommandTypes
         {
             if (!reader.CanRead() && Optional)
             {
-                reader.commandData.EndedOptional = true;
+                reader.Data.EndedOptional = true;
                 return true;
             }
             if (reader.TryReadNamespacedId(throw_on_fail, DisableTags, out _))

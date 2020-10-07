@@ -11,7 +11,7 @@ namespace CommandVerifier.Commands.SubcommandTypes
         {
             if (!reader.CanRead() && Optional)
             {
-                reader.commandData.EndedOptional = true;
+                reader.Data.EndedOptional = true;
                 return true;
             }
             if (reader.Expect(Value, throw_on_fail))

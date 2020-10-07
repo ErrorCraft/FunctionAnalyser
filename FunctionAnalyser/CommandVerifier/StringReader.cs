@@ -9,13 +9,13 @@ namespace CommandVerifier
     {
         public readonly string Command;
         public int Cursor { get; private set; }
-        public CommandData commandData { get; set; }
+        public CommandData Data { get; set; }
         public CommandInformation Information { get; set; }
 
         public StringReader(string command)
         {
             Command = command;
-            commandData = new CommandData();
+            Data = new CommandData();
             Information = new CommandInformation();
         }
 
@@ -38,7 +38,7 @@ namespace CommandVerifier
             return s;
         }
 
-        public bool TryReadString(bool may_throw, out string result)
+        public bool TryReadString(bool mayThrow, out string result)
         {
             result = "";
             if (!CanRead()) return true;
@@ -46,12 +46,12 @@ namespace CommandVerifier
             if (IsQuotedStringStart(next))
             {
                 Skip();
-                return TryReadStringUntil(next, may_throw, out result);
+                return TryReadStringUntil(next, mayThrow, out result);
             }
             return TryReadUnquotedString(out result);
         }
 
-        public bool TryReadStringUntil(char terminator, bool may_throw, out string result)
+        public bool TryReadStringUntil(char terminator, bool mayThrow, out string result)
         {
             result = "";
             bool escaped = false;
@@ -67,7 +67,7 @@ namespace CommandVerifier
                     }
                     else
                     {
-                        if (may_throw) CommandError.InvalidEscapeSequence(c).AddWithContext(this);
+                        if (mayThrow) CommandError.InvalidEscapeSequence(c).AddWithContext(this);
                         return false;
                     }
                 }
@@ -76,26 +76,26 @@ namespace CommandVerifier
                 else result += c;
             }
 
-            if (may_throw) CommandError.ExpectedEndOfQuote().AddWithContext(this);
+            if (mayThrow) CommandError.ExpectedEndOfQuote().AddWithContext(this);
             return false;
         }
 
-        public bool TryReadQuotedString(bool may_throw, out string result)
+        public bool TryReadQuotedString(bool mayThrow, out string result)
         {
             result = "";
             if (!CanRead())
             {
-                if (may_throw) CommandError.ExpectedStartOfQuote().AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedStartOfQuote().AddWithContext(this);
                 return false;
             }
             char next = Peek();
             if (!IsQuotedStringStart(next))
             {
-                if (may_throw) CommandError.ExpectedStartOfQuote().AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedStartOfQuote().AddWithContext(this);
                 return false;
             }
             Skip();
-            return TryReadStringUntil(next, may_throw, out result);
+            return TryReadStringUntil(next, mayThrow, out result);
         }
 
         public bool IsUnquotedStringPart(char c)
@@ -116,15 +116,15 @@ namespace CommandVerifier
             return true;
         }
 
-        public bool TryReadBoolean(bool may_throw, out bool result)
+        public bool TryReadBoolean(bool mayThrow, out bool result)
         {
             result = false;
             int start = Cursor;
-            if (TryReadString(may_throw, out string value))
+            if (TryReadString(mayThrow, out string value))
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    if (may_throw) CommandError.ExpectedBoolean().AddWithContext(this);
+                    if (mayThrow) CommandError.ExpectedBoolean().AddWithContext(this);
                     return false;
                 }
                 if ("true".Equals(value))
@@ -137,10 +137,10 @@ namespace CommandVerifier
                     return true;
                 }
                 Cursor = start;
-                if (may_throw) CommandError.InvalidBoolean(value).AddWithContext(this);
+                if (mayThrow) CommandError.InvalidBoolean(value).AddWithContext(this);
                 return false;
             }
-            if (may_throw) CommandError.ExpectedBoolean().AddWithContext(this);
+            if (mayThrow) CommandError.ExpectedBoolean().AddWithContext(this);
             return false;
         }
 
@@ -151,7 +151,7 @@ namespace CommandVerifier
             return Command[start..Cursor];
         }
 
-        public bool TryReadInt(bool may_throw, out int result)
+        public bool TryReadInt(bool mayThrow, out int result)
         {
             result = 0;
             int start = Cursor;
@@ -159,18 +159,18 @@ namespace CommandVerifier
 
             if (string.IsNullOrEmpty(number))
             {
-                if (may_throw) CommandError.ExpectedInteger().AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedInteger().AddWithContext(this);
                 return false;
             }
             if (int.TryParse(number, SubcommandHelper.MinecraftNumberStyles, SubcommandHelper.MinecraftNumberFormatInfo, out result))
                 return true;
 
             Cursor = start;
-            if (may_throw) CommandError.InvalidInteger(number).AddWithContext(this);
+            if (mayThrow) CommandError.InvalidInteger(number).AddWithContext(this);
             return false;
         }
 
-        public bool TryReadFloat(bool may_throw, out float result)
+        public bool TryReadFloat(bool mayThrow, out float result)
         {
             result = 0.0f;
             int start = Cursor;
@@ -178,18 +178,18 @@ namespace CommandVerifier
 
             if (string.IsNullOrEmpty(number))
             {
-                if (may_throw) CommandError.ExpectedFloat().AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedFloat().AddWithContext(this);
                 return false;
             }
             if (float.TryParse(number, SubcommandHelper.MinecraftNumberStyles, SubcommandHelper.MinecraftNumberFormatInfo, out result))
                 return true;
 
             Cursor = start;
-            if (may_throw) CommandError.InvalidFloat(number).AddWithContext(this);
+            if (mayThrow) CommandError.InvalidFloat(number).AddWithContext(this);
             return false;
         }
 
-        public bool TryReadDouble(bool may_throw, out double result)
+        public bool TryReadDouble(bool mayThrow, out double result)
         {
             result = 0.0d;
             int start = Cursor;
@@ -197,18 +197,18 @@ namespace CommandVerifier
 
             if (string.IsNullOrEmpty(number))
             {
-                if (may_throw) CommandError.ExpectedDouble().AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedDouble().AddWithContext(this);
                 return false;
             }
             if (double.TryParse(number, SubcommandHelper.MinecraftNumberStyles, SubcommandHelper.MinecraftNumberFormatInfo, out result))
                 return true;
 
             Cursor = start;
-            if (may_throw) CommandError.InvalidDouble(number).AddWithContext(this);
+            if (mayThrow) CommandError.InvalidDouble(number).AddWithContext(this);
             return false;
         }
 
-        public bool TryReadUuid(bool may_throw, out Guid result)
+        public bool TryReadUuid(bool mayThrow, out Guid result)
         {
             result = new Guid();
             int start = Cursor;
@@ -218,10 +218,10 @@ namespace CommandVerifier
             if (UuidRegex.IsMatch(uuid))
             {
                 if (IsEndOfArgument()) return true;
-                if (may_throw) CommandError.ExpectedArgumentSeparator().AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedArgumentSeparator().AddWithContext(this);
                 return false;
             }
-            if (may_throw) CommandError.InvalidUuid().AddWithContext(this);
+            if (mayThrow) CommandError.InvalidUuid().AddWithContext(this);
             return false;
         }
 
@@ -290,29 +290,29 @@ namespace CommandVerifier
             while (CanRead() && IsWhitespace(Peek())) Skip();
         }
 
-        public bool TryReadNamespacedId(bool may_throw, bool disable_tags, out NamespacedId result)
+        public bool TryReadNamespacedId(bool mayThrow, bool disableTags, out NamespacedId result)
         {
             result = null;
             if (!CanRead())
             {
-                if (may_throw) CommandError.IncorrectArgument().AddWithContext(this);
+                if (mayThrow) CommandError.IncorrectArgument().AddWithContext(this);
                 return false;
             }
-            bool is_tag = false;
-            if (!disable_tags && CanRead() && Peek() == '#')
+            bool isTag = false;
+            if (!disableTags && CanRead() && Peek() == '#')
             {
                 Skip();
-                is_tag = true;
+                isTag = true;
             }
 
             int start = Cursor;
             while (CanRead() && IsNamespacedIdPart(Peek())) Skip();
             string s = Command[start..Cursor];
 
-            if (!NamespacedId.TryParse(s, is_tag, out result))
+            if (!NamespacedId.TryParse(s, isTag, out result))
             {
                 SetCursor(start);
-                if (may_throw) CommandError.InvalidNamespacedId().AddWithContext(this);
+                if (mayThrow) CommandError.InvalidNamespacedId().AddWithContext(this);
                 return false;
             }
             return true;
@@ -325,11 +325,11 @@ namespace CommandVerifier
                 c == '_' || c == '-' || c == '.' || c == '/' || c == ':';
         }
 
-        public bool Expect(char c, bool may_throw)
+        public bool Expect(char c, bool mayThrow)
         {
             if (!CanRead() || Peek() != c)
             {
-                if (may_throw) CommandError.ExpectedCharacter(c).AddWithContext(this);
+                if (mayThrow) CommandError.ExpectedCharacter(c).AddWithContext(this);
                 return false;
             }
             Skip();

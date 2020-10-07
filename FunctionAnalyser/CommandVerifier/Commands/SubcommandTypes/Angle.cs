@@ -8,7 +8,7 @@ namespace CommandVerifier.Commands.SubcommandTypes
         {
             if (!reader.CanRead() && Optional)
             {
-                reader.commandData.EndedOptional = true;
+                reader.Data.EndedOptional = true;
                 return true;
             }
 

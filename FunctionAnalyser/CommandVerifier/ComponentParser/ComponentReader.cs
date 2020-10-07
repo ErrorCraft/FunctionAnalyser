@@ -1,8 +1,6 @@
 ﻿using CommandVerifier.Commands;
 using TextComponent = CommandVerifier.ComponentParser.Types;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
 
 namespace CommandVerifier.ComponentParser
@@ -15,8 +13,8 @@ namespace CommandVerifier.ComponentParser
         private static readonly string UNTERMINATED_ESCAPE_SEQUENCE_ERROR = "Unterminated escape sequence";
         private static readonly string INVALID_ESCAPE_SEQUENCE_ERROR = "Invalid escape sequence";
         private static readonly string EXPECTED_NAME_VALUE_SEPARATOR_ERROR = "Expected ':'";
-        private static readonly string END_OF_INPUT = "End of input";
-        private static readonly string UNTERMINATED_STRING = "Unterminated string";
+        private static readonly string END_OF_INPUT_ERROR = "End of input";
+        private static readonly string UNTERMINATED_STRING_ERROR = "Unterminated string";
 
         public static bool TryRead(StringReader reader, bool mayThrow, out TextComponent::IComponent result)
         {
@@ -134,7 +132,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != '}')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(END_OF_INPUT).AddWithContext(reader);
+                if (mayThrow) CommandError.InvalidChatComponent(END_OF_INPUT_ERROR).AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -170,7 +168,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != ']')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(END_OF_INPUT).AddWithContext(reader);
+                if (mayThrow) CommandError.InvalidChatComponent(END_OF_INPUT_ERROR).AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -225,7 +223,7 @@ namespace CommandVerifier.ComponentParser
                 else result += c;
             }
 
-            if (mayThrow) CommandError.InvalidChatComponent(UNTERMINATED_STRING).AddWithContext(reader);
+            if (mayThrow) CommandError.InvalidChatComponent(UNTERMINATED_STRING_ERROR).AddWithContext(reader);
             return false;
         }
     }

@@ -1,4 +1,4 @@
-﻿using CommandVerifier.Commands.Converters;
+﻿using CommandVerifier.Converters;
 using CommandVerifier.Commands.SubcommandTypes;
 using Newtonsoft.Json;
 

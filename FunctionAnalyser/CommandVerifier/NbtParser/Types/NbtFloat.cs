@@ -1,14 +1,14 @@
 ﻿namespace CommandVerifier.NbtParser.Types
 {
-    class NbtFloat : NbtArgument
+    class NbtFloat : INbtArgument
     {
-        readonly float _value;
+        private readonly float _value;
         public NbtFloat(float value)
         {
             _value = value;
         }
 
-        public string Get() => _value.ToString(NbtArgument.NbtNumberFormatInfo) + 'f';
+        public string Get() => _value.ToString(INbtArgument.NbtNumberFormatInfo) + 'f';
         public string Id { get; } = "TAG_Float";
 
         public static implicit operator float(NbtFloat d)

@@ -1,14 +1,14 @@
 ﻿namespace CommandVerifier.NbtParser.Types
 {
-    class NbtInteger : NbtArgument
+    class NbtInteger : INbtArgument
     {
-        readonly int _value;
+        private readonly int _value;
         public NbtInteger(int value)
         {
             _value = value;
         }
 
-        public string Get() => _value.ToString(NbtArgument.NbtNumberFormatInfo);
+        public string Get() => _value.ToString(INbtArgument.NbtNumberFormatInfo);
         public string Id { get; } = "TAG_Integer";
 
         public static implicit operator int(NbtInteger d)

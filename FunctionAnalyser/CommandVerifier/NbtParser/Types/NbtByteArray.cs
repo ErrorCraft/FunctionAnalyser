@@ -2,7 +2,7 @@
 
 namespace CommandVerifier.NbtParser.Types
 {
-    class NbtByteArray : NbtCollection
+    class NbtByteArray : INbtCollection
     {
         public List<NbtByte> Values { get; private set; }
 
@@ -11,7 +11,7 @@ namespace CommandVerifier.NbtParser.Types
             Values = new List<NbtByte>();
         }
 
-        public bool TryAdd(NbtArgument value)
+        public bool TryAdd(INbtArgument value)
         {
             if (typeof(NbtByte) != value.GetType()) return false;
             Values.Add((NbtByte)value);

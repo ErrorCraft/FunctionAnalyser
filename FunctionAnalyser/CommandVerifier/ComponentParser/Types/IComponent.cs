@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CommandVerifier.ComponentParser.Types
+﻿namespace CommandVerifier.ComponentParser.Types
 {
     interface IComponent
     {

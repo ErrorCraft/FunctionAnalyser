@@ -6,7 +6,7 @@
         {
             if (!reader.CanRead() && Optional)
             {
-                reader.commandData.EndedOptional = true;
+                reader.Data.EndedOptional = true;
                 return true;
             }
             if (reader.TryReadUuid(throw_on_fail, out _))

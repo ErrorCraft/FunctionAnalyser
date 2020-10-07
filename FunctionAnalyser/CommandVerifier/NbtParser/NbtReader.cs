@@ -1,53 +1,52 @@
 ﻿using CommandVerifier.Commands;
 using CommandVerifier.NbtParser.Types;
-using System;
 
 namespace CommandVerifier.NbtParser
 {
     class NbtReader
     {
-        public static bool TryParse(StringReader reader, bool may_throw, out NbtCompound result) => TryReadCompound(reader, may_throw, out result);
+        public static bool TryParse(StringReader reader, bool mayThrow, out NbtCompound result) => TryReadCompound(reader, mayThrow, out result);
 
-        public static bool TryReadCompound(StringReader reader, bool may_throw, out NbtCompound result)
+        public static bool TryReadCompound(StringReader reader, bool mayThrow, out NbtCompound result)
         {
             result = new NbtCompound();
 
             reader.SkipWhitespace();
-            if (!reader.Expect('{', may_throw)) return false;
+            if (!reader.Expect('{', mayThrow)) return false;
             reader.SkipWhitespace();
 
             while (reader.CanRead() && reader.Peek() != '}')
             {
                 reader.SkipWhitespace();
-                if (!reader.TryReadString(may_throw, out string key)) return false;
+                if (!reader.TryReadString(mayThrow, out string key)) return false;
                 if (string.IsNullOrEmpty(key))
                 {
-                    if (may_throw) CommandError.ExpectedKey().AddWithContext(reader);
+                    if (mayThrow) CommandError.ExpectedKey().AddWithContext(reader);
                     return false;
                 }
                 
                 reader.SkipWhitespace();
-                if (!reader.Expect(':', may_throw)) return false;
+                if (!reader.Expect(':', mayThrow)) return false;
 
                 reader.SkipWhitespace();
                 if (!reader.CanRead())
                 {
-                    if (may_throw) CommandError.ExpectedValue().AddWithContext(reader);
+                    if (mayThrow) CommandError.ExpectedValue().AddWithContext(reader);
                     return false;
                 }
 
                 switch (reader.Peek())
                 {
                     case '{': // compound
-                        if (!TryReadCompound(reader, may_throw, out NbtCompound compound)) return false;
+                        if (!TryReadCompound(reader, mayThrow, out NbtCompound compound)) return false;
                         result.Add(key, compound);
                         break;
                     case '[': // array/list
-                        if (!TryReadArray(reader, may_throw, out NbtCollection array)) return false;
+                        if (!TryReadArray(reader, mayThrow, out INbtCollection array)) return false;
                         result.Add(key, array);
                         break;
                     default: // string/number
-                        if (!TryReadValue(reader, may_throw, out NbtArgument argument)) return false;
+                        if (!TryReadValue(reader, mayThrow, out INbtArgument argument)) return false;
                         result.Add(key, argument);
                         break;
                 }
@@ -63,11 +62,11 @@ namespace CommandVerifier.NbtParser
                 break;
             }
             // End of compound
-            if (!reader.Expect('}', may_throw)) return false;
+            if (!reader.Expect('}', mayThrow)) return false;
             return true;
         }
 
-        public static bool TryReadArray(StringReader reader, bool may_throw, out NbtCollection result)
+        public static bool TryReadArray(StringReader reader, bool may_throw, out INbtCollection result)
         {
             result = null;
 
@@ -93,7 +92,7 @@ namespace CommandVerifier.NbtParser
                         switch (expected_type)
                         {
                             case "B;":
-                                if (!TryReadValue(reader, may_throw, out NbtArgument byte_argument)) return false;
+                                if (!TryReadValue(reader, may_throw, out INbtArgument byte_argument)) return false;
                                 result = new NbtByteArray();
                                 if (!result.TryAdd(byte_argument))
                                 {
@@ -104,7 +103,7 @@ namespace CommandVerifier.NbtParser
                                 is_array_type = true;
                                 break;
                             case "I;":
-                                if (!TryReadValue(reader, may_throw, out NbtArgument integer_argument)) return false;
+                                if (!TryReadValue(reader, may_throw, out INbtArgument integer_argument)) return false;
                                 result = new NbtIntegerArray();
                                 if (!result.TryAdd(integer_argument))
                                 {
@@ -115,7 +114,7 @@ namespace CommandVerifier.NbtParser
                                 is_array_type = true;
                                 break;
                             case "L;":
-                                if (!TryReadValue(reader, may_throw, out NbtArgument long_argument)) return false;
+                                if (!TryReadValue(reader, may_throw, out INbtArgument long_argument)) return false;
                                 result = new NbtLongArray();
                                 if (!result.TryAdd(long_argument))
                                 {
@@ -140,12 +139,12 @@ namespace CommandVerifier.NbtParser
                                 result.TryAdd(compound);
                                 break;
                             case '[': // array/list
-                                if (!TryReadArray(reader, may_throw, out NbtCollection array)) return false;
+                                if (!TryReadArray(reader, may_throw, out INbtCollection array)) return false;
                                 result = new NbtList(array.GetType());
                                 result.TryAdd(array);
                                 break;
                             default: // string/number
-                                if (!TryReadValue(reader, may_throw, out NbtArgument argument)) return false;
+                                if (!TryReadValue(reader, may_throw, out INbtArgument argument)) return false;
                                 result = new NbtList(argument.GetType());
                                 result.TryAdd(argument);
                                 break;
@@ -166,7 +165,7 @@ namespace CommandVerifier.NbtParser
                             }
                             break;
                         case '[': // array/list
-                            if (!TryReadArray(reader, may_throw, out NbtCollection array)) return false;
+                            if (!TryReadArray(reader, may_throw, out INbtCollection array)) return false;
                             if (!result.TryAdd(array))
                             {
                                 reader.SetCursor(start);
@@ -175,7 +174,7 @@ namespace CommandVerifier.NbtParser
                             }
                             break;
                         default: // string/number
-                            if (!TryReadValue(reader, may_throw, out NbtArgument argument)) return false;
+                            if (!TryReadValue(reader, may_throw, out INbtArgument argument)) return false;
                             if (!result.TryAdd(argument))
                             {
                                 reader.SetCursor(start);
@@ -205,7 +204,7 @@ namespace CommandVerifier.NbtParser
             return true;
         }
 
-        public static bool TryReadValue(StringReader reader, bool may_throw, out NbtArgument result)
+        public static bool TryReadValue(StringReader reader, bool may_throw, out INbtArgument result)
         {
             result = null;
 
@@ -236,7 +235,7 @@ namespace CommandVerifier.NbtParser
 
 
         // Cannot throw, because it's a string otherwise (may add)
-        public static bool TryParseNumber(string input, out NbtArgument number)
+        public static bool TryParseNumber(string input, out INbtArgument number)
         {
             number = null;
             if (string.IsNullOrEmpty(input)) return false;
@@ -248,7 +247,7 @@ namespace CommandVerifier.NbtParser
             {
                 case 'b':
                 case 'B':
-                    if (sbyte.TryParse(expected_number, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out sbyte byte_result))
+                    if (sbyte.TryParse(expected_number, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out sbyte byte_result))
                     {
                         number = new NbtByte(byte_result);
                         return true;
@@ -256,7 +255,7 @@ namespace CommandVerifier.NbtParser
                     return false;
                 case 's':
                 case 'S':
-                    if (short.TryParse(expected_number, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out short short_result))
+                    if (short.TryParse(expected_number, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out short short_result))
                     {
                         number = new NbtShort(short_result);
                         return true;
@@ -264,7 +263,7 @@ namespace CommandVerifier.NbtParser
                     return false;
                 case 'l':
                 case 'L':
-                    if (long.TryParse(expected_number, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out long long_result))
+                    if (long.TryParse(expected_number, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out long long_result))
                     {
                         number = new NbtLong(long_result);
                         return true;
@@ -272,7 +271,7 @@ namespace CommandVerifier.NbtParser
                     return false;
                 case 'f':
                 case 'F':
-                    if (float.TryParse(expected_number, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out float float_result))
+                    if (float.TryParse(expected_number, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out float float_result))
                     {
                         number = new NbtFloat(float_result);
                         return true;
@@ -280,7 +279,7 @@ namespace CommandVerifier.NbtParser
                     return false;
                 case 'd':
                 case 'D':
-                    if (double.TryParse(expected_number, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out double double_result))
+                    if (double.TryParse(expected_number, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out double double_result))
                     {
                         number = new NbtDouble(double_result);
                         return true;
@@ -288,14 +287,14 @@ namespace CommandVerifier.NbtParser
                     return false;
                 default:
                     // May be a double (without prefix)
-                    if (input.Contains('.') && double.TryParse(input, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out double double_no_suffix_result))
+                    if (input.Contains('.') && double.TryParse(input, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out double double_no_suffix_result))
                     {
                         number = new NbtDouble(double_no_suffix_result);
                         return true;
                     }
 
                     // May be an integer (doesn't have a prefix)
-                    if (int.TryParse(input, NbtArgument.NbtNumberStyles, NbtArgument.NbtNumberFormatInfo, out int int_result))
+                    if (int.TryParse(input, INbtArgument.NbtNumberStyles, INbtArgument.NbtNumberFormatInfo, out int int_result))
                     {
                         number = new NbtInteger(int_result);
                         return true;

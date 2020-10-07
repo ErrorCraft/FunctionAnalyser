@@ -1,14 +1,14 @@
 ﻿namespace CommandVerifier.NbtParser.Types
 {
-    class NbtShort : NbtArgument
+    class NbtShort : INbtArgument
     {
-        readonly short _value;
+        private readonly short _value;
         public NbtShort(short value)
         {
             _value = value;
         }
 
-        public string Get() => _value.ToString(NbtArgument.NbtNumberFormatInfo) + 's';
+        public string Get() => _value.ToString(INbtArgument.NbtNumberFormatInfo) + 's';
         public string Id { get; } = "TAG_Short";
 
         public static implicit operator short(NbtShort d)
