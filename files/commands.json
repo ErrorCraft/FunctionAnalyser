@@ -1,13 +1,7 @@
 {
 	"java": {
-		"name": "Java 1.16",
+		"name": "Java 1.16.3",
 		"commands": [
-			{
-				"command": "test",
-				"contents": {
-					"type": "component"
-				}
-			},
 			{
 				"command": "advancement",
 				"contents": {
@@ -1885,7 +1879,8 @@
 											"value": "replace"
 										},
 										{
-											"type": "block"
+											"type": "block",
+											"optional": true
 										}
 									]
 								}
