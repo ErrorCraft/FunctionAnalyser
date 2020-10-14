@@ -11,7 +11,7 @@ namespace CommandVerifier.Types
         private static readonly char NAMESPACE_SEPARATOR = ':';
         private static readonly char TAG_CHARACTER = '#';
         private static readonly string DEFAULT_NAMESPACE = "minecraft";
-        private static readonly Regex NAMESPACE_REGEX = new Regex("^[a-z0-9._-]*$");
+        private static readonly Regex NAMESPACED_ID_REGEX = new Regex("^#?[a-z0-9._-]*:[a-z0-9._/-]*$");
         public static NamespacedId PLAYER_ENTITY { get; } = new NamespacedId("player", false);
 
         private NamespacedId(string @namespace, string path, bool isTag)
@@ -24,15 +24,24 @@ namespace CommandVerifier.Types
         private NamespacedId(string Path, bool IsTag)
             : this(DEFAULT_NAMESPACE, Path, IsTag) { }
 
-        public static bool TryParse(string s, bool isTag, out NamespacedId result)
+        public static bool TryParse(string s, out NamespacedId result)
         {
             result = null;
-            string[] values = s.Split(NAMESPACE_SEPARATOR);
+            if (!NAMESPACED_ID_REGEX.IsMatch(s)) return false;
+
+            bool isTag = false;
+            string namespacedId = s;
+            
+            if (namespacedId.StartsWith(TAG_CHARACTER))
+            {
+                isTag = true;
+                namespacedId = namespacedId.Substring(1);
+            }
+            string[] values = namespacedId.Split(NAMESPACE_SEPARATOR);
             if (values.Length > 2) return false;
             if (values.Length == 2)
             {
                 if (string.IsNullOrEmpty(values[0])) result = new NamespacedId(values[1], isTag);
-                else if (!NAMESPACE_REGEX.IsMatch(values[0])) return false;
                 else result = new NamespacedId(values[0], values[1], isTag);
             }
             else result = new NamespacedId(values[0], isTag);

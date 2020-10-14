@@ -12,8 +12,7 @@ namespace CommandVerifier.ComponentParser.ComponentTypes
                 if (mayThrow) ComponentError.StringFormatError(key, JsonTypes.String.Name, obj.Values[key].GetName()).AddWithContext(reader);
                 return false;
             }
-
-            if (!Types.NamespacedId.TryParse(obj.Values[key].ToString(), false, out _))
+            if (!Types.NamespacedId.TryParse(obj.Values[key].ToString(), out _))
             {
                 reader.SetCursor(start);
                 if (mayThrow) CommandError.InvalidNamespacedId().AddWithContext(reader);

@@ -296,18 +296,12 @@ namespace CommandVerifier
                 if (mayThrow) CommandError.IncorrectArgument().AddWithContext(this);
                 return false;
             }
-            bool isTag = false;
-            if (!disableTags && CanRead() && Peek() == '#')
-            {
-                Skip();
-                isTag = true;
-            }
 
             int start = Cursor;
             while (CanRead() && IsNamespacedIdPart(Peek())) Skip();
             string s = Command[start..Cursor];
 
-            if (!NamespacedId.TryParse(s, isTag, out result))
+            if (!NamespacedId.TryParse(s, out result))
             {
                 SetCursor(start);
                 if (mayThrow) CommandError.InvalidNamespacedId().AddWithContext(this);
@@ -320,7 +314,7 @@ namespace CommandVerifier
         {
             return c >= 'a' && c <= 'z' ||
                 c >= '0' && c <= '9' ||
-                c == '_' || c == '-' || c == '.' || c == '/' || c == ':';
+                c == '_' || c == '-' || c == '.' || c == '/' || c == ':' || c == '#';
         }
 
         public bool Expect(char c, bool mayThrow)
