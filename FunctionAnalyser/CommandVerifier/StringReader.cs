@@ -1,7 +1,6 @@
 ﻿using CommandVerifier.Commands;
 using CommandVerifier.Types;
 using System;
-using System.Text.RegularExpressions;
 
 namespace CommandVerifier
 {
@@ -214,8 +213,7 @@ namespace CommandVerifier
             int start = Cursor;
             while (CanRead() && IsUuidPart(Peek())) Skip();
             string uuid = Command[start..Cursor];
-            Regex UuidRegex = new Regex("^[0-9a-fA-F]{1,8}-([0-9a-fA-F]{1,4}-){3}[0-9a-fA-F]{1,12}$");
-            if (UuidRegex.IsMatch(uuid))
+            if (Uuid.TryParse(uuid))
             {
                 if (IsEndOfArgument()) return true;
                 if (mayThrow) CommandError.ExpectedArgumentSeparator().AddWithContext(this);
