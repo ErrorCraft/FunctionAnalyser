@@ -119,7 +119,13 @@ namespace CommandVerifier.ComponentParser
 
                 reader.SkipWhitespace();
                 if (!TryReadAny(reader, mayThrow, out JsonTypes::IComponent value)) return false;
-                compound.Values.Add(name, value);
+                if (compound.Values.ContainsKey(name))
+                {
+                    compound.Values[name] = value;
+                } else
+                {
+                    compound.Values.Add(name, value);
+                }
 
                 reader.SkipWhitespace();
                 if (reader.CanRead() && reader.Peek() == ',')
