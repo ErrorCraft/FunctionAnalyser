@@ -109,7 +109,7 @@
 									"optional": true
 								},
 								"id": {
-									"type": "string"
+									"type": "uuid"
 								}
 							}
 						}
