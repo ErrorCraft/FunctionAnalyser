@@ -2,7 +2,7 @@
 
 namespace CommandVerifier.ComponentParser.ComponentTypes
 {
-    class NamespacedId : Component
+    class Uuid : Component
     {
         public override bool Validate(JsonTypes.Object obj, string key, StringReader reader, int start, bool mayThrow)
         {
@@ -13,10 +13,10 @@ namespace CommandVerifier.ComponentParser.ComponentTypes
                 return false;
             }
 
-            if (!Types.NamespacedId.TryParse(obj.Values[key].ToString(), false, out _))
+            if (!Types.Uuid.TryParse(obj.Values[key].ToString()))
             {
                 reader.SetCursor(start);
-                if (mayThrow) CommandError.InvalidNamespacedId().AddWithContext(reader);
+                if (mayThrow) CommandError.InvalidUuid().AddWithContext(reader);
                 return false;
             }
             return true;
