@@ -1,0 +1,122 @@
+{
+	"content": {
+		"text": {
+			"type": "string"
+		},
+		"translate": {
+			"type": "string",
+			"contents": {
+				"with": {
+					"type": "array",
+					"may_be_empty": true,
+					"optional": true
+				}
+			}
+		},
+		"score": {
+			"type": "object",
+			"contents": {
+				"name": {
+					"type": "string"
+				},
+				"objective": {
+					"type": "string"
+				}
+			}
+		},
+		"selector": {
+			"type": "string"
+		},
+		"keybind": {
+			"type": "string"
+		},
+		"nbt": {
+			"type": "string",
+			"match_first_in_contents": true,
+			"contents": {
+				"block": {
+					"type": "string"
+				},
+				"entity": {
+					"type": "string"
+				},
+				"storage": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"children": {
+		"extra": {
+			"type": "array"
+		}
+	},
+	"formatting": {
+		"color": {"type": "string"},
+		"font": {"type": "string"},
+		"bold": {"type": "string"},
+		"italic": {"type": "string"},
+		"underlined": {"type": "string"},
+		"strikethrough": {"type": "string"},
+		"obfuscated": {"type": "string"}
+	},
+	"interactivity": {
+		"insertion": {"type": "string"},
+		"clickEvent": {
+			"type": "object",
+			"contents": {
+				"action": {"type": "string"},
+				"value": {"type": "string"}
+			}
+		},
+		"hoverEvent": {
+			"type": "object",
+			"contents": {
+				"action": {
+					"type": "string"
+				},
+				"contents": {
+					"type": "binding",
+					"bind_to": "action",
+					"values": {
+						"show_text": {
+							"type": "any"
+						},
+						"show_item": {
+							"type": "object",
+							"contents": {
+								"id": {
+									"type": "string"
+								},
+								"count": {
+									"type": "string",
+									"optional": true
+								},
+								"tag": {
+									"type": "string",
+									"optional": true
+								}
+							}
+						},
+						"show_entity": {
+							"type": "object",
+							"contents": {
+								"type": {
+									"type": "string"
+								},
+								"name": {
+									"type": "object",
+									"optional": true
+								},
+								"id": {
+									"type": "string",
+									"optional": true
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
