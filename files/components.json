@@ -86,10 +86,10 @@
 							"type": "object",
 							"contents": {
 								"id": {
-									"type": "string"
+									"type": "namespaced_id"
 								},
 								"count": {
-									"type": "string",
+									"type": "number",
 									"optional": true
 								},
 								"tag": {
@@ -102,15 +102,14 @@
 							"type": "object",
 							"contents": {
 								"type": {
-									"type": "string"
+									"type": "namespaced_id"
 								},
 								"name": {
 									"type": "object",
 									"optional": true
 								},
 								"id": {
-									"type": "string",
-									"optional": true
+									"type": "string"
 								}
 							}
 						}
