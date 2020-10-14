@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using CommandVerifier.ComponentParser;
-using CommandVerifier.ComponentParser.Types;
+using CommandVerifier.ComponentParser.JsonTypes;
 
 namespace CommandVerifier.Commands.SubcommandTypes
 {
@@ -20,7 +20,8 @@ namespace CommandVerifier.Commands.SubcommandTypes
 
             if (typeof(Null) == result.GetType())
             {
-                if (throw_on_fail) CommandError.InvalidChatComponent("empty").AddWithContext(reader);
+                reader.SetCursor(start);
+                if (throw_on_fail) ComponentErrors.EmptyComponentError().AddWithContext(reader);
                 return false;
             }
             if (!result.Validate(reader, start, throw_on_fail)) return false;

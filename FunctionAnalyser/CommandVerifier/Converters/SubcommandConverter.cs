@@ -77,7 +77,7 @@ namespace CommandVerifier.Converters
             "message" => jObject.ToObject<Message>(serializer),
             "objective" => jObject.ToObject<Objective>(serializer),
             "component" => jObject.ToObject<Component>(serializer),
-            _ => throw new Exception("Type '" + jObject["type"].Value<string>() + "' is not a valid subcommand type"),
+            _ => throw new Exception("Type '" + jObject["type"].Value<string>() + "' is not a valid subcommand type")
         };
 
         public override bool CanWrite

@@ -5,11 +5,9 @@ namespace CommandVerifier.Commands
 {
     class CommandCollection
     {
-        [JsonProperty("version")]
-        public string Version { get; }
 
         [JsonProperty("name")]
-        public string Name { get; }
+        public string Name { get; set; }
 
         [JsonProperty("commands")]
         public List<Command> Commands { get; }
@@ -17,7 +15,6 @@ namespace CommandVerifier.Commands
         [JsonConstructor]
         public CommandCollection()
         {
-            Version = "";
             Name = "";
             Commands = new List<Command>();
         }

@@ -1,5 +1,5 @@
 ﻿using CommandVerifier.Commands;
-using TextComponent = CommandVerifier.ComponentParser.Types;
+using JsonTypes = CommandVerifier.ComponentParser.JsonTypes;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -16,9 +16,9 @@ namespace CommandVerifier.ComponentParser
         private static readonly string END_OF_INPUT_ERROR = "End of input";
         private static readonly string UNTERMINATED_STRING_ERROR = "Unterminated string";
 
-        public static bool TryRead(StringReader reader, bool mayThrow, out TextComponent::IComponent result)
+        public static bool TryRead(StringReader reader, bool mayThrow, out JsonTypes::IComponent result)
         {
-            result = new TextComponent::Null();
+            result = new JsonTypes::Null();
 
             if (!reader.CanRead())
             {
@@ -28,24 +28,24 @@ namespace CommandVerifier.ComponentParser
             return TryReadAny(reader, mayThrow, out result);
         }
 
-        private static bool TryReadAny(StringReader reader, bool mayThrow, out TextComponent::IComponent result)
+        private static bool TryReadAny(StringReader reader, bool mayThrow, out JsonTypes::IComponent result)
         {
-            result = new TextComponent::Null();
+            result = new JsonTypes::Null();
             reader.SkipWhitespace();
 
             if (!reader.CanRead()) return true;
             switch (reader.Peek())
             {
                 case '{':
-                    if (!TryReadCompound(reader, mayThrow, out TextComponent::Object result_compound)) return false;
+                    if (!TryReadCompound(reader, mayThrow, out JsonTypes::Object result_compound)) return false;
                     result = result_compound;
                     return true;
                 case '[':
-                    if (!TryReadArray(reader, mayThrow, out TextComponent::Array result_array)) return false;
+                    if (!TryReadArray(reader, mayThrow, out JsonTypes::Array result_array)) return false;
                     result = result_array;
                     return true;
                 case '"':
-                    if (!TryReadString(reader, mayThrow, out TextComponent::String result_string)) return false;
+                    if (!TryReadString(reader, mayThrow, out JsonTypes::String result_string)) return false;
                     result = result_string;
                     return true;
                 default:
@@ -57,22 +57,22 @@ namespace CommandVerifier.ComponentParser
                     }
                     if ("true".Equals(value))
                     {
-                        result = new TextComponent::Boolean(true);
+                        result = new JsonTypes::Boolean(true);
                         return true;
                     }
                     if ("false".Equals(value))
                     {
-                        result = new TextComponent::Boolean(false);
+                        result = new JsonTypes::Boolean(false);
                         return true;
                     }
                     if ("null".Equals(value))
                     {
-                        result = new TextComponent::Null();
+                        result = new JsonTypes::Null();
                         return true;
                     }
                     if (double.TryParse(value, NumberStyles.Number, NumberFormatInfo.InvariantInfo, out _))
                     {
-                        result = new TextComponent::Number(value);
+                        result = new JsonTypes::Number(value);
                         return true;
                     }
                     break;
@@ -92,9 +92,9 @@ namespace CommandVerifier.ComponentParser
             return reader.Command[start..reader.Cursor];
         }
 
-        private static bool TryReadCompound(StringReader reader, bool mayThrow, out TextComponent::Object compound)
+        private static bool TryReadCompound(StringReader reader, bool mayThrow, out JsonTypes::Object compound)
         {
-            compound = new TextComponent::Object();
+            compound = new JsonTypes::Object();
 
             if (!reader.CanRead() || reader.Peek() != '{')
             {
@@ -107,7 +107,7 @@ namespace CommandVerifier.ComponentParser
             while (reader.CanRead() && reader.Peek() != '}')
             {
                 reader.SkipWhitespace();
-                if (!TryReadString(reader, mayThrow, out TextComponent::String name)) return false;
+                if (!TryReadString(reader, mayThrow, out JsonTypes::String name)) return false;
 
                 reader.SkipWhitespace();
                 if (!reader.CanRead() || reader.Peek() != ':')
@@ -118,7 +118,7 @@ namespace CommandVerifier.ComponentParser
                 reader.Skip();
 
                 reader.SkipWhitespace();
-                if (!TryReadAny(reader, mayThrow, out TextComponent::IComponent value)) return false;
+                if (!TryReadAny(reader, mayThrow, out JsonTypes::IComponent value)) return false;
                 compound.Values.Add(name, value);
 
                 reader.SkipWhitespace();
@@ -139,9 +139,9 @@ namespace CommandVerifier.ComponentParser
             return true;
         }
 
-        private static bool TryReadArray(StringReader reader, bool mayThrow, out TextComponent::Array array)
+        private static bool TryReadArray(StringReader reader, bool mayThrow, out JsonTypes::Array array)
         {
-            array = new TextComponent::Array();
+            array = new JsonTypes::Array();
 
             if (!reader.CanRead() || reader.Peek() != '[')
             {
@@ -154,7 +154,7 @@ namespace CommandVerifier.ComponentParser
             while (reader.CanRead() && reader.Peek() != ']')
             {
                 reader.SkipWhitespace();
-                if (!TryReadAny(reader, mayThrow, out TextComponent::IComponent value)) return false;
+                if (!TryReadAny(reader, mayThrow, out JsonTypes::IComponent value)) return false;
                 array.Values.Add(value);
 
                 reader.SkipWhitespace();
@@ -175,7 +175,7 @@ namespace CommandVerifier.ComponentParser
             return true;
         }
 
-        private static bool TryReadString(StringReader reader, bool mayThrow, out TextComponent::String result)
+        private static bool TryReadString(StringReader reader, bool mayThrow, out JsonTypes::String result)
         {
             result = "";
 

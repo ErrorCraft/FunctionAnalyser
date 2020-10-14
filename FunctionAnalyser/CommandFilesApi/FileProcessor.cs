@@ -47,6 +47,9 @@ namespace CommandFilesApi
             string enchantmentsJson = await GetFile("enchantments.json");
             Enchantments.SetOptions(enchantmentsJson);
 
+            string componentsJson = await GetFile("components.json");
+            Enchantments.SetOptions(componentsJson);
+
             Writer.WriteLine(new TextComponent("All done!", Colour.BuiltinColours.GREEN));
         }
 
