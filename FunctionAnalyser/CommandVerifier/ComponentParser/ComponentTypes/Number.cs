@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CommandVerifier.ComponentParser.ComponentTypes
+﻿namespace CommandVerifier.ComponentParser.ComponentTypes
 {
     public class Number : Component
     {
