@@ -17,14 +17,14 @@ namespace CommandVerifier.ComponentParser.ComponentTypes
             if (!(obj.Values[key] is JsonTypes.Array actualObj))
             {
                 reader.SetCursor(start);
-                if (mayThrow) ComponentErrors.StringFormatError(key, JsonTypes.Array.Name, obj.Values[key].GetName()).AddWithContext(reader);
+                if (mayThrow) ComponentError.StringFormatError(key, JsonTypes.Array.Name, obj.Values[key].GetName()).AddWithContext(reader);
                 return false;
             }
 
             if (actualObj.Values.Count == 0 && !MayBeEmpty)
             {
                 reader.SetCursor(start);
-                if (mayThrow) ComponentErrors.EmptyComponentError().AddWithContext(reader); // Unexpected empty array?
+                if (mayThrow) ComponentError.EmptyComponentError().AddWithContext(reader); // Unexpected empty array?
                 return false;
             }
 

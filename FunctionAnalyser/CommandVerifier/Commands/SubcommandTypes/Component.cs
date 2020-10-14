@@ -21,7 +21,7 @@ namespace CommandVerifier.Commands.SubcommandTypes
             if (typeof(Null) == result.GetType())
             {
                 reader.SetCursor(start);
-                if (throw_on_fail) ComponentErrors.EmptyComponentError().AddWithContext(reader);
+                if (throw_on_fail) ComponentError.EmptyComponentError().AddWithContext(reader);
                 return false;
             }
             if (!result.Validate(reader, start, throw_on_fail)) return false;

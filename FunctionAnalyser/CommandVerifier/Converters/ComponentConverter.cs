@@ -41,6 +41,10 @@ namespace CommandVerifier.Converters
                     return JsonConvert.DeserializeObject<Binding>(jo.ToString(), SpecifiedSubclassConversion);
                 case "any":
                     return JsonConvert.DeserializeObject<Any>(jo.ToString(), SpecifiedSubclassConversion);
+                case "number":
+                    return JsonConvert.DeserializeObject<Number>(jo.ToString(), SpecifiedSubclassConversion);
+                case "namespaced_id":
+                    return JsonConvert.DeserializeObject<NamespacedId>(jo.ToString(), SpecifiedSubclassConversion);
                 default:
                     throw new Exception("Type '" + jo["type"].Value<string>() + "' is not a valid component type");
             }

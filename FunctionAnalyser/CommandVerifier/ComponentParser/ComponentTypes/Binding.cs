@@ -23,7 +23,7 @@ namespace CommandVerifier.ComponentParser.ComponentTypes
             if (!IsText(obj.Values[BindTo]))
             {
                 reader.SetCursor(start);
-                if (mayThrow) ComponentErrors.StringFormatError(key, JsonTypes.String.Name, obj.Values[BindTo].GetName()).AddWithContext(reader);
+                if (mayThrow) ComponentError.StringFormatError(key, JsonTypes.String.Name, obj.Values[BindTo].GetName()).AddWithContext(reader);
                 return false;
             }
             string binding = obj.Values[BindTo].ToString();

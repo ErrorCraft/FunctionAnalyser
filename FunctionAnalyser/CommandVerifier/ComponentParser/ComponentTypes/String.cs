@@ -7,7 +7,7 @@
             if (!IsText(obj.Values[key]))
             {
                 reader.SetCursor(start);
-                if (mayThrow) ComponentErrors.StringFormatError(key, JsonTypes.String.Name, obj.Values[key].GetName()).AddWithContext(reader);
+                if (mayThrow) ComponentError.StringFormatError(key, JsonTypes.String.Name, obj.Values[key].GetName()).AddWithContext(reader);
                 return false;
             }
 

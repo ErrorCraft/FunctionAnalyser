@@ -55,7 +55,7 @@ namespace CommandVerifier.ComponentParser.ComponentTypes
                         if (!Contents[contentsKey].Optional && !MatchFirst)
                         {
                             reader.SetCursor(start);
-                            if (mayThrow) ComponentErrors.IncompleteComponentError(key, this).AddWithContext(reader);
+                            if (mayThrow) ComponentError.IncompleteComponentError(key, this).AddWithContext(reader);
                             return false;
                         }
                     }
@@ -69,7 +69,7 @@ namespace CommandVerifier.ComponentParser.ComponentTypes
                 if (MatchFirst)
                 {
                     reader.SetCursor(start);
-                    if (mayThrow) ComponentErrors.UnknownComponentError(obj).AddWithContext(reader);
+                    if (mayThrow) ComponentError.UnknownComponentError(obj).AddWithContext(reader);
                     return false;
                 }
             }

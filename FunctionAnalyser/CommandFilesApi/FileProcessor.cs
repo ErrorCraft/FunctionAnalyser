@@ -1,6 +1,7 @@
 ﻿using AdvancedText;
 using CommandVerifier;
 using CommandVerifier.Commands.Collections;
+using CommandVerifier.ComponentParser;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -48,7 +49,7 @@ namespace CommandFilesApi
             Enchantments.SetOptions(enchantmentsJson);
 
             string componentsJson = await GetFile("components.json");
-            Enchantments.SetOptions(componentsJson);
+            Components.SetOptions(componentsJson);
 
             Writer.WriteLine(new TextComponent("All done!", Colour.BuiltinColours.GREEN));
         }

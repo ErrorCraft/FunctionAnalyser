@@ -7,7 +7,7 @@
             if (!(obj.Values[key] is JsonTypes.Object actualObj))
             {
                 reader.SetCursor(start);
-                if (mayThrow) ComponentErrors.StringFormatError(key, JsonTypes.Object.Name, obj.Values[key].GetName()).AddWithContext(reader);
+                if (mayThrow) ComponentError.StringFormatError(key, JsonTypes.Object.Name, obj.Values[key].GetName()).AddWithContext(reader);
                 return false;
             }
 

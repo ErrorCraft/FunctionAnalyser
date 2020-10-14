@@ -10,7 +10,7 @@
         public bool Validate(StringReader reader, int start, bool mayThrow)
         {
             reader.SetCursor(start);
-            if (mayThrow) ComponentErrors.UnknownComponentError(this).AddWithContext(reader);
+            if (mayThrow) ComponentError.UnknownComponentError(this).AddWithContext(reader);
             return false;
         }
     }

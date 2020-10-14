@@ -37,7 +37,7 @@ namespace CommandVerifier.ComponentParser.JsonTypes
             if (Values.Count == 0)
             {
                 reader.SetCursor(start);
-                if (mayThrow) ComponentErrors.EmptyComponentError().AddWithContext(reader);
+                if (mayThrow) ComponentError.EmptyComponentError().AddWithContext(reader);
                 return false;
             }
             for (int i = 0; i < Values.Count; i++)

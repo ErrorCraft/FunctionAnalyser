@@ -3,7 +3,7 @@ using CommandVerifier.ComponentParser.JsonTypes;
 
 namespace CommandVerifier.ComponentParser
 {
-    public static class ComponentErrors
+    public static class ComponentError
     {
         public static CommandError StringFormatError(string key, string expected, string received)
         {
