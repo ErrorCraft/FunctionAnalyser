@@ -11,7 +11,7 @@ namespace CommandVerifier.Types
         private static readonly char NAMESPACE_SEPARATOR = ':';
         private static readonly char TAG_CHARACTER = '#';
         private static readonly string DEFAULT_NAMESPACE = "minecraft";
-        private static readonly Regex NAMESPACED_ID_REGEX = new Regex("^#?[a-z0-9._-]*:[a-z0-9._/-]*$");
+        private static readonly Regex NAMESPACED_ID_REGEX = new Regex("^#?[a-z0-9._-]*:?[a-z0-9._/-]*$");
         public static NamespacedId PLAYER_ENTITY { get; } = new NamespacedId("player", false);
 
         private NamespacedId(string @namespace, string path, bool isTag)

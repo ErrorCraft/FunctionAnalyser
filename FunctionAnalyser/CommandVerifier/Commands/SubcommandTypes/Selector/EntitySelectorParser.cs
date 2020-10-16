@@ -113,7 +113,7 @@ namespace CommandVerifier.Commands.SubcommandTypes.Selector
                     reader.SkipWhitespace();
                     if (!reader.CanRead() || reader.Peek() != '=')
                     {
-                        if (may_throw) new CommandError("Expected value for option '" + s + "'").AddWithContext(reader);
+                        if (may_throw) CommandError.ExpectedValueForEntityOption(s).AddWithContext(reader);
                         return false;
                     }
                     reader.Skip();
@@ -128,7 +128,7 @@ namespace CommandVerifier.Commands.SubcommandTypes.Selector
                     }
                     if (reader.Peek() == ']') break;
 
-                    if (may_throw) new CommandError("Expected end of options").AddWithContext(reader);
+                    if (may_throw) CommandError.ExpectedEndOfOptions().AddWithContext(reader);
                     return false;
                 }
                 else return false;
@@ -136,7 +136,7 @@ namespace CommandVerifier.Commands.SubcommandTypes.Selector
 
             if (!reader.CanRead())
             {
-                if (may_throw) new CommandError("Expected end of options").AddWithContext(reader);
+                if (may_throw) CommandError.ExpectedEndOfOptions().AddWithContext(reader);
                 return false;
             }
 
