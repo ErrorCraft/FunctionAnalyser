@@ -5,9 +5,9 @@ using System.Globalization;
 
 namespace CommandVerifier.ComponentParser
 {
-    class ComponentReader
+    public static class ComponentReader
     {
-        private static readonly Dictionary<char, char> ESCAPABLE_CHARACTERS = new Dictionary<char, char>() { { '\'', '\'' }, { '"', '"' }, { '\\', '\\' }, { 'b', '\b' }, { 'f', '\f' }, { 'n', '\n' }, { 'r', '\r' }, { 't', '\t' } };
+        private static readonly HashSet<char> ESCAPABLE_CHARACTERS = new HashSet<char>() { '\'', '"', '\\', 'b', 'f', 'n', 'r', 't' };
 
         public static bool TryRead(StringReader reader, bool mayThrow, out JsonTypes::IComponent result)
         {
@@ -199,17 +199,17 @@ namespace CommandVerifier.ComponentParser
                             return false;
                         }
                         string hex = reader.Read(4);
-                        if (!short.TryParse(hex, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out short s))
+                        if (!short.TryParse(hex, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out _))
                         {
                             if (mayThrow) CommandError.InvalidChatComponent("\\u" + hex).AddWithContext(reader);
                             return false;
                         }
-                        result += (char)s;
                         escaped = false;
-                    } else if (ESCAPABLE_CHARACTERS.ContainsKey(c))
+                        result += c + hex;
+                    } else if (ESCAPABLE_CHARACTERS.Contains(c))
                     {
-                        result += ESCAPABLE_CHARACTERS[c];
                         escaped = false;
+                        result += c;
                     }
                     else
                     {
@@ -217,9 +217,19 @@ namespace CommandVerifier.ComponentParser
                         return false;
                     }
                 }
-                else if (c == '\\') escaped = true;
-                else if (c == '"') return true;
-                else result += c;
+                else if (c == '\\')
+                {
+                    escaped = true;
+                    result += c;
+                }
+                else if (c == '"')
+                {
+                    return true;
+                }
+                else
+                {
+                    result += c;
+                }
             }
 
             if (mayThrow) ComponentError.UnterminatedStringError().AddWithContext(reader);
