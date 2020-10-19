@@ -31,7 +31,7 @@ namespace CommandVerifier.ComponentParser
         private static bool TryReadAny(StringReader reader, bool mayThrow, out JsonTypes::IComponent result)
         {
             result = new JsonTypes::Null();
-            reader.SkipWhitespace();
+            SkipWhitespace(reader);
 
             if (!reader.CanRead()) return true;
             switch (reader.Peek())
@@ -103,13 +103,13 @@ namespace CommandVerifier.ComponentParser
             }
             reader.Skip();
 
-            reader.SkipWhitespace();
+            SkipWhitespace(reader);
             while (reader.CanRead() && reader.Peek() != '}')
             {
-                reader.SkipWhitespace();
+                SkipWhitespace(reader);
                 if (!TryReadString(reader, mayThrow, out JsonTypes::String name)) return false;
 
-                reader.SkipWhitespace();
+                SkipWhitespace(reader);
                 if (!reader.CanRead() || reader.Peek() != ':')
                 {
                     if (mayThrow) CommandError.InvalidChatComponent(EXPECTED_NAME_VALUE_SEPARATOR_ERROR).AddWithContext(reader);
@@ -117,7 +117,7 @@ namespace CommandVerifier.ComponentParser
                 }
                 reader.Skip();
 
-                reader.SkipWhitespace();
+                SkipWhitespace(reader);
                 if (!TryReadAny(reader, mayThrow, out JsonTypes::IComponent value)) return false;
                 if (compound.Values.ContainsKey(name))
                 {
@@ -127,7 +127,7 @@ namespace CommandVerifier.ComponentParser
                     compound.Values.Add(name, value);
                 }
 
-                reader.SkipWhitespace();
+                SkipWhitespace(reader);
                 if (reader.CanRead() && reader.Peek() == ',')
                 {
                     reader.Skip();
@@ -156,14 +156,14 @@ namespace CommandVerifier.ComponentParser
             }
             reader.Skip();
 
-            reader.SkipWhitespace();
+            SkipWhitespace(reader);
             while (reader.CanRead() && reader.Peek() != ']')
             {
-                reader.SkipWhitespace();
+                SkipWhitespace(reader);
                 if (!TryReadAny(reader, mayThrow, out JsonTypes::IComponent value)) return false;
                 array.Values.Add(value);
 
-                reader.SkipWhitespace();
+                SkipWhitespace(reader);
                 if (reader.CanRead() && reader.Peek() == ',')
                 {
                     reader.Skip();
@@ -231,6 +231,16 @@ namespace CommandVerifier.ComponentParser
 
             if (mayThrow) CommandError.InvalidChatComponent(UNTERMINATED_STRING_ERROR).AddWithContext(reader);
             return false;
+        }
+
+        private static void SkipWhitespace(StringReader reader)
+        {
+            while (reader.CanRead() && IsWhitespace(reader.Peek())) reader.Skip();
+        }
+
+        private static bool IsWhitespace(char c)
+        {
+            return c == ' ' || c == '\t';
         }
     }
 }
