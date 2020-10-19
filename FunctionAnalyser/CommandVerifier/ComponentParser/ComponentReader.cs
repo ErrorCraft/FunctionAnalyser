@@ -8,13 +8,6 @@ namespace CommandVerifier.ComponentParser
     class ComponentReader
     {
         private static readonly Dictionary<char, char> ESCAPABLE_CHARACTERS = new Dictionary<char, char>() { { '\'', '\'' }, { '"', '"' }, { '\\', '\\' }, { 'b', '\b' }, { 'f', '\f' }, { 'n', '\n' }, { 'r', '\r' }, { 't', '\t' } };
-        private static readonly string MALFORMED_JSON_ERROR = "Malformed JSON";
-        private static readonly string EXPECTED_VALUE_ERROR = "Expected value";
-        private static readonly string UNTERMINATED_ESCAPE_SEQUENCE_ERROR = "Unterminated escape sequence";
-        private static readonly string INVALID_ESCAPE_SEQUENCE_ERROR = "Invalid escape sequence";
-        private static readonly string EXPECTED_NAME_VALUE_SEPARATOR_ERROR = "Expected ':'";
-        private static readonly string END_OF_INPUT_ERROR = "End of input";
-        private static readonly string UNTERMINATED_STRING_ERROR = "Unterminated string";
 
         public static bool TryRead(StringReader reader, bool mayThrow, out JsonTypes::IComponent result)
         {
@@ -52,7 +45,7 @@ namespace CommandVerifier.ComponentParser
                     string value = ReadSpecial(reader);
                     if (string.IsNullOrEmpty(value))
                     {
-                        if (mayThrow) CommandError.InvalidChatComponent(EXPECTED_VALUE_ERROR).AddWithContext(reader);
+                        if (mayThrow) ComponentError.ExpectedValueError().AddWithContext(reader);
                         return false;
                     }
                     if ("true".Equals(value))
@@ -78,7 +71,7 @@ namespace CommandVerifier.ComponentParser
                     break;
             }
 
-            if (mayThrow) CommandError.InvalidChatComponent(MALFORMED_JSON_ERROR).AddWithContext(reader);
+            if (mayThrow) ComponentError.MalformedJsonError().AddWithContext(reader);
             return false;
         }
 
@@ -98,7 +91,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != '{')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(MALFORMED_JSON_ERROR).AddWithContext(reader);
+                if (mayThrow) ComponentError.MalformedJsonError().AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -112,7 +105,7 @@ namespace CommandVerifier.ComponentParser
                 SkipWhitespace(reader);
                 if (!reader.CanRead() || reader.Peek() != ':')
                 {
-                    if (mayThrow) CommandError.InvalidChatComponent(EXPECTED_NAME_VALUE_SEPARATOR_ERROR).AddWithContext(reader);
+                    if (mayThrow) ComponentError.ExpectedNameValueSeparatorError().AddWithContext(reader);
                     return false;
                 }
                 reader.Skip();
@@ -138,7 +131,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != '}')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(END_OF_INPUT_ERROR).AddWithContext(reader);
+                if (mayThrow) ComponentError.EndOfInputError().AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -151,7 +144,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != '[')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(MALFORMED_JSON_ERROR).AddWithContext(reader);
+                if (mayThrow) ComponentError.MalformedJsonError().AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -174,7 +167,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != ']')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(END_OF_INPUT_ERROR).AddWithContext(reader);
+                if (mayThrow) ComponentError.EndOfInputError().AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -187,7 +180,7 @@ namespace CommandVerifier.ComponentParser
 
             if (!reader.CanRead() || reader.Peek() != '"')
             {
-                if (mayThrow) CommandError.InvalidChatComponent(MALFORMED_JSON_ERROR).AddWithContext(reader);
+                if (mayThrow) ComponentError.MalformedJsonError().AddWithContext(reader);
                 return false;
             }
             reader.Skip();
@@ -202,7 +195,7 @@ namespace CommandVerifier.ComponentParser
                     {
                         if (!reader.CanRead(4))
                         {
-                            if (mayThrow) CommandError.InvalidChatComponent(UNTERMINATED_ESCAPE_SEQUENCE_ERROR).AddWithContext(reader);
+                            if (mayThrow) ComponentError.UnterminatedEscapeSequenceError().AddWithContext(reader);
                             return false;
                         }
                         string hex = reader.Read(4);
@@ -220,7 +213,7 @@ namespace CommandVerifier.ComponentParser
                     }
                     else
                     {
-                        if (mayThrow) CommandError.InvalidChatComponent(INVALID_ESCAPE_SEQUENCE_ERROR).AddWithContext(reader);
+                        if (mayThrow) ComponentError.InvalidEscapeSequenceError().AddWithContext(reader);
                         return false;
                     }
                 }
@@ -229,7 +222,7 @@ namespace CommandVerifier.ComponentParser
                 else result += c;
             }
 
-            if (mayThrow) CommandError.InvalidChatComponent(UNTERMINATED_STRING_ERROR).AddWithContext(reader);
+            if (mayThrow) ComponentError.UnterminatedStringError().AddWithContext(reader);
             return false;
         }
 
