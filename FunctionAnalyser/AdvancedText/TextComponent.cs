@@ -2,48 +2,42 @@
 {
     public class TextComponent
     {
-        public static Colour DefaultColour { get; private set; } = Colour.BuiltinColours.BLACK;
-        public string Text { get; set; }
-        public Colour Colour { get; set; }
-        public bool Italic { get; set; }
-        public bool Bold { get; set; }
+        private static Colour DefaultColour = Colour.BuiltinColours.BLACK;
 
-        public TextComponent()
+        public static void SetDefaultColour(Colour colour)
         {
-            Text = "";
-            Colour = DefaultColour;
-            Italic = false;
-            Bold = false;
+            DefaultColour = colour;
         }
+
+        public string Text { get; private set; }
+        public Colour Colour { get; private set; }
+        public bool Italic { get; private set; }
+        public bool Bold { get; private set; }
 
         public TextComponent(string text)
         {
             Text = text;
             Colour = DefaultColour;
+            Italic = false;
+            Bold = false;
         }
 
-        public TextComponent(string text, Colour colour)
+        public TextComponent WithColour(Colour colour)
         {
-            Text = text;
             Colour = colour;
+            return this;
         }
 
-        public TextComponent(string text, Colour colour, bool italic, bool bold)
+        public TextComponent WithStyle(bool italic, bool bold)
         {
-            Text = text;
-            Colour = colour;
             Italic = italic;
             Bold = bold;
+            return this;
         }
 
-        public void AddText(string text)
+        public void AppendText(string text)
         {
             Text += text;
-        }
-
-        public static void SetDefaultColour(Colour colour)
-        {
-            DefaultColour = colour;
         }
     }
 }

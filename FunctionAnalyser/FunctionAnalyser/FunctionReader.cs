@@ -36,9 +36,9 @@ namespace FunctionAnalyser
         {
             lock (this)
             {
-                Output.Write(new TextComponent("Analysing all functions in folder ", Colour.BuiltinColours.GREY));
-                Output.WriteLine(new TextComponent(BasePath, Colour.BuiltinColours.DARK_GREEN));
-                Output.WriteLine(new TextComponent("Version: " + CommandReader.GetFancyName(version), Colour.BuiltinColours.GREY));
+                Output.Write(new TextComponent("Analysing all functions in folder ").WithColour(Colour.BuiltinColours.GREY));
+                Output.WriteLine(new TextComponent(BasePath).WithColour(Colour.BuiltinColours.DARK_GREEN));
+                Output.WriteLine(new TextComponent("Version: " + CommandReader.GetFancyName(version)).WithColour(Colour.BuiltinColours.GREY));
                 Output.WriteLine();
 
                 Stopwatch timer = new Stopwatch();
@@ -80,13 +80,13 @@ namespace FunctionAnalyser
                     {
                         if (Options.ShowCommandErrors)
                         {
-                            if (CommandError.StoredErrors.Count == 1) Output.Write(new TextComponent("Error found in ", Colour.BuiltinColours.RED));
-                            else Output.Write(new TextComponent(CommandError.StoredErrors.Count.ToString() + " errors found in ", Colour.BuiltinColours.RED));
+                            if (CommandError.StoredErrors.Count == 1) Output.Write(new TextComponent("Error found in ").WithColour(Colour.BuiltinColours.RED));
+                            else Output.Write(new TextComponent(CommandError.StoredErrors.Count.ToString() + " errors found in ").WithColour(Colour.BuiltinColours.RED));
 
                             if (Options.SkipFunctionOnError)
                             {
                                 Output.Write(".." + files[i].Substring(BasePath.Length));
-                                Output.WriteLine(new TextComponent(", skipping function", Colour.BuiltinColours.RED));
+                                Output.WriteLine(new TextComponent(", skipping function").WithColour(Colour.BuiltinColours.RED));
                                 ShowErrors();
                                 continue;
                             }
@@ -99,7 +99,7 @@ namespace FunctionAnalyser
                     }
                     else if (Options.ShowEmptyFunctions && FileSpecificInformation.Commands == 0)
                     {
-                        Output.Write(new TextComponent("Empty function found at ", Colour.BuiltinColours.YELLOW));
+                        Output.Write(new TextComponent("Empty function found at ").WithColour(Colour.BuiltinColours.YELLOW));
                         Output.WriteLine(".." + files[i].Substring(BasePath.Length));
                     }
 
@@ -109,22 +109,22 @@ namespace FunctionAnalyser
 
                 timer.Stop();
                 Progress.Report(1.0);
-                Output.WriteLine(new TextComponent("Time spent reading: " + (timer.ElapsedTicks / 10000.0d).ToString("0.0000") + "ms", Colour.BuiltinColours.DARK_AQUA, false, true));
+                Output.WriteLine(new TextComponent("Time spent reading: " + (timer.ElapsedTicks / 10000.0d).ToString("0.0000") + "ms").WithColour(Colour.BuiltinColours.DARK_AQUA).WithStyle(false, true));
                 Output.WriteLine();
-                Output.WriteLine(new TextComponent("Information:", Colour.BuiltinColours.GREY, false, true));
-                Output.WriteLine(new TextComponent("  Number of functions: " + Information.Functions, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("  Number of commands: " + Information.Commands, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("  Number of comments: " + Information.Comments, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent("  Number of empty lines: " + Information.EmptyLines, Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("Information:").WithColour(Colour.BuiltinColours.GREY).WithStyle(false, true));
+                Output.WriteLine(new TextComponent("  Number of functions: " + Information.Functions).WithColour(Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("  Number of commands: " + Information.Commands).WithColour(Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("  Number of comments: " + Information.Comments).WithColour(Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent("  Number of empty lines: " + Information.EmptyLines).WithColour(Colour.BuiltinColours.AQUA));
 
-                Output.Write(new TextComponent("  Usage of @e selectors: " + Information.EntitySelectors, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent(" " + GetAverage(Information.EntitySelectors), Colour.BuiltinColours.AQUA));
+                Output.Write(new TextComponent("  Usage of @e selectors: " + Information.EntitySelectors).WithColour(Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent(" " + GetAverage(Information.EntitySelectors)).WithColour(Colour.BuiltinColours.AQUA));
 
-                Output.Write(new TextComponent("  NBT Access: " + Information.NbtAccess, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent(" " + GetAverage(Information.NbtAccess), Colour.BuiltinColours.AQUA));
+                Output.Write(new TextComponent("  NBT Access: " + Information.NbtAccess).WithColour(Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent(" " + GetAverage(Information.NbtAccess)).WithColour(Colour.BuiltinColours.AQUA));
 
-                Output.Write(new TextComponent("  Predicate Calls: " + Information.PredicateCalls, Colour.BuiltinColours.AQUA));
-                Output.WriteLine(new TextComponent(" " + GetAverage(Information.PredicateCalls), Colour.BuiltinColours.AQUA));
+                Output.Write(new TextComponent("  Predicate Calls: " + Information.PredicateCalls).WithColour(Colour.BuiltinColours.AQUA));
+                Output.WriteLine(new TextComponent(" " + GetAverage(Information.PredicateCalls)).WithColour(Colour.BuiltinColours.AQUA));
             }
         }
 
@@ -150,7 +150,7 @@ namespace FunctionAnalyser
         private void ShowErrors()
         {
             for (int i = 0; i < CommandError.StoredErrors.Count; i++)
-                Output.WriteLine(new TextComponent("  " + CommandError.StoredErrors[i], Colour.BuiltinColours.RED));
+                Output.WriteLine(new TextComponent("  " + CommandError.StoredErrors[i]).WithColour(Colour.BuiltinColours.RED));
             CommandError.StoredErrors.Clear();
         }
     }

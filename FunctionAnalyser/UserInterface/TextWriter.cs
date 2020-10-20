@@ -56,17 +56,6 @@ namespace UserInterface
             });
         }
 
-        public void Write(TextComponent[] textComponent)
-        {
-            Output.Dispatcher.Invoke(() =>
-            {
-                for (int i = 0; i < textComponent.Length; i++)
-                {
-                    Write(textComponent[i]);
-                }
-            });
-        }
-
         public void Write(string text)
         {
             Output.Dispatcher.Invoke(() => Write(new TextComponent(text)));

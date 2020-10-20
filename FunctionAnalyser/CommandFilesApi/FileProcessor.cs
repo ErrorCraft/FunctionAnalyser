@@ -51,14 +51,14 @@ namespace CommandFilesApi
             string componentsJson = await GetFile("components.json");
             Components.SetOptions(componentsJson);
 
-            Writer.WriteLine(new TextComponent("All done!", Colour.BuiltinColours.GREEN));
+            Writer.WriteLine(new TextComponent("All done!").WithColour(Colour.BuiltinColours.GREEN));
         }
 
         private async Task<string> GetFile(string file)
         {
-            Writer.Write(new TextComponent("Getting ", Colour.BuiltinColours.GREY));
-            Writer.Write(new TextComponent(file, Colour.BuiltinColours.GOLD));
-            Writer.WriteLine(new TextComponent("...", Colour.BuiltinColours.GREY));
+            Writer.Write(new TextComponent("Getting ").WithColour(Colour.BuiltinColours.GREY));
+            Writer.Write(new TextComponent(file).WithColour(Colour.BuiltinColours.GOLD));
+            Writer.WriteLine(new TextComponent("...").WithColour(Colour.BuiltinColours.GREY));
             return await LoadFile(file);
         }
 
@@ -80,9 +80,9 @@ namespace CommandFilesApi
             }
             catch (HttpRequestException)
             {
-                Writer.Write(new TextComponent("Was not able to get ", Colour.BuiltinColours.RED));
-                Writer.Write(new TextComponent(fileName, Colour.BuiltinColours.GOLD));
-                Writer.WriteLine(new TextComponent("!", Colour.BuiltinColours.RED));
+                Writer.Write(new TextComponent("Was not able to get ").WithColour(Colour.BuiltinColours.RED));
+                Writer.Write(new TextComponent(fileName).WithColour(Colour.BuiltinColours.GOLD));
+                Writer.WriteLine(new TextComponent("!").WithColour(Colour.BuiltinColours.RED));
                 throw;
             }
         }
