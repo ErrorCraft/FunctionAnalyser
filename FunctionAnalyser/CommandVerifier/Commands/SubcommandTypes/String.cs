@@ -46,7 +46,7 @@ namespace CommandVerifier.Commands.SubcommandTypes
                 return true;
             } else
             {
-                if (reader.TryReadString(throw_on_fail, out _)) return false;
+                if (!reader.TryReadString(throw_on_fail, out _)) return false;
                 SetLoopAttributes(reader);
                 return true;
             }
