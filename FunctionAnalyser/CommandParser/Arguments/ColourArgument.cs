@@ -1,0 +1,24 @@
+﻿using CommandParser.Collections;
+using CommandParser.Results;
+using CommandParser.Results.Arguments;
+
+namespace CommandParser.Arguments
+{
+    public class ColourArgument : IArgument<Colour>
+    {
+        public ReadResults Parse(StringReader reader, out Colour result)
+        {
+            result = default;
+            ReadResults readResults = reader.ReadUnquotedString(out string colour);
+            if (!readResults.Successful) return readResults;
+
+            if (!Colours.Contains(colour))
+            {
+                return new ReadResults(false, CommandError.UnknownColour(colour));
+            }
+
+            result = new Colour(colour);
+            return new ReadResults(true, null);
+        }
+    }
+}

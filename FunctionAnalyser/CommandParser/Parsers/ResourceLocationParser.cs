@@ -1,0 +1,66 @@
+﻿using CommandParser.Results;
+using CommandParser.Results.Arguments;
+using System.Text.RegularExpressions;
+
+namespace CommandParser.Parsers
+{
+    public class ResourceLocationParser
+    {
+        private static readonly Regex RESOURCE_LOCATION_REGEX = new Regex("^[a-z0-9._-]*:?[a-z0-9._/-]*$");
+        private readonly StringReader StringReader;
+
+        public ResourceLocationParser(StringReader stringReader)
+        {
+            StringReader = stringReader;
+        }
+
+        public ReadResults Read(out ResourceLocation result)
+        {
+            result = default;
+            int start = StringReader.Cursor;
+
+            while (StringReader.CanRead() && IsResourceLocationPart(StringReader.Peek()))
+            {
+                StringReader.Skip();
+            }
+
+            string s = StringReader.Command[start..StringReader.Cursor];
+            return ReadFromString(s, start, out result);
+        }
+
+        public ReadResults ReadFromString(string s, int start, out ResourceLocation result)
+        {
+            result = default;
+            if (!RESOURCE_LOCATION_REGEX.IsMatch(s))
+            {
+                StringReader.Cursor = start;
+                return new ReadResults(false, CommandError.InvalidId().WithContext(StringReader));
+            }
+
+            string[] splitValues = s.Split(ResourceLocation.NAMESPACE_SEPARATOR);
+            if (splitValues.Length == 1)
+            {
+                result = new ResourceLocation(splitValues[0]);
+            }
+            else if (string.IsNullOrEmpty(splitValues[0]))
+            {
+                result = new ResourceLocation(splitValues[1]);
+            }
+            else
+            {
+                result = new ResourceLocation(splitValues[1], splitValues[0]);
+            }
+
+            return new ReadResults(true, null);
+        }
+
+        private static bool IsResourceLocationPart(char c)
+        {
+            return c >= '0' && c <= '9' ||
+                c >= 'a' && c <= 'z' ||
+                c == ':' || c == '/' ||
+                c == '-' || c == '_' ||
+                c == '.';
+        }
+    }
+}

@@ -8,7 +8,7 @@ C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\obj\
 UserInterface
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\App.xaml
 2-1296717163
 
@@ -16,5 +16,5 @@ C:\Users\Ramon\Source\Repos\FunctionAnalyser\FunctionAnalyser\UserInterface\App.
 201481072978
 CrashWindow.xaml;MainWindow.xaml;
 
-False
+True
 
