@@ -21,6 +21,19 @@
           "bin/placeholder/AdvancedText.dll": {}
         }
       },
+      "CommandParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "bin/placeholder/CommandParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandParser.dll": {}
+        }
+      },
       "CommandVerifier/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -73,6 +86,11 @@
       "path": "../AdvancedText/AdvancedText.csproj",
       "msbuildProject": "../AdvancedText/AdvancedText.csproj"
     },
+    "CommandParser/1.0.0": {
+      "type": "project",
+      "path": "../CommandParser/CommandParser.csproj",
+      "msbuildProject": "../CommandParser/CommandParser.csproj"
+    },
     "CommandVerifier/1.0.0": {
       "type": "project",
       "path": "../CommandVerifier/CommandVerifier.csproj",
@@ -82,6 +100,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "AdvancedText >= 1.0.0",
+      "CommandParser >= 1.0.0",
       "CommandVerifier >= 1.0.0"
     ]
   },
@@ -118,6 +137,9 @@
           "projectReferences": {
             "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
               "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
+            },
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandParser\\CommandParser.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandParser\\CommandParser.csproj"
             },
             "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
               "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"

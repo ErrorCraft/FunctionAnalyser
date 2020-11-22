@@ -1261,7 +1261,9 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "AdvancedText": "1.0.0",
+          "CommandParser": "1.0.0",
           "CommandVerifier": "1.0.0",
+          "FunctionAnalyser": "1.0.0",
           "Microsoft.AspNet.WebApi.Client": "5.2.7"
         },
         "compile": {
@@ -1269,6 +1271,19 @@
         },
         "runtime": {
           "bin/placeholder/CommandFilesApi.dll": {}
+        }
+      },
+      "CommandParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "bin/placeholder/CommandParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandParser.dll": {}
         }
       },
       "CommandVerifier/1.0.0": {
@@ -1289,6 +1304,7 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "AdvancedText": "1.0.0",
+          "CommandParser": "1.0.0",
           "CommandVerifier": "1.0.0"
         },
         "compile": {
@@ -4600,6 +4616,11 @@
       "type": "project",
       "path": "../CommandFilesApi/CommandFilesApi.csproj",
       "msbuildProject": "../CommandFilesApi/CommandFilesApi.csproj"
+    },
+    "CommandParser/1.0.0": {
+      "type": "project",
+      "path": "../CommandParser/CommandParser.csproj",
+      "msbuildProject": "../CommandParser/CommandParser.csproj"
     },
     "CommandVerifier/1.0.0": {
       "type": "project",

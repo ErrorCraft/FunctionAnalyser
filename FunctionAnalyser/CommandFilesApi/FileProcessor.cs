@@ -1,7 +1,6 @@
 ﻿using AdvancedText;
-using CommandVerifier;
-using CommandVerifier.Commands.Collections;
-using CommandVerifier.ComponentParser;
+using CommandParser.Collections;
+using FunctionAnalyser;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -19,37 +18,58 @@ namespace CommandFilesApi
         public async Task GetFiles()
         {
             string commandsJson = await GetFile("commands.json");
-            CommandReader.SetCommands(commandsJson);
+            FunctionReader.SetVersions(commandsJson);
 
-            string selectorsArgumentsJson = await GetFile("selector_arguments.json");
-            EntitySelectorOptions.SetOptions(selectorsArgumentsJson);
+            string selectorArgumentsJson = await GetFile("selector_arguments.json");
+            EntitySelectorOptions.Set(selectorArgumentsJson);
 
-            string particlesJson = await GetFile("particles.json");
-            Particles.SetOptions(particlesJson);
+            string gamemodesJson = await GetFile("gamemodes.json");
+            Gamemodes.Set(gamemodesJson);
 
-            string itemsJson = await GetFile("items.json");
-            Items.SetOptions(itemsJson);
+            string sortsJson = await GetFile("sorts.json");
+            Sorts.Set(sortsJson);
 
             string entitiesJson = await GetFile("entities.json");
-            Entities.SetOptions(entitiesJson);
+            Entities.Set(entitiesJson);
 
-            string scoreboardCriteriaJson = await GetFile("scoreboard_criteria.json");
-            ScoreboardCriteria.SetOptions(scoreboardCriteriaJson);
-
-            string scoreboardSlotsJson = await GetFile("scoreboard_slots.json");
-            ScoreboardSlots.SetOptions(scoreboardSlotsJson);
+            string itemsJson = await GetFile("items.json");
+            Items.Set(itemsJson);
 
             string blocksJson = await GetFile("blocks.json");
-            Blocks.SetOptions(blocksJson);
+            Blocks.Set(blocksJson);
 
-            string effectsJson = await GetFile("effects.json");
-            Effects.SetOptions(effectsJson);
+            string timeScalarsJson = await GetFile("time_scalars.json");
+            TimeScalars.Set(timeScalarsJson);
+
+            string coloursJson = await GetFile("colours.json");
+            Colours.Set(coloursJson);
+
+            string slotsJson = await GetFile("item_slots.json");
+            ItemSlots.Set(slotsJson);
+
+            string particlesJson = await GetFile("particles.json");
+            Particles.Set(particlesJson);
+
+            string mobEffectsJson = await GetFile("mob_effects.json");
+            MobEffects.Set(mobEffectsJson);
 
             string enchantmentsJson = await GetFile("enchantments.json");
-            Enchantments.SetOptions(enchantmentsJson);
+            Enchantments.Set(enchantmentsJson);
+
+            string objectiveCriteriaJson = await GetFile("objective_criteria.json");
+            ObjectiveCriteria.Set(objectiveCriteriaJson);
+
+            string scoreboardSlotsJson = await GetFile("scoreboard_slots.json");
+            ScoreboardSlots.Set(scoreboardSlotsJson);
 
             string componentsJson = await GetFile("components.json");
-            Components.SetOptions(componentsJson);
+            Components.Set(componentsJson);
+
+            string anchorsJson = await GetFile("anchors.json");
+            Anchors.Set(anchorsJson);
+
+            string operationsJson = await GetFile("operations.json");
+            Operations.Set(operationsJson);
 
             Writer.WriteLine(new TextComponent("All done!").WithColour(Colour.BuiltinColours.GREEN));
         }
@@ -66,16 +86,14 @@ namespace CommandFilesApi
         {
             try
             {
-                using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(fileName))
+                using HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(fileName);
+                if (response.IsSuccessStatusCode)
                 {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return await response.Content.ReadAsStringAsync();
-                    }
-                    else
-                    {
-                        throw new FileProcessorException(fileName, response);
-                    }
+                    return await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    throw new FileProcessorException(fileName, response);
                 }
             }
             catch (HttpRequestException)

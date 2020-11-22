@@ -3,7 +3,6 @@ using FunctionAnalyser;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using IO = System.IO;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CommandFilesApi;
@@ -56,11 +55,13 @@ namespace UserInterface
             Writer.Reset();
 
             // Read functions
-            Progress<double> progress = new Progress<double>();
+            Progress<FunctionProgress> progress = new Progress<FunctionProgress>();
             progress.ProgressChanged += ReportProgress;
-            FunctionReader functionReader = new FunctionReader(FolderPath, Writer, progress);
+            FunctionReader functionReader = new FunctionReader(FolderPath, progress);
 
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            await functionReader.AnalyseFunctions("java");
+
+            /*TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             Task task = tcs.Task;
             Thread functionThread = new Thread(() => {
                 try
@@ -75,7 +76,7 @@ namespace UserInterface
             });
 
             functionThread.Start();
-            await Task.WhenAll(task);
+            await Task.WhenAll(task);*/
 
             MainWindowModel.EnableOptions = true;
             AnalyseButton.IsEnabled = true;
@@ -83,9 +84,9 @@ namespace UserInterface
             FolderButton.IsEnabled = true;
         }
 
-        private void ReportProgress(object sender, double e)
+        private void ReportProgress(object sender, FunctionProgress e)
         {
-            Progress.Value = e;
+            Progress.Value = e.Completion;
         }
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)

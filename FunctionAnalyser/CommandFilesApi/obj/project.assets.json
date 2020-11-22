@@ -1235,6 +1235,19 @@
           "bin/placeholder/AdvancedText.dll": {}
         }
       },
+      "CommandParser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "bin/placeholder/CommandParser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandParser.dll": {}
+        }
+      },
       "CommandVerifier/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -1246,6 +1259,21 @@
         },
         "runtime": {
           "bin/placeholder/CommandVerifier.dll": {}
+        }
+      },
+      "FunctionAnalyser/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "AdvancedText": "1.0.0",
+          "CommandParser": "1.0.0",
+          "CommandVerifier": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FunctionAnalyser.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FunctionAnalyser.dll": {}
         }
       }
     }
@@ -4520,16 +4548,28 @@
       "path": "../AdvancedText/AdvancedText.csproj",
       "msbuildProject": "../AdvancedText/AdvancedText.csproj"
     },
+    "CommandParser/1.0.0": {
+      "type": "project",
+      "path": "../CommandParser/CommandParser.csproj",
+      "msbuildProject": "../CommandParser/CommandParser.csproj"
+    },
     "CommandVerifier/1.0.0": {
       "type": "project",
       "path": "../CommandVerifier/CommandVerifier.csproj",
       "msbuildProject": "../CommandVerifier/CommandVerifier.csproj"
+    },
+    "FunctionAnalyser/1.0.0": {
+      "type": "project",
+      "path": "../FunctionAnalyser/FunctionAnalyser.csproj",
+      "msbuildProject": "../FunctionAnalyser/FunctionAnalyser.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "AdvancedText >= 1.0.0",
+      "CommandParser >= 1.0.0",
       "CommandVerifier >= 1.0.0",
+      "FunctionAnalyser >= 1.0.0",
       "Microsoft.AspNet.WebApi.Client >= 5.2.7"
     ]
   },
@@ -4567,8 +4607,14 @@
             "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj": {
               "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\AdvancedText\\AdvancedText.csproj"
             },
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandParser\\CommandParser.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandParser\\CommandParser.csproj"
+            },
             "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
               "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
+            },
+            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj": {
+              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser\\FunctionAnalyser.csproj"
             }
           }
         }
