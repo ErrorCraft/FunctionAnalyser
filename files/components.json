@@ -5,7 +5,7 @@
 		},
 		"translate": {
 			"type": "string",
-			"contents": {
+			"children": {
 				"with": {
 					"type": "array",
 					"may_be_empty": true,
@@ -15,7 +15,7 @@
 		},
 		"score": {
 			"type": "object",
-			"contents": {
+			"children": {
 				"name": {
 					"type": "string"
 				},
@@ -32,8 +32,8 @@
 		},
 		"nbt": {
 			"type": "string",
-			"match_first_in_contents": true,
-			"contents": {
+			"match_first": true,
+			"children": {
 				"block": {
 					"type": "string"
 				},
@@ -64,14 +64,14 @@
 		"insertion": {"type": "string"},
 		"clickEvent": {
 			"type": "object",
-			"contents": {
+			"children": {
 				"action": {"type": "string"},
 				"value": {"type": "string"}
 			}
 		},
 		"hoverEvent": {
 			"type": "object",
-			"contents": {
+			"children": {
 				"action": {
 					"type": "string"
 				},
@@ -84,9 +84,9 @@
 						},
 						"show_item": {
 							"type": "object",
-							"contents": {
+							"children": {
 								"id": {
-									"type": "namespaced_id"
+									"type": "resource_location"
 								},
 								"count": {
 									"type": "number",
@@ -100,9 +100,9 @@
 						},
 						"show_entity": {
 							"type": "object",
-							"contents": {
+							"children": {
 								"type": {
-									"type": "namespaced_id"
+									"type": "resource_location"
 								},
 								"name": {
 									"type": "object",
