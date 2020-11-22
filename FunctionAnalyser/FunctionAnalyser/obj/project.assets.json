@@ -33,19 +33,6 @@
         "runtime": {
           "bin/placeholder/CommandParser.dll": {}
         }
-      },
-      "CommandVerifier/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
-        },
-        "compile": {
-          "bin/placeholder/CommandVerifier.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CommandVerifier.dll": {}
-        }
       }
     }
   },
@@ -90,18 +77,12 @@
       "type": "project",
       "path": "../CommandParser/CommandParser.csproj",
       "msbuildProject": "../CommandParser/CommandParser.csproj"
-    },
-    "CommandVerifier/1.0.0": {
-      "type": "project",
-      "path": "../CommandVerifier/CommandVerifier.csproj",
-      "msbuildProject": "../CommandVerifier/CommandVerifier.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "AdvancedText >= 1.0.0",
-      "CommandParser >= 1.0.0",
-      "CommandVerifier >= 1.0.0"
+      "CommandParser >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -140,9 +121,6 @@
             },
             "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandParser\\CommandParser.csproj": {
               "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandParser\\CommandParser.csproj"
-            },
-            "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj": {
-              "projectPath": "C:\\Users\\Ramon\\Source\\Repos\\FunctionAnalyser\\FunctionAnalyser\\CommandVerifier\\CommandVerifier.csproj"
             }
           }
         }

@@ -11,7 +11,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AdvancedText\AdvancedText.csproj" />
     <ProjectReference Include="..\CommandParser\CommandParser.csproj" />
-    <ProjectReference Include="..\CommandVerifier\CommandVerifier.csproj" />
     <ProjectReference Include="..\FunctionAnalyser\FunctionAnalyser.csproj" />
   </ItemGroup>
 
