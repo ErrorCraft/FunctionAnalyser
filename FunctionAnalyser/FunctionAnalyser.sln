@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterface", "UserInterf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandFilesApi", "CommandFilesApi\CommandFilesApi.csproj", "{7E69BFBB-3172-4C92-9C30-6939FD76517F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandParser", "CommandParser\CommandParser.csproj", "{E7C70C81-839D-4B63-A1C3-9F1A0936A5AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandParser", "CommandParser\CommandParser.csproj", "{E7C70C81-839D-4B63-A1C3-9F1A0936A5AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

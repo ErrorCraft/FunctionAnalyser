@@ -105,7 +105,7 @@
             </Grid.RowDefinitions>
 
             <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                <TextBlock x:Name="Output" TextWrapping="Wrap" FontFamily="Courier New"/>
+                <ItemsControl x:Name="Output" FontFamily="Courier New"/>
             </ScrollViewer>
             <ProgressBar x:Name="Progress" Foreground="#00ACED" Grid.Row="1" Background="White" BorderThickness="0" Minimum="0" Maximum="1"></ProgressBar>
         </Grid>

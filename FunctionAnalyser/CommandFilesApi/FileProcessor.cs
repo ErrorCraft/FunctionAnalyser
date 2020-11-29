@@ -8,11 +8,11 @@ namespace CommandFilesApi
 {
     public class FileProcessor
     {
-        private readonly IWriter Writer;
+        private readonly ILogger Logger;
 
-        public FileProcessor(IWriter writer)
+        public FileProcessor(ILogger logger)
         {
-            Writer = writer;
+            Logger = logger;
         }
 
         public async Task GetFiles()
@@ -71,14 +71,16 @@ namespace CommandFilesApi
             string operationsJson = await GetFile("operations.json");
             Operations.Set(operationsJson);
 
-            Writer.WriteLine(new TextComponent("All done!").WithColour(Colour.BuiltinColours.GREEN));
+            Logger.Log(new TextComponent("All done!").WithColour(Colour.BuiltinColours.GREEN));
         }
 
         private async Task<string> GetFile(string file)
         {
-            Writer.Write(new TextComponent("Getting ").WithColour(Colour.BuiltinColours.GREY));
-            Writer.Write(new TextComponent(file).WithColour(Colour.BuiltinColours.GOLD));
-            Writer.WriteLine(new TextComponent("...").WithColour(Colour.BuiltinColours.GREY));
+            Logger.Log(new TextComponent("Getting ").WithColour(Colour.BuiltinColours.GREY).With(
+                new TextComponent(file).WithColour(Colour.BuiltinColours.GOLD).With(
+                    new TextComponent("...").WithColour(Colour.BuiltinColours.GREY)
+                    )
+                ));
             return await LoadFile(file);
         }
 
@@ -98,9 +100,11 @@ namespace CommandFilesApi
             }
             catch (HttpRequestException)
             {
-                Writer.Write(new TextComponent("Was not able to get ").WithColour(Colour.BuiltinColours.RED));
-                Writer.Write(new TextComponent(fileName).WithColour(Colour.BuiltinColours.GOLD));
-                Writer.WriteLine(new TextComponent("!").WithColour(Colour.BuiltinColours.RED));
+                Logger.Log(new TextComponent("Was not able to get ").WithColour(Colour.BuiltinColours.RED).With(
+                new TextComponent(fileName).WithColour(Colour.BuiltinColours.GOLD).With(
+                    new TextComponent("!").WithColour(Colour.BuiltinColours.RED)
+                    )
+                ));
                 throw;
             }
         }

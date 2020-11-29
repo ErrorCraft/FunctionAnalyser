@@ -7,18 +7,32 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommandFilesApi;
 using System.Net.Http;
+using System.Threading;
+using System.Diagnostics;
+using CommandParser;
+using System.Collections.Generic;
+using System.Windows.Documents;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Collections.ObjectModel;
 
 namespace UserInterface
 {
     public partial class MainWindow : Window
     {
-        private readonly TextWriter Writer;
+        private readonly AnalyserLogger Logger;
         private string FolderPath;
+        private readonly ObservableCollection<TextBlock> Blocks;
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowModel();
-            Writer = new TextWriter(Output);
+
+            Blocks = new ObservableCollection<TextBlock>();
+            Output.ItemsSource = Blocks;
+            Logger = new AnalyserLogger(Blocks, Output.Dispatcher);
+
             FolderPath = "";
             TextComponent.SetDefaultColour(Colour.BuiltinColours.WHITE);
             ApiHelper.Initialise();
@@ -40,44 +54,33 @@ namespace UserInterface
             save.Filters.Add(new CommonFileDialogFilter("Text Files", "*.txt"));
             if (save.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                await IO::File.WriteAllTextAsync(save.FileName, Writer.GetFlatOutput());
+                await IO::File.WriteAllTextAsync(save.FileName, Logger.GetFlatString());
             }
         }
 
         private async void ReadFiles(object sender, RoutedEventArgs e)
         {
+            // Disable options
             MainWindowModel.EnableOptions = false;
             AnalyseButton.IsEnabled = false;
             ExportButton.IsEnabled = false;
             FolderButton.IsEnabled = false;
 
             // Clear output
-            Writer.Reset();
+            Logger.Clear();
 
-            // Read functions
+            // Track progress
             Progress<FunctionProgress> progress = new Progress<FunctionProgress>();
             progress.ProgressChanged += ReportProgress;
-            FunctionReader functionReader = new FunctionReader(FolderPath, progress);
 
-            await functionReader.AnalyseFunctions("java");
-
-            /*TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-            Task task = tcs.Task;
-            Thread functionThread = new Thread(() => {
-                try
-                {
-                    functionReader.ReadAllFunctions("java");
-                }
-                catch (TaskCanceledException) { }
-                finally
-                {
-                    tcs.SetResult(true);
-                }
+            // Reading
+            FunctionReader functionReader = new FunctionReader(FolderPath, Logger, progress);
+            await Task.Run(() =>
+            {
+                functionReader.Analyse("java");
             });
 
-            functionThread.Start();
-            await Task.WhenAll(task);*/
-
+            // Enable options again
             MainWindowModel.EnableOptions = true;
             AnalyseButton.IsEnabled = true;
             ExportButton.IsEnabled = true;
@@ -91,7 +94,7 @@ namespace UserInterface
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)
         {
-            FileProcessor fileProcessor = new FileProcessor(Writer);
+            FileProcessor fileProcessor = new FileProcessor(Logger);
             try
             {
                 await Task.Run(fileProcessor.GetFiles);

@@ -13,11 +13,13 @@
         public Colour Colour { get; private set; }
         public bool Italic { get; private set; }
         public bool Bold { get; private set; }
+        public TextComponent Child { get; private set; }
 
         public TextComponent(string text)
         {
             Text = text;
             Colour = DefaultColour;
+
             Italic = false;
             Bold = false;
         }
@@ -32,6 +34,12 @@
         {
             Italic = italic;
             Bold = bold;
+            return this;
+        }
+
+        public TextComponent With(TextComponent child)
+        {
+            Child = child;
             return this;
         }
 
