@@ -91,7 +91,7 @@ namespace CommandParser.Collections
             return new ReadResults(true, null);
         }
 
-        private ReadResults SetLimit(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults SetLimit(EntitySelectorParser parser, StringReader reader)
         {
             ReadResults readResults = reader.ReadInteger(out int number);
             if (!readResults.Successful)
@@ -104,11 +104,11 @@ namespace CommandParser.Collections
                 return new ReadResults(false, CommandError.SelectorLimitTooLow().WithContext(reader));
             }
             parser.SetMaxResults(number);
-            parser.AddArgument(new ParsedArgument<int>(number));
+            parser.AddArgument(new ParsedArgument<int>(number, false));
             return new ReadResults(true, null);
         }
 
-        private ReadResults SetExecutor(EntitySelectorParser parser, StringReader reader, bool negated, string originalName, int previousStart)
+        private static ReadResults SetExecutor(EntitySelectorParser parser, StringReader reader, bool negated, string originalName, int previousStart)
         {
             if (parser.IsTypeLimited())
             {
@@ -142,11 +142,11 @@ namespace CommandParser.Collections
                     return new ReadResults(false, CommandError.InvalidEntityType(entity).WithContext(reader));
                 }
             }
-            parser.AddArgument(new ParsedArgument<Entity>(new Entity(entity)));
+            parser.AddArgument(new ParsedArgument<Entity>(new Entity(entity), false));
             return new ReadResults(true, null);
         }
 
-        private ReadResults ReadAdvancements(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults ReadAdvancements(EntitySelectorParser parser, StringReader reader)
         {
             ReadResults readResults = reader.Expect('{');
             if (!readResults.Successful) return readResults;
@@ -196,7 +196,7 @@ namespace CommandParser.Collections
                     if (!readResults.Successful) return readResults;
                 }
 
-                parser.AddArgument(new ParsedArgument<Advancement>(new Advancement(advancement)));
+                parser.AddArgument(new ParsedArgument<Advancement>(new Advancement(advancement), false));
                 reader.SkipWhitespace();
                 if (reader.CanRead())
                 {
@@ -211,7 +211,7 @@ namespace CommandParser.Collections
             return reader.Expect('}');
         }
 
-        private ReadResults ReadScores(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults ReadScores(EntitySelectorParser parser, StringReader reader)
         {
             ReadResults readResults = reader.Expect('{');
             if (!readResults.Successful) return readResults;
@@ -231,7 +231,7 @@ namespace CommandParser.Collections
                 readResults = new RangeParser<int>(reader).Read(int.TryParse, CommandError.InvalidInteger, int.MinValue, int.MaxValue, false, out Range<int> range);
                 if (!readResults.Successful) return readResults;
 
-                parser.AddArgument(new ParsedArgument<Range<int>>(range));
+                parser.AddArgument(new ParsedArgument<Range<int>>(range, false));
                 reader.SkipWhitespace();
                 if (reader.CanRead())
                 {
@@ -246,7 +246,7 @@ namespace CommandParser.Collections
             return reader.Expect('}');
         }
 
-        private ReadResults ReadGamemode(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults ReadGamemode(EntitySelectorParser parser, StringReader reader)
         {
             int start = reader.Cursor;
             ReadResults readResults = reader.ReadUnquotedString(out string gamemode);
@@ -257,7 +257,7 @@ namespace CommandParser.Collections
 
             if (Gamemodes.Contains(gamemode))
             {
-                parser.AddArgument(new ParsedArgument<Literal>(new Literal(gamemode)));
+                parser.AddArgument(new ParsedArgument<Literal>(new Literal(gamemode), false));
                 return new ReadResults(true, null);
             } else
             {
@@ -266,7 +266,7 @@ namespace CommandParser.Collections
             }
         }
 
-        private ReadResults ReadSort(EntitySelectorParser parser, StringReader reader, string originalName, int previousStart)
+        private static ReadResults ReadSort(EntitySelectorParser parser, StringReader reader, string originalName, int previousStart)
         {
             if (parser.IsSorted())
             {
@@ -283,7 +283,7 @@ namespace CommandParser.Collections
 
             if (Sorts.Contains(sort))
             {
-                parser.AddArgument(new ParsedArgument<Literal>(new Literal(sort)));
+                parser.AddArgument(new ParsedArgument<Literal>(new Literal(sort), false));
                 return new ReadResults(true, null);
             }
             else

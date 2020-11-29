@@ -33,7 +33,7 @@ namespace CommandParser.Tree
             ReadResults parseResults = Argument.Parse(reader, out T result);
             if (parseResults.Successful)
             {
-                ParsedArgument<T> parsed = new ParsedArgument<T>(result);
+                ParsedArgument<T> parsed = new ParsedArgument<T>(result, builder.InRoot);
                 builder.AddArgument(parsed);
                 builder.EncompassRange(new Range(start, reader.Cursor));
             }

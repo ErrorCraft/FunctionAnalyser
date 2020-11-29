@@ -79,6 +79,8 @@ namespace CommandParser
             List<CommandError> errors = null;
             List<ParseResults> potentials = null;
 
+            contextSoFar.InRoot = node is RootNode;
+
             foreach (Node child in node.GetRelevantNodes(originalReader))
             {
                 CommandContext context = contextSoFar.Copy();

@@ -24,7 +24,7 @@ namespace CommandParser.Tree
             int end = Parse(reader);
             if (end > -1)
             {
-                ParsedArgument<Literal> parsed = new ParsedArgument<Literal>(new Literal(reader.Command[start..end]));
+                ParsedArgument<Literal> parsed = new ParsedArgument<Literal>(new Literal(reader.Command[start..end]), builder.InRoot);
                 builder.AddArgument(parsed);
                 builder.EncompassRange(new Range(start, end));
                 return new ReadResults(true, null);
