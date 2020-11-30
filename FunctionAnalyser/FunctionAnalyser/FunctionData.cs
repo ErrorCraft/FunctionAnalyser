@@ -10,25 +10,29 @@ namespace FunctionAnalyser
         public int Comments { get; set; }
         public int EmptyLines { get; set; }
 
-        public int Literals { get; set; }
+        public Dictionary<string, CommandUsage> UsedCommands { get; set; }
 
         public List<TextComponent> Messages { get; set; }
 
         public FunctionData()
         {
             Messages = new List<TextComponent>();
+            UsedCommands = new Dictionary<string, CommandUsage>();
         }
 
         public static FunctionData operator +(FunctionData a, FunctionData b)
         {
-            return new FunctionData()
+            a.Functions += b.Functions;
+            a.Commands += b.Commands;
+            a.Comments += b.Comments;
+            a.EmptyLines += b.EmptyLines;
+            foreach (KeyValuePair<string, CommandUsage> kvp in b.UsedCommands)
             {
-                Functions = a.Functions + b.Functions,
-                Commands = a.Commands + b.Commands,
-                Comments = a.Comments + b.Comments,
-                EmptyLines = a.EmptyLines + b.EmptyLines,
-                Literals = a.Literals + b.Literals
-            };
+                if (a.UsedCommands.ContainsKey(kvp.Key)) a.UsedCommands[kvp.Key] += kvp.Value;
+                else a.UsedCommands[kvp.Key] = kvp.Value;
+            }
+
+            return a;
         }
     }
 }

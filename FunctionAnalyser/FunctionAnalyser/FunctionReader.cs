@@ -122,9 +122,11 @@ namespace FunctionAnalyser
                     {
                         functionData.Commands++;
                         // Analyse Arguments
+                        bool isFirstArgument = true;
                         for (int j = 0; j < commandResults.Arguments.Count; j++)
                         {
-                            AnalyseArgument(commandResults.Arguments[j], functionData);
+                            AnalyseArgument(commandResults.Arguments[j], functionData, isFirstArgument);
+                            isFirstArgument = false;
                         }
                     } else
                     {
@@ -150,12 +152,21 @@ namespace FunctionAnalyser
             return functionData;
         }
 
-        private static void AnalyseArgument(ParsedArgument argument, FunctionData data)
+        private static void AnalyseArgument(ParsedArgument argument, FunctionData data, bool firstArgument)
         {
             object result = argument.GetResult();
-            if (result is Literal)
+            if (argument.IsFromRoot())
             {
-                data.Literals++;
+                if (result is Literal literal)
+                {
+                    string value = literal.Value;
+                    if (!data.UsedCommands.ContainsKey(value)) data.UsedCommands[value] = new CommandUsage();
+                    data.UsedCommands[value].Commands++;
+                    if (!firstArgument) data.UsedCommands[value].BehindExecute++;
+                }
+            } else if (result is EntitySelector entitySelector)
+            {
+                //
             }
         }
 
@@ -164,7 +175,7 @@ namespace FunctionAnalyser
             return $"..{file[BasePath.Length..]}";
         }
 
-        private static string GetAverage(FunctionData data, int item)
+        private static string GetAverageMessage(FunctionData data, int item)
         {
             if (data.Functions == 0) return "";
 
@@ -186,21 +197,26 @@ namespace FunctionAnalyser
             List<TextComponent> components = new List<TextComponent>
             {
                 new TextComponent($"Information:").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
-                new TextComponent($"  Number of functions: {data.Functions}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  Number of commands: {data.Commands}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  Number of comments: {data.Comments}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  Number of empty lines: {data.EmptyLines}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  Literals: {data.Literals}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  Selectors:").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"    @p: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"    @a: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"    @r: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"    @e: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"    @s: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  NBT Access: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA),
-                new TextComponent($"  Predicate Calls: 100 {GetAverage(data, 100)}").WithColour(BuiltinTextColours.AQUA)
+                MessageProvider.Result($"Number of functions: {data.Functions}"),
+                MessageProvider.Result($"Number of comments: {data.Comments}"),
+                MessageProvider.Result($"Number of empty lines: {data.EmptyLines}\n"),
+                MessageProvider.Result($"Number of commands: {data.Commands}")
             };
 
+            foreach (KeyValuePair<string, CommandUsage> kvp in data.UsedCommands)
+            {
+                components.Add(MessageProvider.CommandResult(kvp.Key, kvp.Value));
+            }
+
+            /*components.Add(MessageProvider.Result($"\nSelectors:"));
+            components.Add(MessageProvider.EntitySelector('p', 100));
+            components.Add(MessageProvider.EntitySelector('a', 100));
+            components.Add(MessageProvider.EntitySelector('r', 100));
+            components.Add(MessageProvider.EntitySelector('e', 100));
+            components.Add(MessageProvider.EntitySelector('s', 100));
+            components.Add(new TextComponent($"  NBT Access: 100 {GetAverageMessage(data, 100)}").WithColour(BuiltinTextColours.AQUA));
+            components.Add(new TextComponent($"  Predicate Calls: 100 {GetAverageMessage(data, 100)}").WithColour(BuiltinTextColours.AQUA));*/
+            
             Logger.Log(components);
         }
 

@@ -1,5 +1,6 @@
 ﻿using AdvancedText;
 using CommandParser;
+using System.Text;
 
 namespace FunctionAnalyser
 {
@@ -13,7 +14,7 @@ namespace FunctionAnalyser
         public static TextComponent ErrorsFound(int errorCount, string path, bool skip)
         {
             return new TextComponent(errorCount == 1 ? $"Error found in " : $"{errorCount} errors found in ").WithColour(Colour.BuiltinColours.RED).With(
-                new TextComponent(path).With(
+                    new TextComponent(path).With(
                     skip ? new TextComponent($", skipping").WithColour(Colour.BuiltinColours.RED) : null
                     )
                 );
@@ -24,6 +25,24 @@ namespace FunctionAnalyser
             return new TextComponent($"Empty function found at ").WithColour(Colour.BuiltinColours.YELLOW).With(
                 new TextComponent(path)
                 );
+        }
+
+        public static TextComponent Result(string message)
+        {
+            return new TextComponent($"  {message}").WithColour(Colour.BuiltinColours.AQUA);
+        }
+
+        public static TextComponent CommandResult(string command, CommandUsage usage)
+        {
+            return new TextComponent($"    {command}: ").WithColour(Colour.BuiltinColours.AQUA).With(
+                new TextComponent($"{usage.Commands}").With(
+                        usage.BehindExecute > 0 ? new TextComponent($" ({usage.BehindExecute} behind execute)").WithStyle(true, false) : null
+                    ));
+        }
+
+        public static TextComponent EntitySelector(char selector, int numberOfSelectors)
+        {
+            return new TextComponent($"    @{selector}: {numberOfSelectors}").WithColour(Colour.BuiltinColours.AQUA); // {GetAverageMessage(numberOfSelectors, functions, commands)}
         }
     }
 }
