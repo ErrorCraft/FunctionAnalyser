@@ -156,7 +156,7 @@
 							"children": {
 								"attribute": {
 									"type": "argument",
-									"parser": "resource_location",
+									"parser": "attribute",
 									"children": {
 										"base": {
 											"type": "literal",
@@ -650,7 +650,7 @@
 									"children": {
 										"target": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "storage",
 											"children": {
 												"path": {
 													"type": "argument",
@@ -714,7 +714,7 @@
 									"children": {
 										"target": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "storage",
 											"children": {
 												"nbt": {
 													"type": "argument",
@@ -789,7 +789,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -867,7 +867,7 @@
 																					"children": {
 																						"source": {
 																							"type": "argument",
-																							"parser": "resource_location",
+																							"parser": "storage",
 																							"children": {
 																								"sourcePath": {
 																									"type": "argument",
@@ -943,7 +943,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1017,7 +1017,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1091,7 +1091,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1185,7 +1185,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1263,7 +1263,7 @@
 																					"children": {
 																						"source": {
 																							"type": "argument",
-																							"parser": "resource_location",
+																							"parser": "storage",
 																							"children": {
 																								"sourcePath": {
 																									"type": "argument",
@@ -1339,7 +1339,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1413,7 +1413,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1487,7 +1487,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1524,7 +1524,7 @@
 									"children": {
 										"target": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "storage",
 											"children": {
 												"targetPath": {
 													"type": "argument",
@@ -1578,7 +1578,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1656,7 +1656,7 @@
 																					"children": {
 																						"source": {
 																							"type": "argument",
-																							"parser": "resource_location",
+																							"parser": "storage",
 																							"children": {
 																								"sourcePath": {
 																									"type": "argument",
@@ -1732,7 +1732,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1806,7 +1806,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1880,7 +1880,7 @@
 																			"children": {
 																				"source": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "storage",
 																					"children": {
 																						"sourcePath": {
 																							"type": "argument",
@@ -1957,7 +1957,7 @@
 									"children": {
 										"target": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "storage",
 											"children": {
 												"path": {
 													"type": "argument",
@@ -2380,7 +2380,7 @@
 											"children": {
 												"source": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "storage",
 													"children": {
 														"path": {
 															"type": "argument",
@@ -2791,7 +2791,7 @@
 											"children": {
 												"target": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "storage",
 													"children": {
 														"path": {
 															"type": "argument",
@@ -3068,7 +3068,7 @@
 											"children": {
 												"target": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "storage",
 													"children": {
 														"path": {
 															"type": "argument",
@@ -3245,7 +3245,7 @@
 											"children": {
 												"source": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "storage",
 													"children": {
 														"path": {
 															"type": "argument",
@@ -4107,7 +4107,7 @@
 																			"children": {
 																				"modifier": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "item_modifier",
 																					"executable": true
 																				}
 																			},
@@ -4133,7 +4133,7 @@
 																			"children": {
 																				"modifier": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "item_modifier",
 																					"executable": true
 																				}
 																			},
@@ -4150,7 +4150,7 @@
 													"children": {
 														"modifier": {
 															"type": "argument",
-															"parser": "resource_location",
+															"parser": "item_modifier",
 															"executable": true
 														}
 													}
@@ -4209,7 +4209,7 @@
 																			"children": {
 																				"modifier": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "item_modifier",
 																					"executable": true
 																				}
 																			},
@@ -4235,7 +4235,7 @@
 																			"children": {
 																				"modifier": {
 																					"type": "argument",
-																					"parser": "resource_location",
+																					"parser": "item_modifier",
 																					"executable": true
 																				}
 																			},
@@ -4252,7 +4252,7 @@
 													"children": {
 														"modifier": {
 															"type": "argument",
-															"parser": "resource_location",
+															"parser": "item_modifier",
 															"executable": true
 														}
 													}
@@ -4389,7 +4389,7 @@
 					"children": {
 						"biome": {
 							"type": "argument",
-							"parser": "resource_location",
+							"parser": "biome",
 							"executable": true
 						}
 					}
@@ -4412,7 +4412,7 @@
 											"children": {
 												"loot_table": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "loot_table",
 													"children": {
 														"pos": {
 															"type": "argument",
@@ -4456,7 +4456,7 @@
 											"children": {
 												"loot_table": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "loot_table",
 													"executable": true
 												}
 											}
@@ -4502,7 +4502,7 @@
 											"children": {
 												"loot_table": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "loot_table",
 													"children": {
 														"pos": {
 															"type": "argument",
@@ -4546,7 +4546,7 @@
 											"children": {
 												"loot_table": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "loot_table",
 													"executable": true
 												}
 											}
@@ -4599,7 +4599,7 @@
 															"children": {
 																"loot_table": {
 																	"type": "argument",
-																	"parser": "resource_location",
+																	"parser": "loot_table",
 																	"children": {
 																		"pos": {
 																			"type": "argument",
@@ -4643,7 +4643,7 @@
 															"children": {
 																"loot_table": {
 																	"type": "argument",
-																	"parser": "resource_location",
+																	"parser": "loot_table",
 																	"executable": true
 																}
 															}
@@ -4685,7 +4685,7 @@
 																	"children": {
 																		"loot_table": {
 																			"type": "argument",
-																			"parser": "resource_location",
+																			"parser": "loot_table",
 																			"children": {
 																				"pos": {
 																					"type": "argument",
@@ -4729,7 +4729,7 @@
 																	"children": {
 																		"loot_table": {
 																			"type": "argument",
-																			"parser": "resource_location",
+																			"parser": "loot_table",
 																			"executable": true
 																		}
 																	}
@@ -4783,7 +4783,7 @@
 															"children": {
 																"loot_table": {
 																	"type": "argument",
-																	"parser": "resource_location",
+																	"parser": "loot_table",
 																	"children": {
 																		"pos": {
 																			"type": "argument",
@@ -4827,7 +4827,7 @@
 															"children": {
 																"loot_table": {
 																	"type": "argument",
-																	"parser": "resource_location",
+																	"parser": "loot_table",
 																	"executable": true
 																}
 															}
@@ -4869,7 +4869,7 @@
 																	"children": {
 																		"loot_table": {
 																			"type": "argument",
-																			"parser": "resource_location",
+																			"parser": "loot_table",
 																			"children": {
 																				"pos": {
 																					"type": "argument",
@@ -4913,7 +4913,7 @@
 																	"children": {
 																		"loot_table": {
 																			"type": "argument",
-																			"parser": "resource_location",
+																			"parser": "loot_table",
 																			"executable": true
 																		}
 																	}
@@ -4965,7 +4965,7 @@
 											"children": {
 												"loot_table": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "loot_table",
 													"children": {
 														"pos": {
 															"type": "argument",
@@ -5009,7 +5009,7 @@
 											"children": {
 												"loot_table": {
 													"type": "argument",
-													"parser": "resource_location",
+													"parser": "loot_table",
 													"executable": true
 												}
 											}
@@ -5154,7 +5154,7 @@
 					"children": {
 						"sound": {
 							"type": "argument",
-							"parser": "resource_location",
+							"parser": "sound",
 							"children": {
 								"ambient": {
 									"type": "literal",
@@ -5714,7 +5714,7 @@
 										},
 										"recipe": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "recipe",
 											"executable": true
 										}
 									}
@@ -5737,7 +5737,7 @@
 										},
 										"recipe": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "recipe",
 											"executable": true
 										}
 									}
@@ -6317,7 +6317,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									}
@@ -6327,7 +6327,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6338,7 +6338,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6349,7 +6349,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6360,7 +6360,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6371,7 +6371,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6382,7 +6382,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6393,7 +6393,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6404,7 +6404,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6415,7 +6415,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
@@ -6426,7 +6426,7 @@
 									"children": {
 										"sound": {
 											"type": "argument",
-											"parser": "resource_location",
+											"parser": "sound",
 											"executable": true
 										}
 									},
