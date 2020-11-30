@@ -78,6 +78,7 @@ namespace CommandParser.Converters
                 "loot_table" => Argument(name, new LootTableArgument(), false, null),
                 "sound" => Argument(name, new SoundArgument(), false, null),
                 "recipe" => Argument(name, new RecipeArgument(), false, null),
+                "bossbar" => Argument(name, new BossbarArgument(), false, null),
                 _ => throw new ArgumentException($"'{parser}' is not a valid parser type")
             };
 
