@@ -71,6 +71,13 @@ namespace CommandParser.Converters
                 "entity_anchor" => Argument(name, new EntityAnchorArgument(), false, null),
                 "dimension" => Argument(name, new DimensionArgument(), false, null),
                 "operation" => Argument(name, new OperationArgument(), false, null),
+                "attribute" => Argument(name, new AttributeArgument(), false, null),
+                "storage" => Argument(name, new StorageArgument(), false, null),
+                "item_modifier" => Argument(name, new ItemModifierArgument(), false, null),
+                "biome" => Argument(name, new BiomeArgument(), false, null),
+                "loot_table" => Argument(name, new LootTableArgument(), false, null),
+                "sound" => Argument(name, new SoundArgument(), false, null),
+                "recipe" => Argument(name, new RecipeArgument(), false, null),
                 _ => throw new ArgumentException($"'{parser}' is not a valid parser type")
             };
 
