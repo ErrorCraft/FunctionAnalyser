@@ -125,7 +125,7 @@ namespace FunctionAnalyser
                         bool isFirstArgument = true;
                         for (int j = 0; j < commandResults.Arguments.Count; j++)
                         {
-                            AnalyseArgument(commandResults.Arguments[j], functionData, isFirstArgument);
+                            AnalyseArgument(commandResults.Arguments[j], functionData, isFirstArgument, false);
                             isFirstArgument = false;
                         }
                     } else
@@ -152,7 +152,7 @@ namespace FunctionAnalyser
             return functionData;
         }
 
-        private static void AnalyseArgument(ParsedArgument argument, FunctionData data, bool firstArgument)
+        private static void AnalyseArgument(ParsedArgument argument, FunctionData data, bool firstArgument, bool inSelector)
         {
             object result = argument.GetResult();
             if (argument.IsFromRoot())
@@ -164,15 +164,40 @@ namespace FunctionAnalyser
                     data.UsedCommands[value].Commands++;
                     if (!firstArgument) data.UsedCommands[value].BehindExecute++;
                 }
-            } else if (result is EntitySelector entitySelector)
+            }
+            else if (result is EntitySelector entitySelector)
             {
-                //
+                // Selector type
+                switch (entitySelector.SelectorType)
+                {
+                    case SelectorType.NearestPlayer:
+                        data.Selectors.NearestPlayer++;
+                        break;
+                    case SelectorType.AllPlayers:
+                        data.Selectors.AllPlayers++;
+                        break;
+                    case SelectorType.RandomPlayer:
+                        data.Selectors.RandomPlayer++;
+                        break;
+                    case SelectorType.AllEntities:
+                        data.Selectors.AllEntities++;
+                        break;
+                    case SelectorType.Self:
+                        data.Selectors.CurrentEntity++;
+                        break;
+                }
+
+                // Analyse selector arguments
+                for (int i = 0; i < entitySelector.Arguments.Count; i++)
+                {
+                    AnalyseArgument(entitySelector.Arguments[i], data, false, true);
+                }
             }
         }
 
         private string GetShortFileName(string file)
         {
-            return $"..{file[BasePath.Length..]}";
+            return $".{file[BasePath.Length..]}";
         }
 
         private static string GetAverageMessage(FunctionData data, int item)
@@ -193,31 +218,40 @@ namespace FunctionAnalyser
 
         private void Report(FunctionData data)
         {
-            // Dear god
             List<TextComponent> components = new List<TextComponent>
             {
                 new TextComponent($"Information:").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
                 MessageProvider.Result($"Number of functions: {data.Functions}"),
                 MessageProvider.Result($"Number of comments: {data.Comments}"),
-                MessageProvider.Result($"Number of empty lines: {data.EmptyLines}\n"),
+                MessageProvider.Result($"Number of empty lines: {data.EmptyLines}"),
                 MessageProvider.Result($"Number of commands: {data.Commands}")
             };
 
-            foreach (KeyValuePair<string, CommandUsage> kvp in data.UsedCommands)
+            foreach (string key in GetSortedCommands(data.UsedCommands))
             {
-                components.Add(MessageProvider.CommandResult(kvp.Key, kvp.Value));
+                components.Add(MessageProvider.CommandResult(key, data.UsedCommands[key]));
             }
 
-            /*components.Add(MessageProvider.Result($"\nSelectors:"));
-            components.Add(MessageProvider.EntitySelector('p', 100));
-            components.Add(MessageProvider.EntitySelector('a', 100));
-            components.Add(MessageProvider.EntitySelector('r', 100));
-            components.Add(MessageProvider.EntitySelector('e', 100));
-            components.Add(MessageProvider.EntitySelector('s', 100));
-            components.Add(new TextComponent($"  NBT Access: 100 {GetAverageMessage(data, 100)}").WithColour(BuiltinTextColours.AQUA));
-            components.Add(new TextComponent($"  Predicate Calls: 100 {GetAverageMessage(data, 100)}").WithColour(BuiltinTextColours.AQUA));*/
-            
+            components.Add(MessageProvider.Result($"\nSelectors:"));
+            components.Add(MessageProvider.EntitySelector('p', data.Selectors.NearestPlayer));
+            components.Add(MessageProvider.EntitySelector('a', data.Selectors.AllPlayers));
+            components.Add(MessageProvider.EntitySelector('r', data.Selectors.RandomPlayer));
+            components.Add(MessageProvider.EntitySelector('e', data.Selectors.AllEntities));
+            components.Add(MessageProvider.EntitySelector('s', data.Selectors.CurrentEntity));
+
             Logger.Log(components);
+        }
+
+        private static List<string> GetSortedCommands(Dictionary<string, CommandUsage> input)
+        {
+            List<string> keys = new List<string>(input.Keys);
+            keys.Sort((a, b) =>
+            {
+                if (input[a].Commands < input[b].Commands) return 1;
+                else if (input[a].Commands > input[b].Commands) return -1;
+                return 0;
+            });
+            return keys;
         }
 
         public static class Options

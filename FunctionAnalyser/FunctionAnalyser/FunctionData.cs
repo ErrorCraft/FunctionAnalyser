@@ -9,6 +9,7 @@ namespace FunctionAnalyser
         public int Commands { get; set; }
         public int Comments { get; set; }
         public int EmptyLines { get; set; }
+        public SelectorCount Selectors { get; set; }
 
         public Dictionary<string, CommandUsage> UsedCommands { get; set; }
 
@@ -18,6 +19,7 @@ namespace FunctionAnalyser
         {
             Messages = new List<TextComponent>();
             UsedCommands = new Dictionary<string, CommandUsage>();
+            Selectors = new SelectorCount();
         }
 
         public static FunctionData operator +(FunctionData a, FunctionData b)
@@ -31,6 +33,7 @@ namespace FunctionAnalyser
                 if (a.UsedCommands.ContainsKey(kvp.Key)) a.UsedCommands[kvp.Key] += kvp.Value;
                 else a.UsedCommands[kvp.Key] = kvp.Value;
             }
+            a.Selectors += b.Selectors;
 
             return a;
         }

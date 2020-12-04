@@ -42,7 +42,7 @@ namespace FunctionAnalyser
 
         public static TextComponent EntitySelector(char selector, int numberOfSelectors)
         {
-            return new TextComponent($"    @{selector}: {numberOfSelectors}").WithColour(Colour.BuiltinColours.AQUA); // {GetAverageMessage(numberOfSelectors, functions, commands)}
+            return new TextComponent($"    @{selector}: {numberOfSelectors}").WithColour(Colour.BuiltinColours.AQUA);
         }
     }
 }
