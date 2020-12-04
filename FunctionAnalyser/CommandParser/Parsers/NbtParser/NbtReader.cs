@@ -8,6 +8,7 @@ namespace CommandParser.Parsers.NbtParser
     {
         public static ReadResults ReadValue(StringReader reader, out INbtArgument result)
         {
+            reader.SkipWhitespace();
             switch (reader.Peek())
             {
                 case '{':
