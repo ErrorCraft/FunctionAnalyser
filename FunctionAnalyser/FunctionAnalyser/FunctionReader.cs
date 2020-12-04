@@ -3,6 +3,7 @@ using CommandParser;
 using CommandParser.Context;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
+using FunctionAnalyser.Results;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ namespace FunctionAnalyser
             Report(results);
         }
 
-        public FunctionData AnalyseFunctions(string version)
+        private FunctionData AnalyseFunctions(string version)
         {
             // Results
             FunctionData results = new FunctionData();
@@ -98,6 +99,8 @@ namespace FunctionAnalyser
             // Lines
             string[] lines = File.ReadAllLines(path);
 
+            Debug.WriteLine(lines.Length);
+
             // Errors
             Dictionary<int, CommandError> errors = new Dictionary<int, CommandError>();
 
@@ -117,6 +120,7 @@ namespace FunctionAnalyser
                     continue;
                 } else
                 {
+                    if (command.Contains("replaceitem")) continue;
                     CommandResults commandResults = Versions[version].Parse(command);
                     if (commandResults.Successful)
                     {

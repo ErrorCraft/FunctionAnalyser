@@ -1,5 +1,6 @@
 ﻿using AdvancedText;
 using CommandParser;
+using FunctionAnalyser.Results;
 using System.Text;
 
 namespace FunctionAnalyser

@@ -1,4 +1,5 @@
 ﻿using AdvancedText;
+using FunctionAnalyser.Results;
 using System.Collections.Generic;
 
 namespace FunctionAnalyser

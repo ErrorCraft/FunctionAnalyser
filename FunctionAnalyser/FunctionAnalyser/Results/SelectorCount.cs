@@ -1,4 +1,4 @@
-﻿namespace FunctionAnalyser
+﻿namespace FunctionAnalyser.Results
 {
     public class SelectorCount
     {
