@@ -44,7 +44,7 @@ namespace Tests.Arguments
             StringReader reader = new StringReader("'true'");
 
             // Act
-            ReadResults readResults = argument.Parse(reader, out bool result);
+            argument.Parse(reader, out bool result);
 
             // Assert
             Assert.AreEqual(result, true);
