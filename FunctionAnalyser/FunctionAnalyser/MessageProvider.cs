@@ -33,7 +33,7 @@ namespace FunctionAnalyser
             return new TextComponent($"  {message}").WithColour(Colour.BuiltinColours.AQUA);
         }
 
-        public static TextComponent CommandResult(string command, CommandUsage usage)
+        public static TextComponent CommandResult(string command, Command usage)
         {
             return new TextComponent($"    {command}: ").WithColour(Colour.BuiltinColours.AQUA).With(
                 new TextComponent($"{usage.Commands}").With(

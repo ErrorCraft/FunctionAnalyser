@@ -99,8 +99,6 @@ namespace FunctionAnalyser
             // Lines
             string[] lines = File.ReadAllLines(path);
 
-            Debug.WriteLine(lines.Length);
-
             // Errors
             Dictionary<int, CommandError> errors = new Dictionary<int, CommandError>();
 
@@ -163,10 +161,7 @@ namespace FunctionAnalyser
             {
                 if (result is Literal literal)
                 {
-                    string value = literal.Value;
-                    if (!data.UsedCommands.ContainsKey(value)) data.UsedCommands[value] = new CommandUsage();
-                    data.UsedCommands[value].Commands++;
-                    if (!firstArgument) data.UsedCommands[value].BehindExecute++;
+                    data.UsedCommands.Increase(literal.Value, !firstArgument);
                 }
             }
             else if (result is EntitySelector entitySelector)
@@ -231,9 +226,9 @@ namespace FunctionAnalyser
                 MessageProvider.Result($"Number of commands: {data.Commands}")
             };
 
-            foreach (string key in GetSortedCommands(data.UsedCommands))
+            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(SortType.TimesUsed))
             {
-                components.Add(MessageProvider.CommandResult(key, data.UsedCommands[key]));
+                components.Add(MessageProvider.CommandResult(command.Key, command.Value));
             }
 
             components.Add(MessageProvider.Result($"\nSelectors:"));
@@ -244,18 +239,6 @@ namespace FunctionAnalyser
             components.Add(MessageProvider.EntitySelector('s', data.Selectors.CurrentEntity));
 
             Logger.Log(components);
-        }
-
-        private static List<string> GetSortedCommands(Dictionary<string, CommandUsage> input)
-        {
-            List<string> keys = new List<string>(input.Keys);
-            keys.Sort((a, b) =>
-            {
-                if (input[a].Commands < input[b].Commands) return 1;
-                else if (input[a].Commands > input[b].Commands) return -1;
-                return 0;
-            });
-            return keys;
         }
 
         public static class Options

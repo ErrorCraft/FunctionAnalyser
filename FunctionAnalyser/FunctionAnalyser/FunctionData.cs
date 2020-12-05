@@ -12,14 +12,14 @@ namespace FunctionAnalyser
         public int EmptyLines { get; set; }
         public SelectorCount Selectors { get; set; }
 
-        public Dictionary<string, CommandUsage> UsedCommands { get; set; }
+        public CommandUsage UsedCommands { get; set; }
 
         public List<TextComponent> Messages { get; set; }
 
         public FunctionData()
         {
             Messages = new List<TextComponent>();
-            UsedCommands = new Dictionary<string, CommandUsage>();
+            UsedCommands = new CommandUsage();
             Selectors = new SelectorCount();
         }
 
@@ -29,11 +29,7 @@ namespace FunctionAnalyser
             a.Commands += b.Commands;
             a.Comments += b.Comments;
             a.EmptyLines += b.EmptyLines;
-            foreach (KeyValuePair<string, CommandUsage> kvp in b.UsedCommands)
-            {
-                if (a.UsedCommands.ContainsKey(kvp.Key)) a.UsedCommands[kvp.Key] += kvp.Value;
-                else a.UsedCommands[kvp.Key] = kvp.Value;
-            }
+            a.UsedCommands.Merge(b.UsedCommands);
             a.Selectors += b.Selectors;
 
             return a;
