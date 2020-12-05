@@ -21,17 +21,19 @@ namespace FunctionAnalyser
         private readonly string BasePath;
         private readonly IProgress<FunctionProgress> Progress;
         private readonly ILogger Logger;
+        private readonly FunctionOptions Options;
 
         public static void SetVersions(string json)
         {
             Versions = JsonConvert.DeserializeObject<Dictionary<string, Dispatcher>>(json);
         }
 
-        public FunctionReader(string basePath, ILogger logger, IProgress<FunctionProgress> progress)
+        public FunctionReader(string basePath, ILogger logger, IProgress<FunctionProgress> progress, FunctionOptions options)
         {
             BasePath = basePath;
             Logger = logger;
             Progress = progress;
+            Options = options;
         }
 
         public void Analyse(string version)
@@ -134,20 +136,28 @@ namespace FunctionAnalyser
                     {
                         // Error
                         errors.Add(i, commandResults.Error);
+                        if (Options.SkipFunctionOnError) break;
                     }
                 }
             }
 
             if (errors.Count > 0)
             {
-                functionData.Messages.Add(MessageProvider.ErrorsFound(errors.Count, GetShortFileName(path), false));
-                foreach (KeyValuePair<int, CommandError> kvp in errors)
+                if (Options.ShowCommandErrors)
                 {
-                    functionData.Messages.Add(MessageProvider.Error(kvp.Key, kvp.Value));
+                    functionData.Messages.Add(MessageProvider.ErrorsFound(errors.Count, GetShortFileName(path), Options.SkipFunctionOnError));
+                    foreach (KeyValuePair<int, CommandError> kvp in errors)
+                    {
+                        functionData.Messages.Add(MessageProvider.Error(kvp.Key, kvp.Value));
+                    }
                 }
+                if (Options.SkipFunctionOnError) return functionData;
             } else if (functionData.Commands == 0)
             {
-                functionData.Messages.Add(MessageProvider.Empty(GetShortFileName(path)));
+                if (Options.ShowEmptyFunctions)
+                {
+                    functionData.Messages.Add(MessageProvider.Empty(GetShortFileName(path)));
+                }
             }
 
             functionData.Functions++;
@@ -226,7 +236,7 @@ namespace FunctionAnalyser
                 MessageProvider.Result($"Number of commands: {data.Commands}")
             };
 
-            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(SortType.TimesUsed))
+            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSort))
             {
                 components.Add(MessageProvider.CommandResult(command.Key, command.Value));
             }
@@ -239,13 +249,6 @@ namespace FunctionAnalyser
             components.Add(MessageProvider.EntitySelector('s', data.Selectors.CurrentEntity));
 
             Logger.Log(components);
-        }
-
-        public static class Options
-        {
-            public static bool SkipFunctionOnError { get; set; } = false;
-            public static bool ShowCommandErrors { get; set; } = true;
-            public static bool ShowEmptyFunctions { get; set; } = true;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AdvancedText;
 using CommandParser;
 using FunctionAnalyser.Results;
-using System.Text;
 
 namespace FunctionAnalyser
 {
@@ -16,7 +15,7 @@ namespace FunctionAnalyser
         {
             return new TextComponent(errorCount == 1 ? $"Error found in " : $"{errorCount} errors found in ").WithColour(Colour.BuiltinColours.RED).With(
                     new TextComponent(path).With(
-                    skip ? new TextComponent($", skipping").WithColour(Colour.BuiltinColours.RED) : null
+                    skip ? new TextComponent($", skipping function").WithColour(Colour.BuiltinColours.RED) : null
                     )
                 );
         }

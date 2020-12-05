@@ -15,6 +15,7 @@ using System.Windows.Documents;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
+using FunctionAnalyser.Results;
 
 namespace UserInterface
 {
@@ -74,7 +75,14 @@ namespace UserInterface
             progress.ProgressChanged += ReportProgress;
 
             // Reading
-            FunctionReader functionReader = new FunctionReader(FolderPath, Logger, progress);
+            FunctionOptions options = new FunctionOptions()
+            {
+                SkipFunctionOnError = SkipFunctionOnErrorToggle.IsChecked.Value,
+                ShowCommandErrors = ShowCommandErrorsToggle.IsChecked.Value,
+                ShowEmptyFunctions = ShowEmptyFunctionsToggle.IsChecked.Value,
+                CommandSort = SortType.Alphabetical
+            };
+            FunctionReader functionReader = new FunctionReader(FolderPath, Logger, progress, options);
             await Task.Run(() =>
             {
                 functionReader.Analyse("java");

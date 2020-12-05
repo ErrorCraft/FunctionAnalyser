@@ -60,7 +60,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}" IsChecked="{Binding SkipFunctionOnError}"></ToggleButton>
+                <ToggleButton x:Name="SkipFunctionOnErrorToggle" Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}"></ToggleButton>
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Skip function on error" ToolTip="{Binding SkipFunctionOnErrorTooltip}"></Label>
             </Grid>
 
@@ -70,7 +70,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}" IsChecked="{Binding ShowCommandErrors}"></ToggleButton>
+                <ToggleButton x:Name="ShowCommandErrorsToggle" Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}"></ToggleButton>
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Show command errors" ToolTip="{Binding ShowCommandErrorsTooltip}"></Label>
             </Grid>
 
@@ -80,7 +80,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}" IsChecked="{Binding ShowEmptyFunctions}"></ToggleButton>
+                <ToggleButton x:Name="ShowEmptyFunctionsToggle" Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}"></ToggleButton>
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Show empty functions" ToolTip="{Binding ShowEmptyFunctionsTooltip}"></Label>
             </Grid>
         </Grid>
