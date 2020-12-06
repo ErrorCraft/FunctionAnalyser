@@ -4,7 +4,7 @@ using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
 {
-    class UuidArgument : IArgument<Uuid>
+    public class UuidArgument : IArgument<Uuid>
     {
         public ReadResults Parse(StringReader reader, out Uuid result)
         {
