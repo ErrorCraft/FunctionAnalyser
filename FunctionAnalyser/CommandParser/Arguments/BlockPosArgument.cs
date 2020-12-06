@@ -4,7 +4,7 @@ using CommandParser.Results.Arguments.Coordinates;
 
 namespace CommandParser.Arguments
 {
-    class BlockPosArgument : IArgument<ICoordinates>
+    public class BlockPosArgument : IArgument<ICoordinates>
     {
         public ReadResults Parse(StringReader reader, out ICoordinates result)
         {

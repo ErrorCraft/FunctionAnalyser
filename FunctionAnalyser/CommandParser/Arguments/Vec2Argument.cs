@@ -4,7 +4,7 @@ using CommandParser.Results.Arguments.Coordinates;
 
 namespace CommandParser.Arguments
 {
-    class Vec2Argument : IArgument<ICoordinates>
+    public class Vec2Argument : IArgument<ICoordinates>
     {
         public ReadResults Parse(StringReader reader, out ICoordinates result)
         {

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace CommandParser.Arguments
 {
-    class FloatRangeArgument : IArgument<Range<float>>
+    public class FloatRangeArgument : IArgument<Range<float>>
     {
         [JsonProperty("loopable")]
         private readonly bool Loopable;
