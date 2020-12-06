@@ -101,7 +101,7 @@ namespace CommandParser.Parsers.JsonParser
             return new ReadResults(true, null);
         }
 
-        private ReadResults ReadString(out JsonString result)
+        public ReadResults ReadString(out JsonString result)
         {
             result = default;
             string actualString = "";
