@@ -6,12 +6,12 @@ namespace CommandParser.Arguments
 {
     public class OperationArgument : IArgument<Operation>
     {
-        public ReadResults Parse(StringReader reader, out Operation result)
+        public ReadResults Parse(IStringReader reader, out Operation result)
         {
             result = default;
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             while (!reader.AtEndOfArgument()) reader.Skip();
-            string operation = reader.Command[start..reader.Cursor];
+            string operation = reader.GetString()[start..reader.GetCursor()];
 
             if (!Operations.Contains(operation))
             {

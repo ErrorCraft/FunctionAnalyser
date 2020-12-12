@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             Operations.Set("[\"+=\",\"-=\"]");
             OperationArgument argument = new OperationArgument();
-            StringReader reader = new StringReader("+=");
+            IStringReader reader = new IStringReader("+=");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             Operations.Set("[\"+=\",\"-=\"]");
             OperationArgument argument = new OperationArgument();
-            StringReader reader = new StringReader("!=");
+            IStringReader reader = new IStringReader("!=");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

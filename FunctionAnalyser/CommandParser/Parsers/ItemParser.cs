@@ -8,10 +8,10 @@ namespace CommandParser.Parsers
 {
     public class ItemParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         private readonly bool ForTesting;
 
-        public ItemParser(StringReader stringReader, bool forTesting)
+        public ItemParser(IStringReader stringReader, bool forTesting)
         {
             StringReader = stringReader;
             ForTesting = forTesting;

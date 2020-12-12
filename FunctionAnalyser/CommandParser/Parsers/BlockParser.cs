@@ -9,13 +9,13 @@ namespace CommandParser.Parsers
 {
     public class BlockParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         private readonly bool ForTesting;
 
         private ResourceLocation Block;
         private bool IsTag = false;
 
-        public BlockParser(StringReader stringReader, bool forTesting)
+        public BlockParser(IStringReader stringReader, bool forTesting)
         {
             StringReader = stringReader;
             ForTesting = forTesting;
@@ -78,24 +78,24 @@ namespace CommandParser.Parsers
             while (StringReader.CanRead() && StringReader.Peek() != ']')
             {
                 StringReader.SkipWhitespace();
-                int start = StringReader.Cursor;
+                int start = StringReader.GetCursor();
 
                 readResults = StringReader.ReadString(out string property);
                 if (!readResults.Successful) return readResults;
                 if (result.ContainsKey(property))
                 {
-                    StringReader.Cursor = start;
+                    StringReader.SetCursor(start);
                     return new ReadResults(false, CommandError.DuplicateBlockProperty(Block, property).WithContext(StringReader));
                 }
 
                 if (!IsTag && !Blocks.ContainsProperty(Block, property))
                 {
-                    StringReader.Cursor = start;
+                    StringReader.SetCursor(start);
                     return new ReadResults(false, CommandError.UnknownBlockProperty(Block, property).WithContext(StringReader));
                 }
 
                 StringReader.SkipWhitespace();
-                start = StringReader.Cursor;
+                start = StringReader.GetCursor();
 
                 if (!StringReader.CanRead() || StringReader.Peek() != '=')
                 {
@@ -109,7 +109,7 @@ namespace CommandParser.Parsers
 
                 if (!IsTag && !Blocks.PropertyContainsValue(Block, property, value))
                 {
-                    StringReader.Cursor = start;
+                    StringReader.SetCursor(start);
                     return new ReadResults(false, CommandError.UnknownBlockPropertyValue(Block, property, value).WithContext(StringReader));
                 }
 

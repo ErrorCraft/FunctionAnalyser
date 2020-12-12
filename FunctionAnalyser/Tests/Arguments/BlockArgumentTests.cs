@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("baz");
+            IStringReader reader = new IStringReader("baz");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -45,7 +45,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("minecraft:foo");
+            IStringReader reader = new IStringReader("minecraft:foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -60,7 +60,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("bar[baz=true]");
+            IStringReader reader = new IStringReader("bar[baz=true]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -75,7 +75,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("foo[baz=true]");
+            IStringReader reader = new IStringReader("foo[baz=true]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -90,7 +90,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("foo{bar: 'baz'}");
+            IStringReader reader = new IStringReader("foo{bar: 'baz'}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -105,7 +105,7 @@ namespace Tests.Arguments
             // Arrange
             Blocks.Set("{\"foo\":{},\"bar\":{\"baz\":[\"true\",\"false\"]}}");
             BlockArgument argument = new BlockArgument();
-            StringReader reader = new StringReader("bar[baz=true]{hello: 'world'}");
+            IStringReader reader = new IStringReader("bar[baz=true]{hello: 'world'}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

@@ -6,7 +6,7 @@ namespace CommandParser.Parsers.NbtParser
 {
     public class NbtReader
     {
-        public static ReadResults ReadValue(StringReader reader, out INbtArgument result)
+        public static ReadResults ReadValue(IStringReader reader, out INbtArgument result)
         {
             reader.SkipWhitespace();
             switch (reader.Peek())
@@ -24,7 +24,7 @@ namespace CommandParser.Parsers.NbtParser
             }
         }
 
-        public static ReadResults ReadCompound(StringReader reader, out NbtCompound result)
+        public static ReadResults ReadCompound(IStringReader reader, out NbtCompound result)
         {
             result = new NbtCompound();
 
@@ -71,7 +71,7 @@ namespace CommandParser.Parsers.NbtParser
             return reader.Expect('}');
         }
 
-        public static ReadResults ReadArray(StringReader reader, out INbtCollection result)
+        public static ReadResults ReadArray(IStringReader reader, out INbtCollection result)
         {
             result = default;
 
@@ -83,7 +83,7 @@ namespace CommandParser.Parsers.NbtParser
             while (reader.CanRead() && reader.Peek() != ']')
             {
                 reader.SkipWhitespace();
-                int start = reader.Cursor;
+                int start = reader.GetCursor();
                 if (result == null)
                 {
                     if (reader.CanRead(2) && reader.Peek(1) == ';') // Array type
@@ -103,7 +103,7 @@ namespace CommandParser.Parsers.NbtParser
                                 result = new NbtLongArray();
                                 continue;
                             default:
-                                reader.Cursor = start;
+                                reader.SetCursor(start);
                                 return new ReadResults(false, CommandError.InvalidArrayType(type).WithContext(reader));
                         }
                     } else // List type
@@ -118,7 +118,7 @@ namespace CommandParser.Parsers.NbtParser
                     if (!readResults.Successful) return readResults;
                     if (!result.TryAdd(valueResult))
                     {
-                        reader.Cursor = start;
+                        reader.SetCursor(start);
                         return new ReadResults(false, CommandError.NbtCannotInsert(valueResult, result).WithContext(reader));
                     }
                 }
@@ -135,13 +135,13 @@ namespace CommandParser.Parsers.NbtParser
             return reader.Expect(']');
         }
 
-        public static ReadResults ReadItem(StringReader reader, out INbtArgument result)
+        public static ReadResults ReadItem(IStringReader reader, out INbtArgument result)
         {
             result = default;
             ReadResults readResults;
 
             char c = reader.Peek();
-            if (StringReader.IsQuotedStringStart(c)) // Quoted string
+            if (reader.IsQuotedStringStart(c)) // Quoted string
             {
                 reader.Skip();
                 readResults = reader.ReadStringUntil(c, out string quotedStringResult);

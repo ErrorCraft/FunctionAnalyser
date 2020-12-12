@@ -15,7 +15,7 @@ namespace CommandParser.Arguments
             Loopable = loopable;
         }
 
-        public ReadResults Parse(StringReader reader, out Range<int> result)
+        public ReadResults Parse(IStringReader reader, out Range<int> result)
         {
             return new RangeParser<int>(reader).Read(int.TryParse, CommandError.InvalidInteger, int.MinValue, int.MaxValue, Loopable, out result);
         }

@@ -12,12 +12,12 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
         [JsonProperty("values")]
         private readonly Dictionary<string, ComponentArgument> Values = new Dictionary<string, ComponentArgument>();
 
-        public override ReadResults Validate(JsonObject obj, string key, StringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
         {
             if (obj.ContainsKey(BindTo)) return new ReadResults(true, null);
             if (!IsText(obj.GetChild(BindTo)))
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonString.NAME, obj.GetChild(BindTo).GetName()).WithContext(reader));
             }
 

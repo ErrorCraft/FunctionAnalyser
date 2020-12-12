@@ -15,7 +15,7 @@ namespace CommandParser.Arguments
             Multiple = multiple;
         }
 
-        public ReadResults Parse(StringReader reader, out ScoreHolder result)
+        public ReadResults Parse(IStringReader reader, out ScoreHolder result)
         {
             result = default;
 
@@ -32,12 +32,12 @@ namespace CommandParser.Arguments
                 return new ReadResults(true, null);
             }
 
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             while (!reader.AtEndOfArgument())
             {
                 reader.Skip();
             }
-            string name = reader.Command[start..reader.Cursor];
+            string name = reader.GetString()[start..reader.GetCursor()];
 
             result = new ScoreHolder(name, null);
             return new ReadResults(true, null);

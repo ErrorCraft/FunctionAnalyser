@@ -18,13 +18,13 @@ namespace CommandParser.Tree
             return Literal;
         }
 
-        public override ReadResults Parse(StringReader reader, CommandContext builder)
+        public override ReadResults Parse(IStringReader reader, CommandContext builder)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             int end = Parse(reader);
             if (end > -1)
             {
-                ParsedArgument<Literal> parsed = new ParsedArgument<Literal>(new Literal(reader.Command[start..end]), builder.InRoot);
+                ParsedArgument<Literal> parsed = new ParsedArgument<Literal>(new Literal(reader.GetString()[start..end]), builder.InRoot);
                 builder.AddArgument(parsed);
                 builder.EncompassRange(new Range(start, end));
                 return new ReadResults(true, null);
@@ -32,21 +32,21 @@ namespace CommandParser.Tree
             return new ReadResults(false, CommandError.ExpectedLiteral(Literal).WithContext(reader));
         }
 
-        private int Parse(StringReader reader)
+        private int Parse(IStringReader reader)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             if (reader.CanRead(Literal.Length))
             {
-                int end = reader.Cursor + Literal.Length;
-                if (reader.Command[start..end].Equals(Literal))
+                int end = reader.GetCursor() + Literal.Length;
+                if (reader.GetString()[start..end].Equals(Literal))
                 {
-                    reader.Cursor = end;
+                    reader.SetCursor(end);
                     if (reader.AtEndOfArgument())
                     {
                         return end;
                     } else
                     {
-                        reader.Cursor = start;
+                        reader.SetCursor(start);
                     }
                 }
             }

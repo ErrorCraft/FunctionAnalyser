@@ -19,16 +19,16 @@ namespace CommandParser.Arguments
             PlayersOnly = playersOnly;
         }
 
-        public ReadResults Parse(StringReader reader, out EntitySelector result)
+        public ReadResults Parse(IStringReader reader, out EntitySelector result)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader);
             ReadResults readResults = entitySelectorParser.Parse(out result);
             if (!readResults.Successful) return readResults;
 
             if (result.MaxResults > 1 && SingleEntity)
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 if (PlayersOnly)
                 {
                     return new ReadResults(false, CommandError.SelectorTooManyPlayers().WithContext(reader));
@@ -39,7 +39,7 @@ namespace CommandParser.Arguments
             }
             if (result.IncludesEntities && PlayersOnly && !result.IsSelf)
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, CommandError.SelectorPlayersOnly().WithContext(reader));
             }
 

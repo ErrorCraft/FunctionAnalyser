@@ -19,13 +19,14 @@ namespace FunctionAnalyser.Results
             if (behindExecute) Commands[command].BehindExecute++;
         }
 
-        public void Merge(CommandUsage other)
+        public CommandUsage Merge(CommandUsage other)
         {
             foreach (KeyValuePair<string, Command> otherPair in other.Commands)
             {
                 if (Commands.ContainsKey(otherPair.Key)) Commands[otherPair.Key] += otherPair.Value;
                 else Commands[otherPair.Key] = otherPair.Value;
             }
+            return this;
         }
 
         public Dictionary<string, Command> GetSorted(SortType sortType)

@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class RecipeArgument : IArgument<Recipe>
     {
-        public ReadResults Parse(StringReader reader, out Recipe result)
+        public ReadResults Parse(IStringReader reader, out Recipe result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation recipe);

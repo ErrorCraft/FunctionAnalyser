@@ -5,11 +5,11 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
     public class ComponentObject : ComponentArgument
     {
-        public override ReadResults Validate(JsonObject obj, string key, StringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
         {
             if (obj.GetChild(key) is not JsonObject actualObject)
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonObject.Name, obj.GetChild(key).GetName()).WithContext(reader));
             }
             return ValidateChildren(actualObject, key, reader, start);

@@ -16,7 +16,7 @@ namespace Tests.Arguments
             // Arrange
             TimeScalars.Set("{\"t\":1,\"s\":20,\"d\":24000}");
             TimeArgument argument = new TimeArgument();
-            StringReader reader = new StringReader("100.0");
+            IStringReader reader = new IStringReader("100.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -31,7 +31,7 @@ namespace Tests.Arguments
             // Arrange
             TimeScalars.Set("{\"t\":1,\"s\":20,\"d\":24000}");
             TimeArgument argument = new TimeArgument();
-            StringReader reader = new StringReader("100.0t");
+            IStringReader reader = new IStringReader("100.0t");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -46,7 +46,7 @@ namespace Tests.Arguments
             // Arrange
             TimeScalars.Set("{\"t\":1,\"s\":20,\"d\":24000}");
             TimeArgument argument = new TimeArgument();
-            StringReader reader = new StringReader("100.0s");
+            IStringReader reader = new IStringReader("100.0s");
 
             // Act
             argument.Parse(reader, out Time result);
@@ -61,7 +61,7 @@ namespace Tests.Arguments
             // Arrange
             TimeScalars.Set("{\"t\":1,\"s\":20,\"d\":24000}");
             TimeArgument argument = new TimeArgument();
-            StringReader reader = new StringReader("100.0m");
+            IStringReader reader = new IStringReader("100.0m");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -76,7 +76,7 @@ namespace Tests.Arguments
             // Arrange
             TimeScalars.Set("{\"t\":1,\"s\":20,\"d\":24000}");
             TimeArgument argument = new TimeArgument();
-            StringReader reader = new StringReader("-100.0");
+            IStringReader reader = new IStringReader("-100.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

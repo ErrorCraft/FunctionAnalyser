@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             PredicateArgument argument = new PredicateArgument();
-            StringReader reader = new StringReader("foo:bar");
+            IStringReader reader = new IStringReader("foo:bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             PredicateArgument argument = new PredicateArgument();
-            StringReader reader = new StringReader("foo::bar");
+            IStringReader reader = new IStringReader("foo::bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

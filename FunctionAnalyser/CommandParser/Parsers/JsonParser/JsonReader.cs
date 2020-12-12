@@ -7,13 +7,13 @@ namespace CommandParser.Parsers.JsonParser
 {
     public class JsonReader
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         private readonly int Start;
 
-        public JsonReader(StringReader stringReader)
+        public JsonReader(IStringReader stringReader)
         {
             StringReader = stringReader;
-            Start = stringReader.Cursor;
+            Start = stringReader.GetCursor();
         }
 
         public ReadResults ReadAny(out IJsonArgument result)
@@ -149,9 +149,9 @@ namespace CommandParser.Parsers.JsonParser
 
         public ReadResults ReadSpecial(out IJsonArgument result)
         {
-            int start = StringReader.Cursor;
+            int start = StringReader.GetCursor();
             while (StringReader.CanRead() && IsAllowedInput(StringReader.Peek())) StringReader.Skip();
-            string s = StringReader.Command[start..StringReader.Cursor];
+            string s = StringReader.GetString()[start..StringReader.GetCursor()];
 
             result = s switch
             {

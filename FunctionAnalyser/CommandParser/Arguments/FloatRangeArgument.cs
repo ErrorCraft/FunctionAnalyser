@@ -15,7 +15,7 @@ namespace CommandParser.Arguments
             Loopable = loopable;
         }
 
-        public ReadResults Parse(StringReader reader, out Range<float> result)
+        public ReadResults Parse(IStringReader reader, out Range<float> result)
         {
             return new RangeParser<float>(reader).Read(float.TryParse, CommandError.InvalidFloat, float.NegativeInfinity, float.PositiveInfinity, Loopable, out result);
         }

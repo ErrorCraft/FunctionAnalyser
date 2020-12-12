@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ColumnPosArgument : IArgument<ICoordinates>
     {
-        public ReadResults Parse(StringReader reader, out ICoordinates result)
+        public ReadResults Parse(IStringReader reader, out ICoordinates result)
         {
             result = default;
             if (!reader.CanRead())
@@ -14,14 +14,14 @@ namespace CommandParser.Arguments
                 return new ReadResults(false, CommandError.Vec2CoordinatesIncomplete().WithContext(reader));
             }
 
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             WorldCoordinateParser worldCoordinateParser = new WorldCoordinateParser(reader);
 
             ReadResults readResults = worldCoordinateParser.ReadInteger(out WorldCoordinate x);
             if (!readResults.Successful) return readResults;
             if (!reader.AtEndOfArgument())
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, CommandError.Vec2CoordinatesIncomplete().WithContext(reader));
             }
             reader.Skip();

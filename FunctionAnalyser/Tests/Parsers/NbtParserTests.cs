@@ -13,7 +13,7 @@ namespace Tests.Parsers
         public void NbtParser_ResultsShouldBeCompound()
         {
             // Arrange
-            StringReader reader = new StringReader("{foo: 'bar', baz: 3}");
+            IStringReader reader = new IStringReader("{foo: 'bar', baz: 3}");
 
             // Act
             NbtReader.ReadValue(reader, out INbtArgument result);
@@ -26,7 +26,7 @@ namespace Tests.Parsers
         public void NbtParser_ResultsShouldBeInteger()
         {
             // Arrange
-            StringReader reader = new StringReader("8");
+            IStringReader reader = new IStringReader("8");
 
             // Act
             NbtReader.ReadValue(reader, out INbtArgument result);
@@ -39,7 +39,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseCompoundShouldFail_BecauseEmptyKey()
         {
             // Arrange
-            StringReader reader = new StringReader("{: 'bar'}");
+            IStringReader reader = new IStringReader("{: 'bar'}");
 
             // Act
             ReadResults readResults = NbtReader.ReadCompound(reader, out _);
@@ -52,7 +52,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseCompoundShouldFail_BecauseExpectedValue()
         {
             // Arrange
-            StringReader reader = new StringReader("{foo:}");
+            IStringReader reader = new IStringReader("{foo:}");
 
             // Act
             ReadResults readResults = NbtReader.ReadCompound(reader, out _);
@@ -65,7 +65,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseArrayShouldFail_BecauseInvalidArrayType()
         {
             // Arrange
-            StringReader reader = new StringReader("[M; 1, 2, 3]");
+            IStringReader reader = new IStringReader("[M; 1, 2, 3]");
 
             // Act
             ReadResults readResults = NbtReader.ReadArray(reader, out _);
@@ -78,7 +78,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseArrayShouldFail_BecauseInvalidArrayItem()
         {
             // Arrange
-            StringReader reader = new StringReader("[I; 1, 3L]");
+            IStringReader reader = new IStringReader("[I; 1, 3L]");
 
             // Act
             ReadResults readResults = NbtReader.ReadArray(reader, out _);
@@ -91,7 +91,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseListShouldFail_BecauseInvalidListItem()
         {
             // Arrange
-            StringReader reader = new StringReader("[1, 3L]");
+            IStringReader reader = new IStringReader("[1, 3L]");
 
             // Act
             ReadResults readResults = NbtReader.ReadArray(reader, out _);
@@ -104,7 +104,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_ResultShouldBeInteger()
         {
             // Arrange
-            StringReader reader = new StringReader("1");
+            IStringReader reader = new IStringReader("1");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);
@@ -117,7 +117,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_ResultShouldBeShort()
         {
             // Arrange
-            StringReader reader = new StringReader("1s");
+            IStringReader reader = new IStringReader("1s");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);
@@ -130,7 +130,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_ResultShouldBeFloat()
         {
             // Arrange
-            StringReader reader = new StringReader("1.0f");
+            IStringReader reader = new IStringReader("1.0f");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);
@@ -143,7 +143,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_ResultShouldBeDouble()
         {
             // Arrange
-            StringReader reader = new StringReader("1.0");
+            IStringReader reader = new IStringReader("1.0");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);
@@ -156,7 +156,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_ResultShouldBeString()
         {
             // Arrange
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);
@@ -169,7 +169,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_ResultShouldBeString_Quoted()
         {
             // Arrange
-            StringReader reader = new StringReader("'foo bar baz'");
+            IStringReader reader = new IStringReader("'foo bar baz'");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);
@@ -182,7 +182,7 @@ namespace Tests.Parsers
         public void NbtParser_ParseItem_EscapesStringCorrectly()
         {
             // Arrange
-            StringReader reader = new StringReader("'foo \\\'bar\\\' \\\\ baz'");
+            IStringReader reader = new IStringReader("'foo \\\'bar\\\' \\\\ baz'");
 
             // Act
             NbtReader.ReadItem(reader, out INbtArgument result);

@@ -5,21 +5,21 @@ namespace CommandParser.Parsers
 {
     public class ObjectiveCriterionParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         
-        public ObjectiveCriterionParser(StringReader stringReader)
+        public ObjectiveCriterionParser(IStringReader stringReader)
         {
             StringReader = stringReader;
         }
 
         public ReadResults ByName(out ObjectiveCriterion result)
         {
-            int start = StringReader.Cursor;
+            int start = StringReader.GetCursor();
             while (!StringReader.AtEndOfArgument())
             {
                 StringReader.Skip();
             }
-            string criterion = StringReader.Command[start..StringReader.Cursor];
+            string criterion = StringReader.GetString()[start..StringReader.GetCursor()];
 
             if (criterion.Contains(':'))
             {
@@ -60,7 +60,7 @@ namespace CommandParser.Parsers
 
         private static string Shorten(string input)
         {
-            if (input.StartsWith("minecraft.")) return input.Substring(10);
+            if (input.StartsWith("minecraft.")) return input[10..];
             else return input;
         }
     }

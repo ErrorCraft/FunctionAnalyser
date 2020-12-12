@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("1.0 2.0 3.0");
+            IStringReader reader = new IStringReader("1.0 2.0 3.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("~1.0 ~2.0 ~3.0");
+            IStringReader reader = new IStringReader("~1.0 ~2.0 ~3.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("~ ~ ~");
+            IStringReader reader = new IStringReader("~ ~ ~");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -55,7 +55,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("^1.0 ^2.0 ^3.0");
+            IStringReader reader = new IStringReader("^1.0 ^2.0 ^3.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -69,7 +69,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("^ ^ ^");
+            IStringReader reader = new IStringReader("^ ^ ^");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -83,7 +83,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("~1 ^2 3");
+            IStringReader reader = new IStringReader("~1 ^2 3");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -97,7 +97,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec3Argument argument = new Vec3Argument();
-            StringReader reader = new StringReader("1.0 2.0");
+            IStringReader reader = new IStringReader("1.0 2.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class RotationArgument : IArgument<Rotation>
     {
-        public ReadResults Parse(StringReader reader, out Rotation result)
+        public ReadResults Parse(IStringReader reader, out Rotation result)
         {
             return new RotationParser(reader).Parse(out result);
         }

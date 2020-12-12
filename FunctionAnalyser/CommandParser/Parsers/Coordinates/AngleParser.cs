@@ -5,9 +5,9 @@ namespace CommandParser.Parsers.Coordinates
 {
     public class AngleParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
 
-        public AngleParser(StringReader stringReader)
+        public AngleParser(IStringReader stringReader)
         {
             StringReader = stringReader;
         }

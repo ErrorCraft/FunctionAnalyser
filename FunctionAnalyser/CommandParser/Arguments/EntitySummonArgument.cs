@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class EntitySummonArgument : IArgument<Entity>
     {
-        public ReadResults Parse(StringReader reader, out Entity result)
+        public ReadResults Parse(IStringReader reader, out Entity result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation entity);

@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ScoreHolderArgument argument = new ScoreHolderArgument();
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -28,7 +28,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ScoreHolderArgument argument = new ScoreHolderArgument();
-            StringReader reader = new StringReader("@a");
+            IStringReader reader = new IStringReader("@a");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -42,7 +42,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ScoreHolderArgument argument = new ScoreHolderArgument();
-            StringReader reader = new StringReader("!foo-bar@baz#");
+            IStringReader reader = new IStringReader("!foo-bar@baz#");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -56,7 +56,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ScoreHolderArgument argument = new ScoreHolderArgument();
-            StringReader reader = new StringReader("foo bar");
+            IStringReader reader = new IStringReader("foo bar");
 
             // Act
             argument.Parse(reader, out _);
@@ -70,7 +70,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ScoreHolderArgument argument = new ScoreHolderArgument(false);
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -84,7 +84,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ScoreHolderArgument argument = new ScoreHolderArgument(false);
-            StringReader reader = new StringReader("@a");
+            IStringReader reader = new IStringReader("@a");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -99,7 +99,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"limit\":{\"predicate\":\"set_limit\"}}");
             ScoreHolderArgument argument = new ScoreHolderArgument(false);
-            StringReader reader = new StringReader("@a[limit=1]");
+            IStringReader reader = new IStringReader("@a[limit=1]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

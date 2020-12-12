@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class TimeArgument : IArgument<Time>
     {
-        public ReadResults Parse(StringReader reader, out Time result)
+        public ReadResults Parse(IStringReader reader, out Time result)
         {
             result = default;
             ReadResults readResults = reader.ReadFloat(out float time);

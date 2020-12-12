@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class CompoundTagArgument : IArgument<Nbt>
     {
-        public ReadResults Parse(StringReader reader, out Nbt result)
+        public ReadResults Parse(IStringReader reader, out Nbt result)
         {
             ReadResults readResults = NbtReader.ReadCompound(reader, out NbtCompound nbtResult);
             result = new Nbt(nbtResult);

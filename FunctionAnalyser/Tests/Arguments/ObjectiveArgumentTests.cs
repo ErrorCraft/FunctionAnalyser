@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ObjectiveArgument argument = new ObjectiveArgument();
-            StringReader reader = new StringReader("fooBar");
+            IStringReader reader = new IStringReader("fooBar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ObjectiveArgument argument = new ObjectiveArgument();
-            StringReader reader = new StringReader("fooBarBaz123456789");
+            IStringReader reader = new IStringReader("fooBarBaz123456789");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

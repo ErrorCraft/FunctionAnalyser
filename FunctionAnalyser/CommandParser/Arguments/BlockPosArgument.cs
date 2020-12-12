@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class BlockPosArgument : IArgument<ICoordinates>
     {
-        public ReadResults Parse(StringReader reader, out ICoordinates result)
+        public ReadResults Parse(IStringReader reader, out ICoordinates result)
         {
             if (reader.CanRead() && reader.Peek() == '^')
             {

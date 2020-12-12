@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class MessageArgument : IArgument<Message>
     {
-        public ReadResults Parse(StringReader reader, out Message result)
+        public ReadResults Parse(IStringReader reader, out Message result)
         {
             result = default;
             string message = reader.GetRemaining();
@@ -19,7 +19,7 @@ namespace CommandParser.Arguments
                 {
                     if (reader.CanRead(2) && "parse".Contains(reader.Peek(1)))
                     {
-                        int start = reader.Cursor;
+                        int start = reader.GetCursor();
                         ReadResults readResults = new EntitySelectorParser(reader).Parse(out EntitySelector entitySelector);
                         if (!readResults.Successful) return readResults;
                         selectors.Add(start, entitySelector);

@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class ItemEnchantmentArgument : IArgument<Enchantment>
     {
-        public ReadResults Parse(StringReader reader, out Enchantment result)
+        public ReadResults Parse(IStringReader reader, out Enchantment result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation enchantment);

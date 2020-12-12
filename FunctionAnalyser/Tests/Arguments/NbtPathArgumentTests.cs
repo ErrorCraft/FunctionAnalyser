@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             NbtPathArgument argument = new NbtPathArgument();
-            StringReader reader = new StringReader("foo.bar[0].baz{hello: 'world'}");
+            IStringReader reader = new IStringReader("foo.bar[0].baz{hello: 'world'}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             NbtPathArgument argument = new NbtPathArgument();
-            StringReader reader = new StringReader("foo.\"bar with \\\"weird\\\" characters\"[0].baz{hello: 'world'}");
+            IStringReader reader = new IStringReader("foo.\"bar with \\\"weird\\\" characters\"[0].baz{hello: 'world'}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             NbtPathArgument argument = new NbtPathArgument();
-            StringReader reader = new StringReader("foo[{bar: 'baz'}]");
+            IStringReader reader = new IStringReader("foo[{bar: 'baz'}]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

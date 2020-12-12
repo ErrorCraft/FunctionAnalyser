@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             ItemSlots.Set("[\"container.0\", \"container.1\", \"weapon.mainhand\"]");
             ItemSlotArgument argument = new ItemSlotArgument();
-            StringReader reader = new StringReader("container.0");
+            IStringReader reader = new IStringReader("container.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             ItemSlots.Set("[\"container.0\", \"container.1\", \"weapon.mainhand\"]");
             ItemSlotArgument argument = new ItemSlotArgument();
-            StringReader reader = new StringReader("container.2");
+            IStringReader reader = new IStringReader("container.2");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

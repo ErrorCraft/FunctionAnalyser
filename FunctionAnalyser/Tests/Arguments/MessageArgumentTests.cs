@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             MessageArgument argument = new MessageArgument();
-            StringReader reader = new StringReader("Hello world! This is a test.");
+            IStringReader reader = new IStringReader("Hello world! This is a test.");
 
             // Act
             argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             MessageArgument argument = new MessageArgument();
-            StringReader reader = new StringReader("Hello @a! This is a test.");
+            IStringReader reader = new IStringReader("Hello @a! This is a test.");
 
             // Act
             argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             MessageArgument argument = new MessageArgument();
-            StringReader reader = new StringReader("Hello @m! This is a test.");
+            IStringReader reader = new IStringReader("Hello @m! This is a test.");
 
             // Act
             argument.Parse(reader, out _);
@@ -55,7 +55,7 @@ namespace Tests.Arguments
         {
             // Arrange
             MessageArgument argument = new MessageArgument();
-            StringReader reader = new StringReader("Hello @a[! This is a test.");
+            IStringReader reader = new IStringReader("Hello @a[! This is a test.");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

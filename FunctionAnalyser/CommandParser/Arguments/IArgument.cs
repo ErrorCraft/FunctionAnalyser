@@ -4,6 +4,6 @@ namespace CommandParser.Arguments
 {
     public interface IArgument<T>
     {
-        ReadResults Parse(StringReader reader, out T result);
+        ReadResults Parse(IStringReader reader, out T result);
     }
 }

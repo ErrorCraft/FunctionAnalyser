@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class MobEffectArgument : IArgument<MobEffect>
     {
-        public ReadResults Parse(StringReader reader, out MobEffect result)
+        public ReadResults Parse(IStringReader reader, out MobEffect result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation mobEffect);

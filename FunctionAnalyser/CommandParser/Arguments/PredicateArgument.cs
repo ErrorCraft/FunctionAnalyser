@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class PredicateArgument : IArgument<Predicate>
     {
-        public ReadResults Parse(StringReader reader, out Predicate result)
+        public ReadResults Parse(IStringReader reader, out Predicate result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation predicate);

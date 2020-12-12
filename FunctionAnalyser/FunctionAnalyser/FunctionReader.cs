@@ -72,7 +72,11 @@ namespace FunctionAnalyser
             int totalFiles = files.Length;
 
             // Track progress
-            FunctionProgress functionProgress = new FunctionProgress();
+            FunctionProgress functionProgress = new FunctionProgress
+            {
+                Completion = 0.0d
+            };
+            Progress.Report(functionProgress);
 
             // Analyse all files
             for (int i = 0; i < totalFiles; i++)
@@ -173,6 +177,10 @@ namespace FunctionAnalyser
                 {
                     data.UsedCommands.Increase(literal.Value, !firstArgument);
                 }
+            }
+            else if (result is Function)
+            {
+                data.FunctionCalls++;
             }
             else if (result is EntitySelector entitySelector)
             {

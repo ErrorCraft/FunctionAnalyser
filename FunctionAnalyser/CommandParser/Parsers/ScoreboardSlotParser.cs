@@ -5,9 +5,9 @@ namespace CommandParser.Parsers
 {
     public class ScoreboardSlotParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
 
-        public ScoreboardSlotParser(StringReader stringReader)
+        public ScoreboardSlotParser(IStringReader stringReader)
         {
             StringReader = stringReader;
         }

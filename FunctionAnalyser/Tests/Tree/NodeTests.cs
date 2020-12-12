@@ -23,7 +23,7 @@ namespace Tests.Tree
             root.AddChild(child2);
             root.AddChild(child3);
             root.AddChild(child4);
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             List<Node> relevantNodes = new List<Node>(root.GetRelevantNodes(reader));
@@ -45,7 +45,7 @@ namespace Tests.Tree
             root.AddChild(child2);
             root.AddChild(child3);
             root.AddChild(child4);
-            StringReader reader = new StringReader("123");
+            IStringReader reader = new IStringReader("123");
 
             // Act
             List<Node> relevantNodes = new List<Node>(root.GetRelevantNodes(reader));

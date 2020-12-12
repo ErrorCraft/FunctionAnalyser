@@ -70,18 +70,18 @@ namespace CommandParser.Tree
             }
         }
 
-        public abstract ReadResults Parse(StringReader reader, CommandContext builder);
-        public IEnumerable<Node> GetRelevantNodes(StringReader reader)
+        public abstract ReadResults Parse(IStringReader reader, CommandContext builder);
+        public IEnumerable<Node> GetRelevantNodes(IStringReader reader)
         {
             if (Literals.Count > 0)
             {
-                int start = reader.Cursor;
+                int start = reader.GetCursor();
                 while (!reader.AtEndOfArgument())
                 {
                     reader.Skip();
                 }
-                string value = reader.Command[start..reader.Cursor];
-                reader.Cursor = start;
+                string value = reader.GetString()[start..reader.GetCursor()];
+                reader.SetCursor(start);
                 if (Literals.TryGetValue(value, out LiteralNode literal))
                 {
                     return new List<LiteralNode>(1) { literal };

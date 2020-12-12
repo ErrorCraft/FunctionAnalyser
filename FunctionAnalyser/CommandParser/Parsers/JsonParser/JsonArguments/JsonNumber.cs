@@ -20,7 +20,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => NAME;
 
-        public ReadResults ValidateComponent(StringReader reader, int start)
+        public ReadResults ValidateComponent(IStringReader reader, int start)
         {
             return new ReadResults(true, null);
         }

@@ -15,12 +15,12 @@ namespace CommandParser.Arguments
             Type = type;
         }
 
-        public ReadResults Parse(StringReader reader, out string result)
+        public ReadResults Parse(IStringReader reader, out string result)
         {
             if (Type == StringType.GREEDY)
             {
                 result = reader.GetRemaining();
-                reader.Cursor = reader.GetLength();
+                reader.SetCursor(reader.GetLength());
                 return new ReadResults(true, null);
             } else if (Type == StringType.WORD)
             {

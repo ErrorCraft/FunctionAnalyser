@@ -7,11 +7,11 @@ namespace CommandParser.Arguments
 {
     public class ComponentArgument : IArgument<Component>
     {
-        public ReadResults Parse(StringReader reader, out Component result)
+        public ReadResults Parse(IStringReader reader, out Component result)
         {
             result = default;
             if (!reader.CanRead()) return new ReadResults(false, CommandError.IncorrectArgument().WithContext(reader));
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
 
             ReadResults readResults = new JsonReader(reader).ReadAny(out IJsonArgument json);
             if (!readResults.Successful) return readResults;

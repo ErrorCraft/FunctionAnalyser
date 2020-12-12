@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ItemModifierArgument : IArgument<ItemModifier>
     {
-        public ReadResults Parse(StringReader reader, out ItemModifier result)
+        public ReadResults Parse(IStringReader reader, out ItemModifier result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation itemModifier);

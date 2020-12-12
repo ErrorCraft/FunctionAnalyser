@@ -21,20 +21,20 @@ namespace CommandParser
             return Message;
         }
 
-        public CommandError WithContext(StringReader reader)
+        public CommandError WithContext(IStringReader reader)
         {
             Message += GetContext(reader);
             return this;
         }
 
-        private static string GetContext(StringReader reader)
+        private static string GetContext(IStringReader reader)
         {
-            int minimum = Math.Max(reader.Cursor - 10, 0);
-            int maximum = Math.Min(reader.Cursor, reader.Command.Length);
+            int minimum = Math.Max(reader.GetCursor() - 10, 0);
+            int maximum = Math.Min(reader.GetCursor(), reader.GetLength());
 
-            StringBuilder builder = new StringBuilder($" at position {reader.Cursor}: ");
+            StringBuilder builder = new StringBuilder($" at position {reader.GetCursor()}: ");
             if (minimum > 0) builder.Append("...");
-            builder.Append(reader.Command[minimum..maximum]);
+            builder.Append(reader.GetString()[minimum..maximum]);
             builder.Append("<--[HERE]");
             return builder.ToString();
         }

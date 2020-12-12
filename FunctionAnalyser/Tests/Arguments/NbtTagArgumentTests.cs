@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             NbtTagArgument argument = new NbtTagArgument();
-            StringReader reader = new StringReader("{foo: 'bar', baz: 3}");
+            IStringReader reader = new IStringReader("{foo: 'bar', baz: 3}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             NbtTagArgument argument = new NbtTagArgument();
-            StringReader reader = new StringReader("[1, 2, 3]");
+            IStringReader reader = new IStringReader("[1, 2, 3]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

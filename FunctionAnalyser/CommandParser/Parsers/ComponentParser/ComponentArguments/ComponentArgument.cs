@@ -16,9 +16,9 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
         [JsonProperty("match_first")]
         protected readonly bool MatchFirst = false;
 
-        public abstract ReadResults Validate(JsonObject obj, string key, StringReader reader, int start);
+        public abstract ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start);
 
-        protected ReadResults ValidateChildren(JsonObject obj, string key, StringReader reader, int start)
+        protected ReadResults ValidateChildren(JsonObject obj, string key, IStringReader reader, int start)
         {
             ReadResults readResults;
             foreach (KeyValuePair<string, ComponentArgument> child in Children)
@@ -29,13 +29,13 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
                     if (MatchFirst || !readResults.Successful) return readResults;
                 } else if (!child.Value.Optional && !MatchFirst)
                 {
-                    reader.Cursor = start;
+                    reader.SetCursor(start);
                     return new ReadResults(false, ComponentCommandError.IncompleteComponent(key, this).WithContext(reader));
                 }
             }
             if (MatchFirst)
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.UnknownComponentError(obj).WithContext(reader));
             }
             return new ReadResults(true, null);

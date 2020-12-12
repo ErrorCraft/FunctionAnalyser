@@ -5,11 +5,11 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
     public class ComponentResourceLocation : ComponentArgument
     {
-        public override ReadResults Validate(JsonObject obj, string key, StringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
         {
             if (!IsText(obj.GetChild(key)))
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonString.NAME, obj.GetChild(key).GetName()).WithContext(reader));
             }
             return new ResourceLocationParser(reader).ReadFromString(obj.GetChild(key).ToString(), start, out _);

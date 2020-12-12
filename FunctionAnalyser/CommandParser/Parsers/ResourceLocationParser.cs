@@ -7,24 +7,22 @@ namespace CommandParser.Parsers
     public class ResourceLocationParser
     {
         private static readonly Regex RESOURCE_LOCATION_REGEX = new Regex("^[a-z0-9._-]*:?[a-z0-9._/-]*$");
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
 
-        public ResourceLocationParser(StringReader stringReader)
+        public ResourceLocationParser(IStringReader stringReader)
         {
             StringReader = stringReader;
         }
 
         public ReadResults Read(out ResourceLocation result)
         {
-            result = default;
-            int start = StringReader.Cursor;
-
+            int start = StringReader.GetCursor();
             while (StringReader.CanRead() && IsResourceLocationPart(StringReader.Peek()))
             {
                 StringReader.Skip();
             }
 
-            string s = StringReader.Command[start..StringReader.Cursor];
+            string s = StringReader.GetString()[start..StringReader.GetCursor()];
             return ReadFromString(s, start, out result);
         }
 
@@ -33,7 +31,7 @@ namespace CommandParser.Parsers
             result = default;
             if (!RESOURCE_LOCATION_REGEX.IsMatch(s))
             {
-                StringReader.Cursor = start;
+                StringReader.SetCursor(start);
                 return new ReadResults(false, CommandError.InvalidId().WithContext(StringReader));
             }
 

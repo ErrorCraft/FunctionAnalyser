@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             UuidArgument argument = new UuidArgument();
-            StringReader reader = new StringReader("1-2-3-4-5");
+            IStringReader reader = new IStringReader("1-2-3-4-5");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             UuidArgument argument = new UuidArgument();
-            StringReader reader = new StringReader("1-2-3");
+            IStringReader reader = new IStringReader("1-2-3");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             UuidArgument argument = new UuidArgument();
-            StringReader reader = new StringReader("1-2-3-4-5!!!");
+            IStringReader reader = new IStringReader("1-2-3-4-5!!!");
 
             // Act
             argument.Parse(reader, out _);
@@ -55,7 +55,7 @@ namespace Tests.Arguments
         {
             // Arrange
             UuidArgument argument = new UuidArgument();
-            StringReader reader = new StringReader("1-2-3-aA-fF");
+            IStringReader reader = new IStringReader("1-2-3-aA-fF");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

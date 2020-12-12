@@ -33,11 +33,11 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => Name;
 
-        public ReadResults ValidateComponent(StringReader reader, int start)
+        public ReadResults ValidateComponent(IStringReader reader, int start)
         {
             if (Arguments.Count == 0)
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.EmptyComponent().WithContext(reader));
             }
             ReadResults readResults;

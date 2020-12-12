@@ -13,7 +13,7 @@ namespace Tests.Parsers
         public void ResourceLocationParser_ReadFromStringReader()
         {
             // Arrange
-            StringReader reader = new StringReader("foo:bar");
+            IStringReader reader = new IStringReader("foo:bar");
             ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
@@ -27,7 +27,7 @@ namespace Tests.Parsers
         public void ResourceLocationParser_ReadFromString()
         {
             // Arrange
-            StringReader reader = new StringReader("foo:bar");
+            IStringReader reader = new IStringReader("foo:bar");
             ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
@@ -41,7 +41,7 @@ namespace Tests.Parsers
         public void ResourceLocationParser_ParseShouldFail_BecauseDuplicateSeparator()
         {
             // Arrange
-            StringReader reader = new StringReader("foo::bar");
+            IStringReader reader = new IStringReader("foo::bar");
             ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
@@ -55,7 +55,7 @@ namespace Tests.Parsers
         public void ResourceLocationParser_ParseShouldFail_BecauseInvalidCharactersInNamespace()
         {
             // Arrange
-            StringReader reader = new StringReader("foo/bar:baz");
+            IStringReader reader = new IStringReader("foo/bar:baz");
             ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
@@ -69,7 +69,7 @@ namespace Tests.Parsers
         public void ResourceLocationParser_ResultShouldUseDefaultNamespace()
         {
             // Arrange
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
             ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act

@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             ItemEnchantmentArgument argument = new ItemEnchantmentArgument();
             Enchantments.Set("[\"foo\", \"bar\"]");
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -29,7 +29,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ItemEnchantmentArgument argument = new ItemEnchantmentArgument();
-            StringReader reader = new StringReader("foo::bar");
+            IStringReader reader = new IStringReader("foo::bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -44,7 +44,7 @@ namespace Tests.Arguments
             // Arrange
             ItemEnchantmentArgument argument = new ItemEnchantmentArgument();
             Enchantments.Set("[\"foo\", \"bar\"]");
-            StringReader reader = new StringReader("minecraft:foo");
+            IStringReader reader = new IStringReader("minecraft:foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -59,7 +59,7 @@ namespace Tests.Arguments
             // Arrange
             ItemEnchantmentArgument argument = new ItemEnchantmentArgument();
             Enchantments.Set("[\"foo\", \"bar\"]");
-            StringReader reader = new StringReader("baz");
+            IStringReader reader = new IStringReader("baz");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

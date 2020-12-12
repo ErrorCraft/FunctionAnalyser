@@ -57,7 +57,7 @@ namespace CommandParser.Collections
 
         public ReadResults Handle(EntitySelectorParser parser, string name, int start)
         {
-            StringReader reader = parser.GetReader();
+            IStringReader reader = parser.GetReader();
             bool negated = false;
             if (AllowInverse) negated = parser.ShouldInvertValue();
 
@@ -76,11 +76,11 @@ namespace CommandParser.Collections
             return readResults;
         }
 
-        private ReadResults CheckComponents(EntitySelectorParser parser, StringReader reader)
+        private ReadResults CheckComponents(EntitySelectorParser parser, IStringReader reader)
         {
             if (Contents != null)
             {
-                CommandContext context = new CommandContext(reader.Cursor);
+                CommandContext context = new CommandContext(reader.GetCursor());
                 ReadResults readResults = Contents.Parse(reader, context);
                 if (readResults.Successful)
                 {
@@ -91,7 +91,7 @@ namespace CommandParser.Collections
             return new ReadResults(true, null);
         }
 
-        private static ReadResults SetLimit(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults SetLimit(EntitySelectorParser parser, IStringReader reader)
         {
             ReadResults readResults = reader.ReadInteger(out int number);
             if (!readResults.Successful)
@@ -108,15 +108,15 @@ namespace CommandParser.Collections
             return new ReadResults(true, null);
         }
 
-        private static ReadResults SetExecutor(EntitySelectorParser parser, StringReader reader, bool negated, string originalName, int previousStart)
+        private static ReadResults SetExecutor(EntitySelectorParser parser, IStringReader reader, bool negated, string originalName, int previousStart)
         {
             if (parser.IsTypeLimited())
             {
-                reader.Cursor = previousStart;
+                reader.SetCursor(previousStart);
                 return new ReadResults(false, CommandError.InapplicableOption(originalName).WithContext(reader));
             }
 
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
 
             bool isTag = false;
             if (reader.CanRead() && reader.Peek() == ResourceLocation.TAG_CHARACTER)
@@ -138,7 +138,7 @@ namespace CommandParser.Collections
             {
                 if (!Entities.Contains(entity))
                 {
-                    reader.Cursor = start;
+                    reader.SetCursor(start);
                     return new ReadResults(false, CommandError.InvalidEntityType(entity).WithContext(reader));
                 }
             }
@@ -146,7 +146,7 @@ namespace CommandParser.Collections
             return new ReadResults(true, null);
         }
 
-        private static ReadResults ReadAdvancements(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults ReadAdvancements(EntitySelectorParser parser, IStringReader reader)
         {
             ReadResults readResults = reader.Expect('{');
             if (!readResults.Successful) return readResults;
@@ -211,7 +211,7 @@ namespace CommandParser.Collections
             return reader.Expect('}');
         }
 
-        private static ReadResults ReadScores(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults ReadScores(EntitySelectorParser parser, IStringReader reader)
         {
             ReadResults readResults = reader.Expect('{');
             if (!readResults.Successful) return readResults;
@@ -246,9 +246,9 @@ namespace CommandParser.Collections
             return reader.Expect('}');
         }
 
-        private static ReadResults ReadGamemode(EntitySelectorParser parser, StringReader reader)
+        private static ReadResults ReadGamemode(EntitySelectorParser parser, IStringReader reader)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             ReadResults readResults = reader.ReadUnquotedString(out string gamemode);
             if (!readResults.Successful)
             {
@@ -261,20 +261,20 @@ namespace CommandParser.Collections
                 return new ReadResults(true, null);
             } else
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, CommandError.UnknownGamemode(gamemode).WithContext(reader));
             }
         }
 
-        private static ReadResults ReadSort(EntitySelectorParser parser, StringReader reader, string originalName, int previousStart)
+        private static ReadResults ReadSort(EntitySelectorParser parser, IStringReader reader, string originalName, int previousStart)
         {
             if (parser.IsSorted())
             {
-                reader.Cursor = previousStart;
+                reader.SetCursor(previousStart);
                 return new ReadResults(false, CommandError.InapplicableOption(originalName).WithContext(reader));
             }
 
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             ReadResults readResults = reader.ReadUnquotedString(out string sort);
             if (!readResults.Successful)
             {
@@ -288,7 +288,7 @@ namespace CommandParser.Collections
             }
             else
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, CommandError.UnknownSort(sort).WithContext(reader));
             }
         }

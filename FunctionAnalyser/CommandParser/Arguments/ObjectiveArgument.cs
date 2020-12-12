@@ -5,7 +5,7 @@ namespace CommandParser.Arguments
 {
     public class ObjectiveArgument : IArgument<Objective>
     {
-        public ReadResults Parse(StringReader reader, out Objective result)
+        public ReadResults Parse(IStringReader reader, out Objective result)
         {
             result = default;
             ReadResults readResults = reader.ReadUnquotedString(out string objective);

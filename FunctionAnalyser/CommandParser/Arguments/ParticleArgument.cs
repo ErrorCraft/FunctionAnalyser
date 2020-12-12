@@ -10,7 +10,7 @@ namespace CommandParser.Arguments
 {
     public class ParticleArgument : IArgument<Particle>
     {
-        public ReadResults Parse(StringReader reader, out Particle result)
+        public ReadResults Parse(IStringReader reader, out Particle result)
         {
             result = default;
 

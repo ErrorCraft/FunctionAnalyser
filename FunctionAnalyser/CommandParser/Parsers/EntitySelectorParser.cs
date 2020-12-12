@@ -9,10 +9,10 @@ namespace CommandParser.Parsers
 {
     public class EntitySelectorParser
     {
-        private readonly StringReader Reader;
+        private readonly IStringReader Reader;
         private readonly int Start;
 
-        public StringReader GetReader()
+        public IStringReader GetReader()
         {
             return Reader;
         }
@@ -47,10 +47,10 @@ namespace CommandParser.Parsers
         }
 
 
-        public EntitySelectorParser(StringReader reader)
+        public EntitySelectorParser(IStringReader reader)
         {
             Reader = reader;
-            Start = reader.Cursor;
+            Start = reader.GetCursor();
         }
 
         public ReadResults Parse(out EntitySelector result)
@@ -91,7 +91,7 @@ namespace CommandParser.Parsers
             {
                 if (string.IsNullOrEmpty(s) || s.Length > 16)
                 {
-                    Reader.Cursor = Start;
+                    Reader.SetCursor(Start);
                     return new ReadResults(false, CommandError.InvalidNameOrUuid().WithContext(Reader));
                 }
                 IncludesEntities = false;
@@ -108,10 +108,10 @@ namespace CommandParser.Parsers
 
             if (!Reader.CanRead())
             {
-                Reader.Cursor = Start;
+                Reader.SetCursor(Start);
                 return new ReadResults(false, CommandError.MissingSelectorType().WithContext(Reader));
             }
-            int currentPosition = Reader.Cursor;
+            int currentPosition = Reader.GetCursor();
             char c = Reader.Read();
             switch (c)
             {
@@ -156,7 +156,7 @@ namespace CommandParser.Parsers
                     Sorted = false;
                     break;
                 default:
-                    Reader.Cursor = currentPosition;
+                    Reader.SetCursor(currentPosition);
                     return new ReadResults(false, CommandError.UnknownSelectorType(c).WithContext(Reader));
             }
             if (Reader.CanRead() && Reader.Peek() == '[')
@@ -198,12 +198,12 @@ namespace CommandParser.Parsers
             while (Reader.CanRead() && Reader.Peek() != ']')
             {
                 Reader.SkipWhitespace();
-                int start = Reader.Cursor;
+                int start = Reader.GetCursor();
                 readResults = Reader.ReadString(out string name);
                 if (!readResults.Successful) return readResults;
                 if (!EntitySelectorOptions.TryGet(name, out EntitySelectorOption option))
                 {
-                    Reader.Cursor = start;
+                    Reader.SetCursor(start);
                     return new ReadResults(false, CommandError.UnknownSelectorOption(name).WithContext(Reader));
                 }
 
@@ -217,7 +217,7 @@ namespace CommandParser.Parsers
 
                 if (!MayApply(name, option))
                 {
-                    Reader.Cursor = start;
+                    Reader.SetCursor(start);
                     return new ReadResults(false, CommandError.InapplicableOption(name).WithContext(Reader));
                 }
 

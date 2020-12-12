@@ -16,21 +16,21 @@ namespace CommandParser.Arguments
             Maximum = maximum;
         }
 
-        public ReadResults Parse(StringReader reader, out int result)
+        public ReadResults Parse(IStringReader reader, out int result)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
 			ReadResults readResults = reader.ReadInteger(out result);
             if (readResults.Successful)
             {
                 if (result < Minimum)
                 {
-                    reader.Cursor = start;
+                    reader.SetCursor(start);
                     return new ReadResults(false, CommandError.IntegerTooLow(result, Minimum).WithContext(reader));
                 }
 
                 if (result > Maximum)
                 {
-                    reader.Cursor = start;
+                    reader.SetCursor(start);
                     return new ReadResults(false, CommandError.IntegerTooHigh(result, Maximum).WithContext(reader));
                 }
             }

@@ -8,9 +8,9 @@ namespace CommandParser.Parsers.Coordinates
 {
     public class WorldCoordinateParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
 
-        public WorldCoordinateParser(StringReader stringReader)
+        public WorldCoordinateParser(IStringReader stringReader)
         {
             StringReader = stringReader;
         }
@@ -62,7 +62,7 @@ namespace CommandParser.Parsers.Coordinates
             }
 
             bool isRelative = IsRelative();
-            int start = StringReader.Cursor;
+            int start = StringReader.GetCursor();
 
             if (StringReader.AtEndOfArgument())
             {
@@ -73,8 +73,8 @@ namespace CommandParser.Parsers.Coordinates
             ReadResults readResults = StringReader.ReadDouble(out double value);
             if (!readResults.Successful) return readResults;
 
-            string number = StringReader.Command[start..StringReader.Cursor];
-            if (!isRelative && !number.Contains('.')) value += 0.5d; // b1 is "correct the number" thing
+            string number = StringReader.GetString()[start..StringReader.GetCursor()];
+            if (!isRelative && !number.Contains('.')) value += 0.5d;
 
             result = new WorldCoordinate(value, isRelative);
             return new ReadResults(true, null);

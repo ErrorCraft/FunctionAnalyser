@@ -7,11 +7,11 @@ namespace CommandParser.Arguments
 {
     public class NbtPathArgument : IArgument<NbtPath>
     {
-        public ReadResults Parse(StringReader reader, out NbtPath result)
+        public ReadResults Parse(IStringReader reader, out NbtPath result)
         {
             result = default;
 
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             bool isRoot = true;
 
             ReadResults readResults;
@@ -28,11 +28,11 @@ namespace CommandParser.Arguments
                 readResults = reader.Expect('.');
                 if (!readResults.Successful) return readResults;
             }
-            result = new NbtPath(reader.Command[start..reader.Cursor]);
+            result = new NbtPath(reader.GetString()[start..reader.GetCursor()]);
             return new ReadResults(true, null);
         }
 
-        private static ReadResults ReadNode(StringReader reader, bool isRoot)
+        private static ReadResults ReadNode(IStringReader reader, bool isRoot)
         {
             ReadResults readResults;
             switch (reader.Peek())
@@ -75,7 +75,7 @@ namespace CommandParser.Arguments
             return readResults;
         }
 
-        private static ReadResults ReadObjectNode(StringReader reader)
+        private static ReadResults ReadObjectNode(IStringReader reader)
         {
             if (reader.CanRead() && reader.Peek() == '{')
             {
@@ -84,14 +84,14 @@ namespace CommandParser.Arguments
             return new ReadResults(true, null);
         }
 
-        private static ReadResults ReadUnquotedName(StringReader reader)
+        private static ReadResults ReadUnquotedName(IStringReader reader)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             while (reader.CanRead() && IsAllowedInUnquotedName(reader.Peek()))
             {
                 reader.Skip();
             }
-            if (reader.Cursor == start)
+            if (reader.GetCursor() == start)
             {
                 return new ReadResults(false, CommandError.InvalidNbtPath().WithContext(reader));
             } else

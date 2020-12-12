@@ -5,13 +5,13 @@ namespace CommandParser.Parsers.Coordinates
 {
     public class WorldCoordinatesParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         private readonly int Start;
 
-        public WorldCoordinatesParser(StringReader stringReader)
+        public WorldCoordinatesParser(IStringReader stringReader)
         {
             StringReader = stringReader;
-            Start = stringReader.Cursor;
+            Start = stringReader.GetCursor();
         }
 
         public ReadResults ParseInteger(out ICoordinates result)
@@ -23,7 +23,7 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.Cursor = Start;
+                StringReader.SetCursor(Start);
                 return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
             }
             StringReader.Skip();
@@ -32,7 +32,7 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.Cursor = Start;
+                StringReader.SetCursor(Start);
                 return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
             }
             StringReader.Skip();
@@ -51,7 +51,7 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.Cursor = Start;
+                StringReader.SetCursor(Start);
                 return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
             }
             StringReader.Skip();
@@ -60,7 +60,7 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.Cursor = Start;
+                StringReader.SetCursor(Start);
                 return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
             }
             StringReader.Skip();

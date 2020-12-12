@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             BooleanArgument argument = new BooleanArgument();
-            StringReader reader = new StringReader("true");
+            IStringReader reader = new IStringReader("true");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             BooleanArgument argument = new BooleanArgument();
-            StringReader reader = new StringReader("hello");
+            IStringReader reader = new IStringReader("hello");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             BooleanArgument argument = new BooleanArgument();
-            StringReader reader = new StringReader("'true'");
+            IStringReader reader = new IStringReader("'true'");
 
             // Act
             argument.Parse(reader, out bool result);

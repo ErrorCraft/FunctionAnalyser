@@ -7,9 +7,9 @@ namespace CommandParser.Parsers
     public class RangeParser<T> where T : struct, IComparable
     {
         public delegate bool Converter<S>(S input, out T result);
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
 
-        public RangeParser(StringReader stringReader)
+        public RangeParser(IStringReader stringReader)
         {
             StringReader = stringReader;
         }
@@ -22,7 +22,7 @@ namespace CommandParser.Parsers
                 return new ReadResults(false, CommandError.ExpectedValueOrRange().WithContext(StringReader));
             }
 
-            int start = StringReader.Cursor;
+            int start = StringReader.GetCursor();
             T? right;
             ReadResults readResults = ReadNumber(function, invalidNumberErrorProvider, out T? left);
             if (!readResults.Successful) return readResults;
@@ -46,7 +46,7 @@ namespace CommandParser.Parsers
 
             if (!loopable && ((T)left).CompareTo((T)right) > 0)
             {
-                StringReader.Cursor = start;
+                StringReader.SetCursor(start);
                 return new ReadResults(false, CommandError.RangeMinBiggerThanMax().WithContext(StringReader));
             }
 
@@ -57,13 +57,13 @@ namespace CommandParser.Parsers
         public ReadResults ReadNumber(Converter<string> function, Func<string, CommandError> invalidNumberErrorProvider, out T? result)
         {
             result = default;
-            int start = StringReader.Cursor;
+            int start = StringReader.GetCursor();
 
             while (StringReader.CanRead() && IsAllowedInput(StringReader))
             {
                 StringReader.Skip();
             }
-            string number = StringReader.Command[start..StringReader.Cursor];
+            string number = StringReader.GetString()[start..StringReader.GetCursor()];
 
             if (string.IsNullOrEmpty(number))
             {
@@ -75,11 +75,11 @@ namespace CommandParser.Parsers
                 return new ReadResults(true, null);
             }
 
-            StringReader.Cursor = start;
+            StringReader.SetCursor(start);
             return new ReadResults(false, invalidNumberErrorProvider.Invoke(number).WithContext(StringReader));
         }
 
-        private static bool IsAllowedInput(StringReader reader)
+        private static bool IsAllowedInput(IStringReader reader)
         {
             char c = reader.Peek();
             if (c >= '0' && c <= '9' || c == '-') return true;

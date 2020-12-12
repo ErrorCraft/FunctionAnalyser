@@ -13,6 +13,7 @@ namespace FunctionAnalyser
         public SelectorCount Selectors { get; set; }
 
         public CommandUsage UsedCommands { get; set; }
+        public int FunctionCalls { get; set; }
 
         public List<TextComponent> Messages { get; set; }
 
@@ -25,14 +26,16 @@ namespace FunctionAnalyser
 
         public static FunctionData operator +(FunctionData a, FunctionData b)
         {
-            a.Functions += b.Functions;
-            a.Commands += b.Commands;
-            a.Comments += b.Comments;
-            a.EmptyLines += b.EmptyLines;
-            a.UsedCommands.Merge(b.UsedCommands);
-            a.Selectors += b.Selectors;
-
-            return a;
+            return new FunctionData()
+            {
+                Functions = a.Functions + b.Functions,
+                Commands = a.Commands + b.Commands,
+                Comments = a.Comments + b.Comments,
+                EmptyLines = a.EmptyLines + b.EmptyLines,
+                UsedCommands = new CommandUsage().Merge(a.UsedCommands).Merge(b.UsedCommands),
+                Selectors = a.Selectors + b.Selectors,
+                FunctionCalls = a.Functions + b.Functions
+            };
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class StorageArgument : IArgument<Storage>
     {
-        public ReadResults Parse(StringReader reader, out Storage result)
+        public ReadResults Parse(IStringReader reader, out Storage result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation storage);

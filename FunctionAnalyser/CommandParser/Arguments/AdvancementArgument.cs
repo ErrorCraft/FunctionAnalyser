@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class AdvancementArgument : IArgument<Advancement>
     {
-        public ReadResults Parse(StringReader reader, out Advancement result)
+        public ReadResults Parse(IStringReader reader, out Advancement result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation advancement);

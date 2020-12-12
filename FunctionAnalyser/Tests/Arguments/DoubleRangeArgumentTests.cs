@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument();
-            StringReader reader = new StringReader("1.0");
+            IStringReader reader = new IStringReader("1.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -28,7 +28,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument();
-            StringReader reader = new StringReader("1.0..10.0");
+            IStringReader reader = new IStringReader("1.0..10.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -42,7 +42,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument(true);
-            StringReader reader = new StringReader("10.0..-10.0");
+            IStringReader reader = new IStringReader("10.0..-10.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -56,7 +56,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument();
-            StringReader reader = new StringReader("1.0..10.0");
+            IStringReader reader = new IStringReader("1.0..10.0");
 
             // Act
             argument.Parse(reader, out Range<double> result);
@@ -70,7 +70,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument();
-            StringReader reader = new StringReader("..");
+            IStringReader reader = new IStringReader("..");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -84,7 +84,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument();
-            StringReader reader = new StringReader("1.0..");
+            IStringReader reader = new IStringReader("1.0..");
 
             // Act
             argument.Parse(reader, out Range<double> result);
@@ -98,7 +98,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleRangeArgument argument = new DoubleRangeArgument();
-            StringReader reader = new StringReader("..10.0");
+            IStringReader reader = new IStringReader("..10.0");
 
             // Act
             argument.Parse(reader, out Range<double> result);

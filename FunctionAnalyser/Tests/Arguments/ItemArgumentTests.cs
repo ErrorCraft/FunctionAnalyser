@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             Items.Set("[\"foo\", \"bar\"]");
             ItemArgument argument = new ItemArgument();
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             Items.Set("[\"foo\", \"bar\"]");
             ItemArgument argument = new ItemArgument();
-            StringReader reader = new StringReader("baz");
+            IStringReader reader = new IStringReader("baz");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -45,7 +45,7 @@ namespace Tests.Arguments
             // Arrange
             Items.Set("[\"foo\", \"bar\"]");
             ItemArgument argument = new ItemArgument();
-            StringReader reader = new StringReader("minecraft:foo");
+            IStringReader reader = new IStringReader("minecraft:foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -60,7 +60,7 @@ namespace Tests.Arguments
             // Arrange
             Items.Set("[\"foo\", \"bar\"]");
             ItemArgument argument = new ItemArgument();
-            StringReader reader = new StringReader("foo{bar: 'baz'}");
+            IStringReader reader = new IStringReader("foo{bar: 'baz'}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

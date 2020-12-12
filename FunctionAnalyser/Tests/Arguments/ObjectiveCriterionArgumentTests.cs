@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             ObjectiveCriteria.Set("{\"normal\":{\"foo\":{}}}");
             ObjectiveCriterionArgument argument = new ObjectiveCriterionArgument();
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             ObjectiveCriteria.Set("{\"normal\":{\"foo\":{}}}");
             ObjectiveCriterionArgument argument = new ObjectiveCriterionArgument();
-            StringReader reader = new StringReader("bar");
+            IStringReader reader = new IStringReader("bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -45,7 +45,7 @@ namespace Tests.Arguments
             // Arrange
             ObjectiveCriteria.Set("{\"namespaced\":{\"foo\":{\"criterion_type\":\"statistic\"}},\"custom\":[\"bar\",\"baz\"]}");
             ObjectiveCriterionArgument argument = new ObjectiveCriterionArgument();
-            StringReader reader = new StringReader("foo:bar");
+            IStringReader reader = new IStringReader("foo:bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -60,7 +60,7 @@ namespace Tests.Arguments
             // Arrange
             ObjectiveCriteria.Set("{\"namespaced\":{\"foo\":{\"criterion_type\":\"statistic\"}},\"custom\":[\"bar\",\"baz\"]}");
             ObjectiveCriterionArgument argument = new ObjectiveCriterionArgument();
-            StringReader reader = new StringReader("minecraft.foo:minecraft.bar");
+            IStringReader reader = new IStringReader("minecraft.foo:minecraft.bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

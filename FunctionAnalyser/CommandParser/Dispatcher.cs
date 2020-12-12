@@ -42,8 +42,12 @@ namespace CommandParser
 
         public CommandResults Parse(string command)
         {
-            StringReader reader = new StringReader(command);
-            CommandContext contextBuilder = new CommandContext(reader.Cursor);
+            return Parse(command, new StringReader(command));
+        }
+
+        public CommandResults Parse(string command, IStringReader reader)
+        {
+            CommandContext contextBuilder = new CommandContext(reader.GetCursor());
             ParseResults parseResults = ParseNodes(Root, reader, contextBuilder);
 
             if (parseResults.Reader.CanRead())
@@ -51,10 +55,12 @@ namespace CommandParser
                 if (parseResults.Errors.Count > 0)
                 {
                     return new CommandResults(false, parseResults.Errors[^1], parseResults.Context.Results);
-                } else if (parseResults.Context.Range.IsEmpty())
+                }
+                else if (parseResults.Context.Range.IsEmpty())
                 {
                     return new CommandResults(false, CommandError.UnknownOrIncompleteCommand().WithContext(parseResults.Reader), parseResults.Context.Results);
-                } else
+                }
+                else
                 {
                     return new CommandResults(false, CommandError.IncorrectArgument().WithContext(parseResults.Reader), parseResults.Context.Results);
                 }
@@ -66,7 +72,8 @@ namespace CommandParser
                 {
                     return new CommandResults(false, parseResults.Errors[^1], parseResults.Context.Results);
                 }
-            } else
+            }
+            else
             {
                 return new CommandResults(false, CommandError.UnknownOrIncompleteCommand().WithContext(parseResults.Reader), parseResults.Context.Results);
             }
@@ -74,7 +81,7 @@ namespace CommandParser
             return new CommandResults(true, null, parseResults.Context.Results);
         }
 
-        private ParseResults ParseNodes(Node node, StringReader originalReader, CommandContext contextSoFar)
+        private ParseResults ParseNodes(Node node, IStringReader originalReader, CommandContext contextSoFar)
         {
             List<CommandError> errors = null;
             List<ParseResults> potentials = null;
@@ -84,7 +91,7 @@ namespace CommandParser
             foreach (Node child in node.GetRelevantNodes(originalReader))
             {
                 CommandContext context = contextSoFar.Copy();
-                StringReader reader = originalReader.Copy();
+                IStringReader reader = originalReader.Copy();
 
                 ReadResults readResults = child.Parse(reader, context);
 

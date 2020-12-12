@@ -5,13 +5,13 @@ namespace CommandParser.Parsers.Coordinates
 {
     public class RotationParser
     {
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         private readonly int Start;
 
-        public RotationParser(StringReader stringReader)
+        public RotationParser(IStringReader stringReader)
         {
             StringReader = stringReader;
-            Start = stringReader.Cursor;
+            Start = stringReader.GetCursor();
         }
 
         public ReadResults Parse(out Rotation result)
@@ -23,7 +23,7 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.Cursor = Start;
+                StringReader.SetCursor(Start);
                 return new ReadResults(false, CommandError.RotationIncomplete().WithContext(StringReader));
             }
             StringReader.Skip();

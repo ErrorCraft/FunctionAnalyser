@@ -6,16 +6,16 @@ namespace CommandParser.Arguments
 {
     public class EntityAnchorArgument : IArgument<Anchor>
     {
-        public ReadResults Parse(StringReader reader, out Anchor result)
+        public ReadResults Parse(IStringReader reader, out Anchor result)
         {
             result = default;
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             ReadResults readResults = reader.ReadUnquotedString(out string anchor);
             if (!readResults.Successful) return readResults;
 
             if (!Anchors.Contains(anchor))
             {
-                reader.Cursor = start;
+                reader.SetCursor(start);
                 return new ReadResults(false, CommandError.InvalidEntityAnchor(anchor).WithContext(reader));
             }
 

@@ -15,14 +15,14 @@ namespace CommandParser.Parsers
             Cursor = 0;
         }
 
-        public static ReadResults FromReader(StringReader reader, out Uuid result)
+        public static ReadResults FromReader(IStringReader reader, out Uuid result)
         {
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
             while (reader.CanRead() && IsUuidPart(reader.Peek()))
             {
                 reader.Skip();
             }
-            string uuid = reader.Command[start..reader.Cursor];
+            string uuid = reader.GetString()[start..reader.GetCursor()];
             UuidParser uuidParser = new UuidParser(uuid);
             if (!uuidParser.Parse(out result))
             {

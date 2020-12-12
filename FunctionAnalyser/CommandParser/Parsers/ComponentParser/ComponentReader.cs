@@ -9,10 +9,10 @@ namespace CommandParser.Parsers.ComponentParser
     public class ComponentReader
     {
         private readonly JsonObject Json;
-        private readonly StringReader StringReader;
+        private readonly IStringReader StringReader;
         private readonly int Start;
 
-        public ComponentReader(JsonObject json, StringReader stringReader, int start)
+        public ComponentReader(JsonObject json, IStringReader stringReader, int start)
         {
             Json = json;
             StringReader = stringReader;
@@ -38,7 +38,7 @@ namespace CommandParser.Parsers.ComponentParser
                     return components[key].Validate(Json, key, StringReader, Start);
                 }
             }
-            StringReader.Cursor = Start;
+            StringReader.SetCursor(Start);
             return new ReadResults(false, ComponentCommandError.UnknownComponentError(Json).WithContext(StringReader));
         }
 

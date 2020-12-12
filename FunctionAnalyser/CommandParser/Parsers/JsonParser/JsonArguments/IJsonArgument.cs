@@ -4,7 +4,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 {
     public interface IJsonArgument
     {
-        ReadResults ValidateComponent(StringReader reader, int start);
+        ReadResults ValidateComponent(IStringReader reader, int start);
         string GetName();
         string AsJson();
     }

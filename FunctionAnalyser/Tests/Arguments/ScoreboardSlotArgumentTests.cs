@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             ScoreboardSlots.Set("{\"foo\":{}}");
             ScoreboardSlotArgument argument = new ScoreboardSlotArgument();
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             ScoreboardSlots.Set("{\"foo\":{}}");
             ScoreboardSlotArgument argument = new ScoreboardSlotArgument();
-            StringReader reader = new StringReader("bar");
+            IStringReader reader = new IStringReader("bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -46,7 +46,7 @@ namespace Tests.Arguments
             Colours.Set("[\"red\",\"green\"]");
             ScoreboardSlots.Set("{\"foo\":{\"slot_type\":\"colour\"}}");
             ScoreboardSlotArgument argument = new ScoreboardSlotArgument();
-            StringReader reader = new StringReader("foo.team.red");
+            IStringReader reader = new IStringReader("foo.team.red");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -62,7 +62,7 @@ namespace Tests.Arguments
             Colours.Set("[\"red\",\"green\"]");
             ScoreboardSlots.Set("{\"foo\":{\"contents_optional\":true,\"slot_type\":\"colour\"}}");
             ScoreboardSlotArgument argument = new ScoreboardSlotArgument();
-            StringReader reader = new StringReader("foo");
+            IStringReader reader = new IStringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

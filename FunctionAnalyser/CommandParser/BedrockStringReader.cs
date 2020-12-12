@@ -3,15 +3,15 @@ using CommandParser.Results;
 
 namespace CommandParser
 {
-    public class StringReader : IStringReader
+    public class BedrockStringReader : IStringReader
     {
         private readonly string Command;
         private int Cursor;
 
-        public StringReader(string command)
+        public BedrockStringReader(string command)
             : this(command, 0) { }
 
-        private StringReader(string command, int cursor)
+        private BedrockStringReader(string command, int cursor)
         {
             Command = command;
             Cursor = cursor;
@@ -19,7 +19,7 @@ namespace CommandParser
 
         public IStringReader Copy()
         {
-            return new StringReader(Command, Cursor);
+            return new BedrockStringReader(Command, Cursor);
         }
 
         public string GetString()
@@ -109,7 +109,13 @@ namespace CommandParser
 
         public bool IsQuotedStringStart(char c)
         {
-            return c == '\'' || c == '"';
+            // Figure out the exact characters
+            return c == '\'' || c == '"' ||
+                   c == '«' || c == '‹' || c == '»' || c == '›' ||
+                   c == '„' || c == '“' || c == '‟' || c == '”' || c == '’' ||
+                   c == '❝' || c == '❞' || c == '❮' || c == '❯' || c == '⹂' ||
+                   c == '〝' || c == '〞' || c == '〟' || c == '＂' || c == '‚' ||
+                   c == '‘' || c == '‛' || c == '❛' || c == '❜' || c == '❟';
         }
 
         public ReadResults ReadInteger(out int value)
@@ -351,7 +357,7 @@ namespace CommandParser
                 c >= 'A' && c <= 'Z' ||
                 c >= 'a' && c <= 'z' ||
                 c == '_' || c == '-' ||
-                c == '.' || c == '+';
+                c == '.' || c == '§';
         }
     }
 }

@@ -14,17 +14,17 @@ namespace CommandParser.Arguments
             Characters = characters ?? new HashSet<char>();
         }
 
-        public ReadResults Parse(StringReader reader, out HashSet<char> result)
+        public ReadResults Parse(IStringReader reader, out HashSet<char> result)
         {
             result = new HashSet<char>();
-            int start = reader.Cursor;
+            int start = reader.GetCursor();
 
             while (!reader.AtEndOfArgument())
             {
                 char c = reader.Read();
                 if (!Characters.Contains(c) || result.Contains(c))
                 {
-                    reader.Cursor = start;
+                    reader.SetCursor(start);
                     return new ReadResults(false, CommandError.InvalidSwizzle(Characters).WithContext(reader));
                 }
                 result.Add(c);

@@ -15,7 +15,7 @@ namespace CommandParser.Arguments
             ForTesting = forTesting;
         }
 
-        public ReadResults Parse(StringReader reader, out Item result)
+        public ReadResults Parse(IStringReader reader, out Item result)
         {
             return new ItemParser(reader, ForTesting).Parse(out result);
         }

@@ -6,10 +6,10 @@ namespace CommandParser.Results
     public class ParseResults
     {
         public CommandContext Context { get; }
-        public StringReader Reader { get; }
+        public IStringReader Reader { get; }
         public List<CommandError> Errors { get; }
 
-        public ParseResults(CommandContext context, StringReader reader, List<CommandError> errors)
+        public ParseResults(CommandContext context, IStringReader reader, List<CommandError> errors)
         {
             Context = context;
             Reader = reader;
