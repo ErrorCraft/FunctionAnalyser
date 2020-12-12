@@ -13,23 +13,21 @@ namespace FunctionAnalyser
 
         public static TextComponent ErrorsFound(int errorCount, string path, bool skip)
         {
-            return new TextComponent(errorCount == 1 ? $"Error found in " : $"{errorCount} errors found in ").WithColour(Colour.BuiltinColours.RED).With(
-                    new TextComponent(path).With(
-                    skip ? new TextComponent($", skipping function").WithColour(Colour.BuiltinColours.RED) : null
-                    )
-                );
+            return new TextComponent(errorCount == 1 ? $"Error found in " : $"{errorCount} errors found in ").WithColour(Colour.BuiltinColours.RED)
+                .With(new TextComponent(path)
+                .With(skip ? new TextComponent($", skipping function").WithColour(Colour.BuiltinColours.RED) : null));
         }
 
         public static TextComponent Empty(string path)
         {
-            return new TextComponent($"Empty function found at ").WithColour(Colour.BuiltinColours.YELLOW).With(
-                new TextComponent(path)
-                );
+            return new TextComponent($"Empty function found at ").WithColour(Colour.BuiltinColours.YELLOW)
+                .With( new TextComponent(path));
         }
 
         public static TextComponent Result(string message, IGenericResult result)
         {
-            return new TextComponent($"  {message}: ").WithColour(Colour.BuiltinColours.AQUA).With(result.ToTextComponent());
+            return new TextComponent($"  {message}: ").WithColour(Colour.BuiltinColours.AQUA)
+                .With(result.ToTextComponent());
         }
 
         public static TextComponent Message(string message)
@@ -39,10 +37,9 @@ namespace FunctionAnalyser
 
         public static TextComponent CommandResult(string command, Command usage)
         {
-            return new TextComponent($"    {command}: ").WithColour(Colour.BuiltinColours.AQUA).With(
-                new TextComponent(usage.Commands.ToString()).With(
-                        usage.BehindExecute > 0 ? new TextComponent($" ({usage.BehindExecute} behind execute)").WithStyle(true, false) : null
-                    ));
+            return new TextComponent($"    {command}: ").WithColour(Colour.BuiltinColours.AQUA)
+                .With(new TextComponent(usage.Commands.ToString())
+                .With(usage.BehindExecute > 0 ? new TextComponent($" ({usage.BehindExecute} behind execute)").WithStyle(true, false) : null));
         }
 
         public static TextComponent EntitySelector(char selector, int numberOfSelectors)

@@ -152,7 +152,7 @@ namespace FunctionAnalyser
                     functionData.Messages.Add(MessageProvider.ErrorsFound(errors.Count, GetShortFileName(path), Options.SkipFunctionOnError));
                     foreach (KeyValuePair<int, CommandError> kvp in errors)
                     {
-                        functionData.Messages.Add(MessageProvider.Error(kvp.Key, kvp.Value));
+                        functionData.Messages.Add(MessageProvider.Error(kvp.Key + 1, kvp.Value));
                     }
                 }
                 if (Options.SkipFunctionOnError) return functionData;
@@ -225,11 +225,11 @@ namespace FunctionAnalyser
             if (data.Functions == 0) return "";
 
             StringBuilder stringBuilder = new StringBuilder("(Average: ");
-            stringBuilder.Append($"{(double)item / data.Functions:0.00} per file");
+            stringBuilder.Append($"{item / data.Functions:#0.00} per file");
 
             if (data.Commands > 0)
             {
-                stringBuilder.Append($", {(double)item / data.Commands:0.00} per command");
+                stringBuilder.Append($", {item / data.Commands:#0.00} per command");
             }
 
             stringBuilder.Append(')');
