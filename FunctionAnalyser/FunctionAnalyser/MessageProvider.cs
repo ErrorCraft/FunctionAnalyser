@@ -27,7 +27,12 @@ namespace FunctionAnalyser
                 );
         }
 
-        public static TextComponent Result(string message)
+        public static TextComponent Result(string message, IGenericResult result)
+        {
+            return new TextComponent($"  {message}: ").WithColour(Colour.BuiltinColours.AQUA).With(result.ToTextComponent());
+        }
+
+        public static TextComponent Message(string message)
         {
             return new TextComponent($"  {message}").WithColour(Colour.BuiltinColours.AQUA);
         }
@@ -35,7 +40,7 @@ namespace FunctionAnalyser
         public static TextComponent CommandResult(string command, Command usage)
         {
             return new TextComponent($"    {command}: ").WithColour(Colour.BuiltinColours.AQUA).With(
-                new TextComponent($"{usage.Commands}").With(
+                new TextComponent(usage.Commands.ToString()).With(
                         usage.BehindExecute > 0 ? new TextComponent($" ({usage.BehindExecute} behind execute)").WithStyle(true, false) : null
                     ));
         }

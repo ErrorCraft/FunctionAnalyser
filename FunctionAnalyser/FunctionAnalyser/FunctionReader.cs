@@ -115,12 +115,12 @@ namespace FunctionAnalyser
                 if (string.IsNullOrEmpty(command))
                 {
                     // Empty line
-                    functionData.EmptyLines++;
+                    functionData.EmptyLines.Increase();
                     continue;
                 } else if (command.StartsWith('#'))
                 {
                     // Comment
-                    functionData.Comments++;
+                    functionData.Comments.Increase();
                     continue;
                 } else
                 {
@@ -128,7 +128,7 @@ namespace FunctionAnalyser
                     CommandResults commandResults = Versions[version].Parse(command);
                     if (commandResults.Successful)
                     {
-                        functionData.Commands++;
+                        functionData.Commands.Increase();
                         // Analyse Arguments
                         bool isFirstArgument = true;
                         for (int j = 0; j < commandResults.Arguments.Count; j++)
@@ -164,7 +164,7 @@ namespace FunctionAnalyser
                 }
             }
 
-            functionData.Functions++;
+            functionData.Functions.Increase();
             return functionData;
         }
 
@@ -180,7 +180,7 @@ namespace FunctionAnalyser
             }
             else if (result is Function)
             {
-                data.FunctionCalls++;
+                data.FunctionCalls.Increase();
             }
             else if (result is EntitySelector entitySelector)
             {
@@ -209,6 +209,9 @@ namespace FunctionAnalyser
                 {
                     AnalyseArgument(entitySelector.Arguments[i], data, false, true);
                 }
+            } else if (result is Predicate)
+            {
+                data.PredicateCalls.Increase(inSelector);
             }
         }
 
@@ -238,10 +241,10 @@ namespace FunctionAnalyser
             List<TextComponent> components = new List<TextComponent>
             {
                 new TextComponent($"Information:").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
-                MessageProvider.Result($"Number of functions: {data.Functions}"),
-                MessageProvider.Result($"Number of comments: {data.Comments}"),
-                MessageProvider.Result($"Number of empty lines: {data.EmptyLines}"),
-                MessageProvider.Result($"Number of commands: {data.Commands}")
+                MessageProvider.Result($"Number of functions", data.Functions),
+                MessageProvider.Result($"Number of comments", data.Comments),
+                MessageProvider.Result($"Number of empty lines", data.EmptyLines),
+                MessageProvider.Result($"Number of commands", data.Commands)
             };
 
             foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSort))
@@ -249,12 +252,15 @@ namespace FunctionAnalyser
                 components.Add(MessageProvider.CommandResult(command.Key, command.Value));
             }
 
-            components.Add(MessageProvider.Result($"\nSelectors:"));
+            components.Add(new TextComponent("\n").With(MessageProvider.Message($"Selectors:")));
             components.Add(MessageProvider.EntitySelector('p', data.Selectors.NearestPlayer));
             components.Add(MessageProvider.EntitySelector('a', data.Selectors.AllPlayers));
             components.Add(MessageProvider.EntitySelector('r', data.Selectors.RandomPlayer));
             components.Add(MessageProvider.EntitySelector('e', data.Selectors.AllEntities));
             components.Add(MessageProvider.EntitySelector('s', data.Selectors.CurrentEntity));
+
+            components.Add(MessageProvider.Result($"Function calls", data.FunctionCalls));
+            components.Add(MessageProvider.Result($"Predicate calls", data.PredicateCalls));
 
             Logger.Log(components);
         }

@@ -6,35 +6,30 @@ namespace FunctionAnalyser
 {
     public class FunctionData
     {
-        public int Functions { get; set; }
-        public int Commands { get; set; }
-        public int Comments { get; set; }
-        public int EmptyLines { get; set; }
-        public SelectorCount Selectors { get; set; }
+        public GenericResult Functions { get; private init; } = new GenericResult();
+        public GenericResult Comments { get; private init; } = new GenericResult();
+        public GenericResult EmptyLines { get; private init; } = new GenericResult();
+        public GenericResult Commands { get; private init; } = new GenericResult();
+        public CommandUsage UsedCommands { get; private init; } = new CommandUsage();
 
-        public CommandUsage UsedCommands { get; set; }
-        public int FunctionCalls { get; set; }
+        public SelectorCount Selectors { get; private init; } = new SelectorCount();
+        public GenericResult FunctionCalls { get; private init; } = new GenericResult();
+        public GenericSelectorResult PredicateCalls { get; private init; } = new GenericSelectorResult();
 
-        public List<TextComponent> Messages { get; set; }
-
-        public FunctionData()
-        {
-            Messages = new List<TextComponent>();
-            UsedCommands = new CommandUsage();
-            Selectors = new SelectorCount();
-        }
+        public List<TextComponent> Messages { get; } = new List<TextComponent>();
 
         public static FunctionData operator +(FunctionData a, FunctionData b)
         {
             return new FunctionData()
             {
                 Functions = a.Functions + b.Functions,
-                Commands = a.Commands + b.Commands,
                 Comments = a.Comments + b.Comments,
                 EmptyLines = a.EmptyLines + b.EmptyLines,
+                Commands = a.Commands + b.Commands,
                 UsedCommands = new CommandUsage().Merge(a.UsedCommands).Merge(b.UsedCommands),
                 Selectors = a.Selectors + b.Selectors,
-                FunctionCalls = a.Functions + b.Functions
+                FunctionCalls = a.Functions + b.Functions,
+                PredicateCalls = a.PredicateCalls + b.PredicateCalls
             };
         }
     }
