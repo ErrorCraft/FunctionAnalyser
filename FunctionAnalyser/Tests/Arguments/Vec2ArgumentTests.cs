@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec2Argument argument = new Vec2Argument();
-            IStringReader reader = new IStringReader("1.0 2.0");
+            IStringReader reader = new StringReader("1.0 2.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec2Argument argument = new Vec2Argument();
-            IStringReader reader = new IStringReader("~1.0 ~2.0");
+            IStringReader reader = new StringReader("~1.0 ~2.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec2Argument argument = new Vec2Argument();
-            IStringReader reader = new IStringReader("~ ~");
+            IStringReader reader = new StringReader("~ ~");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -55,7 +55,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec2Argument argument = new Vec2Argument();
-            IStringReader reader = new IStringReader("^1.0 ^2.0");
+            IStringReader reader = new StringReader("^1.0 ^2.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -69,7 +69,7 @@ namespace Tests.Arguments
         {
             // Arrange
             Vec2Argument argument = new Vec2Argument();
-            IStringReader reader = new IStringReader("1.0");
+            IStringReader reader = new StringReader("1.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

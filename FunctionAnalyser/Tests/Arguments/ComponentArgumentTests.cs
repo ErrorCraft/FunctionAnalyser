@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ComponentArgument argument = new ComponentArgument();
-            IStringReader reader = new IStringReader("\"foo\"");
+            IStringReader reader = new StringReader("\"foo\"");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -29,7 +29,7 @@ namespace Tests.Arguments
             // Arrange
             Components.Set("{\"content\":{\"foo\":{\"type\":\"string\"}},\"formatting\":{\"bar\":{\"type\":\"number\"}}}");
             ComponentArgument argument = new ComponentArgument();
-            IStringReader reader = new IStringReader("{\"foo\":\"Hello world!\",\"bar\":3}");
+            IStringReader reader = new StringReader("{\"foo\":\"Hello world!\",\"bar\":3}");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

@@ -13,7 +13,7 @@ namespace Tests.Parsers
         public void JsonParser_ResultsShouldBeObject()
         {
             // Arrange
-            IStringReader reader = new IStringReader("{\"foo\":\"bar\"}");
+            IStringReader reader = new StringReader("{\"foo\":\"bar\"}");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -27,7 +27,7 @@ namespace Tests.Parsers
         public void JsonParser_ResultsShouldBeArray()
         {
             // Arrange
-            IStringReader reader = new IStringReader("[\"foo\", \"bar\", \"baz\"]");
+            IStringReader reader = new StringReader("[\"foo\", \"bar\", \"baz\"]");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -41,7 +41,7 @@ namespace Tests.Parsers
         public void JsonParser_ResultsShouldBeString()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo bar baz\"");
+            IStringReader reader = new StringReader("\"foo bar baz\"");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -55,7 +55,7 @@ namespace Tests.Parsers
         public void JsonParser_ResultsShouldBeNumber()
         {
             // Arrange
-            IStringReader reader = new IStringReader("1.23");
+            IStringReader reader = new StringReader("1.23");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -69,7 +69,7 @@ namespace Tests.Parsers
         public void JsonParser_ResultsShouldBeBoolean()
         {
             // Arrange
-            IStringReader reader = new IStringReader("true");
+            IStringReader reader = new StringReader("true");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -83,7 +83,7 @@ namespace Tests.Parsers
         public void JsonParser_ResultsShouldBeNull()
         {
             // Arrange
-            IStringReader reader = new IStringReader("null");
+            IStringReader reader = new StringReader("null");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -97,7 +97,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseObjectShouldFail_BecauseExpectedOpenObjectCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo\":\"bar\"}");
+            IStringReader reader = new StringReader("\"foo\":\"bar\"}");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -111,7 +111,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseObjectShouldFail_BecauseExpectedNameValueSeparator()
         {
             // Arrange
-            IStringReader reader = new IStringReader("{\"foo\"}");
+            IStringReader reader = new StringReader("{\"foo\"}");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -125,7 +125,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseObjectShouldFail_BecauseExpectedCloseObjectCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("{\"foo\":\"bar\"");
+            IStringReader reader = new StringReader("{\"foo\":\"bar\"");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -139,7 +139,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseArrayShouldFail_BecauseExpectedOpenArrayCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo\"]");
+            IStringReader reader = new StringReader("\"foo\"]");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -153,7 +153,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseArrayShouldFail_BecauseExpectedCloseArrayCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("[\"foo\"");
+            IStringReader reader = new StringReader("[\"foo\"");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -167,7 +167,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseStringShouldFail_BecauseExpectedOpenStringCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("foo\"");
+            IStringReader reader = new StringReader("foo\"");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -181,7 +181,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseStringShouldFail_BecauseInvalidEscapeSequence()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo\\\"");
+            IStringReader reader = new StringReader("\"foo\\\"");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -195,7 +195,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseStringShouldFail_BecauseUnterminatedEscapeSequence()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo\\u00");
+            IStringReader reader = new StringReader("\"foo\\u00");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -209,7 +209,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseStringShouldFail_BecauseInvalidUnicodeCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo\\uZZZZ\"");
+            IStringReader reader = new StringReader("\"foo\\uZZZZ\"");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act
@@ -223,7 +223,7 @@ namespace Tests.Parsers
         public void JsonParser_ParseStringShouldFail_BecauseExpectedCloseStringCharacter()
         {
             // Arrange
-            IStringReader reader = new IStringReader("\"foo");
+            IStringReader reader = new StringReader("\"foo");
             JsonReader jsonReader = new JsonReader(reader);
 
             // Act

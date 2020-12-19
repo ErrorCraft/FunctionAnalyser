@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.WORD);
-            IStringReader reader = new IStringReader("hello");
+            IStringReader reader = new StringReader("hello");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -28,7 +28,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.WORD);
-            IStringReader reader = new IStringReader("");
+            IStringReader reader = new StringReader("");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -42,7 +42,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.WORD);
-            IStringReader reader = new IStringReader("foo!@#");
+            IStringReader reader = new StringReader("foo!@#");
 
             // Act
             argument.Parse(reader, out _);
@@ -56,7 +56,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.QUOTABLE);
-            IStringReader reader = new IStringReader("foo");
+            IStringReader reader = new StringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -70,7 +70,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.QUOTABLE);
-            IStringReader reader = new IStringReader("'foo bar'");
+            IStringReader reader = new StringReader("'foo bar'");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -84,7 +84,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.QUOTABLE);
-            IStringReader reader = new IStringReader("'foo");
+            IStringReader reader = new StringReader("'foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -98,7 +98,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.QUOTABLE);
-            IStringReader reader = new IStringReader("\"foo\\bar\"");
+            IStringReader reader = new StringReader("\"foo\\bar\"");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -112,7 +112,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.QUOTABLE);
-            IStringReader reader = new IStringReader("\"\\\"foo bar\\\"\"");
+            IStringReader reader = new StringReader("\"\\\"foo bar\\\"\"");
 
             // Act
             argument.Parse(reader, out string result);
@@ -126,7 +126,7 @@ namespace Tests.Arguments
         {
             // Arrange
             StringArgument argument = new StringArgument(StringType.GREEDY);
-            IStringReader reader = new IStringReader("Hello world! This is a test.");
+            IStringReader reader = new StringReader("Hello world! This is a test.");
 
             // Act
             argument.Parse(reader, out _);

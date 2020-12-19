@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             AngleArgument argument = new AngleArgument();
-            IStringReader reader = new IStringReader("1.0");
+            IStringReader reader = new StringReader("1.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             AngleArgument argument = new AngleArgument();
-            IStringReader reader = new IStringReader("~1.0");
+            IStringReader reader = new StringReader("~1.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             AngleArgument argument = new AngleArgument();
-            IStringReader reader = new IStringReader("~");
+            IStringReader reader = new StringReader("~");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -55,7 +55,7 @@ namespace Tests.Arguments
         {
             // Arrange
             AngleArgument argument = new AngleArgument();
-            IStringReader reader = new IStringReader("^1.0");
+            IStringReader reader = new StringReader("^1.0");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

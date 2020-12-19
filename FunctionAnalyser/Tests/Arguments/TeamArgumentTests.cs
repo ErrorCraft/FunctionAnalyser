@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             TeamArgument argument = new TeamArgument();
-            IStringReader reader = new IStringReader("foo");
+            IStringReader reader = new StringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             TeamArgument argument = new TeamArgument();
-            IStringReader reader = new IStringReader("");
+            IStringReader reader = new StringReader("");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             TeamArgument argument = new TeamArgument();
-            IStringReader reader = new IStringReader("foo!@#");
+            IStringReader reader = new StringReader("foo!@#");
 
             // Act
             argument.Parse(reader, out _);

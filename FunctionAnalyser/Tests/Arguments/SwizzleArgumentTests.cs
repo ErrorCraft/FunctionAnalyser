@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             HashSet<char> characters = new HashSet<char>() { 'a', 'b', 'c' };
             SwizzleArgument argument = new SwizzleArgument(characters);
-            IStringReader reader = new IStringReader("abc");
+            IStringReader reader = new StringReader("abc");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             HashSet<char> characters = new HashSet<char>() { 'a', 'b', 'c' };
             SwizzleArgument argument = new SwizzleArgument(characters);
-            IStringReader reader = new IStringReader("abbc");
+            IStringReader reader = new StringReader("abbc");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -45,7 +45,7 @@ namespace Tests.Arguments
             // Arrange
             HashSet<char> characters = new HashSet<char>() { 'a', 'b', 'c' };
             SwizzleArgument argument = new SwizzleArgument(characters);
-            IStringReader reader = new IStringReader("abcd");
+            IStringReader reader = new StringReader("abcd");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -60,7 +60,7 @@ namespace Tests.Arguments
             // Arrange
             HashSet<char> characters = new HashSet<char>() { 'a', 'b', 'c' };
             SwizzleArgument argument = new SwizzleArgument(characters);
-            IStringReader reader = new IStringReader("ab c");
+            IStringReader reader = new StringReader("ab c");
 
             // Act
             argument.Parse(reader, out _);

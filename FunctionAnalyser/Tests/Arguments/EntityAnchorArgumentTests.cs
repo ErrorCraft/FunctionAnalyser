@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             Anchors.Set("[\"foo\",\"bar\"]");
             EntityAnchorArgument argument = new EntityAnchorArgument();
-            IStringReader reader = new IStringReader("foo");
+            IStringReader reader = new StringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             Anchors.Set("[\"foo\",\"bar\"]");
             EntityAnchorArgument argument = new EntityAnchorArgument();
-            IStringReader reader = new IStringReader("baz");
+            IStringReader reader = new StringReader("baz");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             Particles.Set("{\"foo\":{},\"bar\":{\"children\":{\"baz\":{\"type\":\"argument\",\"parser\":\"double\"}}}}");
             ParticleArgument argument = new ParticleArgument();
-            IStringReader reader = new IStringReader("foo");
+            IStringReader reader = new StringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             Particles.Set("{\"foo\":{},\"bar\":{\"children\":{\"baz\":{\"type\":\"argument\",\"parser\":\"double\"}}}}");
             ParticleArgument argument = new ParticleArgument();
-            IStringReader reader = new IStringReader("minecraft:foo");
+            IStringReader reader = new StringReader("minecraft:foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -45,7 +45,7 @@ namespace Tests.Arguments
             // Arrange
             Particles.Set("{\"foo\":{},\"bar\":{\"children\":{\"baz\":{\"type\":\"argument\",\"parser\":\"double\"}}}}");
             ParticleArgument argument = new ParticleArgument();
-            IStringReader reader = new IStringReader("hello");
+            IStringReader reader = new StringReader("hello");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -60,7 +60,7 @@ namespace Tests.Arguments
             // Arrange
             Particles.Set("{\"foo\":{},\"bar\":{\"children\":{\"baz\":{\"type\":\"argument\",\"parser\":\"double\"}}}}");
             ParticleArgument argument = new ParticleArgument();
-            IStringReader reader = new IStringReader("bar 1.5");
+            IStringReader reader = new StringReader("bar 1.5");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -75,7 +75,7 @@ namespace Tests.Arguments
             // Arrange
             Particles.Set("{\"foo\":{},\"bar\":{\"children\":{\"baz\":{\"type\":\"argument\",\"parser\":\"double\"}}}}");
             ParticleArgument argument = new ParticleArgument();
-            IStringReader reader = new IStringReader("bar");
+            IStringReader reader = new StringReader("bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument();
-            IStringReader reader = new IStringReader("1");
+            IStringReader reader = new StringReader("1");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -28,7 +28,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument();
-            IStringReader reader = new IStringReader("1..10");
+            IStringReader reader = new StringReader("1..10");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -42,7 +42,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument(true);
-            IStringReader reader = new IStringReader("10..-10");
+            IStringReader reader = new StringReader("10..-10");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -56,7 +56,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument();
-            IStringReader reader = new IStringReader("1..10");
+            IStringReader reader = new StringReader("1..10");
 
             // Act
             argument.Parse(reader, out Range<int> result);
@@ -70,7 +70,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument();
-            IStringReader reader = new IStringReader("..");
+            IStringReader reader = new StringReader("..");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -84,7 +84,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument();
-            IStringReader reader = new IStringReader("1..");
+            IStringReader reader = new StringReader("1..");
 
             // Act
             argument.Parse(reader, out Range<int> result);
@@ -98,7 +98,7 @@ namespace Tests.Arguments
         {
             // Arrange
             IntegerRangeArgument argument = new IntegerRangeArgument();
-            IStringReader reader = new IStringReader("..10");
+            IStringReader reader = new StringReader("..10");
 
             // Act
             argument.Parse(reader, out Range<int> result);

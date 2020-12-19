@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ResourceLocationArgument argument = new ResourceLocationArgument();
-            IStringReader reader = new IStringReader("foo:bar");
+            IStringReader reader = new StringReader("foo:bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -28,7 +28,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ResourceLocationArgument argument = new ResourceLocationArgument();
-            IStringReader reader = new IStringReader("foo::bar");
+            IStringReader reader = new StringReader("foo::bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -42,7 +42,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ResourceLocationArgument argument = new ResourceLocationArgument();
-            IStringReader reader = new IStringReader("foo:barBAZ");
+            IStringReader reader = new StringReader("foo:barBAZ");
 
             // Act
             argument.Parse(reader, out _);
@@ -56,7 +56,7 @@ namespace Tests.Arguments
         {
             // Arrange
             ResourceLocationArgument argument = new ResourceLocationArgument();
-            IStringReader reader = new IStringReader("foo");
+            IStringReader reader = new StringReader("foo");
 
             // Act
             argument.Parse(reader, out ResourceLocation result);

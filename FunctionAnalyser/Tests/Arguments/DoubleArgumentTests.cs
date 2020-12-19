@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleArgument argument = new DoubleArgument();
-            IStringReader reader = new IStringReader("123");
+            IStringReader reader = new StringReader("123");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleArgument argument = new DoubleArgument();
-            IStringReader reader = new IStringReader("foo");
+            IStringReader reader = new StringReader("foo");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -41,7 +41,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleArgument argument = new DoubleArgument();
-            IStringReader reader = new IStringReader("123");
+            IStringReader reader = new StringReader("123");
 
             // Act
             argument.Parse(reader, out double result);
@@ -55,7 +55,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleArgument argument = new DoubleArgument();
-            IStringReader reader = new IStringReader("1..5");
+            IStringReader reader = new StringReader("1..5");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -69,7 +69,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleArgument argument = new DoubleArgument(maximum: 0.0d);
-            IStringReader reader = new IStringReader("10");
+            IStringReader reader = new StringReader("10");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -83,7 +83,7 @@ namespace Tests.Arguments
         {
             // Arrange
             DoubleArgument argument = new DoubleArgument(minimum: 0.0d);
-            IStringReader reader = new IStringReader("-10");
+            IStringReader reader = new StringReader("-10");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

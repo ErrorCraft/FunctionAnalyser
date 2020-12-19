@@ -15,7 +15,7 @@ namespace Tests.Arguments
             // Arrange
             Colours.Set("[\"red\", \"green\"]");
             ColourArgument argument = new ColourArgument();
-            IStringReader reader = new IStringReader("red");
+            IStringReader reader = new StringReader("red");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -30,7 +30,7 @@ namespace Tests.Arguments
             // Arrange
             Colours.Set("[\"red\", \"green\"]");
             ColourArgument argument = new ColourArgument();
-            IStringReader reader = new IStringReader("blue");
+            IStringReader reader = new StringReader("blue");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

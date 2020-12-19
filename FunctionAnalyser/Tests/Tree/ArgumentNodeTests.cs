@@ -15,7 +15,7 @@ namespace Tests.Tree
         {
             // Arrange
             Node node = Argument("foo", new IntegerArgument(), true, null);
-            IStringReader reader = new IStringReader("123 456");
+            IStringReader reader = new StringReader("123 456");
             CommandContext context = new CommandContext(0);
 
             // Act

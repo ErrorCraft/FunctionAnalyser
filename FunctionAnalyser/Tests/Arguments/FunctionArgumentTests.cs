@@ -13,7 +13,7 @@ namespace Tests.Arguments
         {
             // Arrange
             FunctionArgument argument = new FunctionArgument();
-            IStringReader reader = new IStringReader("foo:bar");
+            IStringReader reader = new StringReader("foo:bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -27,7 +27,7 @@ namespace Tests.Arguments
         {
             // Arrange
             FunctionArgument argument = new FunctionArgument();
-            IStringReader reader = new IStringReader("foo::bar");
+            IStringReader reader = new StringReader("foo::bar");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);

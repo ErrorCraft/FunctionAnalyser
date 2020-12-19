@@ -14,7 +14,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("Steve");
+            IStringReader reader = new StringReader("Steve");
 
             // Act
             argument.Parse(reader, out _);
@@ -28,7 +28,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("1-2-3-4-5");
+            IStringReader reader = new StringReader("1-2-3-4-5");
 
             // Act
             argument.Parse(reader, out _);
@@ -42,7 +42,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a");
+            IStringReader reader = new StringReader("@a");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -56,7 +56,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@");
+            IStringReader reader = new StringReader("@");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -70,7 +70,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@m");
+            IStringReader reader = new StringReader("@m");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -85,7 +85,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"foo\":{\"contents\":{\"type\":\"argument\",\"parser\":\"string\",\"properties\":{\"type\":\"word\"}}}, \"baz\":{\"contents\":{\"type\":\"argument\",\"parser\":\"integer\"}}}");
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a[foo=bar, baz=3]");
+            IStringReader reader = new StringReader("@a[foo=bar, baz=3]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -100,7 +100,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"foo\":{\"contents\":{\"type\":\"argument\",\"parser\":\"string\",\"properties\":{\"type\":\"word\"}}}, \"baz\":{\"contents\":{\"type\":\"argument\",\"parser\":\"integer\"}}}");
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a[hello=false]");
+            IStringReader reader = new StringReader("@a[hello=false]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -114,7 +114,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(true, false);
-            IStringReader reader = new IStringReader("Steve");
+            IStringReader reader = new StringReader("Steve");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -128,7 +128,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(false, true);
-            IStringReader reader = new IStringReader("Steve");
+            IStringReader reader = new StringReader("Steve");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -142,7 +142,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(true, false);
-            IStringReader reader = new IStringReader("1-2-3-4-5");
+            IStringReader reader = new StringReader("1-2-3-4-5");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -156,7 +156,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(false, true);
-            IStringReader reader = new IStringReader("1-2-3-4-5");
+            IStringReader reader = new StringReader("1-2-3-4-5");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -170,7 +170,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(true, false);
-            IStringReader reader = new IStringReader("@a");
+            IStringReader reader = new StringReader("@a");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -184,7 +184,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(false, true);
-            IStringReader reader = new IStringReader("@a");
+            IStringReader reader = new StringReader("@a");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -198,7 +198,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(true, false);
-            IStringReader reader = new IStringReader("@e");
+            IStringReader reader = new StringReader("@e");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -213,7 +213,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"limit\":{\"predicate\":\"set_limit\"}}");
             EntityArgument argument = new EntityArgument(true, false);
-            IStringReader reader = new IStringReader("@e[limit=1]");
+            IStringReader reader = new StringReader("@e[limit=1]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -227,7 +227,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(false, true);
-            IStringReader reader = new IStringReader("@e");
+            IStringReader reader = new StringReader("@e");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -241,7 +241,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(true, false);
-            IStringReader reader = new IStringReader("@s");
+            IStringReader reader = new StringReader("@s");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -255,7 +255,7 @@ namespace Tests.Arguments
         {
             // Arrange
             EntityArgument argument = new EntityArgument(false, true);
-            IStringReader reader = new IStringReader("@s");
+            IStringReader reader = new StringReader("@s");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -270,7 +270,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"foo\":{\"contents\":{\"type\":\"argument\",\"parser\":\"string\",\"properties\":{\"type\":\"word\"}}}}");
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a[foo=bar, foo=baz]");
+            IStringReader reader = new StringReader("@a[foo=bar, foo=baz]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -285,7 +285,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"foo\":{\"reapplication_type\":\"always\",\"contents\":{\"type\":\"argument\",\"parser\":\"string\",\"properties\":{\"type\":\"word\"}}}}");
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a[foo=bar, foo=baz]");
+            IStringReader reader = new StringReader("@a[foo=bar, foo=baz]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -300,7 +300,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"foo\":{\"reapplication_type\":\"only_if_inverted\",\"allow_inverse\":true,\"contents\":{\"type\":\"argument\",\"parser\":\"string\",\"properties\":{\"type\":\"word\"}}}}");
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a[foo=!bar, foo=!baz]");
+            IStringReader reader = new StringReader("@a[foo=!bar, foo=!baz]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
@@ -315,7 +315,7 @@ namespace Tests.Arguments
             // Arrange
             EntitySelectorOptions.Set("{\"foo\":{\"reapplication_type\":\"only_if_inverted\",\"allow_inverse\":true,\"contents\":{\"type\":\"argument\",\"parser\":\"string\",\"properties\":{\"type\":\"word\"}}}}");
             EntityArgument argument = new EntityArgument();
-            IStringReader reader = new IStringReader("@a[foo=bar, foo=!baz]");
+            IStringReader reader = new StringReader("@a[foo=bar, foo=!baz]");
 
             // Act
             ReadResults readResults = argument.Parse(reader, out _);
