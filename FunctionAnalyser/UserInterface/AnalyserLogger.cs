@@ -24,10 +24,10 @@ namespace UserInterface
 
         public string GetFlatString()
         {
-            return FlatString;
+            return FlatString.Trim('\n') + "\n";
         }
 
-        private IEnumerable<Run> GetRuns(TextComponent component, bool endWithNewLine)
+        private IEnumerable<Run> GetRuns(TextComponent component)
         {
             TextComponent actualComponent = component;
             while (actualComponent != null)
@@ -35,7 +35,6 @@ namespace UserInterface
                 yield return GetRun(actualComponent);
                 actualComponent = actualComponent.Child;
             }
-            if (endWithNewLine) yield return GetRun(new TextComponent("\n"));
         }
 
         private Run GetRun(TextComponent component)
@@ -69,11 +68,10 @@ namespace UserInterface
                 Disp.Invoke(() =>
                 {
                     TextBlock tb = new TextBlock();
-                    for (int i = 0; i < components.Count - 1; i++)
+                    for (int i = 0; i < components.Count; i++)
                     {
-                        tb.Inlines.AddRange(GetRuns(components[i], true));
+                        tb.Inlines.AddRange(GetRuns(components[i]));
                     }
-                    tb.Inlines.AddRange(GetRuns(components[^1], false));
                     Objects.Add(tb);
                     FlatString += "\n";
                 });

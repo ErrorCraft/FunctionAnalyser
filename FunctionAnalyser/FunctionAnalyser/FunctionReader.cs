@@ -223,7 +223,7 @@ namespace FunctionAnalyser
             int totalLines = data.Comments.GetTotal() + data.EmptyLines.GetTotal() + data.Commands.GetTotal();
             List<TextComponent> components = new List<TextComponent>
             {
-                new TextComponent($"Information:").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
+                new TextComponent($"Information:\n").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
                 MessageProvider.Result($"Number of functions", data.Functions),
                 MessageProvider.Result($"Number of comments", data.Comments, totalLines),
                 MessageProvider.Result($"Number of empty lines", data.EmptyLines, totalLines),
@@ -236,11 +236,11 @@ namespace FunctionAnalyser
             }
 
             components.Add(new TextComponent("\n").With(MessageProvider.Message($"Selectors:")));
-            components.Add(MessageProvider.EntitySelector('p', data.Selectors.NearestPlayer));
-            components.Add(MessageProvider.EntitySelector('a', data.Selectors.AllPlayers));
-            components.Add(MessageProvider.EntitySelector('r', data.Selectors.RandomPlayer));
-            components.Add(MessageProvider.EntitySelector('e', data.Selectors.AllEntities));
-            components.Add(MessageProvider.EntitySelector('s', data.Selectors.CurrentEntity));
+            components.Add(MessageProvider.EntitySelector('p', data.Selectors.NearestPlayer, data.Functions.GetTotal(), data.Commands.GetTotal()));
+            components.Add(MessageProvider.EntitySelector('a', data.Selectors.AllPlayers, data.Functions.GetTotal(), data.Commands.GetTotal()));
+            components.Add(MessageProvider.EntitySelector('r', data.Selectors.RandomPlayer, data.Functions.GetTotal(), data.Commands.GetTotal()));
+            components.Add(MessageProvider.EntitySelector('e', data.Selectors.AllEntities, data.Functions.GetTotal(), data.Commands.GetTotal()));
+            components.Add(MessageProvider.EntitySelector('s', data.Selectors.CurrentEntity, data.Functions.GetTotal(), data.Commands.GetTotal()));
 
             components.Add(MessageProvider.Result($"Function calls", data.FunctionCalls));
             components.Add(MessageProvider.Result($"Predicate calls", data.PredicateCalls));
