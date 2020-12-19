@@ -5,11 +5,9 @@ using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using FunctionAnalyser.Results;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using BuiltinTextColours = AdvancedText.Colour.BuiltinColours;
 
 namespace FunctionAnalyser
@@ -19,7 +17,7 @@ namespace FunctionAnalyser
         private static Dictionary<string, Dispatcher> Versions;
 
         private readonly string BasePath;
-        private readonly IProgress<FunctionProgress> Progress;
+        private readonly System.IProgress<FunctionProgress> Progress;
         private readonly ILogger Logger;
         private readonly FunctionOptions Options;
 
@@ -28,7 +26,7 @@ namespace FunctionAnalyser
             Versions = JsonConvert.DeserializeObject<Dictionary<string, Dispatcher>>(json);
         }
 
-        public FunctionReader(string basePath, ILogger logger, IProgress<FunctionProgress> progress, FunctionOptions options)
+        public FunctionReader(string basePath, ILogger logger, System.IProgress<FunctionProgress> progress, FunctionOptions options)
         {
             BasePath = basePath;
             Logger = logger;
@@ -156,7 +154,7 @@ namespace FunctionAnalyser
                     }
                 }
                 if (Options.SkipFunctionOnError) return functionData;
-            } else if (functionData.Commands == 0)
+            } else if (functionData.Commands.GetTotal() == 0)
             {
                 if (Options.ShowEmptyFunctions)
                 {
@@ -173,45 +171,45 @@ namespace FunctionAnalyser
             object result = argument.GetResult();
             if (argument.IsFromRoot())
             {
-                if (result is Literal literal)
-                {
-                    data.UsedCommands.Increase(literal.Value, !firstArgument);
-                }
+                if (result is Literal literal) data.UsedCommands.Increase(literal.Value, !firstArgument);
             }
-            else if (result is Function)
-            {
-                data.FunctionCalls.Increase();
-            }
-            else if (result is EntitySelector entitySelector)
-            {
-                // Selector type
-                switch (entitySelector.SelectorType)
-                {
-                    case SelectorType.NearestPlayer:
-                        data.Selectors.NearestPlayer++;
-                        break;
-                    case SelectorType.AllPlayers:
-                        data.Selectors.AllPlayers++;
-                        break;
-                    case SelectorType.RandomPlayer:
-                        data.Selectors.RandomPlayer++;
-                        break;
-                    case SelectorType.AllEntities:
-                        data.Selectors.AllEntities++;
-                        break;
-                    case SelectorType.Self:
-                        data.Selectors.CurrentEntity++;
-                        break;
-                }
+            else if (result is Function) data.FunctionCalls.Increase();
+            else if (result is EntitySelector entitySelector) AnalyseSelector(entitySelector, data);
+            else if (result is Predicate) data.PredicateCalls.Increase(inSelector);
+            else if (result is NbtPath) data.NbtAccess.Increase(false);
+            else if (result is Nbt && inSelector) data.NbtAccess.Increase(true);
+            else if (result is Storage) data.StorageUsage.Increase();
+            else if (result is LootTable) data.LootTableUsage.Increase();
+            else if (result is ItemModifier) data.ItemModifierUsage.Increase();
+            else if (result is Attribute) data.AttributeUsage.Increase();
+        }
 
-                // Analyse selector arguments
-                for (int i = 0; i < entitySelector.Arguments.Count; i++)
-                {
-                    AnalyseArgument(entitySelector.Arguments[i], data, false, true);
-                }
-            } else if (result is Predicate)
+        private static void AnalyseSelector(EntitySelector entitySelector, FunctionData data)
+        {
+            // Selector type
+            switch (entitySelector.SelectorType)
             {
-                data.PredicateCalls.Increase(inSelector);
+                case SelectorType.NearestPlayer:
+                    data.Selectors.NearestPlayer++;
+                    break;
+                case SelectorType.AllPlayers:
+                    data.Selectors.AllPlayers++;
+                    break;
+                case SelectorType.RandomPlayer:
+                    data.Selectors.RandomPlayer++;
+                    break;
+                case SelectorType.AllEntities:
+                    data.Selectors.AllEntities++;
+                    break;
+                case SelectorType.Self:
+                    data.Selectors.CurrentEntity++;
+                    break;
+            }
+
+            // Analyse selector arguments
+            for (int i = 0; i < entitySelector.Arguments.Count; i++)
+            {
+                AnalyseArgument(entitySelector.Arguments[i], data, false, true);
             }
         }
 
@@ -220,31 +218,16 @@ namespace FunctionAnalyser
             return $".{file[BasePath.Length..]}";
         }
 
-        private static string GetAverageMessage(FunctionData data, int item)
-        {
-            if (data.Functions == 0) return "";
-
-            StringBuilder stringBuilder = new StringBuilder("(Average: ");
-            stringBuilder.Append($"{item / data.Functions:#0.00} per file");
-
-            if (data.Commands > 0)
-            {
-                stringBuilder.Append($", {item / data.Commands:#0.00} per command");
-            }
-
-            stringBuilder.Append(')');
-            return stringBuilder.ToString();
-        }
-
         private void Report(FunctionData data)
         {
+            int totalLines = data.Comments.GetTotal() + data.EmptyLines.GetTotal() + data.Commands.GetTotal();
             List<TextComponent> components = new List<TextComponent>
             {
                 new TextComponent($"Information:").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
                 MessageProvider.Result($"Number of functions", data.Functions),
-                MessageProvider.Result($"Number of comments", data.Comments),
-                MessageProvider.Result($"Number of empty lines", data.EmptyLines),
-                MessageProvider.Result($"Number of commands", data.Commands)
+                MessageProvider.Result($"Number of comments", data.Comments, totalLines),
+                MessageProvider.Result($"Number of empty lines", data.EmptyLines, totalLines),
+                MessageProvider.Result($"Number of commands", data.Commands, totalLines)
             };
 
             foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSort))
@@ -261,6 +244,11 @@ namespace FunctionAnalyser
 
             components.Add(MessageProvider.Result($"Function calls", data.FunctionCalls));
             components.Add(MessageProvider.Result($"Predicate calls", data.PredicateCalls));
+            components.Add(MessageProvider.Result($"NBT access", data.NbtAccess));
+            components.Add(MessageProvider.Result($"Usage of storage", data.StorageUsage));
+            components.Add(MessageProvider.Result($"Usage of loot tables", data.LootTableUsage));
+            components.Add(MessageProvider.Result($"Usage of item modifiers", data.ItemModifierUsage));
+            components.Add(MessageProvider.Result($"Usage of attributes", data.AttributeUsage));
 
             Logger.Log(components);
         }

@@ -2,8 +2,9 @@
 
 namespace FunctionAnalyser.Results
 {
-    public interface IGenericResult
+    public interface IResult
     {
+        int GetTotal();
         TextComponent ToTextComponent();
     }
 }

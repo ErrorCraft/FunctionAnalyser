@@ -39,7 +39,18 @@
 
         public TextComponent With(TextComponent child)
         {
-            Child = child;
+            if (Child == null)
+            {
+                Child = child;
+            } else
+            {
+                TextComponent lastChild = Child;
+                while (lastChild.Child != null)
+                {
+                    lastChild = lastChild.Child;
+                }
+                lastChild.With(child);
+            }
             return this;
         }
 
