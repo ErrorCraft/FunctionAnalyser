@@ -90,7 +90,7 @@
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="4">
-                <ComboBox ItemsSource="{Binding CommandSortings}" SelectedIndex="{Binding CommandSortingsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
+                <ComboBox ItemsSource="{Binding CommandSortTypes}" SelectedIndex="{Binding CommandSortTypesSelectedIndex}" IsEnabled="{Binding CommandSortTypesEnabled}"></ComboBox>
             </Grid>
         </Grid>
 

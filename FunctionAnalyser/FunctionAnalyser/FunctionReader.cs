@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using BuiltinTextColours = AdvancedText.Colour.BuiltinColours;
+using static AdvancedText.Colour;
 
 namespace FunctionAnalyser
 {
@@ -50,17 +50,17 @@ namespace FunctionAnalyser
         {
             if (!Directory.Exists(BasePath))
             {
-                Logger.Log(new TextComponent("Folder ").WithColour(BuiltinTextColours.GREY).With(
-                    new TextComponent(BasePath).WithColour(BuiltinTextColours.DARK_GREEN).With(
-                        new TextComponent($" does not exist!").WithColour(BuiltinTextColours.GREY)
+                Logger.Log(new TextComponent("Folder ").WithColour(BuiltinColours.GREY).With(
+                    new TextComponent(BasePath).WithColour(BuiltinColours.DARK_GREEN).With(
+                        new TextComponent($" does not exist!").WithColour(BuiltinColours.GREY)
                         )
                     ));
                 return;
             }
 
-            Logger.Log(new TextComponent("Analysing all functions in folder ").WithColour(BuiltinTextColours.GREY).With(
-                new TextComponent(BasePath).WithColour(BuiltinTextColours.DARK_GREEN).With(
-                    new TextComponent($"\nVersion: {Versions[version].GetName()}\n").WithColour(BuiltinTextColours.GREY)
+            Logger.Log(new TextComponent("Analysing all functions in folder ").WithColour(BuiltinColours.GREY).With(
+                new TextComponent(BasePath).WithColour(BuiltinColours.DARK_GREEN).With(
+                    new TextComponent($"\nVersion: {Versions[version].GetName()}\n").WithColour(BuiltinColours.GREY)
                     )
                 ));
 
@@ -68,7 +68,7 @@ namespace FunctionAnalyser
             FunctionData results = AnalyseFunctions(version);
             timer.Stop();
 
-            Logger.Log(new TextComponent($"Time spent reading: {timer.ElapsedTicks / 10000.0d:0.0000ms}\n").WithColour(BuiltinTextColours.DARK_AQUA).WithStyle(false, true));
+            Logger.Log(new TextComponent($"Time spent reading: {timer.ElapsedTicks / 10000.0d:0.0000ms}\n").WithColour(BuiltinColours.DARK_AQUA).WithStyle(false, true));
             Report(results);
         }
 
@@ -235,7 +235,7 @@ namespace FunctionAnalyser
             int totalLines = data.Comments.GetTotal() + data.EmptyLines.GetTotal() + data.Commands.GetTotal();
             List<TextComponent> components = new List<TextComponent>
             {
-                new TextComponent($"Information:\n").WithColour(BuiltinTextColours.GREY).WithStyle(false, true),
+                new TextComponent($"Information:\n").WithColour(BuiltinColours.GREY).WithStyle(false, true),
                 MessageProvider.Result($"Number of functions", data.Functions),
                 MessageProvider.Result($"Number of comments", data.Comments, totalLines),
                 MessageProvider.Result($"Number of empty lines", data.EmptyLines, totalLines),
