@@ -51,6 +51,7 @@
                 <ColumnDefinition Width="167"></ColumnDefinition>
                 <ColumnDefinition Width="167"></ColumnDefinition>
                 <ColumnDefinition Width="167"></ColumnDefinition>
+                <ColumnDefinition Width="167"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
@@ -60,7 +61,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton x:Name="SkipFunctionOnErrorToggle" Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}"></ToggleButton>
+                <ToggleButton Grid.Column="0" Margin="4" IsChecked="{Binding SkipFunctionOnError}" IsEnabled="{Binding SkipFunctionOnErrorEnabled}"></ToggleButton>
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Skip function on error" ToolTip="{Binding SkipFunctionOnErrorTooltip}"></Label>
             </Grid>
 
@@ -70,7 +71,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton x:Name="ShowCommandErrorsToggle" Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}"></ToggleButton>
+                <ToggleButton Grid.Column="0" Margin="4" IsChecked="{Binding ShowCommandErrors}" IsEnabled="{Binding ShowCommandErrorsEnabled}"></ToggleButton>
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Show command errors" ToolTip="{Binding ShowCommandErrorsTooltip}"></Label>
             </Grid>
 
@@ -80,8 +81,12 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton x:Name="ShowEmptyFunctionsToggle" Grid.Column="0" Margin="4" IsEnabled="{Binding EnableOptions}"></ToggleButton>
+                <ToggleButton Grid.Column="0" Margin="4" IsChecked="{Binding ShowEmptyFunctions}" IsEnabled="{Binding ShowEmptyFunctionsEnabled}"></ToggleButton>
                 <Label Grid.Column="1" VerticalAlignment="Center" Content="Show empty functions" ToolTip="{Binding ShowEmptyFunctionsTooltip}"></Label>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="3">
+                <ComboBox IsEnabled="{Binding VersionsEnabled}"></ComboBox>
             </Grid>
         </Grid>
 
@@ -93,9 +98,9 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ExportButton" Grid.Row="0" Grid.Column="0" Content="Export Data" Click="ExportResults" IsEnabled="False"/>
-            <Button x:Name="FolderButton" Grid.Row="1" Grid.Column="0" Content="Select Folder" Click="SelectFolder" IsEnabled="False"/>
-            <Button x:Name="AnalyseButton" Grid.Row="2" Grid.Column="0" Content="Analyse" Click="ReadFiles" IsEnabled="False"/>
+            <Button Grid.Row="0" Content="Export Data" Click="ExportResults" IsEnabled="{Binding ExportDataEnabled}"/>
+            <Button Grid.Row="1" Content="Select Folder" Click="SelectFolder" IsEnabled="{Binding SelectFolderEnabled}"/>
+            <Button Grid.Row="2" Content="Analyse" Click="ReadFiles" IsEnabled="{Binding AnalyseEnabled}"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1" Background="#4C4C4C">
@@ -105,7 +110,7 @@
             </Grid.RowDefinitions>
 
             <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="Output" FontFamily="Courier New"/>
+                <ItemsControl x:Name="Output" ItemsSource="{Binding Blocks}" FontFamily="Courier New"/>
             </ScrollViewer>
             <ProgressBar x:Name="Progress" Foreground="#00ACED" Grid.Row="1" Background="White" BorderThickness="0" Minimum="0" Maximum="1"></ProgressBar>
         </Grid>

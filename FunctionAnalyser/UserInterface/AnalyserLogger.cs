@@ -24,7 +24,7 @@ namespace UserInterface
 
         public string GetFlatString()
         {
-            return FlatString.Trim('\n') + "\n";
+            return FlatString.TrimEnd('\n') + "\n";
         }
 
         private IEnumerable<Run> GetRuns(TextComponent component)

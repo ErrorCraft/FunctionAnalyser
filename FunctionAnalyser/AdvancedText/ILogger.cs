@@ -7,5 +7,6 @@ namespace AdvancedText
         void Log(TextComponent component);
         void Log(List<TextComponent> component);
         void Clear();
+        string GetFlatString();
     }
 }

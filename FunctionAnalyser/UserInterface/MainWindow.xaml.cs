@@ -1,41 +1,26 @@
 ﻿using AdvancedText;
+using CommandFilesApi;
 using FunctionAnalyser;
+using FunctionAnalyser.Results;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using IO = System.IO;
 using System;
+using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
-using CommandFilesApi;
-using System.Net.Http;
-using System.Threading;
-using System.Diagnostics;
-using CommandParser;
-using System.Collections.Generic;
-using System.Windows.Documents;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Collections.ObjectModel;
-using FunctionAnalyser.Results;
 
 namespace UserInterface
 {
     public partial class MainWindow : Window
     {
-        private readonly AnalyserLogger Logger;
-        private string FolderPath;
-        private readonly ObservableCollection<TextBlock> Blocks;
+        private readonly MainWindowModel Model;
+        private readonly ILogger Logger;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowModel();
-
-            Blocks = new ObservableCollection<TextBlock>();
-            Output.ItemsSource = Blocks;
-            Logger = new AnalyserLogger(Blocks, Output.Dispatcher);
-
-            FolderPath = "";
-            TextComponent.SetDefaultColour(Colour.BuiltinColours.WHITE);
+            DataContext = Model = new MainWindowModel();
+            Logger = new AnalyserLogger(Model.Blocks, Output.Dispatcher);
             ApiHelper.Initialise();
         }
 
@@ -44,8 +29,8 @@ namespace UserInterface
             CommonOpenFileDialog select = new CommonOpenFileDialog("Select a folder") { IsFolderPicker = true };
             if (select.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                FolderPath = select.FileName;
-                AnalyseButton.IsEnabled = true;
+                Model.FolderPath = select.FileName;
+                Model.AnalyseEnabled = true;
             }
         }
 
@@ -55,44 +40,31 @@ namespace UserInterface
             save.Filters.Add(new CommonFileDialogFilter("Text Files", "*.txt"));
             if (save.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                await IO::File.WriteAllTextAsync(save.FileName, Logger.GetFlatString());
+                await File.WriteAllTextAsync(save.FileName, Logger.GetFlatString());
             }
         }
 
         private async void ReadFiles(object sender, RoutedEventArgs e)
         {
-            // Disable options
-            MainWindowModel.EnableOptions = false;
-            AnalyseButton.IsEnabled = false;
-            ExportButton.IsEnabled = false;
-            FolderButton.IsEnabled = false;
-
-            // Clear output
+            Model.DisableOptions();
+            Model.DisableButtons();
             Logger.Clear();
 
-            // Track progress
             Progress<FunctionProgress> progress = new Progress<FunctionProgress>();
             progress.ProgressChanged += ReportProgress;
 
-            // Reading
             FunctionOptions options = new FunctionOptions()
             {
-                SkipFunctionOnError = SkipFunctionOnErrorToggle.IsChecked.Value,
-                ShowCommandErrors = ShowCommandErrorsToggle.IsChecked.Value,
-                ShowEmptyFunctions = ShowEmptyFunctionsToggle.IsChecked.Value,
+                SkipFunctionOnError = Model.SkipFunctionOnError,
+                ShowCommandErrors = Model.ShowCommandErrors,
+                ShowEmptyFunctions = Model.ShowEmptyFunctions,
                 CommandSort = SortType.Alphabetical
             };
-            FunctionReader functionReader = new FunctionReader(FolderPath, Logger, progress, options);
-            await Task.Run(() =>
-            {
-                functionReader.Analyse("java");
-            });
+            FunctionReader functionReader = new FunctionReader(Model.FolderPath, Logger, progress, options);
+            await Task.Run(() => functionReader.Analyse("java"));
 
-            // Enable options again
-            MainWindowModel.EnableOptions = true;
-            AnalyseButton.IsEnabled = true;
-            ExportButton.IsEnabled = true;
-            FolderButton.IsEnabled = true;
+            Model.EnableOptions();
+            Model.EnableButtons();
         }
 
         private void ReportProgress(object sender, FunctionProgress e)
@@ -106,7 +78,8 @@ namespace UserInterface
             try
             {
                 await Task.Run(fileProcessor.GetFiles);
-                FolderButton.IsEnabled = true;
+                Model.SelectFolderEnabled = true;
+                Model.EnableOptions();
             } catch (HttpRequestException)
             {
                 // empty (everything is disabled)

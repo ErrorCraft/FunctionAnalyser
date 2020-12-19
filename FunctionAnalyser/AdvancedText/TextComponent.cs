@@ -2,7 +2,7 @@
 {
     public class TextComponent
     {
-        private static Colour DefaultColour = Colour.BuiltinColours.BLACK;
+        private static Colour DefaultColour = Colour.BuiltinColours.WHITE;
 
         public static void SetDefaultColour(Colour colour)
         {
