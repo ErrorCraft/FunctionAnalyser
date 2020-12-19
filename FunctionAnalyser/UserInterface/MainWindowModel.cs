@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
@@ -135,6 +136,8 @@ namespace UserInterface
 
 
         private bool _VersionsEnabled = false;
+        private List<CommandVersionViewModel> _Versions;
+        private int _VersionsSelectedIndex = 0;
         public bool VersionsEnabled
         {
             get { return _VersionsEnabled; }
@@ -143,6 +146,31 @@ namespace UserInterface
                 if (_VersionsEnabled != value)
                 {
                     _VersionsEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public List<CommandVersionViewModel> Versions
+        {
+            get { return _Versions; }
+            set
+            {
+                if (_Versions != value)
+                {
+                    _Versions = value;
+                    VersionsSelectedIndex = 0;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public int VersionsSelectedIndex
+        {
+            get { return _VersionsSelectedIndex; }
+            set
+            {
+                if (_VersionsSelectedIndex != value)
+                {
+                    _VersionsSelectedIndex = value;
                     OnPropertyChanged();
                 }
             }

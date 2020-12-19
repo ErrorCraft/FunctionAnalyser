@@ -61,7 +61,7 @@ namespace UserInterface
                 CommandSort = SortType.Alphabetical
             };
             FunctionReader functionReader = new FunctionReader(Model.FolderPath, Logger, progress, options);
-            await Task.Run(() => functionReader.Analyse("java"));
+            await Task.Run(() => functionReader.Analyse(Model.Versions[Model.VersionsSelectedIndex].GetCommandName()));
 
             Model.EnableOptions();
             Model.EnableButtons();
@@ -78,6 +78,7 @@ namespace UserInterface
             try
             {
                 await Task.Run(fileProcessor.GetFiles);
+                Model.Versions = CommandVersionViewModel.FromVersionNames(FunctionReader.GetVersionNames());
                 Model.SelectFolderEnabled = true;
                 Model.EnableOptions();
             } catch (HttpRequestException)

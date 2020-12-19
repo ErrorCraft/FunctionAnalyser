@@ -26,6 +26,18 @@ namespace FunctionAnalyser
             Versions = JsonConvert.DeserializeObject<Dictionary<string, Dispatcher>>(json);
         }
 
+        public static List<VersionName> GetVersionNames()
+        {
+            List<VersionName> versionNames = new List<VersionName>();
+
+            foreach (KeyValuePair<string, Dispatcher> kvp in Versions)
+            {
+                versionNames.Add(new VersionName(kvp.Key, kvp.Value.GetName()));
+            }
+
+            return versionNames;
+        }
+
         public FunctionReader(string basePath, ILogger logger, System.IProgress<FunctionProgress> progress, FunctionOptions options)
         {
             BasePath = basePath;
