@@ -1,7 +1,6 @@
 ﻿using AdvancedText;
 using CommandFilesApi;
 using FunctionAnalyser;
-using FunctionAnalyser.Results;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.IO;
@@ -58,7 +57,7 @@ namespace UserInterface
                 SkipFunctionOnError = Model.SkipFunctionOnError,
                 ShowCommandErrors = Model.ShowCommandErrors,
                 ShowEmptyFunctions = Model.ShowEmptyFunctions,
-                CommandSort = SortType.Alphabetical
+                CommandSortType = Model.CommandSortTypes[Model.CommandSortTypesSelectedIndex].Value
             };
             FunctionReader functionReader = new FunctionReader(Model.FolderPath, Logger, progress, options);
             await Task.Run(() => functionReader.Analyse(Model.Versions[Model.VersionsSelectedIndex].GetCommandName()));

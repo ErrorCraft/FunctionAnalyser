@@ -88,6 +88,10 @@
             <Grid Grid.Row="0" Grid.Column="3">
                 <ComboBox ItemsSource="{Binding Versions}" SelectedIndex="{Binding VersionsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
             </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="4">
+                <ComboBox ItemsSource="{Binding CommandSortings}" SelectedIndex="{Binding CommandSortingsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="#606060">

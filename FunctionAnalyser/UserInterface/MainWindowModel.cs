@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FunctionAnalyser.Results;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -176,6 +178,47 @@ namespace UserInterface
             }
         }
 
+        private bool _CommandSortTypesEnabled = false;
+        private List<SortTypeViewModel> _CommandSortTypes;
+        private int _CommandSortTypesSelectedIndex = 0;
+        public bool CommandSortTypesEnabled
+        {
+            get { return _CommandSortTypesEnabled; }
+            set
+            {
+                if (_CommandSortTypesEnabled != value)
+                {
+                    _CommandSortTypesEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public List<SortTypeViewModel> CommandSortTypes
+        {
+            get { return _CommandSortTypes; }
+            set
+            {
+                if (_CommandSortTypes != value)
+                {
+                    _CommandSortTypes = value;
+                    _CommandSortTypesSelectedIndex = 0;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public int CommandSortTypesSelectedIndex
+        {
+            get { return _CommandSortTypesSelectedIndex; }
+            set
+            {
+                if (_CommandSortTypesSelectedIndex != value)
+                {
+                    _CommandSortTypesSelectedIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private ObservableCollection<TextBlock> _Blocks = new ObservableCollection<TextBlock>();
         public ObservableCollection<TextBlock> Blocks
         {
@@ -192,12 +235,23 @@ namespace UserInterface
 
         public string FolderPath { get; set; }
 
+        public MainWindowModel()
+        {
+            List<SortTypeViewModel> sortTypes = new List<SortTypeViewModel>();
+            foreach (SortType sortType in Enum.GetValues<SortType>())
+            {
+                sortTypes.Add(new SortTypeViewModel(sortType));
+            }
+            CommandSortTypes = sortTypes;
+        }
+
         public void DisableOptions()
         {
             SkipFunctionOnErrorEnabled = false;
             ShowCommandErrorsEnabled = false;
             ShowEmptyFunctionsEnabled = false;
             VersionsEnabled = false;
+            CommandSortTypesEnabled = false;
         }
 
         public void EnableOptions()
@@ -206,6 +260,7 @@ namespace UserInterface
             ShowCommandErrorsEnabled = true;
             ShowEmptyFunctionsEnabled = true;
             VersionsEnabled = true;
+            CommandSortTypesEnabled = true;
         }
 
         public void DisableButtons()

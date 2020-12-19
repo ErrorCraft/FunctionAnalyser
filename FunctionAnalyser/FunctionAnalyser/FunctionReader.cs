@@ -242,7 +242,7 @@ namespace FunctionAnalyser
                 MessageProvider.Result($"Number of commands", data.Commands, totalLines)
             };
 
-            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSort))
+            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSortType))
             {
                 components.Add(MessageProvider.CommandResult(command.Key, command.Value));
             }
