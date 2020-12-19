@@ -1,6 +1,6 @@
 ﻿using FunctionAnalyser.Results;
 
-namespace UserInterface
+namespace UserInterface.ViewModels
 {
     public class SortTypeViewModel
     {

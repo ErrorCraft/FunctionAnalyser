@@ -7,18 +7,19 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using UserInterface.ViewModels;
 
 namespace UserInterface
 {
     public partial class MainWindow : Window
     {
-        private readonly MainWindowModel Model;
+        private readonly MainWindowViewModel Model;
         private readonly ILogger Logger;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = Model = new MainWindowModel();
+            DataContext = Model = new MainWindowViewModel();
             Logger = new AnalyserLogger(Model.Blocks, Output.Dispatcher);
             ApiHelper.Initialise();
         }

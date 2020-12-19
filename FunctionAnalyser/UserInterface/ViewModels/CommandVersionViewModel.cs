@@ -1,7 +1,7 @@
 ﻿using FunctionAnalyser;
 using System.Collections.Generic;
 
-namespace UserInterface
+namespace UserInterface.ViewModels
 {
     public class CommandVersionViewModel
     {

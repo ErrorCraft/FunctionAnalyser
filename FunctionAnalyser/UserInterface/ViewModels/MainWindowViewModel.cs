@@ -6,9 +6,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
-namespace UserInterface
+namespace UserInterface.ViewModels
 {
-    public class MainWindowModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public string SkipFunctionOnErrorTooltip { get; } = "Skips the function if it contains a command error.\nIt will not contribute to the information found.";
         private bool _SkipFunctionOnErrorEnabled = false;
@@ -235,7 +235,7 @@ namespace UserInterface
 
         public string FolderPath { get; set; }
 
-        public MainWindowModel()
+        public MainWindowViewModel()
         {
             List<SortTypeViewModel> sortTypes = new List<SortTypeViewModel>();
             foreach (SortType sortType in Enum.GetValues<SortType>())
@@ -278,7 +278,7 @@ namespace UserInterface
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
