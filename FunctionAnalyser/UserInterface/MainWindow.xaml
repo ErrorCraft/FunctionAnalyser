@@ -28,6 +28,8 @@
 
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Background" Value="#707070"></Setter>
+                                <Setter Property="BorderBrush" Value="Orange"></Setter>
+                                <Setter Property="BorderThickness" Value="2"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -35,88 +37,41 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="167"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="34"></RowDefinition>
+            <RowDefinition Height="24"></RowDefinition>
+            <RowDefinition Height="24"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#A5A5A5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="167"></ColumnDefinition>
-                <ColumnDefinition Width="167"></ColumnDefinition>
-                <ColumnDefinition Width="167"></ColumnDefinition>
-                <ColumnDefinition Width="167"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Background="#F3F3F3">
+            <Button Width="100" Content="{Binding ExportDataTitle}" IsEnabled="{Binding ExportDataEnabled}" Click="ExportResults"/>
+            <Button Width="100" Content="{Binding SelectFolderTitle}" IsEnabled="{Binding SelectFolderEnabled}" Click="SelectFolder"/>
+            <Button Width="100" Content="{Binding AnalyseTitle}" IsEnabled="{Binding AnalyseEnabled}" Click="ReadFiles"/>
+        </StackPanel>
 
-            <Grid Grid.Row="0" Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="34"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#BCBCBC">
+            <ToggleButton Margin="4" IsChecked="{Binding SkipFunctionOnError}" IsEnabled="{Binding SkipFunctionOnErrorEnabled}"></ToggleButton>
+            <Label Content="{Binding SkipFunctionOnErrorTitle}" ToolTip="{Binding SkipFunctionOnErrorTooltip}"></Label>
+            <ToggleButton Margin="4" IsChecked="{Binding ShowCommandErrors}" IsEnabled="{Binding ShowCommandErrorsEnabled}"></ToggleButton>
+            <Label Content="{Binding ShowCommandErrorsTitle}" ToolTip="{Binding ShowCommandErrorsTooltip}"></Label>
+            <ToggleButton Margin="4" IsChecked="{Binding ShowEmptyFunctions}" IsEnabled="{Binding ShowEmptyFunctionsEnabled}"></ToggleButton>
+            <Label Content="{Binding ShowEmptyFunctionsTitle}" ToolTip="{Binding ShowEmptyFunctionsTooltip}"></Label>
+            <ComboBox Width="100" ItemsSource="{Binding Versions}" SelectedIndex="{Binding VersionsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
+            <ComboBox Width="100" ItemsSource="{Binding CommandSortTypes}" SelectedIndex="{Binding CommandSortTypesSelectedIndex}" IsEnabled="{Binding CommandSortTypesEnabled}"></ComboBox>
+        </StackPanel>
 
-                <ToggleButton Grid.Column="0" Margin="4" IsChecked="{Binding SkipFunctionOnError}" IsEnabled="{Binding SkipFunctionOnErrorEnabled}"></ToggleButton>
-                <Label Grid.Column="1" VerticalAlignment="Center" Content="Skip function on error" ToolTip="{Binding SkipFunctionOnErrorTooltip}"></Label>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="34"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <ToggleButton Grid.Column="0" Margin="4" IsChecked="{Binding ShowCommandErrors}" IsEnabled="{Binding ShowCommandErrorsEnabled}"></ToggleButton>
-                <Label Grid.Column="1" VerticalAlignment="Center" Content="Show command errors" ToolTip="{Binding ShowCommandErrorsTooltip}"></Label>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="34"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <ToggleButton Grid.Column="0" Margin="4" IsChecked="{Binding ShowEmptyFunctions}" IsEnabled="{Binding ShowEmptyFunctionsEnabled}"></ToggleButton>
-                <Label Grid.Column="1" VerticalAlignment="Center" Content="Show empty functions" ToolTip="{Binding ShowEmptyFunctionsTooltip}"></Label>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="3">
-                <ComboBox ItemsSource="{Binding Versions}" SelectedIndex="{Binding VersionsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="4">
-                <ComboBox ItemsSource="{Binding CommandSortTypes}" SelectedIndex="{Binding CommandSortTypesSelectedIndex}" IsEnabled="{Binding CommandSortTypesEnabled}"></ComboBox>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.Column="0" Background="#606060">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="67"></RowDefinition>
-                <RowDefinition Height="67"></RowDefinition>
-                <RowDefinition Height="67"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="0" Content="Export Data" Click="ExportResults" IsEnabled="{Binding ExportDataEnabled}"/>
-            <Button Grid.Row="1" Content="Select Folder" Click="SelectFolder" IsEnabled="{Binding SelectFolderEnabled}"/>
-            <Button Grid.Row="2" Content="Analyse" Click="ReadFiles" IsEnabled="{Binding AnalyseEnabled}"/>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.Column="1" Background="#4C4C4C">
+        <Grid Grid.Row="2" Background="#656565">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="3"></RowDefinition>
             </Grid.RowDefinitions>
-
-            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="Output" ItemsSource="{Binding Blocks}" FontFamily="Courier New"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl Padding="2 2 2 0" x:Name="Output" ItemsSource="{Binding Blocks}" FontFamily="Courier New"/>
             </ScrollViewer>
-            <ProgressBar x:Name="Progress" Foreground="#00ACED" Grid.Row="1" Background="White" BorderThickness="0" Minimum="0" Maximum="1"></ProgressBar>
+            <ProgressBar x:Name="Progress" Grid.Row="1" Foreground="#00ACED" Background="White" BorderThickness="0" Minimum="0" Maximum="1"></ProgressBar>
         </Grid>
     </Grid>
 </Window>
+    

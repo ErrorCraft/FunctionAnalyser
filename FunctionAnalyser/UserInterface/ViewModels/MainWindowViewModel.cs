@@ -10,6 +10,7 @@ namespace UserInterface.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public string SkipFunctionOnErrorTitle { get; } = "Skip function on error";
         public string SkipFunctionOnErrorTooltip { get; } = "Skips the function if it contains a command error.\nIt will not contribute to the information found.";
         private bool _SkipFunctionOnErrorEnabled = false;
         private bool _SkipFunctionOnError = false;
@@ -38,6 +39,7 @@ namespace UserInterface.ViewModels
             }
         }
 
+        public string ShowCommandErrorsTitle { get; } = "Show command errors";
         public string ShowCommandErrorsTooltip { get; } = "Shows command errors if they are found.\nA function may contain multiple errors.";
         private bool _ShowCommandErrorsEnabled = false;
         private bool _ShowCommandErrors = true;
@@ -66,6 +68,7 @@ namespace UserInterface.ViewModels
             }
         }
 
+        public string ShowEmptyFunctionsTitle { get; } = "Show empty functions";
         public string ShowEmptyFunctionsTooltip { get; } = "Shows empty functions if they are found.\nA function is empty if it does not contain any commands.";
         private bool _ShowEmptyFunctionsEnabled = false;
         private bool _ShowEmptyFunctions = true;
@@ -94,6 +97,7 @@ namespace UserInterface.ViewModels
             }
         }
 
+        public string AnalyseTitle { get; } = "Analyse";
         private bool _AnalyseEnabled = false;
         public bool AnalyseEnabled
         {
@@ -108,6 +112,7 @@ namespace UserInterface.ViewModels
             }
         }
 
+        public string SelectFolderTitle { get; } = "Select folder";
         private bool _SelectFolderEnabled = false;
         public bool SelectFolderEnabled
         {
@@ -122,6 +127,7 @@ namespace UserInterface.ViewModels
             }
         }
 
+        public string ExportDataTitle { get; } = "Export data";
         private bool _ExportDataEnabled = false;
         public bool ExportDataEnabled
         {
