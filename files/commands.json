@@ -5680,21 +5680,6 @@
 						}
 					}
 				},
-				"publish": {
-					"type": "literal",
-					"children": {
-						"port": {
-							"type": "argument",
-							"parser": "integer",
-							"properties": {
-								"min": 0,
-								"max": 65535
-							},
-							"executable": true
-						}
-					},
-					"executable": true
-				},
 				"recipe": {
 					"type": "literal",
 					"children": {
@@ -5747,24 +5732,6 @@
 					}
 				},
 				"reload": {
-					"type": "literal",
-					"executable": true
-				},
-				"save-all": {
-					"type": "literal",
-					"children": {
-						"flush": {
-							"type": "literal",
-							"executable": true
-						}
-					},
-					"executable": true
-				},
-				"save-off": {
-					"type": "literal",
-					"executable": true
-				},
-				"save-on": {
 					"type": "literal",
 					"executable": true
 				},
@@ -6146,19 +6113,6 @@
 									"executable": true
 								}
 							}
-						}
-					}
-				},
-				"setidletimeout": {
-					"type": "literal",
-					"children": {
-						"minutes": {
-							"type": "argument",
-							"parser": "integer",
-							"properties": {
-								"min": 0
-							},
-							"executable": true
 						}
 					}
 				},
