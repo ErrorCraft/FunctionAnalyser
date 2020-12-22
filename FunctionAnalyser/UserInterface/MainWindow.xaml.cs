@@ -1,5 +1,6 @@
 ﻿using AdvancedText;
 using CommandFilesApi;
+using CommandFilesApi.GitHub;
 using FunctionAnalyser;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
@@ -21,7 +22,6 @@ namespace UserInterface
             InitializeComponent();
             DataContext = Model = new MainWindowViewModel();
             Logger = new AnalyserLogger(Model.Blocks, Output.Dispatcher);
-            ApiHelper.Initialise();
         }
 
         private void SelectFolder(object sender, RoutedEventArgs e)
@@ -74,14 +74,27 @@ namespace UserInterface
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)
         {
+            Updater updater = new Updater(Logger);
+            Update update = await updater.CheckForUpdate();
+
+            if (update != null)
+            {
+                UpdateWindow updateWindow = new UpdateWindow(update) { Owner = this };
+                if (updateWindow.ShowDialog() == true)
+                {
+                    // Update
+                }
+            }
+
             FileProcessor fileProcessor = new FileProcessor(Logger);
             try
             {
-                await Task.Run(fileProcessor.GetFiles);
+                await fileProcessor.GetFiles();
                 Model.Versions = CommandVersionViewModel.FromVersionNames(FunctionReader.GetVersionNames());
                 Model.SelectFolderEnabled = true;
                 Model.EnableOptions();
-            } catch (HttpRequestException)
+            }
+            catch (HttpRequestException)
             {
                 // empty (everything is disabled)
             }

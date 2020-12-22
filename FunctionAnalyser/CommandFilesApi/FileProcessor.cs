@@ -1,18 +1,28 @@
 ﻿using AdvancedText;
 using CommandParser.Collections;
 using FunctionAnalyser;
+using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace CommandFilesApi
 {
     public class FileProcessor
     {
+        private readonly HttpClient Client;
         private readonly ILogger Logger;
 
         public FileProcessor(ILogger logger)
         {
             Logger = logger;
+
+            Client = new HttpClient()
+            {
+                BaseAddress = new Uri("https://raw.githubusercontent.com/ErrorCraft/FunctionAnalyser/master/files/")
+            };
+            Client.DefaultRequestHeaders.Accept.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task GetFiles()
@@ -88,7 +98,7 @@ namespace CommandFilesApi
         {
             try
             {
-                using HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(fileName);
+                using HttpResponseMessage response = await Client.GetAsync(fileName);
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadAsStringAsync();

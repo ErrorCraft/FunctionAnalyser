@@ -1,0 +1,17 @@
+﻿<Window x:Class="UserInterface.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserInterface"
+        mc:Ignorable="d"
+        Title="Update Available!" Height="315" Width="560" WindowStartupLocation="CenterOwner" ResizeMode="CanResize" Loaded="LoadedWindow">
+    <Grid>
+        <StackPanel>
+            <Label x:Name="UpdateValueLabel"></Label>
+            <Label x:Name="ContentLabel"></Label>
+            <Button x:Name="CancelButton" Content="Cancel" Width="100" Click="CancelUpdate"></Button>
+            <Button x:Name="YesButton" Content="Confirm" Width="100" Click="ConfirmUpdate"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
