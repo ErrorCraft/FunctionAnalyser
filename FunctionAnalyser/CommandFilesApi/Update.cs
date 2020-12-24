@@ -1,18 +1,53 @@
-﻿using System;
+﻿using CommandFilesApi.GitHub;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace CommandFilesApi
 {
     public class Update
     {
+        private readonly HttpClient Client;
         public Version UpdateVersion { get; }
         public string Changelog { get; }
-        public string FileUrl { get; }
+        private readonly GitHubAssets FileAssets;
 
-        public Update(Version updateVersion, string changelog, string fileUrl)
+        public Update(Version updateVersion, string changelog, GitHubAssets fileAssets)
         {
             UpdateVersion = updateVersion;
             Changelog = changelog;
-            FileUrl = fileUrl;
+            FileAssets = fileAssets;
+            Client = new HttpClient();
+            Client.DefaultRequestHeaders.Accept.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/octet-stream"));
+        }
+
+        public async Task<(string tempFilePath, string newFilePath)> Download()
+        {
+            string originalFilePath = Process.GetCurrentProcess().MainModule.FileName;
+            string temporaryFilePath = GetTemporaryFilePath(originalFilePath);
+            File.Move(originalFilePath, temporaryFilePath, true);
+
+            HttpResponseMessage responseMessage = await Client.GetAsync(FileAssets.GetDownloadUrl());
+            HttpContent contents = responseMessage.Content;
+
+            string newFilePath = Path.Combine(Path.GetDirectoryName(originalFilePath), FileAssets.GetName());
+            using FileStream file = File.Create(newFilePath);
+            Stream contentsStream = await contents.ReadAsStreamAsync();
+            await contentsStream.CopyToAsync(file);
+
+            return (temporaryFilePath, newFilePath);
+        }
+
+        private static string GetTemporaryFilePath(string originalFilePath)
+        {
+            string directoryPath = Path.GetDirectoryName(originalFilePath);
+            string fileName = Path.GetFileNameWithoutExtension(originalFilePath);
+            string fileExtension = Path.GetExtension(originalFilePath);
+            return Path.Combine(directoryPath, $"{fileName}_TEMP{fileExtension}");
         }
     }
 }

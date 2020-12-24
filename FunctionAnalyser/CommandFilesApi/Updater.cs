@@ -12,7 +12,8 @@ namespace CommandFilesApi
 {
     public class Updater
     {
-        private static readonly string CHANGELOG_NAME = "changelog.txt";
+        private static readonly string CHANGELOG_LABEL = "changelog";
+        private static readonly string FILE_LABEL = "file";
         private readonly HttpClient Client;
         private readonly ILogger Logger;
 
@@ -28,9 +29,12 @@ namespace CommandFilesApi
 
         public async Task<Update> CheckForUpdate()
         {
+#if DEBUG
+            return null;
+#endif
             Logger.Log(new TextComponent("Checking for updates...").WithColour(Colour.BuiltinColours.GREY));
             
-            string versionsJson = await GetJsonAsync("https://errorcraft.github.io/update_test.json");
+            string versionsJson = await GetJsonAsync("https://api.github.com/repos/ErrorCraft/FunctionAnalyser/releases");
             if (versionsJson == null) return null;
             GitHubVersion[] allVersions = JsonConvert.DeserializeObject<GitHubVersion[]>(versionsJson);
             
@@ -47,16 +51,16 @@ namespace CommandFilesApi
             Logger.Log(new TextComponent($"Update available: {latestVersion.GetVersionTag()}!").WithColour(Colour.BuiltinColours.GREEN));
 
             string changelog = await GetChangelog(latestVersion);
-            string fileUrl = GetFileUrl(latestVersion, "foo.exe");
-            return new Update(latestVersion.GetVersionTag(), changelog, fileUrl);
+            GitHubAssets fileAssets = GetFileAssets(latestVersion);
+            return new Update(latestVersion.GetVersionTag(), changelog, fileAssets);
         }
 
         private async Task<string> GetChangelog(GitHubVersion update)
         {
             try
             {
-                GitHubAsset changelogAsset = update.GetAssets().FirstOrDefault(a => a.GetName() == CHANGELOG_NAME);
-                using HttpResponseMessage response = await Client.GetAsync(changelogAsset.GetDownloadUrl());
+                GitHubAssets changelogAssets = update.GetAssets().FirstOrDefault(a => a.GetLabel() == CHANGELOG_LABEL);
+                using HttpResponseMessage response = await Client.GetAsync(changelogAssets.GetDownloadUrl());
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadAsStringAsync();
@@ -65,6 +69,11 @@ namespace CommandFilesApi
             catch (HttpRequestException) { }
 
             return null;
+        }
+
+        private static GitHubAssets GetFileAssets(GitHubVersion update)
+        {
+            return update.GetAssets().FirstOrDefault(a => a.GetLabel() == FILE_LABEL);
         }
 
         private async Task<string> GetJsonAsync(string address)
@@ -101,12 +110,6 @@ namespace CommandFilesApi
                 }
             }
             return latest;
-        }
-
-        private static string GetFileUrl(GitHubVersion update, string fileName)
-        {
-            GitHubAsset fileAsset = update.GetAssets().FirstOrDefault(a => a.GetName() == fileName);
-            return fileAsset.GetDownloadUrl();
         }
     }
 }

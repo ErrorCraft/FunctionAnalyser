@@ -2,10 +2,13 @@
 
 namespace CommandFilesApi.GitHub
 {
-    public class GitHubAsset
+    public class GitHubAssets
     {
         [JsonProperty("name")]
         private readonly string Name;
+
+        [JsonProperty("label")]
+        private readonly string Label;
 
         [JsonProperty("browser_download_url")]
         private readonly string DownloadUrl;
@@ -18,6 +21,11 @@ namespace CommandFilesApi.GitHub
         public string GetDownloadUrl()
         {
             return DownloadUrl;
+        }
+
+        public string GetLabel()
+        {
+            return Label;
         }
     }
 }

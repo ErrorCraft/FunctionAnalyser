@@ -11,14 +11,14 @@ namespace CommandFilesApi.GitHub
         private readonly Version VersionTag;
 
         [JsonProperty("assets")]
-        private readonly GitHubAsset[] Assets;
+        private readonly GitHubAssets[] Assets;
 
         public Version GetVersionTag()
         {
             return VersionTag;
         }
 
-        public GitHubAsset[] GetAssets()
+        public GitHubAssets[] GetAssets()
         {
             return Assets;
         }
