@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -9,21 +10,26 @@ namespace UserInterface
     {
         private void Crash(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            string basePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
-            string file = "FunctionAnalyser-Crash-" + DateTime.Now.ToString("yyyy-MM-dd_hh.mm.ss") + ".txt";
+            DateTime time = DateTime.Now;
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+            Exception exception = e.Exception;
 
-            using (StreamWriter writer = new StreamWriter(basePath + file))
+            string basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string file = $"FunctionAnalyser-Crash-{time:yyyy-MM-dd_hh.mm.ss}.txt";
+            string path = Path.Combine(basePath, file);
+
+            using (StreamWriter writer = new StreamWriter(path))
             {
-                writer.WriteLine($"Time: {DateTime.Now:yyyy-MM-dd hh:mm:ss}");
-                writer.WriteLine($"Description: {e.Exception.Message}");
+                writer.WriteLine($"Version: {version}");
+                writer.WriteLine($"Time: {time:yyyy-MM-dd hh:mm:ss}");
+                writer.WriteLine($"Description: {exception.Message}");
                 writer.WriteLine();
-                writer.WriteLine(e.Exception.GetType().FullName);
-                writer.WriteLine(e.Exception.StackTrace);
+                writer.WriteLine(exception.GetType().FullName);
+                writer.WriteLine(exception.StackTrace);
             }
 
             e.Handled = true;
-
-            CrashWindow crashWindow = new CrashWindow(e.Exception, basePath + file);
+            CrashWindow crashWindow = new CrashWindow(exception, path);
             crashWindow.ShowDialog();
             MainWindow.Close();
 
