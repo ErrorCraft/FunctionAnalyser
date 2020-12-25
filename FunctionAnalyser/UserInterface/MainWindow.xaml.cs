@@ -80,10 +80,7 @@ namespace UserInterface
             if (update != null)
             {
                 UpdateWindow updateWindow = new UpdateWindow(update) { Owner = this };
-                if (updateWindow.ShowDialog() == true)
-                {
-                    // Update
-                }
+                updateWindow.ShowDialog();
             }
 
             FileProcessor fileProcessor = new FileProcessor(Logger);
