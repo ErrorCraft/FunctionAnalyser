@@ -251,6 +251,20 @@ namespace UserInterface.ViewModels
             CommandSortTypes = sortTypes;
         }
 
+        private double _ProgressValue = 0.0d;
+        public double ProgressValue
+        {
+            get { return _ProgressValue; }
+            set
+            {
+                if (_ProgressValue != value)
+                {
+                    _ProgressValue = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public void DisableOptions()
         {
             SkipFunctionOnErrorEnabled = false;

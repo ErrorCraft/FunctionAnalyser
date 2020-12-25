@@ -21,7 +21,7 @@ namespace UserInterface
         {
             InitializeComponent();
             DataContext = Model = new MainWindowViewModel();
-            Logger = new AnalyserLogger(Model.Blocks, Output.Dispatcher);
+            Logger = new AnalyserLogger(Model.Blocks, Dispatcher);
         }
 
         private void SelectFolder(object sender, RoutedEventArgs e)
@@ -69,7 +69,7 @@ namespace UserInterface
 
         private void ReportProgress(object sender, FunctionProgress e)
         {
-            Progress.Value = e.Completion;
+            Model.ProgressValue = e.Completion;
         }
 
         private async void LoadedWindow(object sender, RoutedEventArgs e)
