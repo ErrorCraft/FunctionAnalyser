@@ -7,21 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CrashWindow.xaml.cs">
+    <Compile Update="Views\CrashWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UpdateWindow.xaml.cs">
+    <Compile Update="Views\UpdateWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="CrashWindow.xaml">
+    <Page Update="Views\CrashWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UpdateWindow.xaml">
+    <Page Update="Views\UpdateWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
