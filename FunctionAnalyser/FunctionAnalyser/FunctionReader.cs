@@ -134,7 +134,6 @@ namespace FunctionAnalyser
                     continue;
                 } else
                 {
-                    if (command.Contains("replaceitem")) continue;
                     CommandResults commandResults = Versions[version].Parse(command);
                     if (commandResults.Successful)
                     {
