@@ -10,6 +10,9 @@
         <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
         <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Canvas x:Key="checkmark" x:Shared="False">
+            <Path Fill="Black" Data="M 15.523334 3.6666667 8 11.378001 4.476 8.0373332 2 10.514667 8 16.333333 18 6.1433333 Z"/>
+        </Canvas>
 
         <Style TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"></Setter>
@@ -43,7 +46,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        
         <Style TargetType="{x:Type ToggleButton}">
             <Setter Property="OverridesDefaultStyle" Value="True"></Setter>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -54,12 +57,14 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
                         <StackPanel x:Name="panel" Orientation="Horizontal" SnapsToDevicePixels="true">
-                            <Canvas x:Name="helloLol" Background="#ACACAC" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"></Canvas>
+                            <Canvas Background="#ACACAC" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                                <ContentControl x:Name="image"></ContentControl>
+                            </Canvas>
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" TargetName="helloLol" Value="Green"/>
+                                <Setter Property="Content" TargetName="image" Value="{StaticResource checkmark}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="panel" Value="{StaticResource Button.MouseOver.Background}"/>
