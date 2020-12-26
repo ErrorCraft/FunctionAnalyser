@@ -7,37 +7,6 @@
         mc:Ignorable="d"
         KeyboardNavigation.TabNavigation="None"
         Title="Function Analyser" Height="450" Width="800" MinHeight="315" MinWidth="560" Loaded="LoadedWindow" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Background" Value="#858585"></Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsEnabled" Value="True"></Condition>
-                                    <Condition Property="IsMouseOver" Value="True"></Condition>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="#909090"></Setter>
-                            </MultiTrigger>
-
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Background" Value="#707070"></Setter>
-                                <Setter Property="BorderBrush" Value="Orange"></Setter>
-                                <Setter Property="BorderThickness" Value="2"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"></RowDefinition>
@@ -46,18 +15,15 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Background="#F3F3F3">
-            <Button Width="100" Content="{Binding ExportDataTitle}" IsEnabled="{Binding ExportDataEnabled}" Click="ExportResults"/>
-            <Button Width="100" Content="{Binding SelectFolderTitle}" IsEnabled="{Binding SelectFolderEnabled}" Click="SelectFolder"/>
-            <Button Width="100" Content="{Binding AnalyseTitle}" IsEnabled="{Binding AnalyseEnabled}" Click="ReadFiles"/>
+            <Button d:IsEnabled="False" d:Content="Export Data" Content="{Binding ExportDataTitle}" IsEnabled="{Binding ExportDataEnabled}" Click="ExportResults"/>
+            <Button d:Content="Select Folder" Content="{Binding SelectFolderTitle}" IsEnabled="{Binding SelectFolderEnabled}" Click="SelectFolder"/>
+            <Button d:Content="Analyse" Content="{Binding AnalyseTitle}" IsEnabled="{Binding AnalyseEnabled}" Click="ReadFiles"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#BCBCBC">
-            <ToggleButton Margin="4" IsChecked="{Binding SkipFunctionOnError}" IsEnabled="{Binding SkipFunctionOnErrorEnabled}"></ToggleButton>
-            <Label Content="{Binding SkipFunctionOnErrorTitle}" ToolTip="{Binding SkipFunctionOnErrorTooltip}"></Label>
-            <ToggleButton Margin="4" IsChecked="{Binding ShowCommandErrors}" IsEnabled="{Binding ShowCommandErrorsEnabled}"></ToggleButton>
-            <Label Content="{Binding ShowCommandErrorsTitle}" ToolTip="{Binding ShowCommandErrorsTooltip}"></Label>
-            <ToggleButton Margin="4" IsChecked="{Binding ShowEmptyFunctions}" IsEnabled="{Binding ShowEmptyFunctionsEnabled}"></ToggleButton>
-            <Label Content="{Binding ShowEmptyFunctionsTitle}" ToolTip="{Binding ShowEmptyFunctionsTooltip}"></Label>
+            <ToggleButton d:IsChecked="True" d:Content="Skip function on error" Content="{Binding SkipFunctionOnErrorTitle}" ToolTip="{Binding SkipFunctionOnErrorTooltip}" IsChecked="{Binding SkipFunctionOnError}" IsEnabled="{Binding SkipFunctionOnErrorEnabled}"></ToggleButton>
+            <ToggleButton d:IsEnabled="False" d:Content="Show command errors" Content="{Binding ShowCommandErrorsTitle}" ToolTip="{Binding ShowCommandErrorsTooltip}" IsChecked="{Binding ShowCommandErrors}" IsEnabled="{Binding ShowCommandErrorsEnabled}"></ToggleButton>
+            <ToggleButton d:Content="Show empty functions" Content="{Binding ShowEmptyFunctionsTitle}" ToolTip="{Binding ShowEmptyFunctionsTooltip}" IsChecked="{Binding ShowEmptyFunctions}" IsEnabled="{Binding ShowEmptyFunctionsEnabled}"></ToggleButton>
             <ComboBox Width="100" ItemsSource="{Binding Versions}" SelectedIndex="{Binding VersionsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
             <ComboBox Width="100" ItemsSource="{Binding CommandSortTypes}" SelectedIndex="{Binding CommandSortTypesSelectedIndex}" IsEnabled="{Binding CommandSortTypesEnabled}"></ComboBox>
         </StackPanel>
