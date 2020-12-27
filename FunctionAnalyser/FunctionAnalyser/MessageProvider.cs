@@ -1,13 +1,35 @@
 ﻿using AdvancedText;
 using CommandParser;
 using FunctionAnalyser.Results;
+using System.Diagnostics;
 using System.Text;
 
 namespace FunctionAnalyser
 {
     public static class MessageProvider
     {
-        public static TextComponent Empty(string path)
+        public static TextComponent FolderDoesNotExist(string path)
+        {
+            return new TextComponent("Folder ")
+                .With(new TextComponent(path).WithColour(Colour.BuiltinColours.GREEN)
+                .With(new TextComponent($" does not exist!")));
+        }
+
+        public static TextComponent AnalyseFunctions(string path, Dispatcher dispatcher)
+        {
+            return new TextComponent("Analysing all functions in folder ")
+                .With(new TextComponent(path).WithColour(Colour.BuiltinColours.GREEN)
+                .With(new TextComponent($"\nVersion: ")
+                .With(new TextComponent(dispatcher.GetName()).WithColour(Colour.BuiltinColours.GREEN)
+                .With(new TextComponent("\n")))));
+        }
+
+        public static TextComponent Time(Stopwatch timer)
+        {
+            return new TextComponent($"Time spent reading: {timer.ElapsedTicks / 10000.0d:0.0000ms}\n").WithColour(Colour.BuiltinColours.DARK_AQUA).WithStyle(false, true);
+        }
+
+        public static TextComponent EmptyFunction(string path)
         {
             return new TextComponent($"Empty function found at ").WithColour(Colour.BuiltinColours.YELLOW)
                 .With(new TextComponent(path));

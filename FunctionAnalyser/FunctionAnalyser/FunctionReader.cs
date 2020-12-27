@@ -50,25 +50,16 @@ namespace FunctionAnalyser
         {
             if (!Directory.Exists(BasePath))
             {
-                Logger.Log(new TextComponent("Folder ").WithColour(BuiltinColours.GREY).With(
-                    new TextComponent(BasePath).WithColour(BuiltinColours.DARK_GREEN).With(
-                        new TextComponent($" does not exist!").WithColour(BuiltinColours.GREY)
-                        )
-                    ));
+                Logger.Log(MessageProvider.FolderDoesNotExist(BasePath));
                 return;
             }
 
-            Logger.Log(new TextComponent("Analysing all functions in folder ").WithColour(BuiltinColours.GREY).With(
-                new TextComponent(BasePath).WithColour(BuiltinColours.DARK_GREEN).With(
-                    new TextComponent($"\nVersion: {Versions[version].GetName()}\n").WithColour(BuiltinColours.GREY)
-                    )
-                ));
-
+            Logger.Log(MessageProvider.AnalyseFunctions(BasePath, Versions[version]));
             Stopwatch timer = Stopwatch.StartNew();
             FunctionData results = AnalyseFunctions(version);
             timer.Stop();
 
-            Logger.Log(new TextComponent($"Time spent reading: {timer.ElapsedTicks / 10000.0d:0.0000ms}\n").WithColour(BuiltinColours.DARK_AQUA).WithStyle(false, true));
+            Logger.Log(MessageProvider.Time(timer));
             Report(results);
         }
 
@@ -82,10 +73,7 @@ namespace FunctionAnalyser
             int totalFiles = files.Length;
 
             // Track progress
-            FunctionProgress functionProgress = new FunctionProgress
-            {
-                Completion = 0.0d
-            };
+            FunctionProgress functionProgress = new FunctionProgress();
             Progress.Report(functionProgress);
 
             // Analyse all files
@@ -169,7 +157,7 @@ namespace FunctionAnalyser
             {
                 if (Options.ShowEmptyFunctions)
                 {
-                    functionData.Messages.Add(MessageProvider.Empty(GetShortFileName(path)));
+                    functionData.Messages.Add(MessageProvider.EmptyFunction(GetShortFileName(path)));
                 }
             }
 
