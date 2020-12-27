@@ -142,7 +142,7 @@ namespace UserInterface.ViewModels
             }
         }
 
-
+        public string VersionsTooltip { get; } = "The version to look at when analysing the functions.";
         private bool _VersionsEnabled = false;
         private List<CommandVersionViewModel> _Versions;
         private int _VersionsSelectedIndex = 0;
@@ -184,6 +184,7 @@ namespace UserInterface.ViewModels
             }
         }
 
+        public string CommandSortTypesTooltip { get; } = "How to sort the commands when showing them in the report.";
         private bool _CommandSortTypesEnabled = false;
         private List<SortTypeViewModel> _CommandSortTypes;
         private int _CommandSortTypesSelectedIndex = 0;

@@ -6,7 +6,7 @@
         xmlns:viewmodels="clr-namespace:UserInterface.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         KeyboardNavigation.TabNavigation="None"
-        Title="Function Analyser" Height="450" Width="800" MinHeight="315" MinWidth="560" Loaded="LoadedWindow" WindowStartupLocation="CenterScreen">
+        Title="Function Analyser" Height="450" Width="800" Loaded="LoadedWindow" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -28,8 +28,8 @@
                 <ToggleButton d:IsChecked="True" d:Content="Skip function on error" Content="{Binding SkipFunctionOnErrorTitle}" ToolTip="{Binding SkipFunctionOnErrorTooltip}" IsChecked="{Binding SkipFunctionOnError}" IsEnabled="{Binding SkipFunctionOnErrorEnabled}"></ToggleButton>
                 <ToggleButton d:IsEnabled="False" d:Content="Show command errors" Content="{Binding ShowCommandErrorsTitle}" ToolTip="{Binding ShowCommandErrorsTooltip}" IsChecked="{Binding ShowCommandErrors}" IsEnabled="{Binding ShowCommandErrorsEnabled}"></ToggleButton>
                 <ToggleButton d:Content="Show empty functions" Content="{Binding ShowEmptyFunctionsTitle}" ToolTip="{Binding ShowEmptyFunctionsTooltip}" IsChecked="{Binding ShowEmptyFunctions}" IsEnabled="{Binding ShowEmptyFunctionsEnabled}"></ToggleButton>
-                <ComboBox Margin="0 2" MinWidth="125" ItemsSource="{Binding Versions}" SelectedIndex="{Binding VersionsSelectedIndex}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
-                <ComboBox Margin="0 2" MinWidth="125" ItemsSource="{Binding CommandSortTypes}" SelectedIndex="{Binding CommandSortTypesSelectedIndex}" IsEnabled="{Binding CommandSortTypesEnabled}"></ComboBox>
+                <ComboBox Margin="0 2" MinWidth="125" ItemsSource="{Binding Versions}" SelectedIndex="{Binding VersionsSelectedIndex}" ToolTip="{Binding VersionsTooltip}" IsEnabled="{Binding VersionsEnabled}"></ComboBox>
+                <ComboBox Margin="0 2" MinWidth="125" ItemsSource="{Binding CommandSortTypes}" SelectedIndex="{Binding CommandSortTypesSelectedIndex}" ToolTip="{Binding CommandSortTypesTooltip}" IsEnabled="{Binding CommandSortTypesEnabled}"></ComboBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Background="#656565">
