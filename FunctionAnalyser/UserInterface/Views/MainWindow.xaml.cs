@@ -1,6 +1,5 @@
 ﻿using AdvancedText;
 using CommandFilesApi;
-using CommandFilesApi.GitHub;
 using FunctionAnalyser;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;

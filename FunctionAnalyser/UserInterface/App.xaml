@@ -9,8 +9,8 @@
         <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
         <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        <Canvas x:Key="checkmark" x:Shared="False">
-            <Path Fill="Black" Data="M 15.523334 3.6666667 8 11.378001 4.476 8.0373332 2 10.514667 8 16.333333 18 6.1433333 Z"/>
+        <Canvas x:Key="checkMark" x:Shared="False">
+            <Path Fill="Black" Data="M 12.142499 3.2499999 6.5 9.0335002 3.857 6.5279999 2 8.3860007 6.5 12.75 14 5.1074999 Z"/>
         </Canvas>
         
         <Style TargetType="{x:Type Button}">
@@ -49,26 +49,28 @@
             <Setter Property="OverridesDefaultStyle" Value="True"></Setter>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="5 0 10 0"></Setter>
-            <Setter Property="Margin" Value="2 2"></Setter>
+            <Setter Property="Padding" Value="3 0 8 0"></Setter>
+            <Setter Property="Margin" Value="2 4"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
                         <StackPanel x:Name="panel" Orientation="Horizontal" SnapsToDevicePixels="true">
-                            <Canvas x:Name="imageContainer" Background="#ACACAC" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                            <Canvas x:Name="imageCanvas" Background="#ACACAC" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
                                 <ContentControl x:Name="image"></ContentControl>
                             </Canvas>
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border x:Name="contentBorder" BorderThickness="0 0 0 1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <ContentPresenter x:Name="contentPresenter" RecognizesAccessKey="True"/>
+                            </Border>
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Content" TargetName="image" Value="{StaticResource checkmark}"/>
+                                <Setter Property="Content" TargetName="image" Value="{StaticResource checkMark}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="imageContainer" Value="#BCBCBC"/>
+                                <Setter Property="BorderBrush" TargetName="contentBorder" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="panel" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="contentBorder" Value="{StaticResource Button.Pressed.Border}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
