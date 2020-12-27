@@ -7,11 +7,28 @@
         mc:Ignorable="d"
         Title="Update Available!" Height="315" Width="560" WindowStartupLocation="CenterOwner" ResizeMode="CanResize" Loaded="LoadedWindow">
     <Grid>
-        <StackPanel>
-            <Label x:Name="UpdateValueLabel"></Label>
-            <Label x:Name="ContentLabel"></Label>
-            <Button x:Name="CancelButton" Content="Cancel" Width="100" Click="CancelUpdate"></Button>
-            <Button x:Name="YesButton" Content="Confirm" Width="100" Click="ConfirmUpdate"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Margin="0 20 0 0" HorizontalAlignment="Center" FontSize="24" Text="{Binding Version}" FontWeight="Bold"></TextBlock>
+        <Grid Grid.Row="1" Margin="15 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Changelog"></TextBlock>
+            <Border Grid.Row="1" Margin="0 2 0 0" Background="#F3F3F3" BorderThickness="1" BorderBrush="#656565">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock Padding="5 2" Text="{Binding Changelog}"></TextBlock>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        <StackPanel Grid.Row="2" Margin="0 0 0 20" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Cancel" Click="CancelUpdate"></Button>
+            <Button Content="Update" Click="ConfirmUpdate"></Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -3,16 +3,19 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using UserInterface.ViewModels;
 
 namespace UserInterface
 {
     public partial class UpdateWindow : Window
     {
         private readonly Update NewVersion;
+        private readonly UpdateWindowViewModel Model;
 
         public UpdateWindow(Update newVersion)
         {
             InitializeComponent();
+            DataContext = Model = new UpdateWindowViewModel();
             NewVersion = newVersion;
         }
 
@@ -43,8 +46,8 @@ namespace UserInterface
 
         private void LoadedWindow(object sender, RoutedEventArgs e)
         {
-            UpdateValueLabel.Content = NewVersion.UpdateVersion.ToString();
-            ContentLabel.Content = NewVersion.Changelog;
+            Model.Version = NewVersion.UpdateVersion.ToString();
+            Model.Changelog = NewVersion.Changelog;
         }
     }
 }
