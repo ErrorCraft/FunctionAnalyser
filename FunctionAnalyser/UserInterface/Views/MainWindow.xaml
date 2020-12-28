@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:UserInterface.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:local="clr-namespace:UserInterface"
+        xmlns:viewmodels="clr-namespace:UserInterface.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         KeyboardNavigation.TabNavigation="None"
         Title="Function Analyser" Height="450" Width="800" Loaded="LoadedWindow" WindowStartupLocation="CenterScreen">
@@ -37,7 +39,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="3"></RowDefinition>
             </Grid.RowDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer local:WpfExtensions.AutoScroll="True" VerticalScrollBarVisibility="Auto">
                 <ItemsControl Padding="2 2 2 0" ItemsSource="{Binding Blocks}" FontFamily="Courier New"/>
             </ScrollViewer>
             <ProgressBar Grid.Row="1" d:Value="0.2" Value="{Binding ProgressValue}"></ProgressBar>
