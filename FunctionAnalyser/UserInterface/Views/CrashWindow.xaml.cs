@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
+using UserInterface.ViewModels;
 
 namespace UserInterface
 {
     public partial class CrashWindow : Window
     {
-        private readonly string CrashPath;
+        private readonly CrashWindowViewModel Model;
 
-        public CrashWindow(Exception exception, string crashPath)
+        public CrashWindow(Exception exception, string crashReportFile)
         {
             InitializeComponent();
-            CrashDescription.Text = $"{exception.GetType().FullName}: {exception.Message}";
-            CrashPath = crashPath;
+            DataContext = Model = new CrashWindowViewModel(exception, crashReportFile);
         }
 
         private void ViewReport(object sender, RoutedEventArgs e)
         {
-            new Process
-            {
-                StartInfo = new ProcessStartInfo(CrashPath)
-                {
-                    UseShellExecute = true
-                }
-            }.Start();
+            new Process() { StartInfo = new ProcessStartInfo(Model.CrashReportFile) { UseShellExecute = true } }.Start();
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
