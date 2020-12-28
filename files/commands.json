@@ -1,6 +1,6 @@
 {
 	"java": {
-		"name": "Java 1.16.4",
+		"name": "Java 20w51a",
 		"root": {
 			"children": {
 				"advancement": {
@@ -3950,6 +3950,17 @@
 								"value": {
 									"type": "argument",
 									"parser": "boolean",
+									"executable": true
+								}
+							},
+							"executable": true
+						},
+						"playersSleepingPercentage": {
+							"type": "literal",
+							"children": {
+								"value": {
+									"type": "argument",
+									"parser": "integer",
 									"executable": true
 								}
 							},
