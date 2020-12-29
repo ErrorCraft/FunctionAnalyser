@@ -27,38 +27,26 @@ namespace CommandFilesApi
 
         public async Task GetFiles()
         {
-            string commandsJson = await GetFile("commands.json");
-            FunctionReader.SetVersions(commandsJson);
-
-            string selectorArgumentsJson = await GetFile("selector_arguments.json");
-            EntitySelectorOptions.Set(selectorArgumentsJson);
-
-            string gamemodesJson = await GetFile("gamemodes.json");
-            Gamemodes.Set(gamemodesJson);
-
-            string sortsJson = await GetFile("sorts.json");
-            Sorts.Set(sortsJson);
-
-            string entitiesJson = await GetFile("entities.json");
-            Entities.Set(entitiesJson);
-
-            string itemsJson = await GetFile("items.json");
-            Items.Set(itemsJson);
-
-            string blocksJson = await GetFile("blocks.json");
-            Blocks.Set(blocksJson);
+            string anchorsJson = await GetFile("anchors.json");
+            Anchors.Set(anchorsJson);
 
             string timeScalarsJson = await GetFile("time_scalars.json");
             TimeScalars.Set(timeScalarsJson);
 
+            string operationsJson = await GetFile("operations.json");
+            Operations.Set(operationsJson);
+
+            string sortsJson = await GetFile("sorts.json");
+            Sorts.Set(sortsJson);
+
+            string gamemodesJson = await GetFile("gamemodes.json");
+            Gamemodes.Set(gamemodesJson);
+
+            string scoreboardSlotsJson = await GetFile("scoreboard_slots.json");
+            ScoreboardSlots.Set(scoreboardSlotsJson);
+
             string coloursJson = await GetFile("colours.json");
             Colours.Set(coloursJson);
-
-            string slotsJson = await GetFile("item_slots.json");
-            ItemSlots.Set(slotsJson);
-
-            string particlesJson = await GetFile("particles.json");
-            Particles.Set(particlesJson);
 
             string mobEffectsJson = await GetFile("mob_effects.json");
             MobEffects.Set(mobEffectsJson);
@@ -66,20 +54,32 @@ namespace CommandFilesApi
             string enchantmentsJson = await GetFile("enchantments.json");
             Enchantments.Set(enchantmentsJson);
 
+            string entitiesJson = await GetFile("entities.json");
+            Entities.Set(entitiesJson);
+
+            string selectorArgumentsJson = await GetFile("selector_arguments.json");
+            EntitySelectorOptions.Set(selectorArgumentsJson);
+
             string objectiveCriteriaJson = await GetFile("objective_criteria.json");
             ObjectiveCriteria.Set(objectiveCriteriaJson);
-
-            string scoreboardSlotsJson = await GetFile("scoreboard_slots.json");
-            ScoreboardSlots.Set(scoreboardSlotsJson);
 
             string componentsJson = await GetFile("components.json");
             Components.Set(componentsJson);
 
-            string anchorsJson = await GetFile("anchors.json");
-            Anchors.Set(anchorsJson);
+            string particlesJson = await GetFile("particles.json");
+            Particles.Set(particlesJson);
 
-            string operationsJson = await GetFile("operations.json");
-            Operations.Set(operationsJson);
+            string slotsJson = await GetFile("item_slots.json");
+            ItemSlots.Set(slotsJson);
+
+            string itemsJson = await GetFile("items.json");
+            Items.Set(itemsJson);
+
+            string blocksJson = await GetFile("blocks.json");
+            Blocks.Set(blocksJson);
+
+            string commandsJson = await GetFile("commands.json");
+            FunctionReader.SetVersions(commandsJson);
 
             Logger.Log(new TextComponent("All done!").WithColour(Colour.BuiltinColours.GREEN));
         }
