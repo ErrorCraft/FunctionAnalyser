@@ -5542,7 +5542,7 @@
 											"children": {
 												"item": {
 													"type": "argument",
-													"parser": "item_stack",
+													"parser": "item",
 													"children": {
 														"count": {
 															"type": "argument",
@@ -5579,7 +5579,7 @@
 											"children": {
 												"item": {
 													"type": "argument",
-													"parser": "item_stack",
+													"parser": "item",
 													"children": {
 														"count": {
 															"type": "argument",
