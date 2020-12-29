@@ -5538,7 +5538,7 @@
 									"children": {
 										"slot": {
 											"type": "argument",
-											"parser": "item_slot",
+											"parser": "slot",
 											"children": {
 												"item": {
 													"type": "argument",
@@ -5575,7 +5575,7 @@
 									"children": {
 										"slot": {
 											"type": "argument",
-											"parser": "item_slot",
+											"parser": "slot",
 											"children": {
 												"item": {
 													"type": "argument",
