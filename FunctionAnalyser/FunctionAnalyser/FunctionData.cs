@@ -33,13 +33,13 @@ namespace FunctionAnalyser
                 Commands = a.Commands + b.Commands,
                 UsedCommands = new CommandUsage().Merge(a.UsedCommands).Merge(b.UsedCommands),
                 Selectors = a.Selectors + b.Selectors,
-                FunctionCalls = a.Functions + b.Functions,
+                FunctionCalls = a.FunctionCalls + b.FunctionCalls,
                 PredicateCalls = a.PredicateCalls + b.PredicateCalls,
                 NbtAccess = a.NbtAccess + b.NbtAccess,
                 StorageUsage = a.StorageUsage + b.StorageUsage,
                 LootTableUsage = a.LootTableUsage+ b.LootTableUsage,
                 ItemModifierUsage = a.ItemModifierUsage+ b.ItemModifierUsage,
-                AttributeUsage = a.AttributeUsage + b.AttributeUsage,
+                AttributeUsage = a.AttributeUsage + b.AttributeUsage
             };
         }
     }
