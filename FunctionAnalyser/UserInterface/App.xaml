@@ -4,15 +4,21 @@
              DispatcherUnhandledException="Crash"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#BEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#C4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#2C628B"/>
+        <SolidColorBrush x:Key="ToggleButton.Canvas.Background" Color="#ACACAC"/>
+        <SolidColorBrush x:Key="ToggleButton.MouseOver.Background" Color="#78909C"/>
+        <SolidColorBrush x:Key="ToggleButton.Pressed.Background" Color="#455A64"/>
+        <SolidColorBrush x:Key="ProgressBar.Background" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ProgressBar.Foreground" Color="#00ACED"/>
+        <SolidColorBrush x:Key="Generic.Disabled.Foreground" Color="#838383"/>
+        <SolidColorBrush x:Key="CheckMark.Foreground" Color="#000000"/>
+
         <Canvas x:Key="checkMark" x:Shared="False">
-            <Path Fill="Black" Data="M 12.142499 3.2499999 6.5 9.0335002 3.857 6.5279999 2 8.3860007 6.5 12.75 14 5.1074999 Z"/>
+            <Path Fill="{StaticResource CheckMark.Foreground}" Data="M 12.142499 3.2499999 6.5 9.0335002 3.857 6.5279999 2 8.3860007 6.5 12.75 14 5.1074999 Z"/>
         </Canvas>
-        
         <Style TargetType="{x:Type Button}">
             <Setter Property="OverridesDefaultStyle" Value="True"></Setter>
             <Setter Property="BorderThickness" Value="1"></Setter>
@@ -26,9 +32,6 @@
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="Button.IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
@@ -38,7 +41,7 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Generic.Disabled.Foreground}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -55,10 +58,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
                         <StackPanel x:Name="panel" Orientation="Horizontal" SnapsToDevicePixels="true">
-                            <Canvas x:Name="imageCanvas" Background="#ACACAC" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                            <Canvas x:Name="imageCanvas" Background="{StaticResource ToggleButton.Canvas.Background}" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
                                 <ContentControl x:Name="image"></ContentControl>
                             </Canvas>
-                            <Border x:Name="contentBorder" BorderThickness="0 0 0 1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Border x:Name="contentBorder" BorderThickness="0 0 0 1.5" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <ContentPresenter x:Name="contentPresenter" RecognizesAccessKey="True"/>
                             </Border>
                         </StackPanel>
@@ -67,13 +70,13 @@
                                 <Setter Property="Content" TargetName="image" Value="{StaticResource checkMark}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="contentBorder" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="contentBorder" Value="{StaticResource ToggleButton.MouseOver.Background}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="BorderBrush" TargetName="contentBorder" Value="{StaticResource Button.Pressed.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="contentBorder" Value="{StaticResource ToggleButton.Pressed.Background}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Generic.Disabled.Foreground}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -81,8 +84,8 @@
             </Setter>
         </Style>
         <Style TargetType="{x:Type ProgressBar}">
-            <Setter Property="Foreground" Value="#00ACED"></Setter>
-            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource ProgressBar.Foreground}"></Setter>
+            <Setter Property="Background" Value="{StaticResource ProgressBar.Background}"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Minimum" Value="0"></Setter>
             <Setter Property="Maximum" Value="1"></Setter>
