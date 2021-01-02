@@ -15,4 +15,5 @@ There are options to spice up the report as well:
 | Show empty functions | Shows empty functions if they are found. A function is empty if it does not contain any commands. |
 | Version | The version to use when parsing the commands. |
 | Sort types | How to sort the commands in the report. The possible options are "Times used", "Alphabetical", and "Command length". |
+
 You can also export the results to a text file with the "Export Data" button.
