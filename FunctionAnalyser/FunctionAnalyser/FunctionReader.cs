@@ -174,6 +174,11 @@ namespace FunctionAnalyser
             }
             else if (result is Function) data.FunctionCalls.Increase();
             else if (result is EntitySelector entitySelector) AnalyseSelector(entitySelector, data);
+            else if (result is ScoreHolder scoreHolder && scoreHolder.Selector != null) AnalyseSelector(scoreHolder.Selector, data);
+            else if (result is Message message)
+            {
+                foreach (EntitySelector messageEntitySelector in message.Selectors.Values) AnalyseSelector(messageEntitySelector, data);
+            }
             else if (result is Predicate) data.PredicateCalls.Increase(inSelector);
             else if (result is NbtPath) data.NbtAccess.Increase(false);
             else if (result is Nbt && inSelector) data.NbtAccess.Increase(true);
