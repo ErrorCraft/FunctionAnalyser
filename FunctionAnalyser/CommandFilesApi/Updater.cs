@@ -25,6 +25,7 @@ namespace CommandFilesApi
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+            Client.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
         }
 
         public async Task<Update> CheckForUpdate()
@@ -60,6 +61,7 @@ namespace CommandFilesApi
             try
             {
                 GitHubAssets changelogAssets = update.GetAssets().FirstOrDefault(a => a.GetLabel() == CHANGELOG_LABEL);
+                if (changelogAssets == null) return "";
                 using HttpResponseMessage response = await Client.GetAsync(changelogAssets.GetDownloadUrl());
                 if (response.IsSuccessStatusCode)
                 {
@@ -68,7 +70,7 @@ namespace CommandFilesApi
             }
             catch (HttpRequestException) { }
 
-            return null;
+            return "";
         }
 
         private static GitHubAssets GetFileAssets(GitHubVersion update)
