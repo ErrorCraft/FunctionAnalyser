@@ -1,5 +1,5 @@
 # Function Analyser
-With this tool you can analyse your functions and get a report that includes details about them.
+With this tool you can analyse your functions and get a report that includes details about them. See below for a (really) small FAQ.
 
 ## Using the function analyser
 You can select a folder and press "Analyse" to analyse all the functions under that folder. It ignores the path name/casing, so a path like `foo/Bar!/B@Z.mcfunction` is valid, even though if used in-game it would not be a valid path. This way you can analyse more than one data pack at once, or even multiple data packs in different worlds! Do note that it may take a second if you want to analyse a lot of functions.
@@ -17,3 +17,9 @@ There are options to spice up the report as well:
 | Sort type | How to sort the commands in the report. The possible options are "Times used", "Alphabetical", and "Command length". |
 
 You can also export the results to a text file with the "Export Data" button.
+
+
+# FAQ
+**"I get a message saying I have to install .NET, what do I do?"**
+Go to [this](https://dotnet.microsoft.com/download/dotnet-core/5.0/runtime/?utm_source=getdotnetcore&utm_medium=referral) page and select the correct version from "Run desktop apps".
+The reason people get this message might be because .NET 5 is fairly new. (November 2020)
