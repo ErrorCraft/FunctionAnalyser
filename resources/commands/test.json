@@ -1,0 +1,16 @@
+{
+	"root": {
+		"children": {
+			"testLiteral": {
+				"type": "literal",
+				"children": {
+					"testArgument": {
+						"type": "argument",
+						"parser": "integer",
+						"executable": true
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"parent": "parent",
+	"root": {
+		"children": {
+			"testWithParentCommand": {
+				"type": "literal",
+				"children": {
+					"testWithParentArgument": {
+						"type": "argument",
+						"parser": "integer",
+						"executable": true
+					}
+				}
+			}
+		}
+	}
+}

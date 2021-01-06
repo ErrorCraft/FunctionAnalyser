@@ -1,0 +1,16 @@
+{
+	"root": {
+		"children": {
+			"nestedLiteral": {
+				"type": "literal",
+				"children": {
+					"nestedArgument": {
+						"type": "argument",
+						"parser": "integer",
+						"executable": true
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"test": {
+		"name": "Test (Normal)",
+		"resources": {
+			"commands": "test",
+			"items": "test"
+		}
+	},
+	"test_2": {
+		"name": "Test 2 (Parent)",
+		"resources": {
+			"commands": "test_with_parent",
+			"items": "test_with_parent"
+		}
+	},
+	"test_3": {
+		"name": "Test 3 (Nested)",
+		"resources": {
+			"commands": "test_with/nested_path",
+			"items": "test_with/nested_path"
+		}
+	}
+}
