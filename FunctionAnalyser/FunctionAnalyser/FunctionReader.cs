@@ -16,10 +16,10 @@ namespace FunctionAnalyser
     {
         private static Dictionary<string, Dispatcher> Versions;
 
-        private readonly string BasePath;
+        private string BasePath;
         private readonly System.IProgress<FunctionProgress> Progress;
         private readonly ILogger Logger;
-        private readonly FunctionOptions Options;
+        private FunctionOptions Options;
 
         public static void SetVersions(string json)
         {
@@ -38,16 +38,16 @@ namespace FunctionAnalyser
             return versionNames;
         }
 
-        public FunctionReader(string basePath, ILogger logger, System.IProgress<FunctionProgress> progress, FunctionOptions options)
+        public FunctionReader(ILogger logger, System.IProgress<FunctionProgress> progress)
         {
-            BasePath = basePath;
             Logger = logger;
             Progress = progress;
-            Options = options;
         }
 
-        public void Analyse(string version)
+        public void Analyse(string basePath, string version, FunctionOptions options)
         {
+            BasePath = basePath;
+            Options = options;
             if (!Directory.Exists(BasePath))
             {
                 Logger.Log(MessageProvider.FolderDoesNotExist(BasePath));

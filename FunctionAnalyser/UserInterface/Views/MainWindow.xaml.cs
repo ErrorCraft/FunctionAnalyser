@@ -13,14 +13,18 @@ namespace UserInterface
 {
     public partial class MainWindow : Window
     {
+        private readonly FunctionReader FunctionReader;
         private readonly MainWindowViewModel Model;
         private readonly ILogger Logger;
+        private readonly Progress<FunctionProgress> Progress = new Progress<FunctionProgress>();
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = Model = new MainWindowViewModel();
             Logger = new AnalyserLogger(Model.Blocks, Dispatcher);
+            Progress.ProgressChanged += ReportProgress;
+            FunctionReader = new FunctionReader(Logger, Progress);
         }
 
         private void SelectFolder(object sender, RoutedEventArgs e)
@@ -47,11 +51,8 @@ namespace UserInterface
         {
             Model.DisableOptions();
             Model.DisableButtons();
+
             Logger.Clear();
-
-            Progress<FunctionProgress> progress = new Progress<FunctionProgress>();
-            progress.ProgressChanged += ReportProgress;
-
             FunctionOptions options = new FunctionOptions()
             {
                 SkipFunctionOnError = Model.SkipFunctionOnError,
@@ -59,8 +60,7 @@ namespace UserInterface
                 ShowEmptyFunctions = Model.ShowEmptyFunctions,
                 CommandSortType = Model.CommandSortTypes[Model.CommandSortTypesSelectedIndex].Value
             };
-            FunctionReader functionReader = new FunctionReader(Model.FolderPath, Logger, progress, options);
-            await Task.Run(() => functionReader.Analyse(Model.Versions[Model.VersionsSelectedIndex].GetCommandName()));
+            await Task.Run(() => FunctionReader.Analyse(Model.FolderPath, Model.Versions[Model.VersionsSelectedIndex].GetCommandName(), options));
 
             Model.EnableOptions();
             Model.EnableButtons();
