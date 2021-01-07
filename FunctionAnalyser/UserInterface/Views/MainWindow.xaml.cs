@@ -1,6 +1,7 @@
 ﻿using AdvancedText;
 using CommandFilesApi;
 using FunctionAnalyser;
+using FunctionAnalyser.Builder;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.IO;
@@ -81,6 +82,9 @@ namespace UserInterface
                 UpdateWindow updateWindow = new UpdateWindow(update) { Owner = this };
                 updateWindow.ShowDialog();
             }
+
+            ResourceBuilder resourceBuilder = new ResourceBuilder(Logger);
+            await resourceBuilder.GetResources();
 
             FileProcessor fileProcessor = new FileProcessor(Logger);
             try

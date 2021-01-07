@@ -8,6 +8,13 @@ namespace FunctionAnalyser
 {
     public static class MessageProvider
     {
+        public static TextComponent GettingFile(string file)
+        {
+            return new TextComponent("Getting ").WithColour(Colour.BuiltinColours.GREY)
+                .With(new TextComponent(file).WithColour(Colour.BuiltinColours.GOLD)
+                .With(new TextComponent("...").WithColour(Colour.BuiltinColours.GREY)));
+        }
+
         public static TextComponent FolderDoesNotExist(string path)
         {
             return new TextComponent("Folder ")
