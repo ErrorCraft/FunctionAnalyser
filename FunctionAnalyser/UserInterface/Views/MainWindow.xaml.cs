@@ -83,9 +83,6 @@ namespace UserInterface
                 updateWindow.ShowDialog();
             }
 
-            ResourceBuilder resourceBuilder = new ResourceBuilder(Logger);
-            await resourceBuilder.GetResources();
-
             FileProcessor fileProcessor = new FileProcessor(Logger);
             try
             {
