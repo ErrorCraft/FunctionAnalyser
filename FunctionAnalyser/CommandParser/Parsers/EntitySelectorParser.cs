@@ -10,7 +10,7 @@ namespace CommandParser.Parsers
     public class EntitySelectorParser
     {
         private readonly IStringReader Reader;
-        DispatcherResources Resources;
+        private readonly DispatcherResources Resources;
         private readonly int Start;
 
         public IStringReader GetReader()

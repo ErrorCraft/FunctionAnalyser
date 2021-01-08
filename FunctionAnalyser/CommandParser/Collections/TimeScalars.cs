@@ -6,6 +6,12 @@ namespace CommandParser.Collections
     public class TimeScalars
     {
         private static Dictionary<char, int> Options = new Dictionary<char, int>();
+        private readonly Dictionary<char, int> Values;
+
+        public TimeScalars(Dictionary<char, int> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

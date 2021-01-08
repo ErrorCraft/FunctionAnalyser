@@ -8,6 +8,12 @@ namespace CommandParser.Collections
     public class Particles
     {
         private static Dictionary<string, RootNode> Options = new Dictionary<string, RootNode>();
+        private readonly Dictionary<string, RootNode> Values;
+
+        public Particles(Dictionary<string, RootNode> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

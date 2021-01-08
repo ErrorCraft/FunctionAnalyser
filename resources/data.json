@@ -2,8 +2,24 @@
 	"test": {
 		"name": "Test (Normal)",
 		"resources": {
+			"anchors": "anchors",
+			"blocks": "blocks",
+			"colours": "colours",
 			"commands": "test",
-			"items": "test"
+			"components": "components",
+			"enchantments": "enchantments",
+			"entities": "entities",
+			"gamemodes": "gamemodes",
+			"item_slots": "item_slots",
+			"items": "test",
+			"mob_effects": "mob_effects",
+			"objective_criteria": "objective_criteria",
+			"operations": "operations",
+			"particles": "particles",
+			"scoreboard_slots": "scoreboard_slots",
+			"selector_arguments": "selector_arguments",
+			"sorts": "sorts",
+			"time_scalars": "time_scalars"
 		}
 	},
 	"test_2": {

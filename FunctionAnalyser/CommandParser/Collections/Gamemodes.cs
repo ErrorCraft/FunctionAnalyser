@@ -3,9 +3,15 @@ using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
-    public static class Gamemodes
+    public class Gamemodes
     {
         private static HashSet<string> Options = new HashSet<string>();
+        private readonly HashSet<string> Values;
+
+        public Gamemodes(HashSet<string> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

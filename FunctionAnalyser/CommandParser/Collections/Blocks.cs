@@ -7,6 +7,12 @@ namespace CommandParser.Collections
     public class Blocks
     {
         private static Dictionary<string, BlockState> Options = new Dictionary<string, BlockState>();
+        private readonly Dictionary<string, BlockState> Values;
+
+        public Blocks(Dictionary<string, BlockState> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

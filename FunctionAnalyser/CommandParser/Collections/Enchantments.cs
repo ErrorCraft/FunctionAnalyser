@@ -7,6 +7,12 @@ namespace CommandParser.Collections
     public class Enchantments
     {
         private static HashSet<string> Options = new HashSet<string>();
+        private readonly HashSet<string> Values;
+
+        public Enchantments(HashSet<string> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

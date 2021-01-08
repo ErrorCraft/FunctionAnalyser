@@ -4,9 +4,15 @@ using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
-    public static class MobEffects
+    public class MobEffects
     {
         private static HashSet<string> Options = new HashSet<string>();
+        private readonly HashSet<string> Values;
+
+        public MobEffects(HashSet<string> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

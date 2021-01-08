@@ -4,9 +4,15 @@ using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
-    public static class Entities
+    public class Entities
     {
         private static HashSet<string> Options = new HashSet<string>();
+        private readonly HashSet<string> Values;
+
+        public Entities(HashSet<string> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

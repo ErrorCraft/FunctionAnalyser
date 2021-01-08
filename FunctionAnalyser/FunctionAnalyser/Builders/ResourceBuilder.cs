@@ -33,8 +33,24 @@ namespace FunctionAnalyser.Builders
         {
             DispatcherResourcesBuilder resources = new DispatcherResourcesBuilder()
             {
+                Anchors = await GetResources<AnchorsBuilder>("anchors"),
+                Blocks = await GetResources<BlocksBuilder>("blocks"),
+                Colours = await GetResources<ColoursBuilder>("colours"),
+                Commands = await GetResources<CommandsBuilder>("commands"),
+                Components = await GetResources<ComponentsBuilder>("components"),
+                Enchantments = await GetResources<EnchantmentsBuilder>("enchantments"),
+                Entities = await GetResources<EntitiesBuilder>("entities"),
+                Gamemodes = await GetResources<GamemodesBuilder>("gamemodes"),
+                ItemSlots = await GetResources<ItemSlotsBuilder>("item_slots"),
                 Items = await GetResources<ItemsBuilder>("items"),
-                Commands = await GetResources<CommandsBuilder>("commands")
+                MobEffects = await GetResources<MobEffectsBuilder>("mob_effects"),
+                ObjectiveCriteria = await GetResources<ObjectiveCriteriaBuilder>("objective_criteria"),
+                Operations = await GetResources<OperationsBuilder>("operations"),
+                Particles = await GetResources<ParticlesBuilder>("particles"),
+                ScoreboardSlots = await GetResources<ScoreboardSlotsBuilder>("scoreboard_slots"),
+                SelectorArguments = await GetResources<SelectorArgumentsBuilder>("selector_arguments"),
+                Sorts = await GetResources<SortsBuilder>("sorts"),
+                TimeScalars = await GetResources<TimeScalarsBuilder>("time_scalars")
             };
             VersionsBuilder versionsBuilder = await GetData();
 

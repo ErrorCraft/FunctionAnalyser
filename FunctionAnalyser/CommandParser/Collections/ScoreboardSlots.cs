@@ -3,18 +3,24 @@ using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
-    public static class ScoreboardSlots
+    public class ScoreboardSlots
     {
-        private static Dictionary<string, ScoreboardSlot> Slots = new Dictionary<string, ScoreboardSlot>();
+        private static Dictionary<string, ScoreboardSlot> SlotsObsolete = new Dictionary<string, ScoreboardSlot>();
+        private readonly Dictionary<string, ScoreboardSlot> Values;
+
+        public ScoreboardSlots(Dictionary<string, ScoreboardSlot> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {
-            Slots = JsonConvert.DeserializeObject<Dictionary<string, ScoreboardSlot>>(json);
+            SlotsObsolete = JsonConvert.DeserializeObject<Dictionary<string, ScoreboardSlot>>(json);
         }
 
         public static bool TryGetSlot(string slot, out ScoreboardSlot result)
         {
-            return Slots.TryGetValue(slot, out result);
+            return SlotsObsolete.TryGetValue(slot, out result);
         }
     }
 }

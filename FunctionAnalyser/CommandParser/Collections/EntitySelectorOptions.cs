@@ -3,10 +3,16 @@ using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
-    public static class EntitySelectorOptions
+    public class EntitySelectorOptions
     {
         private static Dictionary<string, EntitySelectorOption> Options = new Dictionary<string, EntitySelectorOption>();
-        
+        private readonly Dictionary<string, EntitySelectorOption> Values;
+
+        public EntitySelectorOptions(Dictionary<string, EntitySelectorOption> values)
+        {
+            Values = values;
+        }
+
         public static void Set(string json)
         {
             Options = JsonConvert.DeserializeObject<Dictionary<string, EntitySelectorOption>>(json);

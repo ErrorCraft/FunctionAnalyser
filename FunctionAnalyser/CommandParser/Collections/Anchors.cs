@@ -3,9 +3,15 @@ using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
-    public static class Anchors
+    public class Anchors
     {
         private static HashSet<string> Options = new HashSet<string>();
+        private readonly HashSet<string> Values;
+
+        public Anchors(HashSet<string> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {
