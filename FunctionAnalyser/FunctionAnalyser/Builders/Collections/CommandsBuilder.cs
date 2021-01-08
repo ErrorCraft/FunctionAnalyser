@@ -19,7 +19,6 @@ namespace FunctionAnalyser.Builders.Collections
             CommandsBuilder builder = this;
             while (builder.Parent != null)
             {
-                System.Diagnostics.Debug.WriteLine(builder.Parent);
                 builder = resources[builder.Parent];
                 all.Merge(builder.Root);
             }
