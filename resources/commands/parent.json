@@ -6,7 +6,7 @@
 				"children": {
 					"parentArgument": {
 						"type": "argument",
-						"parser": "integer",
+						"parser": "item",
 						"executable": true
 					}
 				}

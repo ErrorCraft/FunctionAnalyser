@@ -7,7 +7,7 @@
 				"children": {
 					"testWithParentArgument": {
 						"type": "argument",
-						"parser": "integer",
+						"parser": "item",
 						"executable": true
 					}
 				}

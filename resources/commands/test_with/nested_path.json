@@ -6,7 +6,7 @@
 				"children": {
 					"nestedArgument": {
 						"type": "argument",
-						"parser": "integer",
+						"parser": "item",
 						"executable": true
 					}
 				}
