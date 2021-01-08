@@ -13,13 +13,15 @@ namespace CommandParser
         private readonly RootNode Root;
         [JsonProperty("name")]
         private readonly string Name;
-        private readonly CommandResources Resources;
+        private readonly DispatcherResources Resources;
 
-        public Dispatcher(string name)
+        public Dispatcher(string name) : this(name, new RootNode(), new DispatcherResources()) { }
+
+        public Dispatcher(string name, RootNode root, DispatcherResources resources)
         {
-            Root = new RootNode();
+            Root = root;
             Name = name;
-            Resources = new CommandResources();
+            Resources = resources;
         }
 
         public string GetName()

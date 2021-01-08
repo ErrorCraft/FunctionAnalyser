@@ -15,6 +15,11 @@ namespace FunctionAnalyser
                 .With(new TextComponent("...").WithColour(Colour.BuiltinColours.GREY)));
         }
 
+        public static TextComponent AllDone()
+        {
+            return new TextComponent("All done!").WithColour(Colour.BuiltinColours.GREEN);
+        }
+
         public static TextComponent FolderDoesNotExist(string path)
         {
             return new TextComponent("Folder ")

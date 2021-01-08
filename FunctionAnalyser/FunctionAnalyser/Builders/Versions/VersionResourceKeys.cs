@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace CommandParser.Builders.Dispatchers
+namespace FunctionAnalyser.Builders.Versions
 {
-    public class DispatcherResourceKeys
+    public class VersionResourceKeys
     {
         [JsonProperty("commands")]
         private readonly string Commands;

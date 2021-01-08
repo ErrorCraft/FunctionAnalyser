@@ -1,7 +1,7 @@
 ﻿using AdvancedText;
 using CommandFilesApi;
 using FunctionAnalyser;
-using FunctionAnalyser.Builder;
+using FunctionAnalyser.Builders;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.IO;
@@ -14,7 +14,7 @@ namespace UserInterface
 {
     public partial class MainWindow : Window
     {
-        private readonly FunctionReader FunctionReader;
+        private readonly FunctionReader Reader;
         private readonly MainWindowViewModel Model;
         private readonly ILogger Logger;
         private readonly Progress<FunctionProgress> Progress = new Progress<FunctionProgress>();
@@ -25,7 +25,7 @@ namespace UserInterface
             DataContext = Model = new MainWindowViewModel();
             Logger = new AnalyserLogger(Model.Blocks, Dispatcher);
             Progress.ProgressChanged += ReportProgress;
-            FunctionReader = new FunctionReader(Logger, Progress);
+            Reader = new FunctionReader(Logger, Progress);
         }
 
         private void SelectFolder(object sender, RoutedEventArgs e)
@@ -61,7 +61,7 @@ namespace UserInterface
                 ShowEmptyFunctions = Model.ShowEmptyFunctions,
                 CommandSortType = Model.CommandSortTypes[Model.CommandSortTypesSelectedIndex].Value
             };
-            await Task.Run(() => FunctionReader.Analyse(Model.FolderPath, Model.Versions[Model.VersionsSelectedIndex].GetCommandName(), options));
+            await Task.Run(() => Reader.Analyse(Model.FolderPath, Model.Versions[Model.VersionsSelectedIndex].GetCommandName(), options));
 
             Model.EnableOptions();
             Model.EnableButtons();
@@ -83,11 +83,10 @@ namespace UserInterface
                 updateWindow.ShowDialog();
             }
 
-            FileProcessor fileProcessor = new FileProcessor(Logger);
             try
             {
-                await fileProcessor.GetFiles();
-                Model.Versions = CommandVersionViewModel.FromVersionNames(FunctionReader.GetVersionNames());
+                await Reader.LoadVersions();
+                Model.Versions = CommandVersionViewModel.FromVersionNames(Reader.GetVersionNames());
                 Model.SelectFolderEnabled = true;
                 Model.EnableOptions();
             }

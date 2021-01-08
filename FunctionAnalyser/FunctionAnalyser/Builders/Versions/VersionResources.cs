@@ -1,22 +1,22 @@
 ﻿using Newtonsoft.Json;
 
-namespace CommandParser.Builders.Dispatchers
+namespace FunctionAnalyser.Builders.Versions
 {
-    public class DispatcherResources
+    public class VersionResources
     {
         [JsonProperty("name")]
         private readonly string Name;
         [JsonProperty("resources")]
-        private readonly DispatcherResourceKeys Resources;
+        private readonly VersionResourceKeys ResourceKeys;
 
         public string GetName()
         {
             return Name;
         }
 
-        public DispatcherResourceKeys GetResourceKeys()
+        public VersionResourceKeys GetResourceKeys()
         {
-            return Resources;
+            return ResourceKeys;
         }
     }
 }

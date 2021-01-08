@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
-namespace FunctionAnalyser.Builder
+namespace FunctionAnalyser.Builders
 {
-    public enum GithubPathType
+    public enum PathType
     {
         [EnumMember(Value = "file")]
         File = 0,

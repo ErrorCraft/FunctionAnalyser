@@ -1,16 +1,16 @@
 ﻿using AdvancedText;
-using CommandParser.Builders.Collections;
-using CommandParser.Builders.Dispatchers;
 using static FunctionAnalyser.MessageProvider;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CommandParser;
+using FunctionAnalyser.Builders.Collections;
+using FunctionAnalyser.Builders.Versions;
 
-namespace FunctionAnalyser.Builder
+namespace FunctionAnalyser.Builders
 {
     public class ResourceBuilder
     {
@@ -29,21 +29,23 @@ namespace FunctionAnalyser.Builder
             Logger = logger;
         }
 
-        public async Task GetResources()
+        public async Task<Dictionary<string, Dispatcher>> GetResources()
         {
-            Dictionary<string, ItemsBuilder> items = await GetResources<ItemsBuilder>("items");
-            Dictionary<string, CommandsBuilder> commands = await GetResources<CommandsBuilder>("commands");
-            DispatcherBuilder dispatcherBuilder = await GetData();
-            foreach (KeyValuePair<string, ItemsBuilder> pair in items)
+            DispatcherResourcesBuilder resources = new DispatcherResourcesBuilder()
             {
-                Debug.WriteLine($"{pair.Key} ({pair.Value})");
-            }
+                Items = await GetResources<ItemsBuilder>("items"),
+                Commands = await GetResources<CommandsBuilder>("commands")
+            };
+            VersionsBuilder versionsBuilder = await GetData();
+
+            Logger.Log(AllDone());
+            return versionsBuilder.Build(resources);
         }
 
-        private async Task<DispatcherBuilder> GetData()
+        private async Task<VersionsBuilder> GetData()
         {
             string fileContents = await GetContents("https://raw.githubusercontent.com/ErrorCraft/FunctionAnalyser/master/resources/data.json");
-            return DispatcherBuilder.FromJson(fileContents);
+            return VersionsBuilder.FromJson(fileContents);
         }
 
         private async Task<Dictionary<string, T>> GetResources<T>(string from)
@@ -57,12 +59,12 @@ namespace FunctionAnalyser.Builder
             Dictionary<string, T> results = new Dictionary<string, T>();
 
             string contents = await GetContents(from, name);
-            GithubPath[] paths = JsonConvert.DeserializeObject<GithubPath[]>(contents);
+            Path[] paths = JsonConvert.DeserializeObject<Path[]>(contents);
 
             for (int i = 0; i < paths.Length; i++)
             {
                 string newName = Utilities.CombinePaths(name, paths[i].GetName());
-                if (paths[i].GetContentType() == GithubPathType.File)
+                if (paths[i].GetContentType() == PathType.File)
                 {
                     string fileContents = await GetContents(paths[i].GetDownloadUrl());
                     T result = JsonConvert.DeserializeObject<T>(fileContents);
@@ -90,7 +92,7 @@ namespace FunctionAnalyser.Builder
             }
             else
             {
-                throw new Exception("no");
+                throw new ResponseException(from, response);
             }
         }
     }

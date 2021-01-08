@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.IO;
 
-namespace FunctionAnalyser.Builder
+namespace FunctionAnalyser.Builders
 {
-    public class GithubPath
+    public class Path
     {
         [JsonProperty("name")]
         private readonly string Name;
@@ -12,11 +11,11 @@ namespace FunctionAnalyser.Builder
         private readonly string DownloadUrl;
         [JsonProperty("type")]
         [JsonConverter(typeof(StringEnumConverter))]
-        private readonly GithubPathType ContentType;
+        private readonly PathType ContentType;
 
         public string GetName()
         {
-            return Path.GetFileNameWithoutExtension(Name);
+            return System.IO.Path.GetFileNameWithoutExtension(Name);
         }
 
         public string GetDownloadUrl()
@@ -24,7 +23,7 @@ namespace FunctionAnalyser.Builder
             return DownloadUrl;
         }
 
-        public GithubPathType GetContentType()
+        public PathType GetContentType()
         {
             return ContentType;
         }

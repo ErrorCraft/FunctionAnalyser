@@ -9,10 +9,13 @@ namespace CommandParser.Collections
         // OBSOLETE
         private static HashSet<string> Options = new HashSet<string>();
 
-        [JsonProperty("parent")]
-        private readonly string Parent;
         [JsonProperty("values")]
         private readonly HashSet<string> Values;
+
+        public Items(HashSet<string> values)
+        {
+            Values = values;
+        }
 
         public static void Set(string json)
         {

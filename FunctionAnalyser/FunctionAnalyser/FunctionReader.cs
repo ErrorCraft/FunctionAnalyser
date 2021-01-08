@@ -3,30 +3,32 @@ using CommandParser;
 using CommandParser.Context;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
+using FunctionAnalyser.Builders;
 using FunctionAnalyser.Results;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using static AdvancedText.Colour;
 
 namespace FunctionAnalyser
 {
     public class FunctionReader
     {
-        private static Dictionary<string, Dispatcher> Versions;
+        private Dictionary<string, Dispatcher> Versions;
 
         private string BasePath;
         private readonly System.IProgress<FunctionProgress> Progress;
         private readonly ILogger Logger;
         private FunctionOptions Options;
 
-        public static void SetVersions(string json)
+        public async Task LoadVersions()
         {
-            Versions = JsonConvert.DeserializeObject<Dictionary<string, Dispatcher>>(json);
+            ResourceBuilder resourceBuilder = new ResourceBuilder(Logger);
+            Versions = await resourceBuilder.GetResources();
         }
 
-        public static List<VersionName> GetVersionNames()
+        public List<VersionName> GetVersionNames()
         {
             List<VersionName> versionNames = new List<VersionName>();
 

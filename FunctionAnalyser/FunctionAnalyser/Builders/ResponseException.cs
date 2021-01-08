@@ -2,11 +2,11 @@
 using System.Globalization;
 using System.Net.Http;
 
-namespace CommandFilesApi
+namespace FunctionAnalyser.Builders
 {
-    class FileProcessorException : Exception
+    public class ResponseException : Exception
     {
-        public FileProcessorException(string fileName, HttpResponseMessage response)
+        public ResponseException(string fileName, HttpResponseMessage response)
             : base($"{fileName}: {response.ReasonPhrase} ({((int)response.StatusCode).ToString(NumberFormatInfo.InvariantInfo)})") { }
     }
 }

@@ -17,5 +17,10 @@ namespace CommandParser.Tree
         {
             throw new NotImplementedException();
         }
+
+        public void Merge(RootNode other)
+        {
+            foreach (Node child in other.Children.Values) AddChild(child);
+        }
     }
 }
