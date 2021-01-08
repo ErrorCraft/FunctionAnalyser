@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommandFilesApi\CommandFilesApi.csproj" />
+    <ProjectReference Include="..\ProgramUpdater\ProgramUpdater.csproj" />
     <ProjectReference Include="..\FunctionAnalyser\FunctionAnalyser.csproj" />
   </ItemGroup>
 
