@@ -1,5 +1,7 @@
 {
-	"belowName": {},
-	"list": {},
-	"sidebar": {"contents_optional":true,"slot_type":"colour"}
+	"values": {
+		"belowName": {},
+		"list": {},
+		"sidebar": {"contents_optional":true,"slot_type":"colour"}
+	}
 }
