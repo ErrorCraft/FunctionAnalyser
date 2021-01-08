@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class Vec2Argument : IArgument<ICoordinates>
     {
-        public ReadResults Parse(IStringReader reader, out ICoordinates result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ICoordinates result)
         {
             result = default;
             if (!reader.CanRead())

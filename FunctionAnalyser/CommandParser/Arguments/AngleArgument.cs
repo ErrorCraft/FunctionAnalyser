@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class AngleArgument : IArgument<Angle>
     {
-        public ReadResults Parse(IStringReader reader, out Angle result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Angle result)
         {
             int start = reader.GetCursor();
             ReadResults readResults = new AngleParser(reader).Read(out result);

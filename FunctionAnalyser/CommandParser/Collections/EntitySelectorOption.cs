@@ -55,7 +55,7 @@ namespace CommandParser.Collections
             return ReapplicationType;
         }
 
-        public ReadResults Handle(EntitySelectorParser parser, string name, int start)
+        public ReadResults Handle(EntitySelectorParser parser, DispatcherResources resources, string name, int start)
         {
             IStringReader reader = parser.GetReader();
             bool negated = false;
@@ -69,19 +69,19 @@ namespace CommandParser.Collections
                 Option.Scores => ReadScores(parser, reader),
                 Option.Gamemode => ReadGamemode(parser, reader),
                 Option.Sort => ReadSort(parser, reader, name, start),
-                _ => CheckComponents(parser, reader)
+                _ => CheckComponents(parser, reader, resources)
             };
 
             if (readResults.Successful) parser.Apply(name, negated);
             return readResults;
         }
 
-        private ReadResults CheckComponents(EntitySelectorParser parser, IStringReader reader)
+        private ReadResults CheckComponents(EntitySelectorParser parser, IStringReader reader, DispatcherResources resources)
         {
             if (Contents != null)
             {
                 CommandContext context = new CommandContext(reader.GetCursor());
-                ReadResults readResults = Contents.Parse(reader, context);
+                ReadResults readResults = Contents.Parse(reader, context, resources);
                 if (readResults.Successful)
                 {
                     parser.AddArgument(context.Results[0]);

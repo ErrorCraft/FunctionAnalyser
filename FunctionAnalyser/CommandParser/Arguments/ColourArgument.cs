@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ColourArgument : IArgument<Colour>
     {
-        public ReadResults Parse(IStringReader reader, out Colour result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Colour result)
         {
             result = default;
             ReadResults readResults = reader.ReadUnquotedString(out string colour);

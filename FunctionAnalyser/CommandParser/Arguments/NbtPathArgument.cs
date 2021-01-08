@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class NbtPathArgument : IArgument<NbtPath>
     {
-        public ReadResults Parse(IStringReader reader, out NbtPath result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out NbtPath result)
         {
             result = default;
 

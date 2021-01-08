@@ -19,10 +19,10 @@ namespace CommandParser.Arguments
             PlayersOnly = playersOnly;
         }
 
-        public ReadResults Parse(IStringReader reader, out EntitySelector result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out EntitySelector result)
         {
             int start = reader.GetCursor();
-            EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader);
+            EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader, resources);
             ReadResults readResults = entitySelectorParser.Parse(out result);
             if (!readResults.Successful) return readResults;
 

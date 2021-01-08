@@ -10,6 +10,7 @@ namespace CommandParser.Parsers
     public class EntitySelectorParser
     {
         private readonly IStringReader Reader;
+        DispatcherResources Resources;
         private readonly int Start;
 
         public IStringReader GetReader()
@@ -47,10 +48,11 @@ namespace CommandParser.Parsers
         }
 
 
-        public EntitySelectorParser(IStringReader reader)
+        public EntitySelectorParser(IStringReader reader, DispatcherResources resources)
         {
             Reader = reader;
             Start = reader.GetCursor();
+            Resources = resources;
         }
 
         public ReadResults Parse(out EntitySelector result)
@@ -221,7 +223,7 @@ namespace CommandParser.Parsers
                     return new ReadResults(false, CommandError.InapplicableOption(name).WithContext(Reader));
                 }
 
-                readResults = option.Handle(this, name, start);
+                readResults = option.Handle(this, Resources, name, start);
                 if (!readResults.Successful) return readResults;
 
                 Reader.SkipWhitespace();

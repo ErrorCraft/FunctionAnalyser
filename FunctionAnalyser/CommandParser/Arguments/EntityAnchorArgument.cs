@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class EntityAnchorArgument : IArgument<Anchor>
     {
-        public ReadResults Parse(IStringReader reader, out Anchor result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Anchor result)
         {
             result = default;
             int start = reader.GetCursor();

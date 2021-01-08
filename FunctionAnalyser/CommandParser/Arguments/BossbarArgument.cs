@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class BossbarArgument : IArgument<Bossbar>
     {
-        public ReadResults Parse(IStringReader reader, out Bossbar result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Bossbar result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation bossbar);

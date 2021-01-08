@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ScoreboardSlotArgument : IArgument<ScoreboardSlot>
     {
-        public ReadResults Parse(IStringReader reader, out ScoreboardSlot result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ScoreboardSlot result)
         {
             return new ScoreboardSlotParser(reader).Read(out result);
         }

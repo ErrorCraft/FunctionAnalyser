@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ItemSlotArgument : IArgument<ItemSlot>
     {
-        public ReadResults Parse(IStringReader reader, out ItemSlot result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ItemSlot result)
         {
             result = default;
             int start = reader.GetCursor();

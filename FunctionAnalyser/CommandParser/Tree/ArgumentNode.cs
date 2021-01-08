@@ -27,10 +27,10 @@ namespace CommandParser.Tree
             return Name;
         }
 
-        public override ReadResults Parse(IStringReader reader, CommandContext builder)
+        public override ReadResults Parse(IStringReader reader, CommandContext builder, DispatcherResources resources)
         {
             int start = reader.GetCursor();
-            ReadResults parseResults = Argument.Parse(reader, out T result);
+            ReadResults parseResults = Argument.Parse(reader, resources, out T result);
             if (parseResults.Successful)
             {
                 ParsedArgument<T> parsed = new ParsedArgument<T>(result, builder.InRoot);

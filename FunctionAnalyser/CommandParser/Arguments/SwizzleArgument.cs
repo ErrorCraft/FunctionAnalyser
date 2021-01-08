@@ -14,7 +14,7 @@ namespace CommandParser.Arguments
             Characters = characters ?? new HashSet<char>();
         }
 
-        public ReadResults Parse(IStringReader reader, out HashSet<char> result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out HashSet<char> result)
         {
             result = new HashSet<char>();
             int start = reader.GetCursor();

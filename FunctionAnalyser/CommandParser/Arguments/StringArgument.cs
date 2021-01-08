@@ -15,7 +15,7 @@ namespace CommandParser.Arguments
             Type = type;
         }
 
-        public ReadResults Parse(IStringReader reader, out string result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out string result)
         {
             if (Type == StringType.GREEDY)
             {

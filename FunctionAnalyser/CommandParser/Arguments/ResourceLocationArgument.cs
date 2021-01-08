@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ResourceLocationArgument : IArgument<ResourceLocation>
     {
-        public ReadResults Parse(IStringReader reader, out ResourceLocation result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ResourceLocation result)
         {
             return new ResourceLocationParser(reader).Read(out result);
         }

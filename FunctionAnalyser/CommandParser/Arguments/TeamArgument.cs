@@ -5,7 +5,7 @@ namespace CommandParser.Arguments
 {
     public class TeamArgument : IArgument<Team>
     {
-        public ReadResults Parse(IStringReader reader, out Team result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Team result)
         {
             ReadResults readResults = reader.ReadUnquotedString(out string team);
             result = new Team(team);

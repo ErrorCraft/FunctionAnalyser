@@ -15,13 +15,13 @@ namespace CommandParser.Arguments
             Multiple = multiple;
         }
 
-        public ReadResults Parse(IStringReader reader, out ScoreHolder result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ScoreHolder result)
         {
             result = default;
 
             if (reader.CanRead() && reader.Peek() == '@')
             {
-                EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader);
+                EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader, resources);
                 ReadResults readResults = entitySelectorParser.Parse(out EntitySelector entitySelector);
                 if (!readResults.Successful) return readResults;
                 if (!Multiple && entitySelector.MaxResults > 1)

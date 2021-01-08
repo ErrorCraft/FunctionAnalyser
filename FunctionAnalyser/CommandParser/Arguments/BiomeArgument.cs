@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class BiomeArgument : IArgument<Biome>
     {
-        public ReadResults Parse(IStringReader reader, out Biome result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Biome result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation biome);

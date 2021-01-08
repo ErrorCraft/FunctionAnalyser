@@ -18,7 +18,7 @@ namespace CommandParser.Tree
             return Literal;
         }
 
-        public override ReadResults Parse(IStringReader reader, CommandContext builder)
+        public override ReadResults Parse(IStringReader reader, CommandContext builder, DispatcherResources resources)
         {
             int start = reader.GetCursor();
             int end = Parse(reader);

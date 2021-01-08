@@ -16,7 +16,7 @@ namespace CommandParser.Arguments
             Maximum = maximum;
         }
 
-        public ReadResults Parse(IStringReader reader, out int result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out int result)
         {
             int start = reader.GetCursor();
 			ReadResults readResults = reader.ReadInteger(out result);

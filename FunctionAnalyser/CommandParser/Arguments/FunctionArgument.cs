@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class FunctionArgument : IArgument<Function>
     {
-        public ReadResults Parse(IStringReader reader, out Function result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Function result)
         {
             result = default;
             bool isTag = false;

@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class DimensionArgument : IArgument<Dimension>
     {
-        public ReadResults Parse(IStringReader reader, out Dimension result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Dimension result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation dimension);

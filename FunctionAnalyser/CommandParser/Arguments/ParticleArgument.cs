@@ -10,7 +10,7 @@ namespace CommandParser.Arguments
 {
     public class ParticleArgument : IArgument<Particle>
     {
-        public ReadResults Parse(IStringReader reader, out Particle result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Particle result)
         {
             result = default;
 
@@ -30,7 +30,7 @@ namespace CommandParser.Arguments
                 if (!readResults.Successful) return readResults;
 
                 context = new CommandContext(0);
-                readResults = pair.Value.Parse(reader, context);
+                readResults = pair.Value.Parse(reader, context, resources);
                 if (!readResults.Successful) return readResults;
 
                 arguments.Add(pair.Key, context.Results[0]);

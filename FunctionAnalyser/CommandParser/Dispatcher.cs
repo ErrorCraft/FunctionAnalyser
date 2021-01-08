@@ -97,7 +97,7 @@ namespace CommandParser
                 CommandContext context = contextSoFar.Copy();
                 IStringReader reader = originalReader.Copy();
 
-                ReadResults readResults = child.Parse(reader, context);
+                ReadResults readResults = child.Parse(reader, context, Resources);
 
                 if (readResults.Successful)
                 {

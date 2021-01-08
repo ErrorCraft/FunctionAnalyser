@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class UuidArgument : IArgument<Uuid>
     {
-        public ReadResults Parse(IStringReader reader, out Uuid result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Uuid result)
         {
             return UuidParser.FromReader(reader, out result);
         }

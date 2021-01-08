@@ -70,7 +70,7 @@ namespace CommandParser.Tree
             }
         }
 
-        public abstract ReadResults Parse(IStringReader reader, CommandContext builder);
+        public abstract ReadResults Parse(IStringReader reader, CommandContext builder, DispatcherResources resources);
         public IEnumerable<Node> GetRelevantNodes(IStringReader reader)
         {
             if (Literals.Count > 0)

@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class OperationArgument : IArgument<Operation>
     {
-        public ReadResults Parse(IStringReader reader, out Operation result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Operation result)
         {
             result = default;
             int start = reader.GetCursor();

@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class LootTableArgument : IArgument<LootTable>
     {
-        public ReadResults Parse(IStringReader reader, out LootTable result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out LootTable result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation lootTable);

@@ -7,7 +7,7 @@ namespace CommandParser.Arguments
 {
     public class ComponentArgument : IArgument<Component>
     {
-        public ReadResults Parse(IStringReader reader, out Component result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Component result)
         {
             result = default;
             if (!reader.CanRead()) return new ReadResults(false, CommandError.IncorrectArgument().WithContext(reader));

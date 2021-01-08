@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class ObjectiveCriterionArgument : IArgument<ObjectiveCriterion>
     {
-        public ReadResults Parse(IStringReader reader, out ObjectiveCriterion result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ObjectiveCriterion result)
         {
             return new ObjectiveCriterionParser(reader).ByName(out result);
         }

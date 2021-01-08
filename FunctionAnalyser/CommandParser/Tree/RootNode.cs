@@ -13,7 +13,7 @@ namespace CommandParser.Tree
             return "";
         }
 
-        public override ReadResults Parse(IStringReader reader, CommandContext builder)
+        public override ReadResults Parse(IStringReader reader, CommandContext builder, DispatcherResources resources)
         {
             throw new NotImplementedException();
         }

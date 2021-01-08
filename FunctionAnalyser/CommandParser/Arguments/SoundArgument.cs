@@ -6,7 +6,7 @@ namespace CommandParser.Arguments
 {
     public class SoundArgument : IArgument<Sound>
     {
-        public ReadResults Parse(IStringReader reader, out Sound result)
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Sound result)
         {
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation sound);
