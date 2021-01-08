@@ -22,7 +22,12 @@ namespace CommandParser.Collections
             Options = JsonConvert.DeserializeObject<HashSet<string>>(json);
         }
 
-        public static bool Contains(ResourceLocation item)
+        public bool Contains(ResourceLocation item)
+        {
+            return item.IsDefaultNamespace() && Values.Contains(item.Path);
+        }
+
+        public static bool ContainsObsolete(ResourceLocation item)
         {
             return item.IsDefaultNamespace() && Options.Contains(item.Path);
         }

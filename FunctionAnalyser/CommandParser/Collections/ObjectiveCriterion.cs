@@ -32,7 +32,7 @@ namespace CommandParser.Collections
             {
                 CriterionType.None => string.IsNullOrEmpty(contents),
                 CriterionType.Colour => Colours.Contains(contents),
-                CriterionType.Item => Items.Contains(new ResourceLocation(contents)),
+                CriterionType.Item => Items.ContainsObsolete(new ResourceLocation(contents)),
                 CriterionType.Block => Blocks.ContainsBlock(new ResourceLocation(contents)),
                 CriterionType.Entity => Entities.Contains(new ResourceLocation(contents)),
                 CriterionType.Statistic => ObjectiveCriteria.ContainsCustomCriterion(contents),

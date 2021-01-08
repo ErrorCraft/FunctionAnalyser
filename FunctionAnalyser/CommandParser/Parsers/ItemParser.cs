@@ -9,11 +9,13 @@ namespace CommandParser.Parsers
     public class ItemParser
     {
         private readonly IStringReader StringReader;
+        private readonly DispatcherResources Resources;
         private readonly bool ForTesting;
 
-        public ItemParser(IStringReader stringReader, bool forTesting)
+        public ItemParser(IStringReader stringReader, DispatcherResources resources, bool forTesting)
         {
             StringReader = stringReader;
+            Resources = resources;
             ForTesting = forTesting;
         }
 
@@ -37,7 +39,7 @@ namespace CommandParser.Parsers
             ReadResults readResults = new ResourceLocationParser(StringReader).Read(out ResourceLocation item);
             if (!readResults.Successful) return readResults;
 
-            if (!isTag && !Items.Contains(item))
+            if (!isTag && !Resources.Items.Contains(item))
             {
                 return new ReadResults(false, CommandError.UnknownItem(item));
             }
