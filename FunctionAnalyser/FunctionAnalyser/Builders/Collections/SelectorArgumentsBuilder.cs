@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FunctionAnalyser.Builders.Collections
 {
-    public class SelectorArgumentsBuilder
+    public class SelectorArgumentsBuilder : IBuilder<SelectorArgumentsBuilder, EntitySelectorOptions>
     {
         [JsonProperty("parent")]
         private readonly string Parent;

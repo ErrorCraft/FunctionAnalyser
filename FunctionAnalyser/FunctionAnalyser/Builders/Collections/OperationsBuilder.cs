@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FunctionAnalyser.Builders.Collections
 {
-    public class OperationsBuilder
+    public class OperationsBuilder : IBuilder<OperationsBuilder, Operations>
     {
         [JsonProperty("parent")]
         private readonly string Parent;

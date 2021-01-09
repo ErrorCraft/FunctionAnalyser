@@ -1,5 +1,7 @@
 ﻿using CommandParser;
+using CommandParser.Collections;
 using CommandParser.Tree;
+using FunctionAnalyser.Builders.Collections;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -27,30 +29,36 @@ namespace FunctionAnalyser.Builders.Versions
         private static Dispatcher GetDispatcher(DispatcherResourcesBuilder dispatcherResources, VersionResources versionResources)
         {
             VersionResourceKeys keys = versionResources.GetResourceKeys();
-            RootNode commandRootNode = dispatcherResources.Commands[keys.GetCommandsKey()].Build(dispatcherResources.Commands);
+            RootNode commandRootNode = GetResources<CommandsBuilder, RootNode>(dispatcherResources.Commands, keys.GetCommandsKey());
             DispatcherResources commandResources = new DispatcherResources()
             {
-                Anchors = dispatcherResources.Anchors[keys.GetAnchorsKey()].Build(dispatcherResources.Anchors),
-                Blocks = dispatcherResources.Blocks[keys.GetBlocksKey()].Build(dispatcherResources.Blocks),
-                Colours = dispatcherResources.Colours[keys.GetColoursKey()].Build(dispatcherResources.Colours),
-                Components = dispatcherResources.Components[keys.GetComponentsKey()].Build(dispatcherResources.Components),
-                Enchantments = dispatcherResources.Enchantments[keys.GetEnchantmentsKey()].Build(dispatcherResources.Enchantments),
-                Entities = dispatcherResources.Entities[keys.GetEntitiesKey()].Build(dispatcherResources.Entities),
-                Gamemodes = dispatcherResources.Gamemodes[keys.GetGamemodesKey()].Build(dispatcherResources.Gamemodes),
-                ItemSlots = dispatcherResources.ItemSlots[keys.GetItemSlotsKey()].Build(dispatcherResources.ItemSlots),
-                Items = dispatcherResources.Items[keys.GetItemsKey()].Build(dispatcherResources.Items),
-                MobEffects = dispatcherResources.MobEffects[keys.GetMobEffectsKey()].Build(dispatcherResources.MobEffects),
-                ObjectiveCriteria = dispatcherResources.ObjectiveCriteria[keys.GetObjectiveCriteriaKey()].Build(dispatcherResources.ObjectiveCriteria),
-                Operations = dispatcherResources.Operations[keys.GetOperationsKey()].Build(dispatcherResources.Operations),
-                Particles = dispatcherResources.Particles[keys.GetParticlesKey()].Build(dispatcherResources.Particles),
-                ScoreboardSlots = dispatcherResources.ScoreboardSlots[keys.GetScoreboardSlotsKey()].Build(dispatcherResources.ScoreboardSlots),
-                SelectorArguments = dispatcherResources.SelectorArguments[keys.GetSelectorArgumentsKey()].Build(dispatcherResources.SelectorArguments),
-                Sorts = dispatcherResources.Sorts[keys.GetSortsKey()].Build(dispatcherResources.Sorts),
-                TimeScalars = dispatcherResources.TimeScalars[keys.GetTimeScalarsKey()].Build(dispatcherResources.TimeScalars)
+                Anchors = GetResources<AnchorsBuilder, Anchors>(dispatcherResources.Anchors, keys.GetAnchorsKey()),
+                Blocks = GetResources<BlocksBuilder, Blocks>(dispatcherResources.Blocks, keys.GetBlocksKey()),
+                Colours = GetResources<ColoursBuilder, Colours>(dispatcherResources.Colours, keys.GetColoursKey()),
+                Components = GetResources<ComponentsBuilder, Components>(dispatcherResources.Components, keys.GetComponentsKey()),
+                Enchantments = GetResources<EnchantmentsBuilder, Enchantments>(dispatcherResources.Enchantments, keys.GetEnchantmentsKey()),
+                Entities = GetResources<EntitiesBuilder, Entities>(dispatcherResources.Entities, keys.GetEntitiesKey()),
+                Gamemodes = GetResources<GamemodesBuilder, Gamemodes>(dispatcherResources.Gamemodes, keys.GetGamemodesKey()),
+                ItemSlots = GetResources<ItemSlotsBuilder, ItemSlots>(dispatcherResources.ItemSlots, keys.GetItemSlotsKey()),
+                Items = GetResources<ItemsBuilder, Items>(dispatcherResources.Items, keys.GetItemsKey()),
+                MobEffects = GetResources<MobEffectsBuilder, MobEffects>(dispatcherResources.MobEffects, keys.GetMobEffectsKey()),
+                ObjectiveCriteria = GetResources<ObjectiveCriteriaBuilder, ObjectiveCriteria>(dispatcherResources.ObjectiveCriteria, keys.GetObjectiveCriteriaKey()),
+                Operations = GetResources<OperationsBuilder, Operations>(dispatcherResources.Operations, keys.GetOperationsKey()),
+                Particles = GetResources<ParticlesBuilder, Particles>(dispatcherResources.Particles, keys.GetParticlesKey()),
+                ScoreboardSlots = GetResources<ScoreboardSlotsBuilder, ScoreboardSlots>(dispatcherResources.ScoreboardSlots, keys.GetScoreboardSlotsKey()),
+                SelectorArguments = GetResources<SelectorArgumentsBuilder, EntitySelectorOptions>(dispatcherResources.SelectorArguments, keys.GetSelectorArgumentsKey()),
+                Sorts = GetResources<SortsBuilder, Sorts>(dispatcherResources.Sorts, keys.GetSortsKey()),
+                TimeScalars = GetResources<TimeScalarsBuilder, TimeScalars>(dispatcherResources.TimeScalars, keys.GetTimeScalarsKey())
             };
 
             Dispatcher dispatcher = new Dispatcher(versionResources.GetName(), commandRootNode, commandResources);
             return dispatcher;
+        }
+
+        private static U GetResources<T, U>(Dictionary<string, T> resources, string key) where T : IBuilder<T, U> where U : class
+        {
+            if (key == null) return null;
+            return resources[key].Build(resources);
         }
 
         public static VersionsBuilder FromJson(string json)

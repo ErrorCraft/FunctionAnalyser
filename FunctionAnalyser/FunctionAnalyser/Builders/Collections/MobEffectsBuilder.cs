@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FunctionAnalyser.Builders.Collections
 {
-    public class MobEffectsBuilder
+    public class MobEffectsBuilder : IBuilder<MobEffectsBuilder, MobEffects>
     {
         [JsonProperty("parent")]
         private readonly string Parent;

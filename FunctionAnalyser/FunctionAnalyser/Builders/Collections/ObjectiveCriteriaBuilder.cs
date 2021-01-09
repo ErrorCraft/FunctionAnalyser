@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FunctionAnalyser.Builders.Collections
 {
-    public class ObjectiveCriteriaBuilder
+    public class ObjectiveCriteriaBuilder : IBuilder<ObjectiveCriteriaBuilder, ObjectiveCriteria>
     {
         [JsonProperty("parent")]
         private readonly string Parent;
