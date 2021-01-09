@@ -1,39 +1,25 @@
 {
-	"test": {
-		"name": "Test (Normal)",
+	"java-snapshot": {
+		"name": "Java 20w51a",
 		"resources": {
-			"anchors": "anchors",
-			"blocks": "blocks",
-			"colours": "colours",
-			"commands": "test",
-			"components": "components",
-			"enchantments": "enchantments",
-			"entities": "entities",
-			"gamemodes": "gamemodes",
-			"item_slots": "item_slots",
-			"items": "test",
+			"anchors": "java",
+			"blocks": "java-snapshot",
+			"colours": "java",
+			"commands": "java-snapshot",
+			"components": "java",
+			"enchantments": "java-snapshot",
+			"entities": "java-snapshot",
+			"gamemodes": "java",
+			"item_slots": "java-snapshot",
+			"items": "java-snapshot",
 			"mob_effects": "mob_effects",
-			"objective_criteria": "objective_criteria",
-			"operations": "operations",
+			"objective_criteria": "java",
+			"operations": "java",
 			"particles": "particles",
-			"scoreboard_slots": "scoreboard_slots",
-			"selector_arguments": "selector_arguments",
-			"sorts": "sorts",
-			"time_scalars": "time_scalars"
-		}
-	},
-	"test_2": {
-		"name": "Test 2 (Parent)",
-		"resources": {
-			"commands": "test_with_parent",
-			"items": "test_with_parent"
-		}
-	},
-	"test_3": {
-		"name": "Test 3 (Nested)",
-		"resources": {
-			"commands": "test_with/nested_path",
-			"items": "test_with/nested_path"
+			"scoreboard_slots": "java",
+			"selector_arguments": "java",
+			"sorts": "java",
+			"time_scalars": "java"
 		}
 	}
 }
