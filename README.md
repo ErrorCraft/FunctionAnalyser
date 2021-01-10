@@ -23,3 +23,7 @@ You can also export the results to a text file with the "Export Data" button.
 **"I get a message saying I have to install .NET, what do I do?"**
 Go to [this](https://dotnet.microsoft.com/download/dotnet-core/5.0/runtime/?utm_source=getdotnetcore&utm_medium=referral) page and select the correct version from "Run desktop apps".
 The reason people get this message might be because .NET 5 is fairly new. (November 2020)
+
+**"Will there be a Bedrock version/port?"**
+Yes, I'm working on that right now! It will use the same program, so you can check this page every now and then.
+Commands/Arguments on Bedrock have a few differences I don't know about. For example, it allows `~1~2~3`, while on Java you have to use `~1 ~2 ~3`, so I will have to figure out all of that first.
