@@ -1,5 +1,4 @@
 ﻿using AdvancedText;
-using CommandFilesApi.GitHub;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace CommandFilesApi
+namespace ProgramUpdater
 {
     public class Updater
     {
@@ -37,10 +36,10 @@ namespace CommandFilesApi
             
             string versionsJson = await GetJsonAsync("https://api.github.com/repos/ErrorCraft/FunctionAnalyser/releases");
             if (versionsJson == null) return null;
-            GitHubVersion[] allVersions = JsonConvert.DeserializeObject<GitHubVersion[]>(versionsJson);
-            
-            Version currentVersion = Assembly.GetEntryAssembly().GetName().Version;
-            GitHubVersion[] newerVersions = GetNewerVersions(allVersions, currentVersion);
+            Version[] allVersions = JsonConvert.DeserializeObject<Version[]>(versionsJson);
+
+            System.Version currentVersion = Assembly.GetEntryAssembly().GetName().Version;
+            Version[] newerVersions = GetNewerVersions((Version[])allVersions, currentVersion);
 
             if (newerVersions.Length == 0)
             {
@@ -48,19 +47,19 @@ namespace CommandFilesApi
                 return null;
             }
 
-            GitHubVersion latestVersion = GetLatestVersion(newerVersions);
+            Version latestVersion = GetLatestVersion(newerVersions);
             Logger.Log(new TextComponent($"Update available: {latestVersion.GetVersionTag()}!").WithColour(Colour.BuiltinColours.GREEN));
 
             string changelog = await GetChangelog(latestVersion);
-            GitHubAssets fileAssets = GetFileAssets(latestVersion);
+            Assets fileAssets = GetFileAssets(latestVersion);
             return new Update(latestVersion.GetVersionTag(), changelog, fileAssets);
         }
 
-        private async Task<string> GetChangelog(GitHubVersion update)
+        private async Task<string> GetChangelog(Version update)
         {
             try
             {
-                GitHubAssets changelogAssets = update.GetAssets().FirstOrDefault(a => a.GetLabel() == CHANGELOG_LABEL);
+                Assets changelogAssets = update.GetAssets().FirstOrDefault(a => a.GetLabel() == CHANGELOG_LABEL);
                 if (changelogAssets == null) return "";
                 using HttpResponseMessage response = await Client.GetAsync(changelogAssets.GetDownloadUrl());
                 if (response.IsSuccessStatusCode)
@@ -73,7 +72,7 @@ namespace CommandFilesApi
             return "";
         }
 
-        private static GitHubAssets GetFileAssets(GitHubVersion update)
+        private static Assets GetFileAssets(Version update)
         {
             return update.GetAssets().FirstOrDefault(a => a.GetLabel() == FILE_LABEL);
         }
@@ -96,14 +95,14 @@ namespace CommandFilesApi
             return null;
         }
 
-        private static GitHubVersion[] GetNewerVersions(GitHubVersion[] versions, Version currentVersion)
+        private static Version[] GetNewerVersions(Version[] versions, System.Version currentVersion)
         {
             return versions.Where(v => v.GetVersionTag() > currentVersion).ToArray();
         }
 
-        private static GitHubVersion GetLatestVersion(GitHubVersion[] versions)
+        private static Version GetLatestVersion(Version[] versions)
         {
-            GitHubVersion latest = null;
+            Version latest = null;
             for (int i = 0; i < versions.Length; i++)
             {
                 if (latest == null || versions[i].GetVersionTag() > latest.GetVersionTag())

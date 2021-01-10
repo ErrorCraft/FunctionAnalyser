@@ -1,21 +1,19 @@
-﻿using CommandFilesApi.GitHub;
-using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace CommandFilesApi
+namespace ProgramUpdater
 {
     public class Update
     {
         private readonly HttpClient Client;
-        public Version UpdateVersion { get; }
+        public System.Version UpdateVersion { get; }
         public string Changelog { get; }
-        private readonly GitHubAssets FileAssets;
+        private readonly Assets FileAssets;
 
-        public Update(Version updateVersion, string changelog, GitHubAssets fileAssets)
+        public Update(System.Version updateVersion, string changelog, Assets fileAssets)
         {
             UpdateVersion = updateVersion;
             Changelog = changelog;

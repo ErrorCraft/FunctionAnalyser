@@ -1,7 +1,6 @@
 ﻿using AdvancedText;
-using CommandFilesApi;
+using ProgramUpdater;
 using FunctionAnalyser;
-using FunctionAnalyser.Builders;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.IO;

@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace CommandFilesApi.Converters
+namespace ProgramUpdater.Converters
 {
     public class TagNameConverter : JsonConverter
     {
@@ -14,7 +14,7 @@ namespace CommandFilesApi.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             string tagName = JToken.Load(reader).ToObject<string>().Replace("v", null);
-            return Version.TryParse(tagName, out Version actualTagName) ? actualTagName : null;
+            return System.Version.TryParse(tagName, out System.Version actualTagName) ? actualTagName : null;
         }
 
         public override bool CanWrite => false;

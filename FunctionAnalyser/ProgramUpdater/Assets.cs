@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace CommandFilesApi.GitHub
+namespace ProgramUpdater
 {
-    public class GitHubAssets
+    public class Assets
     {
         [JsonProperty("name")]
         private readonly string Name;
