@@ -2,7 +2,7 @@
 	"anchors": ["java"],
 	"blocks": ["java","java-release","java-snapshot"],
 	"colours": ["java"],
-	"commands": ["java","java-release","java-snapshot"],
+	"commands": ["java","java-release","java-snapshot","bedrock"],
 	"components": ["java"],
 	"enchantments": ["java"],
 	"entities": ["java","java-snapshot"],

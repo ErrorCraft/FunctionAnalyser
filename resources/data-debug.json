@@ -1,4 +1,10 @@
 {
+	"bedrock": {
+		"name": "Bedrock (Testing)",
+		"resources": {
+			"commands": "bedrock"
+		}
+	},
 	"java-snapshot": {
 		"name": "Java 20w51a",
 		"resources": {
