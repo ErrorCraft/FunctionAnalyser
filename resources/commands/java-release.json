@@ -1,0 +1,82 @@
+{
+	"parent": "java",
+	"root": {
+		"children": {
+			"replaceitem": {
+				"type": "literal",
+				"children": {
+					"block": {
+						"type": "literal",
+						"children": {
+							"pos": {
+								"type": "argument",
+								"parser": "block_pos",
+								"children": {
+									"slot": {
+										"type": "argument",
+										"parser": "slot",
+										"children": {
+											"item": {
+												"type": "argument",
+												"parser": "item",
+												"children": {
+													"count": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 1,
+															"max": 64
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"entity": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"amount": "multiple",
+									"type": "entities"
+								},
+								"children": {
+									"slot": {
+										"type": "argument",
+										"parser": "slot",
+										"children": {
+											"item": {
+												"type": "argument",
+												"parser": "item",
+												"children": {
+													"count": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 1,
+															"max": 64
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
