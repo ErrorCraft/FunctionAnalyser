@@ -21,14 +21,14 @@ namespace CommandParser.Collections
         [JsonProperty("contents_optional")]
         private readonly bool ContentsOptional = false;
 
-        public bool Read(string input)
+        public bool Read(string input, DispatcherResources resources)
         {
             if (string.IsNullOrEmpty(input)) return ContentsOptional || Contents == ContentType.None;
             string[] values = input.Substring(1).Split('.');
             return Contents switch
             {
                 ContentType.None => string.IsNullOrEmpty(input),
-                ContentType.Colour => values.Length == 2 && "team".Equals(values[0]) && Colours.Contains(values[1]),
+                ContentType.Colour => values.Length == 2 && "team".Equals(values[0]) && resources.Colours.Contains(values[1]),
                 _ => false
             };
         }

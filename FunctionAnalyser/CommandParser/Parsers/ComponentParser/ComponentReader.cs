@@ -11,12 +11,14 @@ namespace CommandParser.Parsers.ComponentParser
         private readonly JsonObject Json;
         private readonly IStringReader StringReader;
         private readonly int Start;
+        private readonly DispatcherResources Resources;
 
-        public ComponentReader(JsonObject json, IStringReader stringReader, int start)
+        public ComponentReader(JsonObject json, IStringReader stringReader, int start, DispatcherResources resources)
         {
             Json = json;
             StringReader = stringReader;
             Start = start;
+            Resources = resources;
         }
 
         public ReadResults Validate()
@@ -30,12 +32,12 @@ namespace CommandParser.Parsers.ComponentParser
 
         private ReadResults ValidateContents()
         {
-            Dictionary<string, ComponentArgument> components = Components.GetContent();
+            Dictionary<string, ComponentArgument> components = Resources.Components.GetContent();
             foreach (string key in components.Keys)
             {
                 if (Json.ContainsKey(key))
                 {
-                    return components[key].Validate(Json, key, StringReader, Start);
+                    return components[key].Validate(Json, key, StringReader, Start, Resources);
                 }
             }
             StringReader.SetCursor(Start);
@@ -44,17 +46,17 @@ namespace CommandParser.Parsers.ComponentParser
 
         private ReadResults ValidateChildren()
         {
-            return ValidateOptionalComponents(Components.GetChildren());
+            return ValidateOptionalComponents(Resources.Components.GetChildren());
         }
 
         private ReadResults ValidateFormatting()
         {
-            return ValidateOptionalComponents(Components.GetFormatting());
+            return ValidateOptionalComponents(Resources.Components.GetFormatting());
         }
 
         private ReadResults ValidateInteractivity()
         {
-            return ValidateOptionalComponents(Components.GetInteractivity());
+            return ValidateOptionalComponents(Resources.Components.GetInteractivity());
         }
 
         private ReadResults ValidateOptionalComponents(Dictionary<string, ComponentArgument> components)
@@ -64,7 +66,7 @@ namespace CommandParser.Parsers.ComponentParser
             {
                 if (Json.ContainsKey(key))
                 {
-                    readResults = components[key].Validate(Json, key, StringReader, Start);
+                    readResults = components[key].Validate(Json, key, StringReader, Start, Resources);
                     if (!readResults.Successful) return readResults;
                 }
             }

@@ -5,7 +5,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
     public class ComponentNumber : ComponentArgument
     {
-        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources)
         {
             if (obj.GetChild(key) is not JsonNumber)
             {

@@ -33,7 +33,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => Name;
 
-        public ReadResults ValidateComponent(IStringReader reader, int start)
+        public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
         {
             if (Arguments.Count == 0)
             {
@@ -43,7 +43,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
             ReadResults readResults;
             for (int i = 0; i < Arguments.Count; i++)
             {
-                readResults = Arguments[i].ValidateComponent(reader, start);
+                readResults = Arguments[i].ValidateComponent(reader, start, resources);
                 if (!readResults.Successful) return readResults;
             }
             return new ReadResults(true, null);

@@ -203,7 +203,7 @@ namespace CommandParser.Parsers
                 int start = Reader.GetCursor();
                 readResults = Reader.ReadString(out string name);
                 if (!readResults.Successful) return readResults;
-                if (!EntitySelectorOptions.TryGet(name, out EntitySelectorOption option))
+                if (!Resources.SelectorArguments.TryGet(name, out EntitySelectorOption option))
                 {
                     Reader.SetCursor(start);
                     return new ReadResults(false, CommandError.UnknownSelectorOption(name).WithContext(Reader));

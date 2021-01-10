@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Parsers;
+﻿using CommandParser.Parsers;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
@@ -12,7 +11,7 @@ namespace CommandParser.Arguments
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation mobEffect);
             if (!readResults.Successful) return readResults;
-            if (!MobEffects.Contains(mobEffect))
+            if (!resources.MobEffects.Contains(mobEffect))
             {
                 return new ReadResults(false, CommandError.UnknownEffect(mobEffect));
             }

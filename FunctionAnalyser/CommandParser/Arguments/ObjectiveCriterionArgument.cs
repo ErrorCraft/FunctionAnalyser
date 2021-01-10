@@ -8,7 +8,7 @@ namespace CommandParser.Arguments
     {
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ObjectiveCriterion result)
         {
-            return new ObjectiveCriterionParser(reader).ByName(out result);
+            return new ObjectiveCriterionParser(reader, resources).ByName(out result);
         }
     }
 }

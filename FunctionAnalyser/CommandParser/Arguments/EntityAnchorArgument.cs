@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Results;
+﻿using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
@@ -13,7 +12,7 @@ namespace CommandParser.Arguments
             ReadResults readResults = reader.ReadUnquotedString(out string anchor);
             if (!readResults.Successful) return readResults;
 
-            if (!Anchors.Contains(anchor))
+            if (!resources.Anchors.Contains(anchor))
             {
                 reader.SetCursor(start);
                 return new ReadResults(false, CommandError.InvalidEntityAnchor(anchor).WithContext(reader));

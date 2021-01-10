@@ -1,12 +1,10 @@
 ﻿using CommandParser.Results.Arguments;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
     public class MobEffects
     {
-        private static HashSet<string> Options = new HashSet<string>();
         private readonly HashSet<string> Values;
 
         public MobEffects(HashSet<string> values)
@@ -14,14 +12,9 @@ namespace CommandParser.Collections
             Values = values;
         }
 
-        public static void Set(string json)
+        public bool Contains(ResourceLocation effect)
         {
-            Options = JsonConvert.DeserializeObject<HashSet<string>>(json);
-        }
-
-        public static bool Contains(ResourceLocation effect)
-        {
-            return effect.IsDefaultNamespace() && Options.Contains(effect.Path);
+            return effect.IsDefaultNamespace() && Values.Contains(effect.Path);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => NAME;
 
-        public ReadResults ValidateComponent(IStringReader reader, int start)
+        public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
         {
             reader.SetCursor(start);
             return new ReadResults(false, ComponentCommandError.UnknownComponentError(this).WithContext(reader));

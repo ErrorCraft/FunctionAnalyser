@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
     public class TimeScalars
     {
-        private static Dictionary<char, int> Options = new Dictionary<char, int>();
         private readonly Dictionary<char, int> Values;
 
         public TimeScalars(Dictionary<char, int> values)
@@ -13,14 +11,9 @@ namespace CommandParser.Collections
             Values = values;
         }
 
-        public static void Set(string json)
+        public bool TryGetScalar(char input, out int scalar)
         {
-            Options = JsonConvert.DeserializeObject<Dictionary<char, int>>(json);
-        }
-
-        public static bool TryGetScalar(char input, out int scalar)
-        {
-            return Options.TryGetValue(input, out scalar);
+            return Values.TryGetValue(input, out scalar);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
     public class ComponentResourceLocation : ComponentArgument
     {
-        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources)
         {
             if (!IsText(obj.GetChild(key)))
             {

@@ -6,7 +6,6 @@ using CommandParser.Results.Arguments;
 using CommandParser.Tree;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace CommandParser.Collections
@@ -64,11 +63,11 @@ namespace CommandParser.Collections
             ReadResults readResults = Option switch
             {
                 Option.SetLimit => SetLimit(parser, reader),
-                Option.SetExecutor => SetExecutor(parser, reader, negated, name, start),
+                Option.SetExecutor => SetExecutor(parser, reader, negated, name, start, resources),
                 Option.Advancements => ReadAdvancements(parser, reader),
                 Option.Scores => ReadScores(parser, reader),
-                Option.Gamemode => ReadGamemode(parser, reader),
-                Option.Sort => ReadSort(parser, reader, name, start),
+                Option.Gamemode => ReadGamemode(parser, reader, resources),
+                Option.Sort => ReadSort(parser, reader, name, start, resources),
                 _ => CheckComponents(parser, reader, resources)
             };
 
@@ -108,7 +107,7 @@ namespace CommandParser.Collections
             return new ReadResults(true, null);
         }
 
-        private static ReadResults SetExecutor(EntitySelectorParser parser, IStringReader reader, bool negated, string originalName, int previousStart)
+        private static ReadResults SetExecutor(EntitySelectorParser parser, IStringReader reader, bool negated, string originalName, int previousStart, DispatcherResources resources)
         {
             if (parser.IsTypeLimited())
             {
@@ -136,7 +135,7 @@ namespace CommandParser.Collections
             if (ResourceLocation.PLAYER_ENTITY.Equals(entity) && !negated) parser.SetIncludesEntities(false);
             else if (!entity.IsTag)
             {
-                if (!Entities.Contains(entity))
+                if (!resources.Entities.Contains(entity))
                 {
                     reader.SetCursor(start);
                     return new ReadResults(false, CommandError.InvalidEntityType(entity).WithContext(reader));
@@ -246,7 +245,7 @@ namespace CommandParser.Collections
             return reader.Expect('}');
         }
 
-        private static ReadResults ReadGamemode(EntitySelectorParser parser, IStringReader reader)
+        private static ReadResults ReadGamemode(EntitySelectorParser parser, IStringReader reader, DispatcherResources resources)
         {
             int start = reader.GetCursor();
             ReadResults readResults = reader.ReadUnquotedString(out string gamemode);
@@ -255,7 +254,7 @@ namespace CommandParser.Collections
                 return readResults;
             }
 
-            if (Gamemodes.Contains(gamemode))
+            if (resources.Gamemodes.Contains(gamemode))
             {
                 parser.AddArgument(new ParsedArgument<Literal>(new Literal(gamemode), false));
                 return new ReadResults(true, null);
@@ -266,7 +265,7 @@ namespace CommandParser.Collections
             }
         }
 
-        private static ReadResults ReadSort(EntitySelectorParser parser, IStringReader reader, string originalName, int previousStart)
+        private static ReadResults ReadSort(EntitySelectorParser parser, IStringReader reader, string originalName, int previousStart, DispatcherResources resources)
         {
             if (parser.IsSorted())
             {
@@ -281,7 +280,7 @@ namespace CommandParser.Collections
                 return readResults;
             }
 
-            if (Sorts.Contains(sort))
+            if (resources.Sorts.Contains(sort))
             {
                 parser.AddArgument(new ParsedArgument<Literal>(new Literal(sort), false));
                 return new ReadResults(true, null);

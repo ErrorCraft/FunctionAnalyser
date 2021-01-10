@@ -16,16 +16,16 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
         [JsonProperty("match_first")]
         protected readonly bool MatchFirst = false;
 
-        public abstract ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start);
+        public abstract ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources);
 
-        protected ReadResults ValidateChildren(JsonObject obj, string key, IStringReader reader, int start)
+        protected ReadResults ValidateChildren(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources)
         {
             ReadResults readResults;
             foreach (KeyValuePair<string, ComponentArgument> child in Children)
             {
                 if (obj.ContainsKey(child.Key))
                 {
-                    readResults = child.Value.Validate(obj, child.Key, reader, start);
+                    readResults = child.Value.Validate(obj, child.Key, reader, start, resources);
                     if (MatchFirst || !readResults.Successful) return readResults;
                 } else if (!child.Value.Optional && !MatchFirst)
                 {

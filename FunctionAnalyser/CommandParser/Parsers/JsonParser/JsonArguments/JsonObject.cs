@@ -38,9 +38,9 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => Name;
 
-        public ReadResults ValidateComponent(IStringReader reader, int start)
+        public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
         {
-            return new ComponentReader(this, reader, start).Validate();
+            return new ComponentReader(this, reader, start, resources).Validate();
         }
 
         public bool ContainsKey(string key)

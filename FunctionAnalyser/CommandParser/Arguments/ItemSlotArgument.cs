@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Results;
+﻿using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
@@ -13,7 +12,7 @@ namespace CommandParser.Arguments
             ReadResults readResults = reader.ReadUnquotedString(out string slot);
 
             if (!readResults.Successful) return readResults;
-            if (!ItemSlots.Contains(slot))
+            if (!resources.ItemSlots.Contains(slot))
             {
                 reader.SetCursor(start);
                 return new ReadResults(false, CommandError.UnknownSlot(slot).WithContext(reader));

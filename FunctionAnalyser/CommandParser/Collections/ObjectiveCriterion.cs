@@ -26,16 +26,16 @@ namespace CommandParser.Collections
         [JsonConverter(typeof(StringEnumConverter))]
         private readonly CriterionType CriterionType = CriterionType.None;
 
-        public bool Read(string contents)
+        public bool Read(string contents, DispatcherResources resources)
         {
             return CriterionType switch
             {
                 CriterionType.None => string.IsNullOrEmpty(contents),
-                CriterionType.Colour => Colours.Contains(contents),
-                CriterionType.Item => Items.ContainsObsolete(new ResourceLocation(contents)),
-                CriterionType.Block => Blocks.ContainsBlock(new ResourceLocation(contents)),
-                CriterionType.Entity => Entities.Contains(new ResourceLocation(contents)),
-                CriterionType.Statistic => ObjectiveCriteria.ContainsCustomCriterion(contents),
+                CriterionType.Colour => resources.Colours.Contains(contents),
+                CriterionType.Item => resources.Items.Contains(new ResourceLocation(contents)),
+                CriterionType.Block => resources.Blocks.ContainsBlock(new ResourceLocation(contents)),
+                CriterionType.Entity => resources.Entities.Contains(new ResourceLocation(contents)),
+                CriterionType.Statistic => resources.ObjectiveCriteria.ContainsCustomCriterion(contents),
                 _ => false
             };
         }

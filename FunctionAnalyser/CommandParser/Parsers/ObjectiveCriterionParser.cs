@@ -6,10 +6,12 @@ namespace CommandParser.Parsers
     public class ObjectiveCriterionParser
     {
         private readonly IStringReader StringReader;
+        private readonly DispatcherResources Resources;
         
-        public ObjectiveCriterionParser(IStringReader stringReader)
+        public ObjectiveCriterionParser(IStringReader stringReader, DispatcherResources resources)
         {
             StringReader = stringReader;
+            Resources = resources;
         }
 
         public ReadResults ByName(out ObjectiveCriterion result)
@@ -38,24 +40,24 @@ namespace CommandParser.Parsers
             return new ReadResults(false, CommandError.UnknownCriterion(criterion));
         }
 
-        private static bool ReadNormalCriterion(string input)
+        private bool ReadNormalCriterion(string input)
         {
             string[] values = input.Split('.');
             if (values.Length > 2) return false;
 
-            if (!Collections.ObjectiveCriteria.TryGetNormalCriterion(values[0], out Collections.ObjectiveCriterion contents)) return false;
-            if (values.Length == 1) return contents.Read("");
-            else return contents.Read(values[1]);
+            if (!Resources.ObjectiveCriteria.TryGetNormalCriterion(values[0], out Collections.ObjectiveCriterion contents)) return false;
+            if (values.Length == 1) return contents.Read("", Resources);
+            else return contents.Read(values[1], Resources);
         }
 
-        private static bool ReadNamespacedCriterion(string input)
+        private bool ReadNamespacedCriterion(string input)
         {
             string[] values = input.Split(':');
             if (values.Length != 2) return false;
 
             string criterion = Shorten(values[0]);
-            if (!Collections.ObjectiveCriteria.TryGetNamespacedCriterion(criterion, out Collections.ObjectiveCriterion contents)) return false;
-            return contents.Read(Shorten(values[1]));
+            if (!Resources.ObjectiveCriteria.TryGetNamespacedCriterion(criterion, out Collections.ObjectiveCriterion contents)) return false;
+            return contents.Read(Shorten(values[1]), Resources);
         }
 
         private static string Shorten(string input)

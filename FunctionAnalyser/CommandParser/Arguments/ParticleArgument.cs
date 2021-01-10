@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Context;
+﻿using CommandParser.Context;
 using CommandParser.Parsers;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
@@ -17,7 +16,7 @@ namespace CommandParser.Arguments
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation particle);
             if (!readResults.Successful) return readResults;
 
-            if (!Particles.TryGetNodes(particle, out Dictionary<string, Node> nodes))
+            if (!resources.Particles.TryGetNodes(particle, out Dictionary<string, Node> nodes))
             {
                 return new ReadResults(false, CommandError.UnknownParticle(particle));
             }

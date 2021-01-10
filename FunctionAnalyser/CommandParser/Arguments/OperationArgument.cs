@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Results;
+﻿using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
@@ -13,7 +12,7 @@ namespace CommandParser.Arguments
             while (!reader.AtEndOfArgument()) reader.Skip();
             string operation = reader.GetString()[start..reader.GetCursor()];
 
-            if (!Operations.Contains(operation))
+            if (!resources.Operations.Contains(operation))
             {
                 return new ReadResults(false, CommandError.InvalidOperation());
             }

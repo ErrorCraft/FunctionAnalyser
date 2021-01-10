@@ -5,14 +5,14 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
     public class ComponentObject : ComponentArgument
     {
-        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources)
         {
             if (obj.GetChild(key) is not JsonObject actualObject)
             {
                 reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonObject.Name, obj.GetChild(key).GetName()).WithContext(reader));
             }
-            return ValidateChildren(actualObject, key, reader, start);
+            return ValidateChildren(actualObject, key, reader, start, resources);
         }
     }
 }

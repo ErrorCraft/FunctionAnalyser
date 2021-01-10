@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
     public class ItemSlots
     {
-        private static HashSet<string> Options = new HashSet<string>();
         private readonly HashSet<string> Values;
 
         public ItemSlots(HashSet<string> values)
@@ -13,14 +11,9 @@ namespace CommandParser.Collections
             Values = values;
         }
 
-        public static void Set(string json)
+        public bool Contains(string slot)
         {
-            Options = JsonConvert.DeserializeObject<HashSet<string>>(json);
-        }
-
-        public static bool Contains(string slot)
-        {
-            return Options.Contains(slot);
+            return Values.Contains(slot);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Parsers;
+﻿using CommandParser.Parsers;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
@@ -12,7 +11,7 @@ namespace CommandParser.Arguments
             result = default;
             ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation entity);
             if (!readResults.Successful) return readResults;
-            if (!Entities.Contains(entity))
+            if (!resources.Entities.Contains(entity))
             {
                 return new ReadResults(false, CommandError.UnknownEntity(entity));
             }

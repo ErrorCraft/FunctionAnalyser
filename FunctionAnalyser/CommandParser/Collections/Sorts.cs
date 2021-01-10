@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
     public class Sorts
     {
-        private static HashSet<string> Options = new HashSet<string>();
         private readonly HashSet<string> Values;
 
         public Sorts(HashSet<string> values)
@@ -13,14 +11,9 @@ namespace CommandParser.Collections
             Values = values;
         }
 
-        public static void Set(string json)
+        public bool Contains(string gamemode)
         {
-            Options = JsonConvert.DeserializeObject<HashSet<string>>(json);
-        }
-
-        public static bool Contains(string gamemode)
-        {
-            return Options.Contains(gamemode);
+            return Values.Contains(gamemode);
         }
     }
 }

@@ -6,10 +6,12 @@ namespace CommandParser.Parsers
     public class ScoreboardSlotParser
     {
         private readonly IStringReader StringReader;
+        private readonly DispatcherResources Resources;
 
-        public ScoreboardSlotParser(IStringReader stringReader)
+        public ScoreboardSlotParser(IStringReader stringReader, DispatcherResources resources)
         {
             StringReader = stringReader;
+            Resources = resources;
         }
 
         public ReadResults Read(out ScoreboardSlot result)
@@ -19,9 +21,9 @@ namespace CommandParser.Parsers
             if (!readResults.Successful) return readResults;
 
             string[] values = slot.Split('.');
-            if (Collections.ScoreboardSlots.TryGetSlot(values[0], out Collections.ScoreboardSlot contents))
+            if (Resources.ScoreboardSlots.TryGetSlot(values[0], out Collections.ScoreboardSlot contents))
             {
-                if (contents.Read(slot.Substring(values[0].Length)))
+                if (contents.Read(slot.Substring(values[0].Length), Resources))
                 {
                     result = new ScoreboardSlot(slot);
                     return new ReadResults(true, null);

@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Results;
+﻿using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
@@ -12,7 +11,7 @@ namespace CommandParser.Arguments
             ReadResults readResults = reader.ReadUnquotedString(out string colour);
             if (!readResults.Successful) return readResults;
 
-            if (!Colours.Contains(colour))
+            if (!resources.Colours.Contains(colour))
             {
                 return new ReadResults(false, CommandError.UnknownColour(colour));
             }

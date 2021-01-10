@@ -17,7 +17,7 @@ namespace CommandParser.Arguments
 
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Block result)
         {
-            return new BlockParser(reader, ForTesting).Parse(out result);
+            return new BlockParser(reader, ForTesting, resources).Parse(out result);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
     public class ComponentArray : ComponentArgument
     {
-        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start)
+        public override ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources)
         {
             if (obj.GetChild(key) is not JsonArray actualArray)
             {
@@ -16,7 +16,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             ReadResults readResults;
             foreach (IJsonArgument child in actualArray.GetChildren())
             {
-                readResults = child.ValidateComponent(reader, start);
+                readResults = child.ValidateComponent(reader, start, resources);
                 if (!readResults.Successful) return readResults;
             }
 

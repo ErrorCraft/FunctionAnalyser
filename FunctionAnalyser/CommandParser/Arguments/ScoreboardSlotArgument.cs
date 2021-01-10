@@ -8,7 +8,7 @@ namespace CommandParser.Arguments
     {
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ScoreboardSlot result)
         {
-            return new ScoreboardSlotParser(reader).Read(out result);
+            return new ScoreboardSlotParser(reader, resources).Read(out result);
         }
     }
 }

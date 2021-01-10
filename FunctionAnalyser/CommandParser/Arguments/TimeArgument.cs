@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Results;
+﻿using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
@@ -19,7 +18,7 @@ namespace CommandParser.Arguments
 
             if (!reader.AtEndOfArgument())
             {
-                if (TimeScalars.TryGetScalar(reader.Peek(), out int scalar))
+                if (resources.TimeScalars.TryGetScalar(reader.Peek(), out int scalar))
                 {
                     time *= scalar;
                     reader.Skip();
