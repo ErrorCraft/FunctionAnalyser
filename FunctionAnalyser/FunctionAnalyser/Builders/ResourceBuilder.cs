@@ -21,36 +21,36 @@ namespace FunctionAnalyser.Builders
         {
             Client = new HttpClient()
             {
-                BaseAddress = new Uri("https://api.github.com/repos/ErrorCraft/FunctionAnalyser/contents/resources/")
+                BaseAddress = new Uri("https://raw.githubusercontent.com/ErrorCraft/FunctionAnalyser/master/resources/")
             };
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            Client.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
             Logger = logger;
         }
 
         public async Task<Dictionary<string, Dispatcher>> GetResources()
         {
+            Definitions definitions = await GetDefinitions();
             DispatcherResourcesBuilder resources = new DispatcherResourcesBuilder()
             {
-                Anchors = await GetResources<AnchorsBuilder>("anchors"),
-                Blocks = await GetResources<BlocksBuilder>("blocks"),
-                Colours = await GetResources<ColoursBuilder>("colours"),
-                Commands = await GetResources<CommandsBuilder>("commands"),
-                Components = await GetResources<ComponentsBuilder>("components"),
-                Enchantments = await GetResources<EnchantmentsBuilder>("enchantments"),
-                Entities = await GetResources<EntitiesBuilder>("entities"),
-                Gamemodes = await GetResources<GamemodesBuilder>("gamemodes"),
-                ItemSlots = await GetResources<ItemSlotsBuilder>("item_slots"),
-                Items = await GetResources<ItemsBuilder>("items"),
-                MobEffects = await GetResources<MobEffectsBuilder>("mob_effects"),
-                ObjectiveCriteria = await GetResources<ObjectiveCriteriaBuilder>("objective_criteria"),
-                Operations = await GetResources<OperationsBuilder>("operations"),
-                Particles = await GetResources<ParticlesBuilder>("particles"),
-                ScoreboardSlots = await GetResources<ScoreboardSlotsBuilder>("scoreboard_slots"),
-                SelectorArguments = await GetResources<SelectorArgumentsBuilder>("selector_arguments"),
-                Sorts = await GetResources<SortsBuilder>("sorts"),
-                TimeScalars = await GetResources<TimeScalarsBuilder>("time_scalars")
+                Anchors = await GetResources<AnchorsBuilder>("anchors", definitions.GetAnchors()),
+                Blocks = await GetResources<BlocksBuilder>("blocks", definitions.GetBlocks()),
+                Colours = await GetResources<ColoursBuilder>("colours", definitions.GetColours()),
+                Commands = await GetResources<CommandsBuilder>("commands", definitions.GetCommands()),
+                Components = await GetResources<ComponentsBuilder>("components", definitions.GetComponents()),
+                Enchantments = await GetResources<EnchantmentsBuilder>("enchantments", definitions.GetEnchantments()),
+                Entities = await GetResources<EntitiesBuilder>("entities", definitions.GetEntities()),
+                Gamemodes = await GetResources<GamemodesBuilder>("gamemodes", definitions.GetGamemodes()),
+                ItemSlots = await GetResources<ItemSlotsBuilder>("item_slots", definitions.GetItemSlots()),
+                Items = await GetResources<ItemsBuilder>("items", definitions.GetItems()),
+                MobEffects = await GetResources<MobEffectsBuilder>("mob_effects", definitions.GetMobEffects()),
+                ObjectiveCriteria = await GetResources<ObjectiveCriteriaBuilder>("objective_criteria", definitions.GetObjectiveCriteria()),
+                Operations = await GetResources<OperationsBuilder>("operations", definitions.GetOperations()),
+                Particles = await GetResources<ParticlesBuilder>("particles", definitions.GetParticles()),
+                ScoreboardSlots = await GetResources<ScoreboardSlotsBuilder>("scoreboard_slots", definitions.GetScoreboardSlots()),
+                SelectorArguments = await GetResources<SelectorArgumentsBuilder>("selector_arguments", definitions.GetSelectorArguments()),
+                Sorts = await GetResources<SortsBuilder>("sorts", definitions.GetSorts()),
+                TimeScalars = await GetResources<TimeScalarsBuilder>("time_scalars", definitions.GetTimeScalars())
             };
             VersionsBuilder versionsBuilder = await GetData();
 
@@ -58,45 +58,29 @@ namespace FunctionAnalyser.Builders
             return versionsBuilder.Build(resources);
         }
 
+        private async Task<Definitions> GetDefinitions()
+        {
+            string json = await GetContents("definitions.json");
+            return JsonConvert.DeserializeObject<Definitions>(json);
+        }
+
         private async Task<VersionsBuilder> GetData()
         {
-            string fileContents = await GetContents("https://raw.githubusercontent.com/ErrorCraft/FunctionAnalyser/master/resources/data.json");
-            return VersionsBuilder.FromJson(fileContents);
+            string json = await GetContents("data.json");
+            return VersionsBuilder.FromJson(json);
         }
 
-        private async Task<Dictionary<string, T>> GetResources<T>(string from)
+        private async Task<Dictionary<string, T>> GetResources<T>(string from, string[] paths)
         {
             Logger.Log(GettingFile(from));
-            return await GetResource<T>(from, "");
-        }
-
-        private async Task<Dictionary<string, T>> GetResource<T>(string from, string name)
-        {
-            Dictionary<string, T> results = new Dictionary<string, T>();
-
-            string contents = await GetContents(from, name);
-            Path[] paths = JsonConvert.DeserializeObject<Path[]>(contents);
-
+            Dictionary<string, T> resources = new Dictionary<string, T>();
             for (int i = 0; i < paths.Length; i++)
             {
-                string newName = Utilities.CombinePaths(name, paths[i].GetName());
-                if (paths[i].GetContentType() == PathType.File)
-                {
-                    string fileContents = await GetContents(paths[i].GetDownloadUrl());
-                    T result = JsonConvert.DeserializeObject<T>(fileContents);
-                    results[newName] = result;
-                } else
-                {
-                    Dictionary<string, T> nestedResults = await GetResource<T>(from, newName);
-                    results.AddRange(nestedResults);
-                }
+                string url = Utilities.CombinePaths(from, paths[i] + ".json");
+                string json = await GetContents(url);
+                resources.Add(paths[i], JsonConvert.DeserializeObject<T>(json));
             }
-            return results;
-        }
-
-        private async Task<string> GetContents(string from, string name)
-        {
-            return await GetContents(Utilities.CombinePaths(from, name));
+            return resources;
         }
 
         private async Task<string> GetContents(string from)
