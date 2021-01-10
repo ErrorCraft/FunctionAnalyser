@@ -60,7 +60,11 @@ namespace FunctionAnalyser.Builders
 
         private async Task<Definitions> GetDefinitions()
         {
+#if DEBUG
+            string json = await GetContents("definitions-debug.json");
+#else
             string json = await GetContents("definitions.json");
+#endif
             return JsonConvert.DeserializeObject<Definitions>(json);
         }
 
