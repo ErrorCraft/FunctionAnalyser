@@ -1,0 +1,10 @@
+{
+	"root": {
+		"children": {
+			"test": {
+				"type": "literal",
+				"executable": true
+			}
+		}
+	}
+}
