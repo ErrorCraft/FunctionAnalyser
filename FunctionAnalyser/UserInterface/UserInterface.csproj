@@ -4,15 +4,15 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
     <ApplicationIcon>command_block.ico</ApplicationIcon>
     <Authors>ErrorCraft</Authors>
     <Product>Function Analyser</Product>
     <Description>A tool that analyses your functions and generates a report that includes details about them.</Description>
     <PackageId>Function Analyser</PackageId>
     <AssemblyName>Function Analyser</AssemblyName>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
