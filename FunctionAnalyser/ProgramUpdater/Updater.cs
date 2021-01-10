@@ -31,7 +31,7 @@ namespace ProgramUpdater
         {
 #if DEBUG
             return null;
-#endif
+#else
             Logger.Log(new TextComponent("Checking for updates...").WithColour(Colour.BuiltinColours.GREY));
             
             string versionsJson = await GetJsonAsync("https://api.github.com/repos/ErrorCraft/FunctionAnalyser/releases");
@@ -53,6 +53,7 @@ namespace ProgramUpdater
             string changelog = await GetChangelog(latestVersion);
             Assets fileAssets = GetFileAssets(latestVersion);
             return new Update(latestVersion.GetVersionTag(), changelog, fileAssets);
+#endif
         }
 
         private async Task<string> GetChangelog(Version update)
