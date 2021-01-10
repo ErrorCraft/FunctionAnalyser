@@ -70,7 +70,11 @@ namespace FunctionAnalyser.Builders
 
         private async Task<VersionsBuilder> GetData()
         {
+#if DEBUG
+            string json = await GetContents("data-debug.json");
+#else
             string json = await GetContents("data.json");
+#endif
             return VersionsBuilder.FromJson(json);
         }
 

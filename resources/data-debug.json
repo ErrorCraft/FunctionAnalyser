@@ -1,0 +1,48 @@
+{
+	"java-snapshot": {
+		"name": "Java 20w51a",
+		"resources": {
+			"anchors": "java",
+			"blocks": "java-snapshot",
+			"colours": "java",
+			"commands": "java-snapshot",
+			"components": "java",
+			"enchantments": "java",
+			"entities": "java-snapshot",
+			"gamemodes": "java",
+			"items": "java-snapshot",
+			"item_slots": "java",
+			"mob_effects": "java",
+			"objective_criteria": "java",
+			"operations": "java",
+			"particles": "java-snapshot",
+			"scoreboard_slots": "java",
+			"selector_arguments": "java",
+			"sorts": "java",
+			"time_scalars": "java"
+		}
+	},
+	"java-release": {
+		"name": "Java 1.16.4",
+		"resources": {
+			"anchors": "java",
+			"blocks": "java-release",
+			"colours": "java",
+			"commands": "java-release",
+			"components": "java",
+			"enchantments": "java",
+			"entities": "java",
+			"gamemodes": "java",
+			"items": "java-release",
+			"item_slots": "java",
+			"mob_effects": "java",
+			"objective_criteria": "java",
+			"operations": "java",
+			"particles": "java",
+			"scoreboard_slots": "java",
+			"selector_arguments": "java",
+			"sorts": "java",
+			"time_scalars": "java"
+		}
+	}
+}
