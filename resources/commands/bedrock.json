@@ -1791,7 +1791,7 @@
 								"children": {
 									"slot": {
 										"type": "argument",
-										"parser": "item_slot",
+										"parser": "slot",
 										"children": {
 											"slotId": {
 												"type": "argument",
