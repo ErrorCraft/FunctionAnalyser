@@ -48,7 +48,9 @@ namespace FunctionAnalyser.Builders.Versions
                 ScoreboardSlots = GetResources<ScoreboardSlotsBuilder, ScoreboardSlots>(dispatcherResources.ScoreboardSlots, keys.GetScoreboardSlotsKey()),
                 SelectorArguments = GetResources<SelectorArgumentsBuilder, EntitySelectorOptions>(dispatcherResources.SelectorArguments, keys.GetSelectorArgumentsKey()),
                 Sorts = GetResources<SortsBuilder, Sorts>(dispatcherResources.Sorts, keys.GetSortsKey()),
-                TimeScalars = GetResources<TimeScalarsBuilder, TimeScalars>(dispatcherResources.TimeScalars, keys.GetTimeScalarsKey())
+                TimeScalars = GetResources<TimeScalarsBuilder, TimeScalars>(dispatcherResources.TimeScalars, keys.GetTimeScalarsKey()),
+                StructureRotations = GetResources<StructureRotationsBuilder, StructureRotations>(dispatcherResources.StructureRotations, keys.GetStructureRotationsKey()),
+                StructureMirrors = GetResources<StructureMirrorsBuilder, StructureMirrors>(dispatcherResources.StructureMirrors, keys.GetStructureMirrorsKey())
             };
 
             Dispatcher dispatcher = new Dispatcher(versionResources.GetName(), commandRootNode, commandResources);

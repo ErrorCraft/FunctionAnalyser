@@ -58,6 +58,12 @@ namespace FunctionAnalyser.Builders.Versions
         [JsonProperty("time_scalars")]
         private readonly string TimeScalars;
 
+        [JsonProperty("structure_rotations")]
+        private readonly string StructureRotations;
+
+        [JsonProperty("structure_mirrors")]
+        private readonly string StructureMirrors;
+
         public string GetAnchorsKey()
         {
             return Anchors;
@@ -146,6 +152,16 @@ namespace FunctionAnalyser.Builders.Versions
         public string GetTimeScalarsKey()
         {
             return TimeScalars;
+        }
+
+        public string GetStructureRotationsKey()
+        {
+            return StructureRotations;
+        }
+
+        public string GetStructureMirrorsKey()
+        {
+            return StructureMirrors;
         }
     }
 }

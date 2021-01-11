@@ -23,5 +23,7 @@ namespace FunctionAnalyser.Builders
         public Dictionary<string, SelectorArgumentsBuilder> SelectorArguments { get; init; }
         public Dictionary<string, SortsBuilder> Sorts { get; init; }
         public Dictionary<string, TimeScalarsBuilder> TimeScalars { get; init; }
+        public Dictionary<string, StructureRotationsBuilder> StructureRotations { get; init; }
+        public Dictionary<string, StructureMirrorsBuilder> StructureMirrors { get; init; }
     }
 }

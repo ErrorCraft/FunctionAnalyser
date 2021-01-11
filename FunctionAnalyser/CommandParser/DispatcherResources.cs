@@ -21,5 +21,7 @@ namespace CommandParser
         public EntitySelectorOptions SelectorArguments { get; init; }
         public Sorts Sorts { get; init; }
         public TimeScalars TimeScalars { get; init; }
+        public StructureRotations StructureRotations { get; init; }
+        public StructureMirrors StructureMirrors { get; init; }
     }
 }

@@ -40,6 +40,10 @@ namespace FunctionAnalyser.Builders
         private readonly string[] Sorts;
         [JsonProperty("time_scalars")]
         private readonly string[] TimeScalars;
+        [JsonProperty("structure_rotation")]
+        private readonly string[] StructureRotations;
+        [JsonProperty("structure_mirror")]
+        private readonly string[] StructureMirrors;
 
         public string[] GetAnchors()
         {
@@ -129,6 +133,16 @@ namespace FunctionAnalyser.Builders
         public string[] GetTimeScalars()
         {
             return TimeScalars;
+        }
+
+        public string[] GetStructureRotations()
+        {
+            return StructureRotations;
+        }
+
+        public string[] GetStructureMirrors()
+        {
+            return StructureMirrors;
         }
     }
 }

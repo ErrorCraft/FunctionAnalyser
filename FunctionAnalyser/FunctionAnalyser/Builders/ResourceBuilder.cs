@@ -50,7 +50,9 @@ namespace FunctionAnalyser.Builders
                 ScoreboardSlots = await GetResources<ScoreboardSlotsBuilder>("scoreboard_slots", definitions.GetScoreboardSlots()),
                 SelectorArguments = await GetResources<SelectorArgumentsBuilder>("selector_arguments", definitions.GetSelectorArguments()),
                 Sorts = await GetResources<SortsBuilder>("sorts", definitions.GetSorts()),
-                TimeScalars = await GetResources<TimeScalarsBuilder>("time_scalars", definitions.GetTimeScalars())
+                TimeScalars = await GetResources<TimeScalarsBuilder>("time_scalars", definitions.GetTimeScalars()),
+                StructureRotations = await GetResources<StructureRotationsBuilder>("structure_rotations", definitions.GetStructureRotations()),
+                StructureMirrors = await GetResources<StructureMirrorsBuilder>("structure_mirrors", definitions.GetStructureMirrors())
             };
             VersionsBuilder versionsBuilder = await GetData();
 

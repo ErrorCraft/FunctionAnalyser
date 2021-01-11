@@ -16,5 +16,7 @@
 	"scoreboard_slots": ["java"],
 	"selector_arguments": ["java"],
 	"sorts": ["java"],
-	"time_scalars": ["java"]
+	"time_scalars": ["java"],
+	"structure_rotations": ["bedrock"],
+	"structure_mirrors": ["bedrock"]
 }
