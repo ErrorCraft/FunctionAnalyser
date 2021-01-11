@@ -79,6 +79,9 @@ namespace CommandParser.Converters
                 "sound" => Argument(name, new SoundArgument(), false, null),
                 "recipe" => Argument(name, new RecipeArgument(), false, null),
                 "bossbar" => Argument(name, new BossbarArgument(), false, null),
+                "item_component" => Argument(name, new ItemComponentArgument(), false, null),
+                "structure_rotation" => Argument(name, new StructureRotationArgument(), false, null),
+                "structure_mirror" => Argument(name, new StructureMirrorArgument(), false, null),
                 _ => throw new ArgumentException($"'{parser}' is not a valid parser type")
             };
 
