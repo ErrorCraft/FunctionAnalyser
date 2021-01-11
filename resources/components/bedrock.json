@@ -1,0 +1,35 @@
+{
+	"content": {
+		"text": {
+			"type": "string"
+		},
+		"translate": {
+			"type": "string",
+			"children": {
+				"with": {
+					"type": "array",
+					"may_be_empty": true,
+					"optional": true
+				}
+			}
+		},
+		"score": {
+			"type": "object",
+			"children": {
+				"name": {
+					"type": "string"
+				},
+				"objective": {
+					"type": "string"
+				}
+			}
+		},
+		"selector": {
+			"type": "string"
+		}
+	},
+	"children": {},
+	"formatting": {},
+	"interactivity": {}
+	}
+}

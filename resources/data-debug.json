@@ -2,7 +2,8 @@
 	"bedrock": {
 		"name": "Bedrock (Testing)",
 		"resources": {
-			"commands": "bedrock"
+			"commands": "bedrock",
+			"components": "bedrock"
 		}
 	},
 	"java-snapshot": {
