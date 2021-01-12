@@ -1,0 +1,32 @@
+{
+	"required": {},
+	"optional": {
+		"can_place_on": {
+			"type": "object",
+			"children": {
+				"blocks": {
+					"type": "array"
+				}
+			}
+		},
+		"can_destroy": {
+			"type": "object",
+			"children": {
+				"blocks": {
+					"type": "array"
+				}
+			}
+		},
+		"item_lock": {
+			"type": "object",
+			"children": {
+				"mode": {
+					"type": "string"
+				}
+			}
+		},
+		"keep_on_death": {
+			"type": "object"
+		}
+	}
+}
