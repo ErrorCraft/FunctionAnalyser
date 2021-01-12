@@ -10,6 +10,8 @@ namespace CommandParser.Collections
         private readonly Dictionary<string, ComponentArgument> Formatting;
         private readonly Dictionary<string, ComponentArgument> Interactivity;
 
+        public Components() : this(new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>()) { }
+
         public Components(Dictionary<string, ComponentArgument> content, Dictionary<string, ComponentArgument> children, Dictionary<string, ComponentArgument> formatting, Dictionary<string, ComponentArgument> interactivity)
         {
             Content = content;

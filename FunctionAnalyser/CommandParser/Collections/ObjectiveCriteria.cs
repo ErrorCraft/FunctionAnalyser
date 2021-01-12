@@ -8,6 +8,8 @@ namespace CommandParser.Collections
         private readonly Dictionary<string, ObjectiveCriterion> NamespacedCriteria;
         private readonly Dictionary<string, ObjectiveCriterion> NormalCriteria;
 
+        public ObjectiveCriteria() : this(new HashSet<string>(), new Dictionary<string, ObjectiveCriterion>(), new Dictionary<string, ObjectiveCriterion>()) { }
+
         public ObjectiveCriteria(HashSet<string> customCriteria, Dictionary<string, ObjectiveCriterion> namespacedCriteria, Dictionary<string, ObjectiveCriterion> normalCriteria)
         {
             CustomCriteria = customCriteria;

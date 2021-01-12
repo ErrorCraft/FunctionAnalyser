@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public Gamemodes() : this(new HashSet<string>()) { }
+
         public Gamemodes(HashSet<string> values)
         {
             Values = values;

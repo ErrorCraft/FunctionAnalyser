@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly Dictionary<string, EntitySelectorOption> Values;
 
+        public EntitySelectorOptions() : this(new Dictionary<string, EntitySelectorOption>()) { }
+
         public EntitySelectorOptions(Dictionary<string, EntitySelectorOption> values)
         {
             Values = values;

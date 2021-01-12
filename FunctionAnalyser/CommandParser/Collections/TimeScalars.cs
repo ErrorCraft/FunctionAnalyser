@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly Dictionary<char, int> Values;
 
+        public TimeScalars() : this (new Dictionary<char, int>()) { }
+
         public TimeScalars(Dictionary<char, int> values)
         {
             Values = values;

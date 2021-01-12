@@ -35,7 +35,7 @@ namespace FunctionAnalyser.Builders.Versions
                 Anchors = GetResources<AnchorsBuilder, Anchors>(dispatcherResources.Anchors, keys.GetAnchorsKey()),
                 Blocks = GetResources<BlocksBuilder, Blocks>(dispatcherResources.Blocks, keys.GetBlocksKey()),
                 Colours = GetResources<ColoursBuilder, Colours>(dispatcherResources.Colours, keys.GetColoursKey()),
-                Components = GetResources<ComponentsBuilder, Components>(dispatcherResources.Components, keys.GetComponentsKey()),
+                //Components = GetResources<ComponentsBuilder, Components>(dispatcherResources.Components, keys.GetComponentsKey()),
                 Enchantments = GetResources<EnchantmentsBuilder, Enchantments>(dispatcherResources.Enchantments, keys.GetEnchantmentsKey()),
                 Entities = GetResources<EntitiesBuilder, Entities>(dispatcherResources.Entities, keys.GetEntitiesKey()),
                 Gamemodes = GetResources<GamemodesBuilder, Gamemodes>(dispatcherResources.Gamemodes, keys.GetGamemodesKey()),
@@ -57,9 +57,9 @@ namespace FunctionAnalyser.Builders.Versions
             return dispatcher;
         }
 
-        private static U GetResources<T, U>(Dictionary<string, T> resources, string key) where T : IBuilder<T, U> where U : class
+        private static U GetResources<T, U>(Dictionary<string, T> resources, string key) where T : IBuilder<T, U> where U : class, new()
         {
-            if (key == null) return null;
+            if (key == null) return new U();
             return resources[key].Build(resources);
         }
 

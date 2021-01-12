@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public StructureRotations() : this(new HashSet<string>()) { }
+
         public StructureRotations(HashSet<string> values)
         {
             Values = values;

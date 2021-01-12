@@ -8,6 +8,8 @@ namespace CommandParser.Collections
     {
         private readonly Dictionary<string, RootNode> Values;
 
+        public Particles() : this(new Dictionary<string, RootNode>()) { }
+
         public Particles(Dictionary<string, RootNode> values)
         {
             Values = values;

@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly Dictionary<string, ScoreboardSlot> Values;
 
+        public ScoreboardSlots() : this(new Dictionary<string, ScoreboardSlot>()) { }
+
         public ScoreboardSlots(Dictionary<string, ScoreboardSlot> values)
         {
             Values = values;

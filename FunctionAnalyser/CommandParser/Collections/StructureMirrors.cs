@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public StructureMirrors() : this(new HashSet<string>()) { }
+
         public StructureMirrors(HashSet<string> values)
         {
             Values = values;

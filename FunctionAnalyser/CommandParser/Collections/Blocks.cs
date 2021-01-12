@@ -7,6 +7,8 @@ namespace CommandParser.Collections
     {
         private readonly Dictionary<string, BlockState> Values;
 
+        public Blocks() : this(new Dictionary<string, BlockState>()) { }
+
         public Blocks(Dictionary<string, BlockState> values)
         {
             Values = values;

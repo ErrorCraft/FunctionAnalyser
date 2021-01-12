@@ -7,6 +7,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public Enchantments() : this(new HashSet<string>()) { }
+
         public Enchantments(HashSet<string> values)
         {
             Values = values;

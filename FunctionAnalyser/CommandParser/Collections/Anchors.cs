@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public Anchors() : this(new HashSet<string>()) { }
+
         public Anchors(HashSet<string> values)
         {
             Values = values;

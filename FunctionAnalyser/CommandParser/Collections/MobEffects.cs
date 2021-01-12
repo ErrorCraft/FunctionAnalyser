@@ -7,6 +7,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public MobEffects() : this(new HashSet<string>()) { }
+
         public MobEffects(HashSet<string> values)
         {
             Values = values;

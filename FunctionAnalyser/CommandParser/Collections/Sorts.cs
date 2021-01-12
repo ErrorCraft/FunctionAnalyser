@@ -6,6 +6,8 @@ namespace CommandParser.Collections
     {
         private readonly HashSet<string> Values;
 
+        public Sorts() : this(new HashSet<string>()) { }
+
         public Sorts(HashSet<string> values)
         {
             Values = values;
