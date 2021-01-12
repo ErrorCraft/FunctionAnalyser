@@ -1,5 +1,5 @@
 {
-	"content": {
+	"primary": {
 		"text": {
 			"type": "string"
 		},
@@ -28,7 +28,5 @@
 			"type": "string"
 		}
 	},
-	"children": {},
-	"formatting": {},
-	"interactivity": {}
+	"optional": {}
 }
