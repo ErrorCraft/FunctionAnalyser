@@ -5,39 +5,25 @@ namespace CommandParser.Collections
 {
     public class Components
     {
-        private readonly Dictionary<string, ComponentArgument> Content;
-        private readonly Dictionary<string, ComponentArgument> Children;
-        private readonly Dictionary<string, ComponentArgument> Formatting;
-        private readonly Dictionary<string, ComponentArgument> Interactivity;
+        private readonly Dictionary<string, ComponentArgument> Primary;
+        private readonly Dictionary<string, ComponentArgument> Optional;
 
-        public Components() : this(new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>()) { }
+        public Components() : this(new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>()) { }
 
-        public Components(Dictionary<string, ComponentArgument> content, Dictionary<string, ComponentArgument> children, Dictionary<string, ComponentArgument> formatting, Dictionary<string, ComponentArgument> interactivity)
+        public Components(Dictionary<string, ComponentArgument> primary, Dictionary<string, ComponentArgument> optional)
         {
-            Content = content;
-            Children = children;
-            Formatting = formatting;
-            Interactivity = interactivity;
+            Primary = primary;
+            Optional = optional;
         }
 
-        public Dictionary<string, ComponentArgument> GetContent()
+        public Dictionary<string, ComponentArgument> GetPrimary()
         {
-            return Content;
+            return Primary;
         }
 
-        public Dictionary<string, ComponentArgument> GetChildren()
+        public Dictionary<string, ComponentArgument> GetOptional()
         {
-            return Children;
-        }
-
-        public Dictionary<string, ComponentArgument> GetFormatting()
-        {
-            return Formatting;
-        }
-
-        public Dictionary<string, ComponentArgument> GetInteractivity()
-        {
-            return Interactivity;
+            return Optional;
         }
     }
 }

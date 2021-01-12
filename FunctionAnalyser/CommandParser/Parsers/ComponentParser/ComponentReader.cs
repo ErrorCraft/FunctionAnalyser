@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Parsers.ComponentParser.ComponentArguments;
+﻿using CommandParser.Parsers.ComponentParser.ComponentArguments;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 using System.Collections.Generic;
@@ -23,16 +22,14 @@ namespace CommandParser.Parsers.ComponentParser
 
         public ReadResults Validate()
         {
-            ReadResults readResults = ValidateContents();
-            if (readResults.Successful) readResults = ValidateChildren();
-            if (readResults.Successful) readResults = ValidateFormatting();
-            if (readResults.Successful) readResults = ValidateInteractivity();
+            ReadResults readResults = ValidatePrimary();
+            if (readResults.Successful) readResults = ValidateOptional();
             return readResults;
         }
 
-        private ReadResults ValidateContents()
+        private ReadResults ValidatePrimary()
         {
-            Dictionary<string, ComponentArgument> components = Resources.Components.GetContent();
+            Dictionary<string, ComponentArgument> components = Resources.Components.GetPrimary();
             foreach (string key in components.Keys)
             {
                 if (Json.ContainsKey(key))
@@ -44,24 +41,10 @@ namespace CommandParser.Parsers.ComponentParser
             return new ReadResults(false, ComponentCommandError.UnknownComponentError(Json).WithContext(StringReader));
         }
 
-        private ReadResults ValidateChildren()
-        {
-            return ValidateOptionalComponents(Resources.Components.GetChildren());
-        }
-
-        private ReadResults ValidateFormatting()
-        {
-            return ValidateOptionalComponents(Resources.Components.GetFormatting());
-        }
-
-        private ReadResults ValidateInteractivity()
-        {
-            return ValidateOptionalComponents(Resources.Components.GetInteractivity());
-        }
-
-        private ReadResults ValidateOptionalComponents(Dictionary<string, ComponentArgument> components)
+        private ReadResults ValidateOptional()
         {
             ReadResults readResults;
+            Dictionary<string, ComponentArgument> components = Resources.Components.GetOptional();
             foreach (string key in components.Keys)
             {
                 if (Json.ContainsKey(key))
