@@ -135,5 +135,7 @@ namespace CommandParser
         public static CommandError InvalidChatComponent(string component) => new CommandError($"Invalid chat component: {component}");
         public static CommandError InvalidEntityAnchor(string anchor) => new CommandError($"Invalid entity anchor position {anchor}");
         public static CommandError InvalidOperation() => new CommandError($"Invalid operation");
+        public static CommandError UnknownStructureRotation(string structureRotation) => new CommandError($"Unknown structure rotation '{structureRotation}'");
+        public static CommandError UnknownStructureMirror(string structureMirror) => new CommandError($"Unknown structure mirror '{structureMirror}'");
     }
 }
