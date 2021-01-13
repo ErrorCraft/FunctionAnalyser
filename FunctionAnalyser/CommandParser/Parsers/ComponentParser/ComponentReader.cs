@@ -30,11 +30,12 @@ namespace CommandParser.Parsers.ComponentParser
         private ReadResults ValidatePrimary()
         {
             Dictionary<string, ComponentArgument> components = Resources.Components.GetPrimary();
+            if (components == null || components.Count == 0) return new ReadResults(true, null);
             foreach (string key in components.Keys)
             {
-                if (Json.ContainsKey(key))
+                if (Json.TryGetKey(key, out string actualKey))
                 {
-                    return components[key].Validate(Json, key, StringReader, Start, Resources);
+                    return components[actualKey].Validate(Json, actualKey, StringReader, Start, Resources);
                 }
             }
             StringReader.SetCursor(Start);
@@ -43,13 +44,14 @@ namespace CommandParser.Parsers.ComponentParser
 
         private ReadResults ValidateOptional()
         {
-            ReadResults readResults;
             Dictionary<string, ComponentArgument> components = Resources.Components.GetOptional();
+            if (components == null || components.Count == 0) return new ReadResults(true, null);
+            ReadResults readResults;
             foreach (string key in components.Keys)
             {
-                if (Json.ContainsKey(key))
+                if (Json.TryGetKey(key, out string actualKey))
                 {
-                    readResults = components[key].Validate(Json, key, StringReader, Start, Resources);
+                    readResults = components[actualKey].Validate(Json, actualKey, StringReader, Start, Resources);
                     if (!readResults.Successful) return readResults;
                 }
             }

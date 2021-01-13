@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using CommandParser.Results;
 using CommandParser.Parsers.ComponentParser;
+using Newtonsoft.Json;
+using CommandParser.Results.Arguments;
 
 namespace CommandParser.Parsers.JsonParser.JsonArguments
 {
     public class JsonObject : IJsonArgument
     {
+        [JsonProperty("key_resource_location")]
+        private readonly bool KeyResourceLocation;
         public const string Name = "Object";
 
         private readonly Dictionary<string, IJsonArgument> Arguments;
@@ -43,9 +47,35 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
             return new ComponentReader(this, reader, start, resources).Validate();
         }
 
+        public bool TryGetKey(string key, out string result)
+        {
+            if (KeyResourceLocation)
+            {
+                foreach (string jsonKey in Arguments.Keys)
+                {
+                    if (ResourceLocationParser.TryParse(jsonKey, out ResourceLocation resourceLocation))
+                    {
+                        result = resourceLocation.Path;
+                        return true;
+                    }
+                }
+                result = default;
+                return false;
+            }
+            result = key;
+            return Arguments.ContainsKey(key);
+        }
+
         public bool ContainsKey(string key)
         {
-            return Arguments.ContainsKey(key);
+            if (KeyResourceLocation)
+            {
+                foreach (string jsonKey in Arguments.Keys)
+                {
+                    if (ResourceLocationParser.TryParse(jsonKey, out _)) return true;
+                }
+                return false;
+            } else return Arguments.ContainsKey(key);
         }
     }
 }

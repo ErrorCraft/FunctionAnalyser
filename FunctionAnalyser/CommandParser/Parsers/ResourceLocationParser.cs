@@ -28,14 +28,17 @@ namespace CommandParser.Parsers
 
         public ReadResults ReadFromString(string s, int start, out ResourceLocation result)
         {
-            result = default;
-            if (!RESOURCE_LOCATION_REGEX.IsMatch(s))
-            {
-                StringReader.SetCursor(start);
-                return new ReadResults(false, CommandError.InvalidId().WithContext(StringReader));
-            }
+            if (TryParse(s, out result)) return new ReadResults(true, null);
+            StringReader.SetCursor(start);
+            return new ReadResults(false, CommandError.InvalidId().WithContext(StringReader));
+        }
 
+        public static bool TryParse(string s, out ResourceLocation result)
+        {
+            result = default;
+            if (!RESOURCE_LOCATION_REGEX.IsMatch(s)) return false;
             string[] splitValues = s.Split(ResourceLocation.NAMESPACE_SEPARATOR);
+
             if (splitValues.Length == 1)
             {
                 result = new ResourceLocation(splitValues[0]);
@@ -48,8 +51,7 @@ namespace CommandParser.Parsers
             {
                 result = new ResourceLocation(splitValues[1], splitValues[0]);
             }
-
-            return new ReadResults(true, null);
+            return true;
         }
 
         private static bool IsResourceLocationPart(char c)
