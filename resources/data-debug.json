@@ -4,7 +4,8 @@
 		"resources": {
 			"commands": "bedrock",
 			"components": "bedrock",
-			"items": "java"
+			"items": "java",
+			"item_components": "bedrock"
 		}
 	},
 	"java-test": {

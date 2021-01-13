@@ -8,6 +8,7 @@
 	"entities": ["java","java-snapshot"],
 	"gamemodes": ["java"],
 	"items": ["java","java-snapshot"],
+	"item_components": ["bedrock"],
 	"item_slots": ["java"],
 	"mob_effects": ["java"],
 	"objective_criteria": ["java"],

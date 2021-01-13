@@ -20,10 +20,12 @@ namespace FunctionAnalyser.Builders
         private readonly string[] Entities;
         [JsonProperty("gamemodes")]
         private readonly string[] Gamemodes;
-        [JsonProperty("item_slots")]
-        private readonly string[] ItemSlots;
         [JsonProperty("items")]
         private readonly string[] Items;
+        [JsonProperty("item_components")]
+        private readonly string[] ItemComponents;
+        [JsonProperty("item_slots")]
+        private readonly string[] ItemSlots;
         [JsonProperty("mob_effects")]
         private readonly string[] MobEffects;
         [JsonProperty("objective_criteria")]
@@ -85,14 +87,19 @@ namespace FunctionAnalyser.Builders
             return Gamemodes;
         }
 
-        public string[] GetItemSlots()
-        {
-            return ItemSlots;
-        }
-
         public string[] GetItems()
         {
             return Items;
+        }
+
+        public string[] GetItemComponents()
+        {
+            return ItemComponents;
+        }
+
+        public string[] GetItemSlots()
+        {
+            return ItemSlots;
         }
 
         public string[] GetMobEffects()

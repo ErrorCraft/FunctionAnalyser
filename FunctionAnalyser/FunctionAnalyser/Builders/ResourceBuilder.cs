@@ -41,8 +41,9 @@ namespace FunctionAnalyser.Builders
                 Enchantments = await GetResources<EnchantmentsBuilder>("enchantments", definitions.GetEnchantments()),
                 Entities = await GetResources<EntitiesBuilder>("entities", definitions.GetEntities()),
                 Gamemodes = await GetResources<GamemodesBuilder>("gamemodes", definitions.GetGamemodes()),
-                ItemSlots = await GetResources<ItemSlotsBuilder>("item_slots", definitions.GetItemSlots()),
                 Items = await GetResources<ItemsBuilder>("items", definitions.GetItems()),
+                ItemComponents = await GetResources<ComponentsBuilder>("item_components", definitions.GetItemComponents()),
+                ItemSlots = await GetResources<ItemSlotsBuilder>("item_slots", definitions.GetItemSlots()),
                 MobEffects = await GetResources<MobEffectsBuilder>("mob_effects", definitions.GetMobEffects()),
                 ObjectiveCriteria = await GetResources<ObjectiveCriteriaBuilder>("objective_criteria", definitions.GetObjectiveCriteria()),
                 Operations = await GetResources<OperationsBuilder>("operations", definitions.GetOperations()),
@@ -84,6 +85,7 @@ namespace FunctionAnalyser.Builders
         {
             Logger.Log(GettingFile(from));
             Dictionary<string, T> resources = new Dictionary<string, T>();
+            if (paths == null || paths.Length == 0) return resources;
             for (int i = 0; i < paths.Length; i++)
             {
                 string url = Utilities.CombinePaths(from, paths[i] + ".json");

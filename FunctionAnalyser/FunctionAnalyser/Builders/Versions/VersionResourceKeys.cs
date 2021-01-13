@@ -28,11 +28,14 @@ namespace FunctionAnalyser.Builders.Versions
         [JsonProperty("gamemodes")]
         private readonly string Gamemodes;
 
-        [JsonProperty("item_slots")]
-        private readonly string ItemSlots;
-
         [JsonProperty("items")]
         private readonly string Items;
+
+        [JsonProperty("item_components")]
+        private readonly string ItemComponents;
+
+        [JsonProperty("item_slots")]
+        private readonly string ItemSlots;
 
         [JsonProperty("mob_effects")]
         private readonly string MobEffects;
@@ -104,14 +107,19 @@ namespace FunctionAnalyser.Builders.Versions
             return Gamemodes;
         }
 
-        public string GetItemSlotsKey()
-        {
-            return ItemSlots;
-        }
-
         public string GetItemsKey()
         {
             return Items;
+        }
+
+        public string GetItemComponentsKey()
+        {
+            return ItemComponents;
+        }
+
+        public string GetItemSlotsKey()
+        {
+            return ItemSlots;
         }
 
         public string GetMobEffectsKey()

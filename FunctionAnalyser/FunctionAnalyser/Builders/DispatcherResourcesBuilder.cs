@@ -13,8 +13,9 @@ namespace FunctionAnalyser.Builders
         public Dictionary<string, EnchantmentsBuilder> Enchantments { get; init; }
         public Dictionary<string, EntitiesBuilder> Entities { get; init; }
         public Dictionary<string, GamemodesBuilder> Gamemodes { get; init; }
-        public Dictionary<string, ItemSlotsBuilder> ItemSlots { get; init; }
         public Dictionary<string, ItemsBuilder> Items { get; init; }
+        public Dictionary<string, ComponentsBuilder> ItemComponents { get; init; }
+        public Dictionary<string, ItemSlotsBuilder> ItemSlots { get; init; }
         public Dictionary<string, MobEffectsBuilder> MobEffects { get; init; }
         public Dictionary<string, ObjectiveCriteriaBuilder> ObjectiveCriteria { get; init; }
         public Dictionary<string, OperationsBuilder> Operations { get; init; }
