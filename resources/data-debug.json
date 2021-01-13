@@ -3,7 +3,8 @@
 		"name": "Bedrock (Testing)",
 		"resources": {
 			"commands": "bedrock",
-			"components": "bedrock"
+			"components": "bedrock",
+			"items": "java"
 		}
 	},
 	"java-test": {
