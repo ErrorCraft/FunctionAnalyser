@@ -2,8 +2,7 @@
 	"root": {
 		"type": "object"
 	},
-	"primary": {},
-	"optional": {
+	"primary": {
 		"can_place_on": {
 			"type": "object",
 			"key_resource_location": true,
@@ -35,5 +34,6 @@
 			"type": "object",
 			"key_resource_location": true
 		}
-	}
+	},
+	"optional": {}
 }
