@@ -1,4 +1,5 @@
-﻿using CommandParser.Parsers.JsonParser;
+﻿using CommandParser.Parsers.ComponentParser;
+using CommandParser.Parsers.JsonParser;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
@@ -16,7 +17,8 @@ namespace CommandParser.Arguments
             ReadResults readResults = new JsonReader(reader).ReadAny(out IJsonArgument json);
             if (!readResults.Successful) return readResults;
             result = new Component(json);
-            return json.ValidateComponent(reader, start, resources);
+            return new ComponentReader(reader, start, resources).Validate(json, resources.Components);
+            //return json.ValidateComponent(reader, start, resources);
         }
     }
 }

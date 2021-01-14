@@ -1,4 +1,5 @@
-﻿using CommandParser.Converters;
+﻿using CommandParser.Collections;
+using CommandParser.Converters;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 using Newtonsoft.Json;
@@ -15,17 +16,21 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
         protected readonly bool Optional = false;
         [JsonProperty("match_first")]
         protected readonly bool MatchFirst = false;
+        [JsonProperty("key_resource_location")]
+        private readonly bool KeyResourceLocation = false;
 
-        public abstract ReadResults Validate(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources);
+        public abstract ReadResults Validate(JsonObject obj, string key, ComponentReader componentReader, Components components, IStringReader reader, int start, DispatcherResources resources);
 
-        protected ReadResults ValidateChildren(JsonObject obj, string key, IStringReader reader, int start, DispatcherResources resources)
+        protected ReadResults ValidateChildren(JsonObject obj, string key, ComponentReader componentReader, Components components, IStringReader reader, int start, DispatcherResources resources)
         {
             ReadResults readResults;
             foreach (KeyValuePair<string, ComponentArgument> child in Children)
             {
+                System.Diagnostics.Debug.WriteLine("BBBB: " + child.Key + ", " + obj.ContainsKey(child.Key));
                 if (obj.ContainsKey(child.Key))
                 {
-                    readResults = child.Value.Validate(obj, child.Key, reader, start, resources);
+                    readResults = child.Value.Validate(obj, child.Key, componentReader, components, reader, start, resources);
+                    System.Diagnostics.Debug.WriteLine("CCCC: " + readResults.Successful);
                     if (MatchFirst || !readResults.Successful) return readResults;
                 } else if (!child.Value.Optional && !MatchFirst)
                 {
@@ -67,6 +72,11 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
                 }
                 return $"{s} and {keys[^1]}";
             }
+        }
+
+        public bool MayUseKeyResourceLocation()
+        {
+            return KeyResourceLocation;
         }
 
         protected static bool IsText(IJsonArgument argument)

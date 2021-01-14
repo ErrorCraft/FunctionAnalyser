@@ -21,6 +21,13 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
             Arguments.Add(argument);
         }
 
+        public int GetLength()
+        {
+            return Arguments.Count;
+        }
+
+        public IJsonArgument this[int index] { get { return Arguments[index]; } }
+
         public string AsJson()
         {
             string s = $"{ARRAY_OPEN_CHARACTER}";

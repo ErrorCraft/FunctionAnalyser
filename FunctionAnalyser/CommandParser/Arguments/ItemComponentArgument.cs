@@ -1,4 +1,7 @@
-﻿using CommandParser.Results;
+﻿using CommandParser.Parsers.ComponentParser;
+using CommandParser.Parsers.JsonParser;
+using CommandParser.Parsers.JsonParser.JsonArguments;
+using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Arguments
@@ -8,7 +11,14 @@ namespace CommandParser.Arguments
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out ItemComponent result)
         {
             result = default;
-            return new ReadResults(true, null);
+            if (!reader.CanRead()) return new ReadResults(false, CommandError.IncorrectArgument().WithContext(reader));
+            int start = reader.GetCursor();
+
+            ReadResults readResults = new JsonReader(reader).ReadAny(out IJsonArgument json);
+            if (!readResults.Successful) return readResults;
+            result = new ItemComponent(json);
+            return new ComponentReader(reader, start, resources).Validate(json, resources.ItemComponents);
+            //return json.ValidateComponent(reader, start, resources);
         }
     }
 }

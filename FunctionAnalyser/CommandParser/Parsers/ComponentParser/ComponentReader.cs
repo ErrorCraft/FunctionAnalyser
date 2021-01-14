@@ -1,4 +1,5 @@
-﻿using CommandParser.Parsers.ComponentParser.ComponentArguments;
+﻿using CommandParser.Collections;
+using CommandParser.Parsers.ComponentParser.ComponentArguments;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 using System.Collections.Generic;
@@ -7,51 +8,81 @@ namespace CommandParser.Parsers.ComponentParser
 {
     public class ComponentReader
     {
-        private readonly JsonObject Json;
         private readonly IStringReader StringReader;
         private readonly int Start;
         private readonly DispatcherResources Resources;
 
-        public ComponentReader(JsonObject json, IStringReader stringReader, int start, DispatcherResources resources)
+        public ComponentReader(IStringReader stringReader, int start, DispatcherResources resources)
         {
-            Json = json;
             StringReader = stringReader;
             Start = start;
             Resources = resources;
         }
 
-        public ReadResults Validate()
+        public ReadResults Validate(IJsonArgument json, Components components)
         {
-            ReadResults readResults = ValidatePrimary();
-            if (readResults.Successful) readResults = ValidateOptional();
+            IJsonArgument actualJson = json;
+
+            // VALIDATE ROOT
+
+            return ValidateContents(actualJson, components);
+        }
+
+        public ReadResults ValidateContents(IJsonArgument json, Components components)
+        {
+            if (json is JsonNull)
+            {
+                StringReader.SetCursor(Start);
+                return new ReadResults(false, ComponentCommandError.UnknownComponentError(json).WithContext(StringReader));
+            }
+            else if (json is JsonObject jsonObject) return ValidateObject(jsonObject, components);
+            else if (json is JsonArray jsonArray) return ValidateArray(jsonArray, components);
+            else return new ReadResults(true, null);
+        }
+
+        private ReadResults ValidateObject(JsonObject json, Components components)
+        {
+            ReadResults readResults = ValidatePrimary(json, components);
+            if (readResults.Successful) readResults = ValidateOptional(json, components);
             return readResults;
         }
 
-        private ReadResults ValidatePrimary()
+        private ReadResults ValidateArray(JsonArray json, Components components)
         {
-            Dictionary<string, ComponentArgument> components = Resources.Components.GetPrimary();
-            if (components == null || components.Count == 0) return new ReadResults(true, null);
-            foreach (string key in components.Keys)
+            ReadResults readResults;
+            for (int i = 0; i < json.GetLength(); i++)
             {
-                if (Json.TryGetKey(key, out string actualKey))
+                readResults = ValidateContents(json[i], components);
+                if (!readResults.Successful) return readResults;
+            }
+            return new ReadResults(true, null);
+        }
+
+        private ReadResults ValidatePrimary(JsonObject json, Components components)
+        {
+            Dictionary<string, ComponentArgument> componentArguments = components.GetPrimary();
+            if (componentArguments == null || componentArguments.Count == 0) return new ReadResults(true, null);
+            foreach (string key in componentArguments.Keys)
+            {
+                if (json.TryGetKey(key, componentArguments[key].MayUseKeyResourceLocation(), out string actualKey))
                 {
-                    return components[actualKey].Validate(Json, actualKey, StringReader, Start, Resources);
+                    return componentArguments[key].Validate(json, actualKey, this, components, StringReader, Start, Resources);
                 }
             }
             StringReader.SetCursor(Start);
-            return new ReadResults(false, ComponentCommandError.UnknownComponentError(Json).WithContext(StringReader));
+            return new ReadResults(false, ComponentCommandError.UnknownComponentError(json).WithContext(StringReader));
         }
 
-        private ReadResults ValidateOptional()
+        private ReadResults ValidateOptional(JsonObject json, Components components)
         {
-            Dictionary<string, ComponentArgument> components = Resources.Components.GetOptional();
-            if (components == null || components.Count == 0) return new ReadResults(true, null);
+            Dictionary<string, ComponentArgument> componentArguments = components.GetOptional();
+            if (componentArguments == null || componentArguments.Count == 0) return new ReadResults(true, null);
             ReadResults readResults;
-            foreach (string key in components.Keys)
+            foreach (string key in componentArguments.Keys)
             {
-                if (Json.TryGetKey(key, out string actualKey))
+                if (json.TryGetKey(key, componentArguments[key].MayUseKeyResourceLocation(), out string actualKey))
                 {
-                    readResults = components[actualKey].Validate(Json, actualKey, StringReader, Start, Resources);
+                    readResults = componentArguments[key].Validate(json, actualKey, this, components, StringReader, Start, Resources);
                     if (!readResults.Successful) return readResults;
                 }
             }

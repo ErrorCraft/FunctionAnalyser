@@ -9,8 +9,6 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 {
     public class JsonObject : IJsonArgument
     {
-        [JsonProperty("key_resource_location")]
-        private readonly bool KeyResourceLocation;
         public const string Name = "Object";
 
         private readonly Dictionary<string, IJsonArgument> Arguments;
@@ -44,18 +42,19 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
         {
-            return new ComponentReader(this, reader, start, resources).Validate();
+            return new ReadResults(true, null);
+            //return new ComponentReader(this, reader, start, resources).Validate(resources.Components);
         }
 
-        public bool TryGetKey(string key, out string result)
+        public bool TryGetKey(string key, bool mayUseKeyResourceLocation, out string result)
         {
-            if (KeyResourceLocation)
+            if (mayUseKeyResourceLocation)
             {
                 foreach (string jsonKey in Arguments.Keys)
                 {
-                    if (ResourceLocationParser.TryParse(jsonKey, out ResourceLocation resourceLocation))
+                    if (ResourceLocationParser.TryParse(jsonKey, out ResourceLocation resourceLocation) && resourceLocation.IsDefaultNamespace() && key == resourceLocation.Path)
                     {
-                        result = resourceLocation.Path;
+                        result = jsonKey;
                         return true;
                     }
                 }
@@ -68,14 +67,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public bool ContainsKey(string key)
         {
-            if (KeyResourceLocation)
-            {
-                foreach (string jsonKey in Arguments.Keys)
-                {
-                    if (ResourceLocationParser.TryParse(jsonKey, out _)) return true;
-                }
-                return false;
-            } else return Arguments.ContainsKey(key);
+            return Arguments.ContainsKey(key);
         }
     }
 }
