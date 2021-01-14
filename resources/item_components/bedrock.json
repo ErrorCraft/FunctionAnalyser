@@ -1,4 +1,7 @@
 {
+	"root": {
+		"type": "object"
+	},
 	"primary": {},
 	"optional": {
 		"can_place_on": {

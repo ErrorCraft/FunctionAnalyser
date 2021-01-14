@@ -1,4 +1,7 @@
 {
+	"root": {
+		"type": "any"
+	},
 	"primary": {
 		"text": {
 			"type": "string"

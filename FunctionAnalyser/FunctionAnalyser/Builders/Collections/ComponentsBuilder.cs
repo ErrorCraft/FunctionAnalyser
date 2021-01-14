@@ -9,6 +9,8 @@ namespace FunctionAnalyser.Builders.Collections
     {
         [JsonProperty("parent")]
         private readonly string Parent;
+        [JsonProperty("root")]
+        private readonly ComponentArgument Root;
         [JsonProperty("primary")]
         private readonly Dictionary<string, ComponentArgument> Primary;
         [JsonProperty("optional")]
@@ -16,16 +18,18 @@ namespace FunctionAnalyser.Builders.Collections
 
         public Components Build(Dictionary<string, ComponentsBuilder> resources)
         {
+            ComponentArgument root = Root;
             Dictionary<string, ComponentArgument> primary = new Dictionary<string, ComponentArgument>(Primary);
             Dictionary<string, ComponentArgument> optional = new Dictionary<string, ComponentArgument>(Optional);
             ComponentsBuilder builder = this;
             while (builder.Parent != null)
             {
                 builder = resources[builder.Parent];
+                if (builder.Root != null) root = builder.Root;
                 foreach (KeyValuePair<string, ComponentArgument> pair in builder.Primary) primary.Add(pair.Key, pair.Value);
                 foreach (KeyValuePair<string, ComponentArgument> pair in builder.Optional) optional.Add(pair.Key, pair.Value);
             }
-            return new Components(primary, optional);
+            return new Components(root, primary, optional);
         }
     }
 }

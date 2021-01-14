@@ -5,15 +5,22 @@ namespace CommandParser.Collections
 {
     public class Components
     {
+        private readonly ComponentArgument Root;
         private readonly Dictionary<string, ComponentArgument> Primary;
         private readonly Dictionary<string, ComponentArgument> Optional;
 
-        public Components() : this(new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>()) { }
+        public Components() : this(null, new Dictionary<string, ComponentArgument>(), new Dictionary<string, ComponentArgument>()) { }
 
-        public Components(Dictionary<string, ComponentArgument> primary, Dictionary<string, ComponentArgument> optional)
+        public Components(ComponentArgument root, Dictionary<string, ComponentArgument> primary, Dictionary<string, ComponentArgument> optional)
         {
+            Root = root;
             Primary = primary;
             Optional = optional;
+        }
+
+        public ComponentArgument GetRootComponent()
+        {
+            return Root;
         }
 
         public Dictionary<string, ComponentArgument> GetPrimary()

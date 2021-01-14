@@ -22,8 +22,12 @@ namespace CommandParser.Parsers.ComponentParser
         public ReadResults Validate(IJsonArgument json, Components components)
         {
             IJsonArgument actualJson = json;
+            ComponentArgument root = components.GetRootComponent();
 
-            // VALIDATE ROOT
+            if (root != null)
+            {
+                // VALIDATE ROOT
+            }
 
             return ValidateContents(actualJson, components);
         }

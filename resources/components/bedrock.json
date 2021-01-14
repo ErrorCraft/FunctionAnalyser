@@ -1,4 +1,12 @@
 {
+	"root": {
+		"type": "object",
+		"children": {
+			"rawtext": {
+				"type": "array"
+			}
+		}
+	},
 	"primary": {
 		"text": {
 			"type": "string"
