@@ -8,7 +8,6 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
     {
         public override ReadResults Validate(JsonObject obj, string key, ComponentReader componentReader, Components components, IStringReader reader, int start, DispatcherResources resources)
         {
-            System.Diagnostics.Debug.WriteLine("AAAA: " + key);
             if (obj.GetChild(key) is not JsonObject actualObject)
             {
                 reader.SetCursor(start);

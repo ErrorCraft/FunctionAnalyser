@@ -26,11 +26,9 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             ReadResults readResults;
             foreach (KeyValuePair<string, ComponentArgument> child in Children)
             {
-                System.Diagnostics.Debug.WriteLine("BBBB: " + child.Key + ", " + obj.ContainsKey(child.Key));
                 if (obj.ContainsKey(child.Key))
                 {
                     readResults = child.Value.Validate(obj, child.Key, componentReader, components, reader, start, resources);
-                    System.Diagnostics.Debug.WriteLine("CCCC: " + readResults.Successful);
                     if (MatchFirst || !readResults.Successful) return readResults;
                 } else if (!child.Value.Optional && !MatchFirst)
                 {
