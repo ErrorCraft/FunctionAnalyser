@@ -21,15 +21,10 @@ namespace CommandParser.Parsers.ComponentParser
 
         public ReadResults Validate(IJsonArgument json, Components components)
         {
-            IJsonArgument actualJson = json;
             ComponentArgument root = components.GetRootComponent();
-
-            if (root != null)
-            {
-                // VALIDATE ROOT
-            }
-
-            return ValidateContents(actualJson, components);
+            JsonObject rootObject = new JsonObject();
+            rootObject.Add("root", json);
+            return root.Validate(rootObject, "root", this, components, StringReader, Start, Resources);
         }
 
         public ReadResults ValidateContents(IJsonArgument json, Components components)
