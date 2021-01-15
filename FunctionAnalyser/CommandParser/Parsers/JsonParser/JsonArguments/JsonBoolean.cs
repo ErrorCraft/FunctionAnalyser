@@ -1,6 +1,4 @@
-﻿using CommandParser.Results;
-
-namespace CommandParser.Parsers.JsonParser.JsonArguments
+﻿namespace CommandParser.Parsers.JsonParser.JsonArguments
 {
     public class JsonBoolean : IJsonArgument
     {
@@ -21,11 +19,6 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
         }
 
         public string GetName() => NAME;
-
-        public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
-        {
-            return new ReadResults(true, null);
-        }
 
         public override string ToString()
         {

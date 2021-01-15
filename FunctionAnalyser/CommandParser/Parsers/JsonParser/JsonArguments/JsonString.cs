@@ -1,5 +1,4 @@
-﻿using CommandParser.Results;
-using static CommandParser.Parsers.JsonParser.JsonCharacterProvider;
+﻿using static CommandParser.Parsers.JsonParser.JsonCharacterProvider;
 
 namespace CommandParser.Parsers.JsonParser.JsonArguments
 {
@@ -20,11 +19,6 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
         }
 
         public string GetName() => NAME;
-
-        public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
-        {
-            return new ReadResults(true, null);
-        }
 
         public static implicit operator string(JsonString s)
         {

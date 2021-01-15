@@ -1,8 +1,5 @@
 ﻿using static CommandParser.Parsers.JsonParser.JsonCharacterProvider;
 using System.Collections.Generic;
-using CommandParser.Results;
-using CommandParser.Parsers.ComponentParser;
-using Newtonsoft.Json;
 using CommandParser.Results.Arguments;
 
 namespace CommandParser.Parsers.JsonParser.JsonArguments
@@ -39,12 +36,6 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
         }
 
         public string GetName() => Name;
-
-        public ReadResults ValidateComponent(IStringReader reader, int start, DispatcherResources resources)
-        {
-            return new ReadResults(true, null);
-            //return new ComponentReader(this, reader, start, resources).Validate(resources.Components);
-        }
 
         public bool TryGetKey(string key, bool mayUseKeyResourceLocation, out string result)
         {

@@ -48,6 +48,11 @@ namespace CommandParser.Parsers.ComponentParser
 
         private ReadResults ValidateArray(JsonArray json, Components components)
         {
+            if (json.GetLength() == 0)
+            {
+                StringReader.SetCursor(Start);
+                return new ReadResults(false, ComponentCommandError.EmptyComponent().WithContext(StringReader));
+            }
             ReadResults readResults;
             for (int i = 0; i < json.GetLength(); i++)
             {

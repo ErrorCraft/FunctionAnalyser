@@ -12,7 +12,7 @@ namespace CommandParser.Parsers.ComponentParser
 
         public static CommandError EmptyComponent()
         {
-            return CommandError.InvalidChatComponent($"empty");
+            return CommandError.InvalidChatComponent($"Empty array");
         }
 
         public static CommandError StringFormat(string key, string expected, string received)
