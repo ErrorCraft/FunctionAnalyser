@@ -32,7 +32,7 @@ namespace CommandParser.Parsers.ComponentParser
             if (json is JsonNull)
             {
                 StringReader.SetCursor(Start);
-                return new ReadResults(false, ComponentCommandError.UnknownComponentError(json).WithContext(StringReader));
+                return new ReadResults(false, ComponentCommandError.UnknownComponent(json).WithContext(StringReader));
             }
             else if (json is JsonObject jsonObject) return ValidateObject(jsonObject, components);
             else if (json is JsonArray jsonArray) return ValidateArray(jsonArray, components);
@@ -74,7 +74,7 @@ namespace CommandParser.Parsers.ComponentParser
                 }
             }
             StringReader.SetCursor(Start);
-            return new ReadResults(false, ComponentCommandError.UnknownComponentError(json).WithContext(StringReader));
+            return new ReadResults(false, ComponentCommandError.UnknownComponent(json).WithContext(StringReader));
         }
 
         private ReadResults ValidateOptional(JsonObject json, Components components)

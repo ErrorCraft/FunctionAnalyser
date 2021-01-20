@@ -9,13 +9,15 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
     {
         [JsonProperty("may_be_empty")]
         private readonly bool MayBeEmpty = false;
+        [JsonProperty("object_only")]
+        private readonly bool ObjectOnly = false;
 
         public override ReadResults Validate(JsonObject obj, string key, ComponentReader componentReader, Components components, IStringReader reader, int start, DispatcherResources resources)
         {
             if (obj.GetChild(key) is not JsonArray actualArray)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonArray.Name, obj.GetChild(key).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArray.Name, obj.GetChild(key).GetName()).WithContext(reader));
             }
 
             if (actualArray.GetLength() == 0 && !MayBeEmpty)
@@ -27,7 +29,11 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             ReadResults readResults;
             foreach (IJsonArgument child in actualArray.GetChildren())
             {
-                //readResults = child.ValidateComponent(reader, start, resources);
+                if (ObjectOnly && child is not JsonObject)
+                {
+                    reader.SetCursor(start);
+                    return new ReadResults(false, ComponentCommandError.InvalidComponentArray(key, JsonObject.Name, child.GetName()).WithContext(reader));
+                }
                 readResults = componentReader.ValidateContents(child, components);
                 if (!readResults.Successful) return readResults;
             }

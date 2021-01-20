@@ -19,7 +19,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (!IsText(obj.GetChild(BindTo)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonString.NAME, obj.GetChild(BindTo).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonString.NAME, obj.GetChild(BindTo).GetName()).WithContext(reader));
             }
 
             string binding = obj.GetChild(BindTo).ToString();

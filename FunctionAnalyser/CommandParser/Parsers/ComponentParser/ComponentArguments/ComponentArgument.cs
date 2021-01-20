@@ -39,7 +39,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (MatchFirst)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.UnknownComponentError(obj).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.UnknownComponent(obj).WithContext(reader));
             }
             return new ReadResults(true, null);
         }

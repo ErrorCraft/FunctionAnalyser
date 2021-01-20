@@ -5,7 +5,7 @@ namespace CommandParser.Parsers.ComponentParser
 {
     public static class ComponentCommandError
     {
-        public static CommandError UnknownComponentError(IJsonArgument json)
+        public static CommandError UnknownComponent(IJsonArgument json)
         {
             return CommandError.InvalidChatComponent($"Don't know how to turn {json.AsJson()} into a component");
         }
@@ -15,9 +15,14 @@ namespace CommandParser.Parsers.ComponentParser
             return CommandError.InvalidChatComponent($"Empty array");
         }
 
-        public static CommandError StringFormat(string key, string expected, string received)
+        public static CommandError InvalidComponent(string key, string expected, string received)
         {
             return CommandError.InvalidChatComponent($"Expected {key} to be {expected}, was {received}");
+        }
+
+        public static CommandError InvalidComponentArray(string key, string expected, string received)
+        {
+            return CommandError.InvalidChatComponent($"Expected values in {key} array to be {expected}, was {received}");
         }
 
         public static CommandError IncompleteComponent(string key, ComponentArgument component)

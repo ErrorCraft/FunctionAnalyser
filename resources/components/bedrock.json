@@ -3,7 +3,8 @@
 		"type": "object",
 		"children": {
 			"rawtext": {
-				"type": "array"
+				"type": "array",
+				"object_only": true
 			}
 		}
 	},

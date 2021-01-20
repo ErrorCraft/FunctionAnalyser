@@ -11,7 +11,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (!IsText(obj.GetChild(key)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonString.NAME, obj.GetChild(key).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonString.NAME, obj.GetChild(key).GetName()).WithContext(reader));
             }
             return ValidateChildren(obj, key, componentReader, components, reader, start, resources);
         }

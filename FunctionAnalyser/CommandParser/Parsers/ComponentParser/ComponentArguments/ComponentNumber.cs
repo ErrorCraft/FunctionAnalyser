@@ -11,7 +11,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (obj.GetChild(key) is not JsonNumber)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.StringFormat(key, JsonNumber.NAME, obj.GetChild(key).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonNumber.NAME, obj.GetChild(key).GetName()).WithContext(reader));
             }
             return new ReadResults(true, null);
         }
