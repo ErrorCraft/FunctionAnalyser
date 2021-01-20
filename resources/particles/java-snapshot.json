@@ -6,6 +6,8 @@
 		"dust_color_transition":{"children":{"red":{"type":"argument","parser":"double"},"green":{"type":"argument","parser":"double"},"blue":{"type":"argument","parser":"double"},"redFade":{"type":"argument","parser":"double"},"greenFade":{"type":"argument","parser":"double"},"blueFade":{"type":"argument","parser":"double"},"size":{"type":"argument","parser":"double"}}},
 		"falling_dripstone_lava":{},
 		"falling_dripstone_water":{},
+		"glow":{},
+		"glow_squid_ink":{},
 		"reverse_portal":{},
 		"small_flame":{},
 		"snowflake":{},

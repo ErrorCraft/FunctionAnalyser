@@ -86,6 +86,7 @@
 		"waxed_cut_copper_slab":{"type":["top","bottom","double"],"waterlogged":["true","false"]},
 		"lightning_rod":{"facing":["north","east","south","west","up","down"],"powered":["true","false"]},
 		"pointed_dripstone":{"thickness":["tip_merge","tip","frustum","middle","base"],"vertical_direction":["up","down"],"waterlogged":["true","false"]},
-		"dripstone_block":{}
+		"dripstone_block":{},
+		"glow_lichen":{"down":["true","false"],"east":["true","false"],"north":["true","false"],"south":["true","false"],"up":["true","false"],"waterlogged":["true","false"],"west":["true","false"]}
 	}
 }

@@ -1,6 +1,8 @@
 {
 	"parent": "java",
 	"values": [
-		"axolotl"
+		"axolotl",
+		"glow_squid",
+		"glow_item_frame"
 	]
 }
