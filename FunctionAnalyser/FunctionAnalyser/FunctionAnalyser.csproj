@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AdvancedText\AdvancedText.csproj" />
     <ProjectReference Include="..\CommandParser\CommandParser.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
 </Project>

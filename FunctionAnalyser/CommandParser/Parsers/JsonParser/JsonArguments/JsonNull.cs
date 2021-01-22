@@ -12,6 +12,11 @@
 
         public string GetName() => NAME;
 
+        public JsonArgumentType GetArgumentType()
+        {
+            return JsonArgumentType.Null;
+        }
+
         public override string ToString()
         {
             return NULL;

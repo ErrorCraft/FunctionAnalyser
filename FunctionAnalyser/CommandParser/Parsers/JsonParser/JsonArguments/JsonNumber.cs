@@ -18,6 +18,11 @@
 
         public string GetName() => NAME;
 
+        public JsonArgumentType GetArgumentType()
+        {
+            return JsonArgumentType.Number;
+        }
+
         public override string ToString()
         {
             return Number;

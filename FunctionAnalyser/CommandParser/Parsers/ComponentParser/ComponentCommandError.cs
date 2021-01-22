@@ -1,5 +1,7 @@
 ﻿using CommandParser.Parsers.ComponentParser.ComponentArguments;
+using CommandParser.Parsers.JsonParser;
 using CommandParser.Parsers.JsonParser.JsonArguments;
+using Utilities;
 
 namespace CommandParser.Parsers.ComponentParser
 {
@@ -15,14 +17,14 @@ namespace CommandParser.Parsers.ComponentParser
             return CommandError.InvalidChatComponent($"Empty array");
         }
 
-        public static CommandError InvalidComponent(string key, string expected, string received)
+        public static CommandError InvalidComponent(string key, JsonArgumentType expected, JsonArgumentType received)
         {
-            return CommandError.InvalidChatComponent($"Expected {key} to be {expected}, was {received}");
+            return CommandError.InvalidChatComponent($"Expected {key} to be {expected.GetDisplayName()}, was {received.GetDisplayName()}");
         }
 
-        public static CommandError InvalidComponentArray(string key, string expected, string received)
+        public static CommandError InvalidComponentArray(string key, JsonArgumentType expected, JsonArgumentType received)
         {
-            return CommandError.InvalidChatComponent($"Expected values in {key} array to be {expected}, was {received}");
+            return CommandError.InvalidChatComponent($"Expected values in {key} array to be {expected.GetDisplayName()}, was {received.GetDisplayName()}");
         }
 
         public static CommandError IncompleteComponent(string key, ComponentArgument component)

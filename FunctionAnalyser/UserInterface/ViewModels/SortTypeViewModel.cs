@@ -1,4 +1,5 @@
 ﻿using FunctionAnalyser.Results;
+using Utilities;
 
 namespace UserInterface.ViewModels
 {

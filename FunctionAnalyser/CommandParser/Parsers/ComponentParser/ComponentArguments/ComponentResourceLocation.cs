@@ -1,4 +1,5 @@
 ﻿using CommandParser.Collections;
+using CommandParser.Parsers.JsonParser;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 
@@ -11,7 +12,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (!IsText(obj.GetChild(key)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonString.NAME, obj.GetChild(key).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
             return new ResourceLocationParser(reader).ReadFromString(obj.GetChild(key).ToString(), start, out _);
         }

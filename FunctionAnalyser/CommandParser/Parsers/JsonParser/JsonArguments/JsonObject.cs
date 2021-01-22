@@ -37,6 +37,11 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => Name;
 
+        public JsonArgumentType GetArgumentType()
+        {
+            return JsonArgumentType.Object;
+        }
+
         public bool TryGetKey(string key, bool mayUseKeyResourceLocation, out string result)
         {
             if (mayUseKeyResourceLocation)

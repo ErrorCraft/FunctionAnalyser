@@ -6,5 +6,6 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
     {
         string GetName();
         string AsJson();
+        JsonArgumentType GetArgumentType();
     }
 }

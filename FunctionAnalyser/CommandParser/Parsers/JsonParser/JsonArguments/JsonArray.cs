@@ -38,6 +38,11 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => Name;
 
+        public JsonArgumentType GetArgumentType()
+        {
+            return JsonArgumentType.Array;
+        }
+
         public List<IJsonArgument> GetChildren()
         {
             return Arguments;

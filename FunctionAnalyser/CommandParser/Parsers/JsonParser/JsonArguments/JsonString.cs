@@ -20,6 +20,11 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
 
         public string GetName() => NAME;
 
+        public JsonArgumentType GetArgumentType()
+        {
+            return JsonArgumentType.String;
+        }
+
         public static implicit operator string(JsonString s)
         {
             return s.String;

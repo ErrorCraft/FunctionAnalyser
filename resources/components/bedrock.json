@@ -3,38 +3,39 @@
 		"type": "object",
 		"children": {
 			"rawtext": {
-				"type": "array",
-				"object_only": true
+				"json_type": "array",
+				"array_contents": "object"
 			}
 		}
 	},
 	"primary": {
 		"text": {
-			"type": "string"
+			"json_type": "string"
 		},
 		"translate": {
-			"type": "string",
+			"json_type": "string",
 			"children": {
 				"with": {
-					"type": "array",
+					"type": "array_or_root",
+					"array_contents": "string",
 					"may_be_empty": true,
 					"optional": true
 				}
 			}
 		},
 		"score": {
-			"type": "object",
+			"json_type": "object",
 			"children": {
 				"name": {
-					"type": "string"
+					"json_type": "string"
 				},
 				"objective": {
-					"type": "string"
+					"json_type": "string"
 				}
 			}
 		},
 		"selector": {
-			"type": "string"
+			"json_type": "string"
 		}
 	},
 	"optional": {}

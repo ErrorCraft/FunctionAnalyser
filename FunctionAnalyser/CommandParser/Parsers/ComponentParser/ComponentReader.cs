@@ -19,7 +19,7 @@ namespace CommandParser.Parsers.ComponentParser
             Resources = resources;
         }
 
-        public ReadResults Validate(IJsonArgument json, Components components)
+        public ReadResults ValidateFromRoot(IJsonArgument json, Components components)
         {
             ComponentArgument root = components.GetRootComponent();
             JsonObject rootObject = new JsonObject();

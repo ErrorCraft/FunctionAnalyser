@@ -20,6 +20,11 @@
 
         public string GetName() => NAME;
 
+        public JsonArgumentType GetArgumentType()
+        {
+            return JsonArgumentType.Boolean;
+        }
+
         public override string ToString()
         {
             return Boolean ? TRUE : FALSE;

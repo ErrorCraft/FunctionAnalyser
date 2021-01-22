@@ -1,7 +1,9 @@
 ﻿using CommandParser.Collections;
+using CommandParser.Parsers.JsonParser;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 {
@@ -9,15 +11,16 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
     {
         [JsonProperty("may_be_empty")]
         private readonly bool MayBeEmpty = false;
-        [JsonProperty("object_only")]
-        private readonly bool ObjectOnly = false;
+        [JsonProperty("array_contents")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        private readonly JsonArgumentType? ArrayContents = null;
 
         public override ReadResults Validate(JsonObject obj, string key, ComponentReader componentReader, Components components, IStringReader reader, int start, DispatcherResources resources)
         {
             if (obj.GetChild(key) is not JsonArray actualArray)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArray.Name, obj.GetChild(key).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.Array, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
 
             if (actualArray.GetLength() == 0 && !MayBeEmpty)
@@ -29,10 +32,10 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             ReadResults readResults;
             foreach (IJsonArgument child in actualArray.GetChildren())
             {
-                if (ObjectOnly && child is not JsonObject)
+                if (ArrayContents is not null && child.GetArgumentType() != ArrayContents)
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, ComponentCommandError.InvalidComponentArray(key, JsonObject.Name, child.GetName()).WithContext(reader));
+                    return new ReadResults(false, ComponentCommandError.InvalidComponentArray(key, ArrayContents.Value, child.GetArgumentType()).WithContext(reader));
                 }
                 readResults = componentReader.ValidateContents(child, components);
                 if (!readResults.Successful) return readResults;

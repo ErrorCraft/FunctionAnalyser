@@ -1,4 +1,5 @@
 ﻿using CommandParser.Collections;
+using CommandParser.Parsers.JsonParser;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
 using Newtonsoft.Json;
@@ -19,7 +20,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (!IsText(obj.GetChild(BindTo)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonString.NAME, obj.GetChild(BindTo).GetName()).WithContext(reader));
+                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(BindTo).GetArgumentType()).WithContext(reader));
             }
 
             string binding = obj.GetChild(BindTo).ToString();

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CommandParser;
 using FunctionAnalyser.Builders.Collections;
 using FunctionAnalyser.Builders.Versions;
+using static Utilities.Generic;
 
 namespace FunctionAnalyser.Builders
 {
@@ -88,7 +89,7 @@ namespace FunctionAnalyser.Builders
             if (paths == null || paths.Length == 0) return resources;
             for (int i = 0; i < paths.Length; i++)
             {
-                string url = Utilities.CombinePaths(from, paths[i] + ".json");
+                string url = CombinePaths(from, paths[i] + ".json");
                 string json = await GetContents(url);
                 resources.Add(paths[i], JsonConvert.DeserializeObject<T>(json));
             }

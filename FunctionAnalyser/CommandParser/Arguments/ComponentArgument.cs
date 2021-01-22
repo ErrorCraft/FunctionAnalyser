@@ -17,8 +17,7 @@ namespace CommandParser.Arguments
             ReadResults readResults = new JsonReader(reader).ReadAny(out IJsonArgument json);
             if (!readResults.Successful) return readResults;
             result = new Component(json);
-            return new ComponentReader(reader, start, resources).Validate(json, resources.Components);
-            //return json.ValidateComponent(reader, start, resources);
+            return new ComponentReader(reader, start, resources).ValidateFromRoot(json, resources.Components);
         }
     }
 }
