@@ -3,17 +3,17 @@
 		"type": "object",
 		"children": {
 			"rawtext": {
-				"json_type": "array",
+				"type": "array",
 				"array_contents": "object"
 			}
 		}
 	},
 	"primary": {
 		"text": {
-			"json_type": "string"
+			"type": "string"
 		},
 		"translate": {
-			"json_type": "string",
+			"type": "string",
 			"children": {
 				"with": {
 					"type": "array_or_root",
@@ -24,18 +24,18 @@
 			}
 		},
 		"score": {
-			"json_type": "object",
+			"type": "object",
 			"children": {
 				"name": {
-					"json_type": "string"
+					"type": "string"
 				},
 				"objective": {
-					"json_type": "string"
+					"type": "string"
 				}
 			}
 		},
 		"selector": {
-			"json_type": "string"
+			"type": "string"
 		}
 	},
 	"optional": {}
