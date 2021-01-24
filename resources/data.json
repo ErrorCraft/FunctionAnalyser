@@ -24,7 +24,6 @@
 	},
 	"java-release": {
 		"name": "Java 1.16.4",
-		"use_bedrock_string_reader": true,
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-release",

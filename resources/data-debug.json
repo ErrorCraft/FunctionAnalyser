@@ -1,6 +1,7 @@
 {
 	"bedrock-test": {
 		"name": "Bedrock (Testing)",
+		"use_bedrock_string_reader": true,
 		"resources": {
 			"blocks": "java",
 			"commands": "bedrock",
