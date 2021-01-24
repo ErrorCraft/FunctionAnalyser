@@ -23,6 +23,7 @@ namespace CommandParser.Converters
                 "uuid" => new ComponentUuid(),
                 "root" => new ComponentRoot(),
                 "array_or_root" => new ComponentArrayOrRoot(),
+                "root_object" => new ComponentRootObject(),
                 _ => throw new ArgumentException($"'{type}' is not a valid component type")
             };
 

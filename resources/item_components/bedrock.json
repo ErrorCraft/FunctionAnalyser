@@ -1,6 +1,6 @@
 {
 	"root": {
-		"type": "object"
+		"type": "root_object"
 	},
 	"primary": {
 		"can_place_on": {

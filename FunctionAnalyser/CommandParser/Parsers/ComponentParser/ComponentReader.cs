@@ -39,7 +39,7 @@ namespace CommandParser.Parsers.ComponentParser
             else return new ReadResults(true, null);
         }
 
-        private ReadResults ValidateObject(JsonObject json, Components components)
+        public ReadResults ValidateObject(JsonObject json, Components components)
         {
             ReadResults readResults = ValidatePrimary(json, components);
             if (readResults.Successful) readResults = ValidateOptional(json, components);
