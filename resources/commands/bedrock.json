@@ -380,6 +380,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"effect": {
 								"type": "argument",
@@ -474,6 +477,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"pos": {
 								"type": "argument",
@@ -523,6 +529,9 @@
 							"targets": {
 								"type": "argument",
 								"parser": "entity",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"eventName": {
 										"type": "argument",
@@ -648,6 +657,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"push": {
 								"type": "literal",
@@ -1265,6 +1277,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"executable": true
 					}
 				},
@@ -1559,6 +1574,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"animation": {
 								"type": "argument",
@@ -1813,6 +1831,9 @@
 							"targets": {
 								"type": "argument",
 								"parser": "entity",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"slot": {
 										"type": "argument",
@@ -1947,6 +1968,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"start_riding": {
 								"type": "literal",
@@ -2608,6 +2632,9 @@
 											"targets": {
 												"type": "argument",
 												"parser": "entity",
+												"properties": {
+													"use_bedrock": true
+												},
 												"executable": true
 											}
 										}
@@ -2886,6 +2913,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"add": {
 								"type": "literal",
@@ -2984,6 +3014,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"checkForBlocks": {
 								"type": "argument",
@@ -3092,6 +3125,9 @@
 					"targets": {
 						"type": "argument",
 						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
 						"executable": true
 					}
 				}
