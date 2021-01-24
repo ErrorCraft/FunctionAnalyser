@@ -9,19 +9,19 @@ namespace CommandParser
     public class Dispatcher
     {
         private const char ARGUMENT_SEPARATOR = ' ';
-        [JsonProperty("root")]
         private readonly RootNode Root;
-        [JsonProperty("name")]
         private readonly string Name;
         private readonly DispatcherResources Resources;
+        private readonly bool UseBedrockStringReader;
 
-        public Dispatcher(string name) : this(name, new RootNode(), new DispatcherResources()) { }
+        public Dispatcher(string name) : this(name, new RootNode(), new DispatcherResources(), false) { }
 
-        public Dispatcher(string name, RootNode root, DispatcherResources resources)
+        public Dispatcher(string name, RootNode root, DispatcherResources resources, bool useBedrockStringReader)
         {
             Root = root;
             Name = name;
             Resources = resources;
+            UseBedrockStringReader = useBedrockStringReader;
         }
 
         public string GetName()
@@ -46,6 +46,7 @@ namespace CommandParser
 
         public CommandResults Parse(string command)
         {
+            if (UseBedrockStringReader) return Parse(command, new BedrockStringReader(command));
             return Parse(command, new StringReader(command));
         }
 

@@ -10,6 +10,9 @@ namespace CommandParser.Arguments
         [JsonProperty("multiple")]
         private readonly bool Multiple;
 
+        [JsonProperty("use_bedrock")]
+        private readonly bool UseBedrock;
+
         public ScoreHolderArgument(bool multiple = true)
         {
             Multiple = multiple;
@@ -21,7 +24,7 @@ namespace CommandParser.Arguments
 
             if (reader.CanRead() && reader.Peek() == '@')
             {
-                EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader, resources);
+                EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader, resources, UseBedrock);
                 ReadResults readResults = entitySelectorParser.Parse(out EntitySelector entitySelector);
                 if (!readResults.Successful) return readResults;
                 if (!Multiple && entitySelector.MaxResults > 1)
@@ -32,15 +35,25 @@ namespace CommandParser.Arguments
                 return new ReadResults(true, null);
             }
 
-            int start = reader.GetCursor();
-            while (!reader.AtEndOfArgument())
+            if (UseBedrock)
             {
-                reader.Skip();
-            }
-            string name = reader.GetString()[start..reader.GetCursor()];
+                ReadResults readResults = reader.ReadString(out string name);
+                if (!readResults.Successful) return readResults;
 
-            result = new ScoreHolder(name, null);
-            return new ReadResults(true, null);
+                result = new ScoreHolder(name, null);
+                return new ReadResults(true, null);
+            } else
+            {
+                int start = reader.GetCursor();
+                while (!reader.AtEndOfArgument())
+                {
+                    reader.Skip();
+                }
+                string name = reader.GetString()[start..reader.GetCursor()];
+
+                result = new ScoreHolder(name, null);
+                return new ReadResults(true, null);
+            }
         }
     }
 }

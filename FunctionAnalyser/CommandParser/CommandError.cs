@@ -137,5 +137,6 @@ namespace CommandParser
         public static CommandError InvalidOperation() => new CommandError($"Invalid operation");
         public static CommandError UnknownStructureRotation(string structureRotation) => new CommandError($"Unknown structure rotation '{structureRotation}'");
         public static CommandError UnknownStructureMirror(string structureMirror) => new CommandError($"Unknown structure mirror '{structureMirror}'");
+        public static CommandError InvalidUnquotedStringStart() => new CommandError($"Unquoted strings cannot start with a digit");
     }
 }

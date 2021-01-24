@@ -266,6 +266,11 @@ namespace CommandParser
         public ReadResults ReadUnquotedString(out string result)
         {
             int start = Cursor;
+            if (CanRead() && IsDigit(Peek()))
+            {
+                result = default;
+                return new ReadResults(false, CommandError.InvalidUnquotedStringStart().WithContext(this));
+            }
             while (CanRead() && IsUnquotedStringPart(Peek()))
             {
                 Skip();
@@ -346,9 +351,14 @@ namespace CommandParser
             return c == ' ';
         }
 
+        private static bool IsDigit(char c)
+        {
+            return c >= '0' && c <= '9';
+        }
+
         private static bool IsNumberPart(char c)
         {
-            return c >= '0' && c <= '9' || c == '.' || c == '-';
+            return IsDigit(c) || c == '.' || c == '-';
         }
 
         private static bool IsUnquotedStringPart(char c)

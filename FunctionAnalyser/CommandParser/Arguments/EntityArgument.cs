@@ -13,16 +13,20 @@ namespace CommandParser.Arguments
         [JsonProperty("players_only")]
         private readonly bool PlayersOnly;
 
-        public EntityArgument(bool singleEntity = false, bool playersOnly = false)
+        [JsonProperty("use_bedrock")]
+        private readonly bool UseBedrock;
+
+        public EntityArgument(bool singleEntity = false, bool playersOnly = false, bool useBedrock = false)
         {
             SingleEntity = singleEntity;
             PlayersOnly = playersOnly;
+            UseBedrock = useBedrock;
         }
 
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out EntitySelector result)
         {
             int start = reader.GetCursor();
-            EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader, resources);
+            EntitySelectorParser entitySelectorParser = new EntitySelectorParser(reader, resources, UseBedrock);
             ReadResults readResults = entitySelectorParser.Parse(out result);
             if (!readResults.Successful) return readResults;
 

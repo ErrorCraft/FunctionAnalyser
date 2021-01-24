@@ -12,7 +12,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"worldbuilder": {
@@ -67,7 +68,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"children": {
 									"intensity": {
@@ -111,7 +113,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -127,7 +130,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"item": {
@@ -171,7 +175,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"executable": true
 					}
@@ -425,7 +430,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"enchantmentName": {
@@ -720,7 +726,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -734,7 +741,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -748,7 +756,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -762,7 +771,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -776,7 +786,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -790,7 +801,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -804,7 +816,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -818,7 +831,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -832,7 +846,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}
@@ -1150,7 +1165,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"item": {
@@ -1226,12 +1242,16 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"reason": {
 								"type": "argument",
 								"parser": "message",
+								"properties": {
+									"use_bedrock": true
+								},
 								"executable": true
 							}
 						},
@@ -1385,12 +1405,16 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"message": {
 								"type": "argument",
 								"parser": "message",
+								"properties": {
+									"use_bedrock": true
+								},
 								"executable": true
 							}
 						},
@@ -1596,7 +1620,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"children": {
 									"pos": {
@@ -1931,6 +1956,7 @@
 										"parser": "entity",
 										"properties": {
 											"single_entity": true,
+											"use_bedrock": true
 										},
 										"children": {
 											"teleport_ride": {
@@ -2115,6 +2141,9 @@
 					"message": {
 						"type": "argument",
 						"parser": "message",
+						"properties": {
+							"use_bedrock": true
+						},
 						"executable": true
 					}
 				}
@@ -2272,6 +2301,9 @@
 									"targets": {
 										"type": "argument",
 										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"objective": {
 												"type": "argument",
@@ -2298,7 +2330,8 @@
 										"type": "argument",
 										"parser": "score_holder",
 										"properties": {
-											"single_entity": true
+											"single_entity": true,
+											"use_bedrock": true
 										},
 										"executable": true
 									}
@@ -2311,6 +2344,9 @@
 									"targets": {
 										"type": "argument",
 										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"targetObjective": {
 												"type": "argument",
@@ -2323,6 +2359,9 @@
 															"source": {
 																"type": "argument",
 																"parser": "score_holder",
+																"properties": {
+																	"use_bedrock": true
+																},
 																"children": {
 																	"sourceObjective": {
 																		"type": "argument",
@@ -2345,6 +2384,9 @@
 									"targets": {
 										"type": "argument",
 										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"objective": {
 												"type": "argument",
@@ -2373,6 +2415,9 @@
 									"targets": {
 										"type": "argument",
 										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"objective": {
 												"type": "argument",
@@ -2398,6 +2443,9 @@
 									"targets": {
 										"type": "argument",
 										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"objective": {
 												"type": "argument",
@@ -2415,6 +2463,9 @@
 									"targets": {
 										"type": "argument",
 										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"objective": {
 												"type": "argument",
@@ -2518,7 +2569,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"pos": {
@@ -2573,7 +2625,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"sound": {
@@ -2912,6 +2965,7 @@
 										"parser": "entity",
 										"properties": {
 											"single_entity": true,
+											"use_bedrock": true
 										},
 										"children": {
 											"checkForBlocks": {
@@ -2941,6 +2995,7 @@
 								"parser": "entity",
 								"properties": {
 									"single_entity": true,
+									"use_bedrock": true
 								},
 								"children": {
 									"checkForBlocks": {
@@ -2987,6 +3042,7 @@
 												"parser": "entity",
 												"properties": {
 													"single_entity": true,
+													"use_bedrock": true
 												},
 												"children": {
 													"checkForBlocks": {
@@ -3017,7 +3073,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"message": {
@@ -3265,7 +3322,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"actionbar": {
@@ -3274,6 +3332,9 @@
 									"title": {
 										"type": "argument",
 										"parser": "message",
+										"properties": {
+											"use_bedrock": true
+										},
 										"executable": true
 									}
 								}
@@ -3292,6 +3353,9 @@
 									"title": {
 										"type": "argument",
 										"parser": "message",
+										"properties": {
+											"use_bedrock": true
+										},
 										"executable": true
 									}
 								}
@@ -3333,6 +3397,9 @@
 									"title": {
 										"type": "argument",
 										"parser": "message",
+										"properties": {
+											"use_bedrock": true
+										},
 										"executable": true
 									}
 								}
@@ -3348,7 +3415,8 @@
 						"type": "argument",
 						"parser": "entity",
 						"properties": {
-							"players_only": true
+							"players_only": true,
+							"use_bedrock": true
 						},
 						"children": {
 							"actionbar": {
@@ -3528,7 +3596,8 @@
 								"type": "argument",
 								"parser": "entity",
 								"properties": {
-									"players_only": true
+									"players_only": true,
+									"use_bedrock": true
 								},
 								"executable": true
 							}

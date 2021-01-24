@@ -8,6 +8,8 @@ namespace FunctionAnalyser.Builders.Versions
         private readonly string Name;
         [JsonProperty("resources")]
         private readonly VersionResourceKeys ResourceKeys;
+        [JsonProperty("use_bedrock_string_reader")]
+        private readonly bool UseBedrockStringReader;
 
         public string GetName()
         {
@@ -17,6 +19,11 @@ namespace FunctionAnalyser.Builders.Versions
         public VersionResourceKeys GetResourceKeys()
         {
             return ResourceKeys;
+        }
+
+        public bool GetUseBedrockStringReader()
+        {
+            return UseBedrockStringReader;
         }
     }
 }

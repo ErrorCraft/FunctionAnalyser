@@ -12,6 +12,7 @@ namespace CommandParser.Parsers
         private readonly IStringReader Reader;
         private readonly DispatcherResources Resources;
         private readonly int Start;
+        private readonly bool UseBedrock;
 
         public IStringReader GetReader()
         {
@@ -48,11 +49,12 @@ namespace CommandParser.Parsers
         }
 
 
-        public EntitySelectorParser(IStringReader reader, DispatcherResources resources)
+        public EntitySelectorParser(IStringReader reader, DispatcherResources resources, bool useBedrock)
         {
             Reader = reader;
             Start = reader.GetCursor();
             Resources = resources;
+            UseBedrock = useBedrock;
         }
 
         public ReadResults Parse(out EntitySelector result)
@@ -161,6 +163,7 @@ namespace CommandParser.Parsers
                     Reader.SetCursor(currentPosition);
                     return new ReadResults(false, CommandError.UnknownSelectorType(c).WithContext(Reader));
             }
+            if (UseBedrock) Reader.SkipWhitespace();
             if (Reader.CanRead() && Reader.Peek() == '[')
             {
                 Reader.Skip();
