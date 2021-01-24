@@ -2,10 +2,21 @@
 	"bedrock-test": {
 		"name": "Bedrock (Testing)",
 		"resources": {
+			"blocks": "java",
 			"commands": "bedrock",
 			"components": "bedrock",
+			"enchantments": "java",
+			"entities": "java",
+			"gamemodes": "bedrock",
 			"items": "java",
-			"item_components": "bedrock"
+			"item_components": "bedrock",
+			"mob_effects": "java",
+			"objective_criteria": "bedrock",
+			"operations": "java",
+			"particles": "java",
+			"scoreboard_slots": "bedrock",
+			"selector_arguments": "bedrock",
+			"time_scalars": "java"
 		}
 	},
 	"java-test": {

@@ -1,0 +1,25 @@
+{
+	"values": {
+		"c":{"predicate":"set_limit"},
+		"dx":{"contents":{"type":"argument","parser":"double"}},
+		"dy":{"contents":{"type":"argument","parser":"double"}},
+		"dz":{"contents":{"type":"argument","parser":"double"}},
+		"family":{"allow_inverse":true,"reapplication_type":"only_if_inverted","contents":{"type":"argument","parser":"string","properties":{"type":"phrase"}}},
+		"l":{"contents":{"type":"argument","parser":"integer","properties":{"minimum":0}}},
+		"lm":{"contents":{"type":"argument","parser":"integer","properties":{"minimum":0}}},
+		"m":{"predicate":"gamemode","allow_inverse":true,"reapplication_type":"only_if_inverted"},
+		"name":{"allow_inverse":true,"reapplication_type":"only_if_inverted","contents":{"type":"argument","parser":"string","properties":{"type":"phrase"}}},
+		"r":{"contents":{"type":"argument","parser":"double","properties":{"minimum":0}}},
+		"rm":{"contents":{"type":"argument","parser":"double","properties":{"minimum":0}}},
+		"rx":{"contents":{"type":"argument","parser":"float","properties":{"minimum":0}}},
+		"rxm":{"contents":{"type":"argument","parser":"float","properties":{"minimum":0}}},
+		"ry":{"contents":{"type":"argument","parser":"float","properties":{"minimum":0}}},
+		"rym":{"contents":{"type":"argument","parser":"float","properties":{"minimum":0}}},
+		"scores":{"predicate":"scores"},
+		"tag":{"allow_inverse":true,"reapplication_type":"always","contents":{"type":"argument","parser":"string","properties":{"type":"phrase"}}},
+		"type":{"predicate":"set_executor","allow_inverse":true,"reapplication_type":"only_if_inverted"},
+		"x":{"contents":{"type":"argument","parser":"double"}},
+		"y":{"contents":{"type":"argument","parser":"double"}},
+		"z":{"contents":{"type":"argument","parser":"double"}}
+	}
+}
