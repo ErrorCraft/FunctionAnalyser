@@ -7,11 +7,13 @@ namespace CommandParser.Parsers.Coordinates
     {
         private readonly IStringReader StringReader;
         private readonly int Start;
+        private readonly bool UseBedrock;
 
-        public LocalCoordinatesParser(IStringReader stringReader)
+        public LocalCoordinatesParser(IStringReader stringReader, bool useBedrock)
         {
             StringReader = stringReader;
             Start = stringReader.GetCursor();
+            UseBedrock = useBedrock;
         }
 
         public ReadResults Parse(out ICoordinates result)
@@ -22,19 +24,23 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.SetCursor(Start);
-                return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
-            }
-            StringReader.Skip();
+                if (!UseBedrock)
+                {
+                    StringReader.SetCursor(Start);
+                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                }
+            } else StringReader.Skip();
 
             readResults = ReadDouble(out double up);
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.SetCursor(Start);
-                return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
-            }
-            StringReader.Skip();
+                if (!UseBedrock)
+                {
+                    StringReader.SetCursor(Start);
+                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                }
+            } else StringReader.Skip();
 
             readResults = ReadDouble(out double forwards);
             if (readResults.Successful) result = new LocalCoordinates(left, up, forwards);

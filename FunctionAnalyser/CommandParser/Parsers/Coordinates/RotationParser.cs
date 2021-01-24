@@ -7,11 +7,13 @@ namespace CommandParser.Parsers.Coordinates
     {
         private readonly IStringReader StringReader;
         private readonly int Start;
+        private readonly bool UseBedrock;
 
-        public RotationParser(IStringReader stringReader)
+        public RotationParser(IStringReader stringReader, bool useBedrock)
         {
             StringReader = stringReader;
             Start = stringReader.GetCursor();
+            UseBedrock = useBedrock;
         }
 
         public ReadResults Parse(out Rotation result)
@@ -23,10 +25,12 @@ namespace CommandParser.Parsers.Coordinates
             if (!readResults.Successful) return readResults;
             if (!StringReader.AtEndOfArgument())
             {
-                StringReader.SetCursor(Start);
-                return new ReadResults(false, CommandError.RotationIncomplete().WithContext(StringReader));
-            }
-            StringReader.Skip();
+                if (!UseBedrock)
+                {
+                    StringReader.SetCursor(Start);
+                    return new ReadResults(false, CommandError.RotationIncomplete().WithContext(StringReader));
+                }
+            } else StringReader.Skip();
 
             readResults = angleParser.Read(out Angle xRotation);
             if (readResults.Successful) result = new Rotation(yRotation, xRotation);
