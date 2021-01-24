@@ -188,14 +188,23 @@
 					"begin": {
 						"type": "argument",
 						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"end": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"destination": {
 										"type": "argument",
 										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"filtered": {
 												"type": "literal",
@@ -484,6 +493,9 @@
 							"pos": {
 								"type": "argument",
 								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"detect": {
 										"type": "literal",
@@ -491,6 +503,9 @@
 											"detectPos": {
 												"type": "argument",
 												"parser": "block_pos",
+												"properties": {
+													"use_bedrock": true
+												},
 												"children": {
 													"block": {
 														"type": "argument",
@@ -553,10 +568,16 @@
 					"from": {
 						"type": "argument",
 						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"to": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"block": {
 										"type": "argument",
@@ -1562,6 +1583,9 @@
 							"pos": {
 								"type": "argument",
 								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
 								"executable": true
 							}
 						}
@@ -1645,6 +1669,9 @@
 									"pos": {
 										"type": "argument",
 										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"volume": {
 												"type": "argument",
@@ -1700,6 +1727,9 @@
 							"pos": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"slot.container": {
 										"type": "literal",
@@ -2184,10 +2214,16 @@
 									"from": {
 										"type": "argument",
 										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"to": {
 												"type": "argument",
 												"parser": "vec3",
+												"properties": {
+													"use_bedrock": true
+												},
 												"children": {
 													"function": {
 														"type": "argument",
@@ -2204,6 +2240,9 @@
 											"center": {
 												"type": "argument",
 												"parser": "vec3",
+												"properties": {
+													"use_bedrock": true
+												},
 												"children": {
 													"radius": {
 														"type": "argument",
@@ -2516,6 +2555,9 @@
 					"pos": {
 						"type": "argument",
 						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"block": {
 								"type": "argument",
@@ -2581,6 +2623,9 @@
 					"pos": {
 						"type": "argument",
 						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
 						"executable": true
 					}
 				},
@@ -2600,6 +2645,9 @@
 							"pos": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"executable": true
 							}
 						},
@@ -2614,6 +2662,9 @@
 					"center": {
 						"type": "argument",
 						"parser": "vec2",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"spreadDistance": {
 								"type": "argument",
@@ -2682,10 +2733,16 @@
 									"from": {
 										"type": "argument",
 										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"to": {
 												"type": "argument",
 												"parser": "block_pos",
+												"properties": {
+													"use_bedrock": true
+												},
 												"children": {
 													"includeEntities": {
 														"type": "argument",
@@ -2732,6 +2789,9 @@
 									"to": {
 										"type": "argument",
 										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"rotation": {
 												"type": "argument",
@@ -2872,6 +2932,9 @@
 									"pos": {
 										"type": "argument",
 										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
 										"executable": true
 									}
 								},
@@ -2880,6 +2943,9 @@
 							"pos": {
 								"type": "argument",
 								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"spawnEvent": {
 										"type": "argument",
@@ -2957,6 +3023,9 @@
 					"destination": {
 						"type": "argument",
 						"parser": "vec3",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"checkForBlocks": {
 								"type": "argument",
@@ -2966,6 +3035,9 @@
 							"rotation": {
 								"type": "argument",
 								"parser": "vec2",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"checkForBlocks": {
 										"type": "argument",
@@ -2981,6 +3053,9 @@
 									"facingLocation": {
 										"type": "argument",
 										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"checkForBlocks": {
 												"type": "argument",
@@ -3042,10 +3117,16 @@
 							"destination": {
 								"type": "argument",
 								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"rotation": {
 										"type": "argument",
 										"parser": "vec2",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"checkForBlocks": {
 												"type": "argument",
@@ -3061,6 +3142,9 @@
 											"facingLocation": {
 												"type": "argument",
 												"parser": "vec3",
+												"properties": {
+													"use_bedrock": true
+												},
 												"children": {
 													"checkForBlocks": {
 														"type": "argument",
@@ -3138,6 +3222,9 @@
 					"pos": {
 						"type": "argument",
 						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"block": {
 								"type": "argument",
@@ -3167,14 +3254,23 @@
 					"begin": {
 						"type": "argument",
 						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"end": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"destination": {
 										"type": "argument",
 										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"all": {
 												"type": "literal",
@@ -3202,10 +3298,16 @@
 							"from": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"to": {
 										"type": "argument",
 										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"name": {
 												"type": "argument",
@@ -3226,6 +3328,9 @@
 									"center": {
 										"type": "argument",
 										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"radius": {
 												"type": "argument",
@@ -3265,6 +3370,9 @@
 							"pos": {
 								"type": "argument",
 								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
 								"executable": true
 							}
 						}
