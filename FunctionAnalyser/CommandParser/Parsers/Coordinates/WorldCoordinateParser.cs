@@ -1,18 +1,17 @@
 ﻿using CommandParser.Results;
 using CommandParser.Results.Arguments.Coordinates;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CommandParser.Parsers.Coordinates
 {
     public class WorldCoordinateParser
     {
         private readonly IStringReader StringReader;
+        private readonly bool UseBedrock;
 
-        public WorldCoordinateParser(IStringReader stringReader)
+        public WorldCoordinateParser(IStringReader stringReader, bool useBedrock)
         {
             StringReader = stringReader;
+            UseBedrock = useBedrock;
         }
 
         public ReadResults ReadInteger(out WorldCoordinate result)
@@ -32,6 +31,12 @@ namespace CommandParser.Parsers.Coordinates
             double value = 0.0d;
             if (!StringReader.AtEndOfArgument())
             {
+                if (UseBedrock && !IsNumberPart(StringReader.Peek()))
+                {
+                    result = new WorldCoordinate(value, isRelative);
+                    return new ReadResults(true, null);
+                }
+                
                 ReadResults readResults;
                 if (isRelative)
                 {
@@ -64,7 +69,7 @@ namespace CommandParser.Parsers.Coordinates
             bool isRelative = IsRelative();
             int start = StringReader.GetCursor();
 
-            if (StringReader.AtEndOfArgument())
+            if (StringReader.AtEndOfArgument() || (UseBedrock && !IsNumberPart(StringReader.Peek())))
             {
                 result = new WorldCoordinate(isRelative ? 0.0d : 0.5d, isRelative);
                 return new ReadResults(true, null);
@@ -88,6 +93,11 @@ namespace CommandParser.Parsers.Coordinates
                 return true;
             }
             return false;
+        }
+
+        private static bool IsNumberPart(char c)
+        {
+            return c >= '0' && c <= '9' || c == '.' || c == '-';
         }
     }
 }

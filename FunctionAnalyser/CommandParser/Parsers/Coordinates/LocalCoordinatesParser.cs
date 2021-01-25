@@ -22,25 +22,29 @@ namespace CommandParser.Parsers.Coordinates
 
             ReadResults readResults = ReadDouble(out double left);
             if (!readResults.Successful) return readResults;
-            if (!StringReader.AtEndOfArgument())
+            if (UseBedrock) StringReader.SkipWhitespace();
+            else
             {
-                if (!UseBedrock)
+                if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
                     return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
-            } else StringReader.Skip();
+                StringReader.Skip();
+            }
 
             readResults = ReadDouble(out double up);
             if (!readResults.Successful) return readResults;
-            if (!StringReader.AtEndOfArgument())
+            if (UseBedrock) StringReader.SkipWhitespace();
+            else
             {
-                if (!UseBedrock)
+                if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
                     return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
-            } else StringReader.Skip();
+                StringReader.Skip();
+            }
 
             readResults = ReadDouble(out double forwards);
             if (readResults.Successful) result = new LocalCoordinates(left, up, forwards);
@@ -59,7 +63,7 @@ namespace CommandParser.Parsers.Coordinates
                 return new ReadResults(false, CommandError.MixedCoordinateType().WithContext(StringReader));
             }
             StringReader.Skip();
-            if (StringReader.AtEndOfArgument())
+            if (StringReader.AtEndOfArgument() || (UseBedrock && !IsNumberPart(StringReader.Peek())))
             {
                 result = 0.0d;
                 return new ReadResults(true, null);
@@ -67,6 +71,11 @@ namespace CommandParser.Parsers.Coordinates
             {
                 return StringReader.ReadDouble(out result);
             }
+        }
+
+        private static bool IsNumberPart(char c)
+        {
+            return c >= '0' && c <= '9' || c == '.' || c == '-';
         }
     }
 }

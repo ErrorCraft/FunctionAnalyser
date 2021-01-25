@@ -108,8 +108,6 @@ namespace CommandParser.Parsers
 
         private ReadResults ParseSelector()
         {
-            // this.UsesSelectors = true;
-
             if (!Reader.CanRead())
             {
                 Reader.SetCursor(Start);
@@ -163,7 +161,12 @@ namespace CommandParser.Parsers
                     Reader.SetCursor(currentPosition);
                     return new ReadResults(false, CommandError.UnknownSelectorType(c).WithContext(Reader));
             }
-            if (UseBedrock) Reader.SkipWhitespace();
+            if (UseBedrock)
+            {
+                currentPosition = Reader.GetCursor();
+                Reader.SkipWhitespace();
+                if (!Reader.CanRead() || Reader.Peek() != '[') Reader.SetCursor(currentPosition);
+            }
             if (Reader.CanRead() && Reader.Peek() == '[')
             {
                 Reader.Skip();
