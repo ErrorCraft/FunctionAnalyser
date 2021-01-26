@@ -10,14 +10,18 @@ namespace CommandParser.Arguments
         [JsonProperty("for_testing")]
         private readonly bool ForTesting;
 
-        public ItemArgument(bool forTesting = false)
+        [JsonProperty("use_bedrock")]
+        private readonly bool UseBedrock;
+
+        public ItemArgument(bool forTesting = false, bool useBedrock = false)
         {
             ForTesting = forTesting;
+            UseBedrock = useBedrock;
         }
 
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Item result)
         {
-            return new ItemParser(reader, resources, ForTesting).Parse(out result);
+            return new ItemParser(reader, resources, ForTesting, UseBedrock).Parse(out result);
         }
     }
 }

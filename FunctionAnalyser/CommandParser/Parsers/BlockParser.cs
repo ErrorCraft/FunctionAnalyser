@@ -11,15 +11,17 @@ namespace CommandParser.Parsers
         private readonly IStringReader StringReader;
         private readonly bool ForTesting;
         private readonly DispatcherResources Resources;
+        private readonly bool UseBedrock;
 
         private ResourceLocation Block;
         private bool IsTag = false;
 
-        public BlockParser(IStringReader stringReader, bool forTesting, DispatcherResources resources)
+        public BlockParser(IStringReader stringReader, bool forTesting, DispatcherResources resources, bool useBedrock)
         {
             StringReader = stringReader;
             ForTesting = forTesting;
             Resources = resources;
+            UseBedrock = useBedrock;
 
             Block = null;
             IsTag = false;
@@ -34,6 +36,13 @@ namespace CommandParser.Parsers
 
             readResults = new ResourceLocationParser(StringReader).Read(out Block);
             if (!readResults.Successful) return readResults;
+
+            // Temporary
+            if (UseBedrock)
+            {
+                result = new Block(Block, null, null, IsTag);
+                return new ReadResults(true, null);
+            }
 
             if (!IsTag && !Resources.Blocks.ContainsBlock(Block))
             {

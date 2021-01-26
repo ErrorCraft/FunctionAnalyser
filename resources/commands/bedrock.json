@@ -138,7 +138,8 @@
 								"type": "argument",
 								"parser": "item",
 								"properties": {
-									"for_testing": true
+									"for_testing": true,
+									"use_bedrock": true
 								},
 								"children": {
 									"data": {
@@ -216,7 +217,8 @@
 																"type": "argument",
 																"parser": "block",
 																"properties": {
-																	"for_testing": true
+																	"for_testing": true,
+																	"use_bedrock": true
 																},
 																"children": {
 																	"data": {
@@ -239,7 +241,8 @@
 																"type": "argument",
 																"parser": "block",
 																"properties": {
-																	"for_testing": true
+																	"for_testing": true,
+																	"use_bedrock": true
 																},
 																"children": {
 																	"data": {
@@ -262,7 +265,8 @@
 																"type": "argument",
 																"parser": "block",
 																"properties": {
-																	"for_testing": true
+																	"for_testing": true,
+																	"use_bedrock": true
 																},
 																"children": {
 																	"data": {
@@ -511,7 +515,8 @@
 														"type": "argument",
 														"parser": "block",
 														"properties": {
-															"for_testing": true
+															"for_testing": true,
+															"use_bedrock": true
 														},
 														"children": {
 															"data": {
@@ -582,6 +587,9 @@
 									"block": {
 										"type": "argument",
 										"parser": "block",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"data": {
 												"type": "argument",
@@ -613,7 +621,8 @@
 																"type": "argument",
 																"parser": "block",
 																"properties": {
-																	"for_testing": true
+																	"for_testing": true,
+																	"use_bedrock": true
 																},
 																"children": {
 																	"data": {
@@ -656,7 +665,8 @@
 														"type": "argument",
 														"parser": "block",
 														"properties": {
-															"for_testing": true
+															"for_testing": true,
+															"use_bedrock": true
 														},
 														"executable": true
 													}
@@ -1205,6 +1215,9 @@
 							"item": {
 								"type": "argument",
 								"parser": "item",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"amount": {
 										"type": "argument",
@@ -1741,6 +1754,9 @@
 													"item": {
 														"type": "argument",
 														"parser": "item",
+														"properties": {
+															"use_bedrock": true
+														},
 														"children": {
 															"amount": {
 																"type": "argument",
@@ -1777,6 +1793,9 @@
 															"item": {
 																"type": "argument",
 																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
 																"children": {
 																	"amount": {
 																		"type": "argument",
@@ -1815,6 +1834,9 @@
 															"item": {
 																"type": "argument",
 																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
 																"children": {
 																	"amount": {
 																		"type": "argument",
@@ -1876,6 +1898,9 @@
 													"item": {
 														"type": "argument",
 														"parser": "item",
+														"properties": {
+															"use_bedrock": true
+														},
 														"children": {
 															"amount": {
 																"type": "argument",
@@ -1912,6 +1937,9 @@
 															"item": {
 																"type": "argument",
 																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
 																"children": {
 																	"amount": {
 																		"type": "argument",
@@ -1950,6 +1978,9 @@
 															"item": {
 																"type": "argument",
 																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
 																"children": {
 																	"amount": {
 																		"type": "argument",
@@ -2562,6 +2593,9 @@
 							"block": {
 								"type": "argument",
 								"parser": "block",
+								"properties": {
+									"use_bedrock": true
+								},
 								"children": {
 									"data": {
 										"type": "argument",
@@ -3230,7 +3264,8 @@
 								"type": "argument",
 								"parser": "block",
 								"properties": {
-									"for_testing": true
+									"for_testing": true,
+									"use_bedrock": true
 								},
 								"children": {
 									"data": {
