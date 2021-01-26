@@ -54,7 +54,7 @@ namespace FunctionAnalyser.Builders.Versions
                 StructureMirrors = GetResources<StructureMirrorsBuilder, StructureMirrors>(dispatcherResources.StructureMirrors, keys.GetStructureMirrorsKey())
             };
 
-            Dispatcher dispatcher = new Dispatcher(versionResources.GetName(), commandRootNode, commandResources, versionResources.GetUseBedrockStringReader());
+            Dispatcher dispatcher = new Dispatcher(versionResources.GetName(), commandRootNode, commandResources, versionResources.GetUseBedrockStringReader(), versionResources.GetData());
             return dispatcher;
         }
 

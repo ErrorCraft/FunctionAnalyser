@@ -102,6 +102,10 @@ namespace FunctionAnalyser
             // Data to return
             FunctionData functionData = new FunctionData();
 
+            // Dispatcher
+            Dispatcher dispatcher = Versions[version];
+            DispatcherData data = dispatcher.GetData();
+
             // Lines
             string[] lines = File.ReadAllLines(path);
 
@@ -117,7 +121,7 @@ namespace FunctionAnalyser
                     // Empty line
                     functionData.EmptyLines.Increase();
                     continue;
-                } else if (command.StartsWith('#'))
+                } else if (command.StartsWith(data.GetCommentString()))
                 {
                     // Comment
                     functionData.Comments.Increase();

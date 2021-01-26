@@ -13,15 +13,17 @@ namespace CommandParser
         private readonly string Name;
         private readonly DispatcherResources Resources;
         private readonly bool UseBedrockStringReader;
+        private readonly DispatcherData Data;
 
-        public Dispatcher(string name) : this(name, new RootNode(), new DispatcherResources(), false) { }
+        public Dispatcher(string name) : this(name, new RootNode(), new DispatcherResources(), false, new DispatcherData()) { }
 
-        public Dispatcher(string name, RootNode root, DispatcherResources resources, bool useBedrockStringReader)
+        public Dispatcher(string name, RootNode root, DispatcherResources resources, bool useBedrockStringReader, DispatcherData data)
         {
             Root = root;
             Name = name;
             Resources = resources;
             UseBedrockStringReader = useBedrockStringReader;
+            Data = data;
         }
 
         public string GetName()
@@ -32,6 +34,11 @@ namespace CommandParser
         public RootNode GetRoot()
         {
             return Root;
+        }
+
+        public DispatcherData GetData()
+        {
+            return Data;
         }
 
         public void Register(LiteralNode contents)

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CommandParser;
+using Newtonsoft.Json;
 
 namespace FunctionAnalyser.Builders.Versions
 {
@@ -10,6 +11,8 @@ namespace FunctionAnalyser.Builders.Versions
         private readonly VersionResourceKeys ResourceKeys;
         [JsonProperty("use_bedrock_string_reader")]
         private readonly bool UseBedrockStringReader;
+        [JsonProperty("data")]
+        private readonly DispatcherData Data;
 
         public string GetName()
         {
@@ -24,6 +27,11 @@ namespace FunctionAnalyser.Builders.Versions
         public bool GetUseBedrockStringReader()
         {
             return UseBedrockStringReader;
+        }
+
+        public DispatcherData GetData()
+        {
+            return Data;
         }
     }
 }
