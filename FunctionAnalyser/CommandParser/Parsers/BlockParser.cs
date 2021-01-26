@@ -1,5 +1,4 @@
-﻿using CommandParser.Collections;
-using CommandParser.Parsers.NbtParser;
+﻿using CommandParser.Parsers.NbtParser;
 using CommandParser.Parsers.NbtParser.NbtArguments;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
@@ -30,20 +29,10 @@ namespace CommandParser.Parsers
         {
             result = default;
 
-            if (StringReader.CanRead() && StringReader.Peek() == '#')
-            {
-                if (ForTesting)
-                {
-                    IsTag = true;
-                    StringReader.Skip();
-                }
-                else
-                {
-                    return new ReadResults(false, CommandError.BlockTagsNotAllowed().WithContext(StringReader));
-                }
-            }
+            ReadResults readResults = ReadTag();
+            if (!readResults.Successful) return readResults;
 
-            ReadResults readResults = new ResourceLocationParser(StringReader).Read(out Block);
+            readResults = new ResourceLocationParser(StringReader).Read(out Block);
             if (!readResults.Successful) return readResults;
 
             if (!IsTag && !Resources.Blocks.ContainsBlock(Block))
@@ -66,6 +55,17 @@ namespace CommandParser.Parsers
             }
 
             result = new Block(Block, blockStates, nbt, IsTag);
+            return new ReadResults(true, null);
+        }
+
+        private ReadResults ReadTag()
+        {
+            if (StringReader.CanRead() && StringReader.Peek() == '#')
+            {
+                if (!ForTesting) return new ReadResults(false, CommandError.BlockTagsNotAllowed().WithContext(StringReader));
+                IsTag = true;
+                StringReader.Skip();
+            }
             return new ReadResults(true, null);
         }
 
