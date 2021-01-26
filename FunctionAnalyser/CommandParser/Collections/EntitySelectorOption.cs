@@ -54,7 +54,7 @@ namespace CommandParser.Collections
             return ReapplicationType;
         }
 
-        public ReadResults Handle(EntitySelectorParser parser, DispatcherResources resources, string name, int start)
+        public ReadResults Handle(EntitySelectorParser parser, DispatcherResources resources, string name, int start, bool useBedrock)
         {
             IStringReader reader = parser.GetReader();
             bool negated = false;
@@ -63,7 +63,7 @@ namespace CommandParser.Collections
             ReadResults readResults = Option switch
             {
                 Option.SetLimit => SetLimit(parser, reader),
-                Option.SetExecutor => SetExecutor(parser, reader, negated, name, start, resources),
+                Option.SetExecutor => SetExecutor(parser, reader, negated, name, start, resources, useBedrock),
                 Option.Advancements => ReadAdvancements(parser, reader),
                 Option.Scores => ReadScores(parser, reader),
                 Option.Gamemode => ReadGamemode(parser, reader, resources),
@@ -107,7 +107,7 @@ namespace CommandParser.Collections
             return new ReadResults(true, null);
         }
 
-        private static ReadResults SetExecutor(EntitySelectorParser parser, IStringReader reader, bool negated, string originalName, int previousStart, DispatcherResources resources)
+        private static ReadResults SetExecutor(EntitySelectorParser parser, IStringReader reader, bool negated, string originalName, int previousStart, DispatcherResources resources, bool useBedrock)
         {
             if (parser.IsTypeLimited())
             {
@@ -133,6 +133,11 @@ namespace CommandParser.Collections
             entity = new ResourceLocation(entity, isTag);
 
             if (ResourceLocation.PLAYER_ENTITY.Equals(entity) && !negated) parser.SetIncludesEntities(false);
+            else if (useBedrock)
+            {
+                // Temporary
+                return new ReadResults(true, null);
+            }
             else if (!entity.IsTag)
             {
                 if (!resources.Entities.Contains(entity))

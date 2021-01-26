@@ -229,7 +229,7 @@ namespace CommandParser.Parsers
                     return new ReadResults(false, CommandError.InapplicableOption(name).WithContext(Reader));
                 }
 
-                readResults = option.Handle(this, Resources, name, start);
+                readResults = option.Handle(this, Resources, name, start, UseBedrock);
                 if (!readResults.Successful) return readResults;
 
                 Reader.SkipWhitespace();

@@ -2091,6 +2091,9 @@
 									"entity": {
 										"type": "argument",
 										"parser": "entity_summon",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"spawnEvent": {
 												"type": "argument",
@@ -2121,6 +2124,9 @@
 									"entity": {
 										"type": "argument",
 										"parser": "entity_summon",
+										"properties": {
+											"use_bedrock": true
+										},
 										"children": {
 											"no_ride_change": {
 												"type": "literal",
@@ -2955,6 +2961,9 @@
 					"entity": {
 						"type": "argument",
 						"parser": "entity_summon",
+						"properties": {
+							"use_bedrock": true
+						},
 						"children": {
 							"name": {
 								"type": "argument",
