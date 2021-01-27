@@ -44,5 +44,27 @@
 			"sorts": "java",
 			"time_scalars": "java"
 		}
+	},
+	"bedrock": {
+		"name": "Bedrock",
+		"use_bedrock_string_reader": true,
+		"resources": {
+			"blocks": "java",
+			"commands": "bedrock",
+			"components": "bedrock",
+			"enchantments": "java",
+			"entities": "java",
+			"gamemodes": "bedrock",
+			"items": "java",
+			"item_slots": "bedrock",
+			"item_components": "bedrock",
+			"mob_effects": "java",
+			"objective_criteria": "bedrock",
+			"operations": "java",
+			"particles": "java",
+			"scoreboard_slots": "bedrock",
+			"selector_arguments": "bedrock",
+			"time_scalars": "java"
+		}
 	}
 }
