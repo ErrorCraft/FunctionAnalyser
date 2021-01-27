@@ -8,8 +8,9 @@ namespace CommandParser.Arguments
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out StructureRotation result)
         {
             result = default;
-            ReadResults readResults = reader.ReadUnquotedString(out string structureRotation);
-            if (!readResults.Successful) return readResults;
+            int start = reader.GetCursor();
+            while (reader.CanRead() && IsUnquotedStringPart(reader.Peek())) reader.Skip();
+            string structureRotation = reader.GetString()[start..reader.GetCursor()];
 
             if (!resources.StructureRotations.Contains(structureRotation))
             {
@@ -18,6 +19,15 @@ namespace CommandParser.Arguments
 
             result = new StructureRotation(structureRotation);
             return new ReadResults(true, null);
+        }
+
+        private static bool IsUnquotedStringPart(char c)
+        {
+            return c >= '0' && c <= '9' ||
+                c >= 'A' && c <= 'Z' ||
+                c >= 'a' && c <= 'z' ||
+                c == '_' || c == '-' ||
+                c == '.' || c == '§';
         }
     }
 }
