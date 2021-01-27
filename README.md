@@ -28,5 +28,4 @@ Go to [this](https://dotnet.microsoft.com/download/dotnet-core/5.0/runtime/?utm_
 The reason people get this message might be because .NET 5 is fairly new. (November 2020)
 
 **"Will there be a Bedrock version/port?"**
-Yes, I'm working on that right now! It will use the same program, so you can check this page every now and then.
-Commands/Arguments on Bedrock have a few differences I don't know about. For example, it allows `~1~2~3`, while on Java you have to use `~1 ~2 ~3`, so I will have to figure out all of that first.
+There is a Bedrock version included. It's definitely not complete and bug free though, so please tell me if I need to change something, preferably via an [issue](https://github.com/ErrorCraft/FunctionAnalyser/issues).
