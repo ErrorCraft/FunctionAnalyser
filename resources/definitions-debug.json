@@ -3,7 +3,7 @@
 	"blocks": ["java","java-snapshot"],
 	"colours": ["java"],
 	"commands": ["java","java-snapshot","bedrock"],
-	"components": ["java-test","bedrock"],
+	"components": ["java","bedrock"],
 	"enchantments": ["java"],
 	"entities": ["java","java-snapshot"],
 	"gamemodes": ["java","bedrock"],
