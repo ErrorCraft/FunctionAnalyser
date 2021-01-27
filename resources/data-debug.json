@@ -2,9 +2,6 @@
 	"bedrock-test": {
 		"name": "Bedrock (Testing)",
 		"use_bedrock_string_reader": true,
-		"data": {
-			"comment_string": "//"
-		},
 		"resources": {
 			"blocks": "java",
 			"commands": "bedrock",
@@ -26,9 +23,6 @@
 	},
 	"java-test": {
 		"name": "Java (Testing)",
-		"data": {
-			"comment_string": "#"
-		},
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-snapshot",
