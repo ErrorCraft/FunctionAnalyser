@@ -1,6 +1,9 @@
 # Function Analyser
 With this tool you can analyse your functions and get a report that includes details about them. It also includes an auto-updater, so you don't have to check this page all the time. There's a (really) small FAQ below.
 
+## Credits
+Thanks to [Ersatz](https://github.com/Ersatz77) for allowing me to use [bedrock-data](https://github.com/Ersatz77/bedrock-data) for Bedrock!
+
 ## Using the function analyser
 You can select a folder and press "Analyse" to analyse all the functions under that folder. It ignores the path name/casing, so a path like `foo/Bar!/B@Z.mcfunction` is valid, even though if used in-game it would not be a valid path. This way you can analyse more than one data pack at once, or even multiple data packs in different worlds! Do note that it may take a second if you want to analyse a lot of functions.
 
