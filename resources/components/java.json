@@ -1,5 +1,8 @@
 {
-	"content": {
+	"root": {
+		"type": "any"
+	},
+	"primary": {
 		"text": {
 			"type": "string"
 		},
@@ -46,21 +49,17 @@
 			}
 		}
 	},
-	"children": {
+	"optional": {
 		"extra": {
 			"type": "array"
-		}
-	},
-	"formatting": {
+		},
 		"color": {"type": "string"},
 		"font": {"type": "string"},
 		"bold": {"type": "string"},
 		"italic": {"type": "string"},
 		"underlined": {"type": "string"},
 		"strikethrough": {"type": "string"},
-		"obfuscated": {"type": "string"}
-	},
-	"interactivity": {
+		"obfuscated": {"type": "string"},
 		"insertion": {"type": "string"},
 		"clickEvent": {
 			"type": "object",
