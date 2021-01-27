@@ -22,7 +22,7 @@
             <TextBlock Text="Changelog"></TextBlock>
             <Border Grid.Row="1" Margin="0 2 0 0" Background="#F3F3F3" BorderThickness="1" BorderBrush="#656565">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <TextBlock Padding="5 2" Text="{Binding Changelog}"></TextBlock>
+                    <TextBlock Padding="5 2" TextWrapping="Wrap" Text="{Binding Changelog}"></TextBlock>
                 </ScrollViewer>
             </Border>
         </Grid>
