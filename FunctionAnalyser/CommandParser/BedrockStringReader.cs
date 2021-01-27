@@ -109,13 +109,7 @@ namespace CommandParser
 
         public bool IsQuotedStringStart(char c)
         {
-            // Figure out the exact characters
-            return c == '\'' || c == '"' ||
-                   c == '«' || c == '‹' || c == '»' || c == '›' ||
-                   c == '„' || c == '“' || c == '‟' || c == '”' || c == '’' ||
-                   c == '❝' || c == '❞' || c == '❮' || c == '❯' || c == '⹂' ||
-                   c == '〝' || c == '〞' || c == '〟' || c == '＂' || c == '‚' ||
-                   c == '‘' || c == '‛' || c == '❛' || c == '❜' || c == '❟';
+            return c == '"' || c == '“' || c == '”';
         }
 
         public ReadResults ReadInteger(out int value)
