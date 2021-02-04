@@ -89,6 +89,7 @@
 		"dripstone_block":{},
 		"glow_lichen":{"down":["true","false"],"east":["true","false"],"north":["true","false"],"south":["true","false"],"up":["true","false"],"waterlogged":["true","false"],"west":["true","false"]},
 		"azalea":{},
+		"azalea_leaves":{"distance":["1","2","3","4","5","6","7"],"persistent":["true","false"]},
 		"azalea_leaves_flowers":{"distance":["1","2","3","4","5","6","7"],"persistent":["true","false"]},
 		"flowering_azalea":{},
 		"cave_vines_body":{"berries":["true","false"]},
