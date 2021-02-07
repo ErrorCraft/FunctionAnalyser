@@ -1,4 +1,4 @@
-﻿using CommandParser.Parsers;
+﻿using CommandParser.Minecraft;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
@@ -9,7 +9,7 @@ namespace CommandParser.Arguments
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Storage result)
         {
             result = default;
-            ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation storage);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out ResourceLocation storage);
             if (readResults.Successful) result = new Storage(storage);
             return readResults;
         }

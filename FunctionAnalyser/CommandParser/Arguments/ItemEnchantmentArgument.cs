@@ -1,4 +1,4 @@
-﻿using CommandParser.Parsers;
+﻿using CommandParser.Minecraft;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
@@ -9,7 +9,7 @@ namespace CommandParser.Arguments
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Enchantment result)
         {
             result = default;
-            ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation enchantment);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out ResourceLocation enchantment);
             if (!readResults.Successful) return readResults;
             if (!resources.Enchantments.Contains(enchantment))
             {

@@ -1,5 +1,5 @@
 ﻿using CommandParser.Context;
-using CommandParser.Parsers;
+using CommandParser.Minecraft;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using CommandParser.Tree;
@@ -13,7 +13,7 @@ namespace CommandParser.Arguments
         {
             result = default;
 
-            ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation particle);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out ResourceLocation particle);
             if (!readResults.Successful) return readResults;
 
             if (!resources.Particles.TryGetNodes(particle, out Dictionary<string, Node> nodes))

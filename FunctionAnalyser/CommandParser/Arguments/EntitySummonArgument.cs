@@ -1,4 +1,4 @@
-﻿using CommandParser.Parsers;
+﻿using CommandParser.Minecraft;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using Newtonsoft.Json;
@@ -13,7 +13,7 @@ namespace CommandParser.Arguments
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Entity result)
         {
             result = default;
-            ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation entity);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out ResourceLocation entity);
             if (!readResults.Successful) return readResults;
 
             // Temporary

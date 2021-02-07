@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using CommandParser.Results.Arguments;
 using CommandParser.Parsers.NbtParser.NbtArguments;
 using static CommandParser.Providers.NumberProvider;
+using CommandParser.Minecraft;
 
 namespace CommandParser
 {

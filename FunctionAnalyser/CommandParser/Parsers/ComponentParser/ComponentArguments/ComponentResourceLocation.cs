@@ -1,4 +1,5 @@
 ﻿using CommandParser.Collections;
+using CommandParser.Minecraft;
 using CommandParser.Parsers.JsonParser;
 using CommandParser.Parsers.JsonParser.JsonArguments;
 using CommandParser.Results;
@@ -14,7 +15,15 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
                 reader.SetCursor(start);
                 return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
-            return new ResourceLocationParser(reader).ReadFromString(obj.GetChild(key).ToString(), start, out _);
+
+            if (ResourceLocation.TryParse(obj.GetChild(key).ToString(), out _))
+            {
+                return new ReadResults(true, null);
+            } else
+            {
+                reader.SetCursor(start);
+                return new ReadResults(false, CommandError.InvalidId().WithContext(reader));
+            }
         }
     }
 }

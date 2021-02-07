@@ -1,4 +1,5 @@
-﻿using CommandParser.Parsers.NbtParser.NbtArguments;
+﻿using CommandParser.Minecraft;
+using CommandParser.Parsers.NbtParser.NbtArguments;
 using System.Text;
 
 namespace CommandParser.Results.Arguments

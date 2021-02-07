@@ -1,4 +1,4 @@
-﻿using CommandParser.Results.Arguments;
+﻿using CommandParser.Minecraft;
 using System.Collections.Generic;
 
 namespace CommandParser.Collections

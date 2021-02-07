@@ -1,4 +1,4 @@
-﻿using CommandParser.Parsers;
+﻿using CommandParser.Minecraft;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 
@@ -16,8 +16,8 @@ namespace CommandParser.Arguments
                 isTag = true;
             }
 
-            ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation function);
-            if (readResults.Successful) result = new Function(new ResourceLocation(function, isTag));
+            ReadResults readResults = ResourceLocation.TryRead(reader, out ResourceLocation function);
+            if (readResults.Successful) result = new Function(function, isTag);
             return readResults;
         }
     }

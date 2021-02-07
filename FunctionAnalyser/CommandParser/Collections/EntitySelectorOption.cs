@@ -1,5 +1,6 @@
 ﻿using CommandParser.Context;
 using CommandParser.Converters;
+using CommandParser.Minecraft;
 using CommandParser.Parsers;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
@@ -118,19 +119,17 @@ namespace CommandParser.Collections
             int start = reader.GetCursor();
 
             bool isTag = false;
-            if (reader.CanRead() && reader.Peek() == ResourceLocation.TAG_CHARACTER)
+            if (reader.CanRead() && reader.Peek() == '#')
             {
                 reader.Skip();
                 isTag = true;
             }
 
-            ReadResults readResults = new ResourceLocationParser(reader).Read(out ResourceLocation entity);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out ResourceLocation entity);
             if (!readResults.Successful)
             {
                 return readResults;
             }
-
-            entity = new ResourceLocation(entity, isTag);
 
             if (ResourceLocation.PLAYER_ENTITY.Equals(entity) && !negated) parser.SetIncludesEntities(false);
             else if (useBedrock)
@@ -138,7 +137,7 @@ namespace CommandParser.Collections
                 // Temporary
                 return new ReadResults(true, null);
             }
-            else if (!entity.IsTag)
+            else if (!isTag)
             {
                 if (!resources.Entities.Contains(entity))
                 {
@@ -146,7 +145,7 @@ namespace CommandParser.Collections
                     return new ReadResults(false, CommandError.InvalidEntityType(entity).WithContext(reader));
                 }
             }
-            parser.AddArgument(new ParsedArgument<Entity>(new Entity(entity), false));
+            parser.AddArgument(new ParsedArgument<Entity>(new Entity(entity, isTag), false));
             return new ReadResults(true, null);
         }
 
@@ -159,7 +158,7 @@ namespace CommandParser.Collections
             while (reader.CanRead() && reader.Peek() != '}')
             {
                 reader.SkipWhitespace();
-                readResults = new ResourceLocationParser(reader).Read(out ResourceLocation advancement);
+                readResults = ResourceLocation.TryRead(reader, out ResourceLocation advancement);
                 if (!readResults.Successful) return readResults;
 
                 reader.SkipWhitespace();

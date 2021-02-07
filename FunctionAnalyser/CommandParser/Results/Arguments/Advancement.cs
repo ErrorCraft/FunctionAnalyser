@@ -1,4 +1,6 @@
-﻿namespace CommandParser.Results.Arguments
+﻿using CommandParser.Minecraft;
+
+namespace CommandParser.Results.Arguments
 {
     public class Advancement
     {

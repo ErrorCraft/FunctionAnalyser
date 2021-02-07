@@ -1,4 +1,4 @@
-﻿using CommandParser.Results.Arguments;
+﻿using CommandParser.Minecraft;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
@@ -28,13 +28,14 @@ namespace CommandParser.Collections
 
         public bool Read(string contents, DispatcherResources resources)
         {
+            bool successfulParse = ResourceLocation.TryParse(contents, out ResourceLocation resourceLocation);
             return CriterionType switch
             {
                 CriterionType.None => string.IsNullOrEmpty(contents),
                 CriterionType.Colour => resources.Colours.Contains(contents),
-                CriterionType.Item => resources.Items.Contains(new ResourceLocation(contents)),
-                CriterionType.Block => resources.Blocks.ContainsBlock(new ResourceLocation(contents)),
-                CriterionType.Entity => resources.Entities.Contains(new ResourceLocation(contents)),
+                CriterionType.Item => successfulParse && resources.Items.Contains(resourceLocation),
+                CriterionType.Block => successfulParse && resources.Blocks.ContainsBlock(resourceLocation),
+                CriterionType.Entity => successfulParse && resources.Entities.Contains(resourceLocation),
                 CriterionType.Statistic => resources.ObjectiveCriteria.ContainsCustomCriterion(contents),
                 _ => false
             };

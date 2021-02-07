@@ -1,4 +1,5 @@
-﻿using CommandParser.Parsers.NbtParser;
+﻿using CommandParser.Minecraft;
+using CommandParser.Parsers.NbtParser;
 using CommandParser.Parsers.NbtParser.NbtArguments;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
@@ -27,7 +28,7 @@ namespace CommandParser.Parsers
             ReadResults readResults = ReadTag(out bool isTag);
             if (!readResults.Successful) return readResults;
 
-            readResults = new ResourceLocationParser(StringReader).Read(out ResourceLocation item);
+            readResults = ResourceLocation.TryRead(StringReader, out ResourceLocation item);
             if (!readResults.Successful) return readResults;
 
             // Temporary

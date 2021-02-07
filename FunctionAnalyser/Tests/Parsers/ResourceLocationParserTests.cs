@@ -1,7 +1,6 @@
 ﻿using CommandParser;
-using CommandParser.Parsers;
+using CommandParser.Minecraft;
 using CommandParser.Results;
-using CommandParser.Results.Arguments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Parsers
@@ -14,27 +13,25 @@ namespace Tests.Parsers
         {
             // Arrange
             IStringReader reader = new StringReader("foo:bar");
-            ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
-            ReadResults readResults = parser.Read(out _);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out _);
 
             // Assert
             Assert.IsTrue(readResults.Successful);
         }
 
         [TestMethod]
-        public void ResourceLocationParser_ReadFromString()
+        public void ResourceLocationParser_TryParse()
         {
             // Arrange
-            IStringReader reader = new StringReader("foo:bar");
-            ResourceLocationParser parser = new ResourceLocationParser(reader);
+            string s = "foo:bar";
 
             // Act
-            ReadResults readResults = parser.ReadFromString(reader.GetString(), 0, out _);
+            bool successful = ResourceLocation.TryParse(s, out _);
 
             // Assert
-            Assert.IsTrue(readResults.Successful);
+            Assert.IsTrue(successful);
         }
 
         [TestMethod]
@@ -42,10 +39,9 @@ namespace Tests.Parsers
         {
             // Arrange
             IStringReader reader = new StringReader("foo::bar");
-            ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
-            ReadResults readResults = parser.Read(out _);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out _);
 
             // Assert
             Assert.IsFalse(readResults.Successful);
@@ -56,10 +52,9 @@ namespace Tests.Parsers
         {
             // Arrange
             IStringReader reader = new StringReader("foo/bar:baz");
-            ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
-            ReadResults readResults = parser.Read(out _);
+            ReadResults readResults = ResourceLocation.TryRead(reader, out _);
 
             // Assert
             Assert.IsFalse(readResults.Successful);
@@ -70,10 +65,9 @@ namespace Tests.Parsers
         {
             // Arrange
             IStringReader reader = new StringReader("foo");
-            ResourceLocationParser parser = new ResourceLocationParser(reader);
 
             // Act
-            parser.Read(out ResourceLocation result);
+            ResourceLocation.TryRead(reader, out ResourceLocation result);
 
             // Assert
             Assert.IsTrue(result.IsDefaultNamespace());

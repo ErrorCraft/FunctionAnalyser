@@ -1,6 +1,7 @@
 ﻿using static CommandParser.Parsers.JsonParser.JsonCharacterProvider;
 using System.Collections.Generic;
 using CommandParser.Results.Arguments;
+using CommandParser.Minecraft;
 
 namespace CommandParser.Parsers.JsonParser.JsonArguments
 {
@@ -48,7 +49,7 @@ namespace CommandParser.Parsers.JsonParser.JsonArguments
             {
                 foreach (string jsonKey in Arguments.Keys)
                 {
-                    if (ResourceLocationParser.TryParse(jsonKey, out ResourceLocation resourceLocation) && resourceLocation.IsDefaultNamespace() && key == resourceLocation.Path)
+                    if (ResourceLocation.TryParse(jsonKey, out ResourceLocation resourceLocation) && resourceLocation.IsDefaultNamespace() && key == resourceLocation.Path)
                     {
                         result = jsonKey;
                         return true;
