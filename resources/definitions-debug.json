@@ -6,7 +6,7 @@
 	"components": ["java","bedrock"],
 	"enchantments": ["java"],
 	"entities": ["java","java-snapshot"],
-	"gamemodes": ["java","bedrock","java-test"],
+	"gamemodes": ["java-test"],
 	"items": ["java","java-release","java-snapshot"],
 	"item_components": ["bedrock"],
 	"item_slots": ["java","bedrock"],
