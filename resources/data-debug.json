@@ -1,28 +1,4 @@
 {
-	"bedrock-test": {
-		"name": "Bedrock (Testing)",
-		"use_bedrock_string_reader": true,
-		"resources": {
-			"blocks": "java",
-			"commands": "bedrock",
-			"components": "bedrock",
-			"enchantments": "java",
-			"entities": "java",
-			"gamemodes": "bedrock",
-			"items": "java",
-			"item_slots": "bedrock",
-			"item_components": "bedrock",
-			"mob_effects": "java",
-			"objective_criteria": "bedrock",
-			"operations": "java",
-			"particles": "java",
-			"scoreboard_slots": "bedrock",
-			"selector_arguments": "bedrock",
-			"structure_mirrors": "bedrock",
-			"structure_rotations": "bedrock",
-			"time_scalars": "java"
-		}
-	},
 	"java-test": {
 		"name": "Java (Testing)",
 		"resources": {
@@ -33,7 +9,7 @@
 			"components": "java",
 			"enchantments": "java",
 			"entities": "java-snapshot",
-			"gamemodes": "java",
+			"gamemodes": "java-test",
 			"items": "java-snapshot",
 			"item_slots": "java",
 			"mob_effects": "java",

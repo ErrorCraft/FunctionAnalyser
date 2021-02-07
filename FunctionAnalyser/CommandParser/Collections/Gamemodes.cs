@@ -1,21 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using CommandParser.Minecraft;
+using System.Collections.Generic;
 
 namespace CommandParser.Collections
 {
     public class Gamemodes
     {
-        private readonly HashSet<string> Values;
+        private readonly Dictionary<GameType, HashSet<string>> Values;
 
-        public Gamemodes() : this(new HashSet<string>()) { }
+        public Gamemodes() : this(new Dictionary<GameType, HashSet<string>>()) { }
 
-        public Gamemodes(HashSet<string> values)
+        public Gamemodes(Dictionary<GameType, HashSet<string>> values)
         {
             Values = values;
         }
 
-        public bool Contains(string gamemode)
+        public bool TryGet(string gamemode, out GameType result)
         {
-            return Values.Contains(gamemode);
+            foreach (KeyValuePair<GameType, HashSet<string>> pair in Values)
+            {
+                if (pair.Value.Contains(gamemode))
+                {
+                    result = pair.Key;
+                    return true;
+                }
+            }
+            result = default;
+            return false;
         }
     }
 }

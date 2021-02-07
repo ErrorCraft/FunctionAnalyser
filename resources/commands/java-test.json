@@ -2071,20 +2071,9 @@
 			"defaultgamemode": {
 				"type": "literal",
 				"children": {
-					"adventure": {
-						"type": "literal",
-						"executable": true
-					},
-					"creative": {
-						"type": "literal",
-						"executable": true
-					},
-					"spectator": {
-						"type": "literal",
-						"executable": true
-					},
-					"survival": {
-						"type": "literal",
+					"mode": {
+						"type": "argument",
+						"parser": "gamemode",
 						"executable": true
 					}
 				}
@@ -3606,50 +3595,9 @@
 			"gamemode": {
 				"type": "literal",
 				"children": {
-					"adventure": {
-						"type": "literal",
-						"children": {
-							"target": {
-								"type": "argument",
-								"parser": "entity",
-								"properties": {
-									"players_only": true
-								},
-								"executable": true
-							}
-						},
-						"executable": true
-					},
-					"creative": {
-						"type": "literal",
-						"children": {
-							"target": {
-								"type": "argument",
-								"parser": "entity",
-								"properties": {
-									"players_only": true
-								},
-								"executable": true
-							}
-						},
-						"executable": true
-					},
-					"spectator": {
-						"type": "literal",
-						"children": {
-							"target": {
-								"type": "argument",
-								"parser": "entity",
-								"properties": {
-									"players_only": true
-								},
-								"executable": true
-							}
-						},
-						"executable": true
-					},
-					"survival": {
-						"type": "literal",
+					"mode": {
+						"type": "argument",
+						"parser": "gamemode",
 						"children": {
 							"target": {
 								"type": "argument",

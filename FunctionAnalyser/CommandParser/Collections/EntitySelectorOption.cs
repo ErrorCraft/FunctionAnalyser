@@ -258,7 +258,7 @@ namespace CommandParser.Collections
                 return readResults;
             }
 
-            if (resources.Gamemodes.Contains(gamemode))
+            if (resources.Gamemodes.TryGet(gamemode, out _))
             {
                 parser.AddArgument(new ParsedArgument<Literal>(new Literal(gamemode), false));
                 return new ReadResults(true, null);

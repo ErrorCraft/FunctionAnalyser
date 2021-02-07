@@ -82,6 +82,7 @@ namespace CommandParser.Converters
                 "item_component" => Argument(name, new ItemComponentArgument(), false, null),
                 "structure_rotation" => Argument(name, new StructureRotationArgument(), false, null),
                 "structure_mirror" => Argument(name, new StructureMirrorArgument(), false, null),
+                "gamemode" => Argument(name, new GamemodeArgument(), false, null),
                 _ => throw new ArgumentException($"'{parser}' is not a valid parser type")
             };
 
