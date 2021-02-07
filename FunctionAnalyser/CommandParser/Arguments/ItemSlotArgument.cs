@@ -15,10 +15,10 @@ namespace CommandParser.Arguments
             if (!resources.ItemSlots.Contains(slot))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.UnknownSlot(slot).WithContext(reader));
+                return ReadResults.Failure(CommandError.UnknownSlot(slot).WithContext(reader));
             }
             result = new Results.Arguments.ItemSlot(slot);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace CommandParser.Arguments
             }
 
             result = new Message(message, selectors);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (obj.GetChild(key) is not JsonObject actualObject)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.Object, obj.GetChild(key).GetArgumentType()).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.InvalidComponent(key, JsonArgumentType.Object, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
             return ValidateChildren(actualObject, key, componentReader, components, reader, start, resources);
         }

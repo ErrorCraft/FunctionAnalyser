@@ -20,15 +20,15 @@ namespace CommandParser.Arguments
             if (UseBedrock)
             {
                 result = new Entity(entity);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             if (!resources.Entities.Contains(entity))
             {
-                return new ReadResults(false, CommandError.UnknownEntity(entity));
+                return ReadResults.Failure(CommandError.UnknownEntity(entity));
             }
             result = new Entity(entity);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

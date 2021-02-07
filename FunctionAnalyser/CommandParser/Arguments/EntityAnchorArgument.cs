@@ -15,11 +15,11 @@ namespace CommandParser.Arguments
             if (!resources.Anchors.Contains(anchor))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.InvalidEntityAnchor(anchor).WithContext(reader));
+                return ReadResults.Failure(CommandError.InvalidEntityAnchor(anchor).WithContext(reader));
             }
 
             result = new Anchor(anchor);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

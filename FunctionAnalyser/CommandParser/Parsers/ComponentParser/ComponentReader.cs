@@ -32,11 +32,11 @@ namespace CommandParser.Parsers.ComponentParser
             if (json is JsonNull)
             {
                 StringReader.SetCursor(Start);
-                return new ReadResults(false, ComponentCommandError.UnknownComponent(json).WithContext(StringReader));
+                return ReadResults.Failure(ComponentCommandError.UnknownComponent(json).WithContext(StringReader));
             }
             else if (json is JsonObject jsonObject) return ValidateObject(jsonObject, components);
             else if (json is JsonArray jsonArray) return ValidateArray(jsonArray, components);
-            else return new ReadResults(true, null);
+            else return ReadResults.Success();
         }
 
         public ReadResults ValidateObject(JsonObject json, Components components)
@@ -51,7 +51,7 @@ namespace CommandParser.Parsers.ComponentParser
             if (json.GetLength() == 0)
             {
                 StringReader.SetCursor(Start);
-                return new ReadResults(false, ComponentCommandError.EmptyComponent().WithContext(StringReader));
+                return ReadResults.Failure(ComponentCommandError.EmptyComponent().WithContext(StringReader));
             }
             ReadResults readResults;
             for (int i = 0; i < json.GetLength(); i++)
@@ -59,13 +59,13 @@ namespace CommandParser.Parsers.ComponentParser
                 readResults = ValidateContents(json[i], components);
                 if (!readResults.Successful) return readResults;
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private ReadResults ValidatePrimary(JsonObject json, Components components)
         {
             Dictionary<string, ComponentArgument> componentArguments = components.GetPrimary();
-            if (componentArguments == null || componentArguments.Count == 0) return new ReadResults(true, null);
+            if (componentArguments == null || componentArguments.Count == 0) return ReadResults.Success();
             foreach (string key in componentArguments.Keys)
             {
                 if (json.TryGetKey(key, componentArguments[key].MayUseKeyResourceLocation(), out string actualKey))
@@ -74,13 +74,13 @@ namespace CommandParser.Parsers.ComponentParser
                 }
             }
             StringReader.SetCursor(Start);
-            return new ReadResults(false, ComponentCommandError.UnknownComponent(json).WithContext(StringReader));
+            return ReadResults.Failure(ComponentCommandError.UnknownComponent(json).WithContext(StringReader));
         }
 
         private ReadResults ValidateOptional(JsonObject json, Components components)
         {
             Dictionary<string, ComponentArgument> componentArguments = components.GetOptional();
-            if (componentArguments == null || componentArguments.Count == 0) return new ReadResults(true, null);
+            if (componentArguments == null || componentArguments.Count == 0) return ReadResults.Success();
             ReadResults readResults;
             foreach (string key in componentArguments.Keys)
             {
@@ -90,7 +90,7 @@ namespace CommandParser.Parsers.ComponentParser
                     if (!readResults.Successful) return readResults;
                 }
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

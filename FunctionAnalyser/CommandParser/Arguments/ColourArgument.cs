@@ -13,11 +13,11 @@ namespace CommandParser.Arguments
 
             if (!resources.Colours.Contains(colour))
             {
-                return new ReadResults(false, CommandError.UnknownColour(colour));
+                return ReadResults.Failure(CommandError.UnknownColour(colour));
             }
 
             result = new Colour(colour);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

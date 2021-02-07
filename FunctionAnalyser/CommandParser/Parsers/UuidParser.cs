@@ -26,9 +26,9 @@ namespace CommandParser.Parsers
             UuidParser uuidParser = new UuidParser(uuid);
             if (!uuidParser.Parse(out result))
             {
-                return new ReadResults(false, CommandError.InvalidUuid());
+                return ReadResults.Failure(CommandError.InvalidUuid());
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public bool Parse(out Uuid result)

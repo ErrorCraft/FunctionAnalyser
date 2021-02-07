@@ -96,14 +96,14 @@ namespace CommandParser.Parsers
                 if (string.IsNullOrEmpty(s) || s.Length > 16)
                 {
                     Reader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.InvalidNameOrUuid().WithContext(Reader));
+                    return ReadResults.Failure(CommandError.InvalidNameOrUuid().WithContext(Reader));
                 }
                 IncludesEntities = false;
             }
 
             MaxResults = 1;
             SelectorType = SelectorType.None;
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private ReadResults ParseSelector()
@@ -111,7 +111,7 @@ namespace CommandParser.Parsers
             if (!Reader.CanRead())
             {
                 Reader.SetCursor(Start);
-                return new ReadResults(false, CommandError.MissingSelectorType().WithContext(Reader));
+                return ReadResults.Failure(CommandError.MissingSelectorType().WithContext(Reader));
             }
             int currentPosition = Reader.GetCursor();
             char c = Reader.Read();
@@ -159,7 +159,7 @@ namespace CommandParser.Parsers
                     break;
                 default:
                     Reader.SetCursor(currentPosition);
-                    return new ReadResults(false, CommandError.UnknownSelectorType(c).WithContext(Reader));
+                    return ReadResults.Failure(CommandError.UnknownSelectorType(c).WithContext(Reader));
             }
             if (UseBedrock)
             {
@@ -176,7 +176,7 @@ namespace CommandParser.Parsers
                     return readResults;
                 }
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private bool MayApply(string name, EntitySelectorOption option)
@@ -212,13 +212,13 @@ namespace CommandParser.Parsers
                 if (!Resources.SelectorArguments.TryGet(name, out EntitySelectorOption option))
                 {
                     Reader.SetCursor(start);
-                    return new ReadResults(false, CommandError.UnknownSelectorOption(name).WithContext(Reader));
+                    return ReadResults.Failure(CommandError.UnknownSelectorOption(name).WithContext(Reader));
                 }
 
                 Reader.SkipWhitespace();
                 if (!Reader.CanRead() || Reader.Peek() != '=')
                 {
-                    return new ReadResults(false, CommandError.ExpectedValueForSelectorOption(name).WithContext(Reader));
+                    return ReadResults.Failure(CommandError.ExpectedValueForSelectorOption(name).WithContext(Reader));
                 }
                 Reader.Skip();
                 Reader.SkipWhitespace();
@@ -226,7 +226,7 @@ namespace CommandParser.Parsers
                 if (!MayApply(name, option))
                 {
                     Reader.SetCursor(start);
-                    return new ReadResults(false, CommandError.InapplicableOption(name).WithContext(Reader));
+                    return ReadResults.Failure(CommandError.InapplicableOption(name).WithContext(Reader));
                 }
 
                 readResults = option.Handle(this, Resources, name, start, UseBedrock);
@@ -242,16 +242,16 @@ namespace CommandParser.Parsers
                 if (Reader.Peek() == ']')
                 {
                     Reader.Skip();
-                    return new ReadResults(true, null);
+                    return ReadResults.Success();
                 }
                 break;
             }
             if (Reader.CanRead() && Reader.Peek() == ']')
             {
                 Reader.Skip();
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
-            return new ReadResults(false, CommandError.SelectorExpectedEndOfOptions().WithContext(Reader));
+            return ReadResults.Failure(CommandError.SelectorExpectedEndOfOptions().WithContext(Reader));
         }
 
         private bool WillBeInverted()

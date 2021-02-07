@@ -88,7 +88,7 @@ namespace CommandParser.Collections
                 }
                 return readResults;
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static ReadResults SetLimit(EntitySelectorParser parser, IStringReader reader)
@@ -101,11 +101,11 @@ namespace CommandParser.Collections
 
             if (number < 1)
             {
-                return new ReadResults(false, CommandError.SelectorLimitTooLow().WithContext(reader));
+                return ReadResults.Failure(CommandError.SelectorLimitTooLow().WithContext(reader));
             }
             parser.SetMaxResults(number);
             parser.AddArgument(new ParsedArgument<int>(number, false));
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static ReadResults SetExecutor(EntitySelectorParser parser, IStringReader reader, bool negated, string originalName, int previousStart, DispatcherResources resources, bool useBedrock)
@@ -113,7 +113,7 @@ namespace CommandParser.Collections
             if (parser.IsTypeLimited())
             {
                 reader.SetCursor(previousStart);
-                return new ReadResults(false, CommandError.InapplicableOption(originalName).WithContext(reader));
+                return ReadResults.Failure(CommandError.InapplicableOption(originalName).WithContext(reader));
             }
 
             int start = reader.GetCursor();
@@ -135,18 +135,18 @@ namespace CommandParser.Collections
             else if (useBedrock)
             {
                 // Temporary
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
             else if (!isTag)
             {
                 if (!resources.Entities.Contains(entity))
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, CommandError.InvalidEntityType(entity).WithContext(reader));
+                    return ReadResults.Failure(CommandError.InvalidEntityType(entity).WithContext(reader));
                 }
             }
             parser.AddArgument(new ParsedArgument<Entity>(new Entity(entity, isTag), false));
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static ReadResults ReadAdvancements(EntitySelectorParser parser, IStringReader reader)
@@ -205,9 +205,9 @@ namespace CommandParser.Collections
                 {
                     char c = reader.Read();
                     if (c == ',') continue;
-                    if (c == '}') return new ReadResults(true, null);
+                    if (c == '}') return ReadResults.Success();
                 }
-                return new ReadResults(false, CommandError.ExpectedCharacter('}').WithContext(reader));
+                return ReadResults.Failure(CommandError.ExpectedCharacter('}').WithContext(reader));
             }
 
             reader.SkipWhitespace();
@@ -240,9 +240,9 @@ namespace CommandParser.Collections
                 {
                     char c = reader.Read();
                     if (c == ',') continue;
-                    if (c == '}') return new ReadResults(true, null);
+                    if (c == '}') return ReadResults.Success();
                 }
-                return new ReadResults(false, CommandError.ExpectedCharacter('}').WithContext(reader));
+                return ReadResults.Failure(CommandError.ExpectedCharacter('}').WithContext(reader));
             }
 
             reader.SkipWhitespace();
@@ -261,11 +261,11 @@ namespace CommandParser.Collections
             if (resources.Gamemodes.TryGet(gamemode, out _))
             {
                 parser.AddArgument(new ParsedArgument<Literal>(new Literal(gamemode), false));
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             } else
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.UnknownGamemode(gamemode).WithContext(reader));
+                return ReadResults.Failure(CommandError.UnknownGamemode(gamemode).WithContext(reader));
             }
         }
 
@@ -274,7 +274,7 @@ namespace CommandParser.Collections
             if (parser.IsSorted())
             {
                 reader.SetCursor(previousStart);
-                return new ReadResults(false, CommandError.InapplicableOption(originalName).WithContext(reader));
+                return ReadResults.Failure(CommandError.InapplicableOption(originalName).WithContext(reader));
             }
 
             int start = reader.GetCursor();
@@ -287,12 +287,12 @@ namespace CommandParser.Collections
             if (resources.Sorts.Contains(sort))
             {
                 parser.AddArgument(new ParsedArgument<Literal>(new Literal(sort), false));
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
             else
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.UnknownSort(sort).WithContext(reader));
+                return ReadResults.Failure(CommandError.UnknownSort(sort).WithContext(reader));
             }
         }
     }

@@ -21,7 +21,7 @@ namespace CommandParser.Arguments
             {
                 result = reader.GetRemaining();
                 reader.SetCursor(reader.GetLength());
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             } else if (Type == StringType.WORD)
             {
                 return reader.ReadUnquotedString(out result);

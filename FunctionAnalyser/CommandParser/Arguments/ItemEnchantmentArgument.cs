@@ -13,10 +13,10 @@ namespace CommandParser.Arguments
             if (!readResults.Successful) return readResults;
             if (!resources.Enchantments.Contains(enchantment))
             {
-                return new ReadResults(false, CommandError.UnknownEnchantment(enchantment));
+                return ReadResults.Failure(CommandError.UnknownEnchantment(enchantment));
             }
             result = new Enchantment(enchantment);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

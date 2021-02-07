@@ -14,11 +14,11 @@ namespace CommandParser.Arguments
 
             if (!resources.StructureMirrors.Contains(structureMirror))
             {
-                return new ReadResults(false, CommandError.UnknownStructureMirror(structureMirror));
+                return ReadResults.Failure(CommandError.UnknownStructureMirror(structureMirror));
             }
 
             result = new StructureMirror(structureMirror);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static bool IsUnquotedStringPart(char c)

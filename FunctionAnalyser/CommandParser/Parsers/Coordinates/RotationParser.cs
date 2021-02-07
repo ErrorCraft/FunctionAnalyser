@@ -28,7 +28,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!UseBedrock)
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.RotationIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.RotationIncomplete().WithContext(StringReader));
                 }
             } else StringReader.Skip();
 

@@ -13,10 +13,10 @@ namespace CommandParser.Arguments
             if (!readResults.Successful) return readResults;
             if (!resources.MobEffects.Contains(mobEffect))
             {
-                return new ReadResults(false, CommandError.UnknownEffect(mobEffect));
+                return ReadResults.Failure(CommandError.UnknownEffect(mobEffect));
             }
             result = new MobEffect(mobEffect);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

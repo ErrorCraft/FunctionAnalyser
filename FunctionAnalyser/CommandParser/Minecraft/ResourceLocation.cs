@@ -48,9 +48,9 @@ namespace CommandParser.Minecraft
             if (!TryParse(input, out result))
             {
                 stringReader.SetCursor(start);
-                return new ReadResults(false, CommandError.InvalidId());
+                return ReadResults.Failure(CommandError.InvalidId());
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static bool IsAllowedInResourceLocation(char c)

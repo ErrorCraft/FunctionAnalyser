@@ -41,7 +41,7 @@ namespace CommandParser.Parsers.NbtParser
 
                 if (string.IsNullOrEmpty(key))
                 {
-                    return new ReadResults(false, CommandError.ExpectedKey().WithContext(reader));
+                    return ReadResults.Failure(CommandError.ExpectedKey().WithContext(reader));
                 }
 
                 reader.SkipWhitespace();
@@ -51,7 +51,7 @@ namespace CommandParser.Parsers.NbtParser
                 reader.SkipWhitespace();
                 if (!reader.CanRead())
                 {
-                    return new ReadResults(false, CommandError.ExpectedValue().WithContext(reader));
+                    return ReadResults.Failure(CommandError.ExpectedValue().WithContext(reader));
                 } else
                 {
                     readResults = ReadValue(reader, out INbtArgument valueResult);
@@ -104,7 +104,7 @@ namespace CommandParser.Parsers.NbtParser
                                 continue;
                             default:
                                 reader.SetCursor(start);
-                                return new ReadResults(false, CommandError.InvalidArrayType(type).WithContext(reader));
+                                return ReadResults.Failure(CommandError.InvalidArrayType(type).WithContext(reader));
                         }
                     } else // List type
                     {
@@ -119,7 +119,7 @@ namespace CommandParser.Parsers.NbtParser
                     if (!result.TryAdd(valueResult))
                     {
                         reader.SetCursor(start);
-                        return new ReadResults(false, CommandError.NbtCannotInsert(valueResult, result).WithContext(reader));
+                        return ReadResults.Failure(CommandError.NbtCannotInsert(valueResult, result).WithContext(reader));
                     }
                 }
 
@@ -156,12 +156,12 @@ namespace CommandParser.Parsers.NbtParser
             // Empty string
             if (string.IsNullOrEmpty(stringResult))
             {
-                return new ReadResults(false, CommandError.ExpectedValue().WithContext(reader));
+                return ReadResults.Failure(CommandError.ExpectedValue().WithContext(reader));
             }
 
             // Number or unquoted string
             if (!TryParseNumber(stringResult, out result)) result = new NbtString(stringResult);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static bool TryParseNumber(string input, out INbtArgument result)

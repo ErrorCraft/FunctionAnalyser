@@ -20,13 +20,13 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (obj.GetChild(key) is not JsonArray actualArray)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.Array, obj.GetChild(key).GetArgumentType()).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.InvalidComponent(key, JsonArgumentType.Array, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
 
             if (actualArray.GetLength() == 0 && !MayBeEmpty)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.EmptyComponent().WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.EmptyComponent().WithContext(reader));
             }
 
             ReadResults readResults;
@@ -35,13 +35,13 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
                 if (ArrayContents is not null && child.GetArgumentType() != ArrayContents)
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, ComponentCommandError.InvalidComponentArray(key, ArrayContents.Value, child.GetArgumentType()).WithContext(reader));
+                    return ReadResults.Failure(ComponentCommandError.InvalidComponentArray(key, ArrayContents.Value, child.GetArgumentType()).WithContext(reader));
                 }
                 readResults = componentReader.ValidateContents(child, components);
                 if (!readResults.Successful) return readResults;
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

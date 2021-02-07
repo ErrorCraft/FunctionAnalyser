@@ -106,7 +106,7 @@ namespace CommandParser
                     {
                         if (reader.Peek() != ARGUMENT_SEPARATOR)
                         {
-                            readResults = new ReadResults(false, CommandError.ExpectedArgumentSeparator().WithContext(reader));
+                            readResults = ReadResults.Failure(CommandError.ExpectedArgumentSeparator().WithContext(reader));
                         }
                     }
                 }

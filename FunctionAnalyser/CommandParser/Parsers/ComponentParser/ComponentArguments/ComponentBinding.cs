@@ -16,16 +16,16 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
 
         public override ReadResults Validate(JsonObject obj, string key, ComponentReader componentReader, Components components, IStringReader reader, int start, DispatcherResources resources)
         {
-            if (!obj.ContainsKey(BindTo)) return new ReadResults(true, null);
+            if (!obj.ContainsKey(BindTo)) return ReadResults.Success();
             if (!IsText(obj.GetChild(BindTo)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(BindTo).GetArgumentType()).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(BindTo).GetArgumentType()).WithContext(reader));
             }
 
             string binding = obj.GetChild(BindTo).ToString();
             if (Values.TryGetValue(binding, out ComponentArgument argument)) return argument.Validate(obj, key, componentReader, components, reader, start, resources);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

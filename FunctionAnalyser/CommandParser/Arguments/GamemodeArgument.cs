@@ -14,10 +14,10 @@ namespace CommandParser.Arguments
             if (!resources.Gamemodes.TryGet(gamemode, out result))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.UnknownGamemode(gamemode).WithContext(reader));
+                return ReadResults.Failure(CommandError.UnknownGamemode(gamemode).WithContext(reader));
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

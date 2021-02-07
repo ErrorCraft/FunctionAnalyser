@@ -42,12 +42,12 @@ namespace CommandParser.Parsers
             if (UseBedrock)
             {
                 result = new Block(Block, null, null, IsTag);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             if (!IsTag && !Resources.Blocks.ContainsBlock(Block))
             {
-                return new ReadResults(false, CommandError.UnknownBlock(Block));
+                return ReadResults.Failure(CommandError.UnknownBlock(Block));
             }
 
             Dictionary<string, string> blockStates = null;
@@ -65,18 +65,18 @@ namespace CommandParser.Parsers
             }
 
             result = new Block(Block, blockStates, nbt, IsTag);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private ReadResults ReadTag()
         {
             if (StringReader.CanRead() && StringReader.Peek() == '#')
             {
-                if (!ForTesting) return new ReadResults(false, CommandError.BlockTagsNotAllowed().WithContext(StringReader));
+                if (!ForTesting) return ReadResults.Failure(CommandError.BlockTagsNotAllowed().WithContext(StringReader));
                 IsTag = true;
                 StringReader.Skip();
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private ReadResults ReadBlockStates(out Dictionary<string, string> result)
@@ -97,13 +97,13 @@ namespace CommandParser.Parsers
                 if (result.ContainsKey(property))
                 {
                     StringReader.SetCursor(start);
-                    return new ReadResults(false, CommandError.DuplicateBlockProperty(Block, property).WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.DuplicateBlockProperty(Block, property).WithContext(StringReader));
                 }
 
                 if (!IsTag && !Resources.Blocks.ContainsProperty(Block, property))
                 {
                     StringReader.SetCursor(start);
-                    return new ReadResults(false, CommandError.UnknownBlockProperty(Block, property).WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.UnknownBlockProperty(Block, property).WithContext(StringReader));
                 }
 
                 StringReader.SkipWhitespace();
@@ -111,7 +111,7 @@ namespace CommandParser.Parsers
 
                 if (!StringReader.CanRead() || StringReader.Peek() != '=')
                 {
-                    return new ReadResults(false, CommandError.ExpectedValueForBlockProperty(Block, property));
+                    return ReadResults.Failure(CommandError.ExpectedValueForBlockProperty(Block, property));
                 }
                 StringReader.Skip();
 
@@ -122,7 +122,7 @@ namespace CommandParser.Parsers
                 if (!IsTag && !Resources.Blocks.PropertyContainsValue(Block, property, value))
                 {
                     StringReader.SetCursor(start);
-                    return new ReadResults(false, CommandError.UnknownBlockPropertyValue(Block, property, value).WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.UnknownBlockPropertyValue(Block, property, value).WithContext(StringReader));
                 }
 
                 result.Add(property, value);
@@ -138,11 +138,11 @@ namespace CommandParser.Parsers
 
             if (!StringReader.CanRead() || StringReader.Peek() != ']')
             {
-                return new ReadResults(false, CommandError.UnclosedBlockStateProperties().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.UnclosedBlockStateProperties().WithContext(StringReader));
             }
             StringReader.Skip();
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

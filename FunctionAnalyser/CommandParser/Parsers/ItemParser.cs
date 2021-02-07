@@ -35,12 +35,12 @@ namespace CommandParser.Parsers
             if (UseBedrock)
             {
                 result = new Item(item, null, isTag);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             if (!isTag && !Resources.Items.Contains(item))
             {
-                return new ReadResults(false, CommandError.UnknownItem(item));
+                return ReadResults.Failure(CommandError.UnknownItem(item));
             }
 
             if (StringReader.CanRead() && StringReader.Peek() == '{')
@@ -51,7 +51,7 @@ namespace CommandParser.Parsers
             }
 
             result = new Item(item, null, isTag);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private ReadResults ReadTag(out bool isTag)
@@ -59,11 +59,11 @@ namespace CommandParser.Parsers
             isTag = false;
             if (StringReader.CanRead() && StringReader.Peek() == '#')
             {
-                if (!ForTesting) return new ReadResults(false, CommandError.ItemTagsNotAllowed().WithContext(StringReader));
+                if (!ForTesting) return ReadResults.Failure(CommandError.ItemTagsNotAllowed().WithContext(StringReader));
                 isTag = true;
                 StringReader.Skip();
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

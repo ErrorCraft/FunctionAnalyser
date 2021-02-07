@@ -29,10 +29,10 @@ namespace CommandParser.Arguments
                 if (!readResults.Successful) return readResults;
                 if (!Multiple && entitySelector.MaxResults > 1)
                 {
-                    return new ReadResults(false, CommandError.SelectorTooManyEntities());
+                    return ReadResults.Failure(CommandError.SelectorTooManyEntities());
                 }
                 result = new ScoreHolder(null, entitySelector);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             if (UseBedrock)
@@ -41,7 +41,7 @@ namespace CommandParser.Arguments
                 if (!readResults.Successful) return readResults;
 
                 result = new ScoreHolder(name, null);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             } else
             {
                 int start = reader.GetCursor();
@@ -52,7 +52,7 @@ namespace CommandParser.Arguments
                 string name = reader.GetString()[start..reader.GetCursor()];
 
                 result = new ScoreHolder(name, null);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
         }
     }

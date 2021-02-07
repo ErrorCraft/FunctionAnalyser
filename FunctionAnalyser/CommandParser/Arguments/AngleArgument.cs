@@ -15,9 +15,9 @@ namespace CommandParser.Arguments
             if (float.IsNaN(result.Value) || float.IsInfinity(result.Value))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.InvalidAngle().WithContext(reader));
+                return ReadResults.Failure(CommandError.InvalidAngle().WithContext(reader));
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

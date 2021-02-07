@@ -35,19 +35,19 @@ namespace CommandParser.Arguments
                 reader.SetCursor(start);
                 if (PlayersOnly)
                 {
-                    return new ReadResults(false, CommandError.SelectorTooManyPlayers().WithContext(reader));
+                    return ReadResults.Failure(CommandError.SelectorTooManyPlayers().WithContext(reader));
                 } else
                 {
-                    return new ReadResults(false, CommandError.SelectorTooManyEntities().WithContext(reader));
+                    return ReadResults.Failure(CommandError.SelectorTooManyEntities().WithContext(reader));
                 }
             }
             if (result.IncludesEntities && PlayersOnly && !result.IsSelf)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.SelectorPlayersOnly().WithContext(reader));
+                return ReadResults.Failure(CommandError.SelectorPlayersOnly().WithContext(reader));
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

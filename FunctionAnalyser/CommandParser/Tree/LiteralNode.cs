@@ -27,9 +27,9 @@ namespace CommandParser.Tree
                 ParsedArgument<Literal> parsed = new ParsedArgument<Literal>(new Literal(reader.GetString()[start..end]), builder.InRoot);
                 builder.AddArgument(parsed);
                 builder.EncompassRange(new Range(start, end));
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
-            return new ReadResults(false, CommandError.ExpectedLiteral(Literal).WithContext(reader));
+            return ReadResults.Failure(CommandError.ExpectedLiteral(Literal).WithContext(reader));
         }
 
         private int Parse(IStringReader reader)

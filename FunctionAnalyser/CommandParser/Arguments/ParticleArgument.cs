@@ -18,7 +18,7 @@ namespace CommandParser.Arguments
 
             if (!resources.Particles.TryGetNodes(particle, out Dictionary<string, Node> nodes))
             {
-                return new ReadResults(false, CommandError.UnknownParticle(particle));
+                return ReadResults.Failure(CommandError.UnknownParticle(particle));
             }
 
             Dictionary<string, ParsedArgument> arguments = new Dictionary<string, ParsedArgument>();
@@ -36,7 +36,7 @@ namespace CommandParser.Arguments
             }
 
             result = new Particle(particle, arguments);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

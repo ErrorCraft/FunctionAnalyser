@@ -1,7 +1,7 @@
 ﻿using CommandParser.Parsers.NbtParser;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
-using System;
+
 
 namespace CommandParser.Arguments
 {
@@ -29,7 +29,7 @@ namespace CommandParser.Arguments
                 if (!readResults.Successful) return readResults;
             }
             result = new NbtPath(reader.GetString()[start..reader.GetCursor()]);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static ReadResults ReadNode(IStringReader reader, bool isRoot)
@@ -40,20 +40,20 @@ namespace CommandParser.Arguments
                 case '{':
                     if (!isRoot)
                     {
-                        return new ReadResults(false, CommandError.InvalidNbtPath().WithContext(reader));
+                        return ReadResults.Failure(CommandError.InvalidNbtPath().WithContext(reader));
                     }
                     return NbtReader.ReadCompound(reader, out _);
                 case '[':
                     reader.Skip();
                     if (!reader.CanRead())
                     {
-                        return new ReadResults(false, CommandError.ExpectedInteger().WithContext(reader));
+                        return ReadResults.Failure(CommandError.ExpectedInteger().WithContext(reader));
                     }
                     char c = reader.Peek();
                     if (c == ']')
                     {
                         reader.Skip();
-                        return new ReadResults(true, null);
+                        return ReadResults.Success();
                     }
                     if (c == '{')
                     {
@@ -81,7 +81,7 @@ namespace CommandParser.Arguments
             {
                 return NbtReader.ReadCompound(reader, out _);
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static ReadResults ReadUnquotedName(IStringReader reader)
@@ -93,10 +93,10 @@ namespace CommandParser.Arguments
             }
             if (reader.GetCursor() == start)
             {
-                return new ReadResults(false, CommandError.InvalidNbtPath().WithContext(reader));
+                return ReadResults.Failure(CommandError.InvalidNbtPath().WithContext(reader));
             } else
             {
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
         }
 

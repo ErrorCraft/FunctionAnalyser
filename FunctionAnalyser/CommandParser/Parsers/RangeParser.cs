@@ -19,7 +19,7 @@ namespace CommandParser.Parsers
             result = default;
             if (!StringReader.CanRead())
             {
-                return new ReadResults(false, CommandError.ExpectedValueOrRange().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.ExpectedValueOrRange().WithContext(StringReader));
             }
 
             int start = StringReader.GetCursor();
@@ -38,7 +38,7 @@ namespace CommandParser.Parsers
 
             if (left == null && right == null)
             {
-                return new ReadResults(false, CommandError.ExpectedValueOrRange().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.ExpectedValueOrRange().WithContext(StringReader));
             }
 
             if (left == null) left = minimum;
@@ -47,11 +47,11 @@ namespace CommandParser.Parsers
             if (!loopable && ((T)left).CompareTo((T)right) > 0)
             {
                 StringReader.SetCursor(start);
-                return new ReadResults(false, CommandError.RangeMinBiggerThanMax().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.RangeMinBiggerThanMax().WithContext(StringReader));
             }
 
             result = new Range<T>((T)left, (T)right);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadNumber(Converter<string> function, Func<string, CommandError> invalidNumberErrorProvider, out T? result)
@@ -68,15 +68,15 @@ namespace CommandParser.Parsers
             if (string.IsNullOrEmpty(number))
             {
                 result = null;
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             } else if (function.Invoke(number, out T actualResult))
             {
                 result = actualResult;
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             StringReader.SetCursor(start);
-            return new ReadResults(false, invalidNumberErrorProvider.Invoke(number).WithContext(StringReader));
+            return ReadResults.Failure(invalidNumberErrorProvider.Invoke(number).WithContext(StringReader));
         }
 
         private static bool IsAllowedInput(IStringReader reader)

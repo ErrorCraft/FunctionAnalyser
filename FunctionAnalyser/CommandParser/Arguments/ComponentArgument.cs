@@ -11,7 +11,7 @@ namespace CommandParser.Arguments
         public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Component result)
         {
             result = default;
-            if (!reader.CanRead()) return new ReadResults(false, CommandError.IncorrectArgument().WithContext(reader));
+            if (!reader.CanRead()) return ReadResults.Failure(CommandError.IncorrectArgument().WithContext(reader));
             int start = reader.GetCursor();
 
             ReadResults readResults = new JsonReader(reader).ReadAny(out IJsonArgument json);

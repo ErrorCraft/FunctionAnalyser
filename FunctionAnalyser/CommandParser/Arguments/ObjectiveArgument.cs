@@ -21,10 +21,10 @@ namespace CommandParser.Arguments
             if (!readResults.Successful) return readResults;
             if (objective.Length > 16)
             {
-                return new ReadResults(false, CommandError.ObjectiveNameTooLong());
+                return ReadResults.Failure(CommandError.ObjectiveNameTooLong());
             }
             result = new Objective(objective);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

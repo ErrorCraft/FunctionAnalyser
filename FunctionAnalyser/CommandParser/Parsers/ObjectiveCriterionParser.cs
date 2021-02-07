@@ -28,16 +28,16 @@ namespace CommandParser.Parsers
                 if (ReadNamespacedCriterion(criterion))
                 {
                     result = new ObjectiveCriterion(criterion);
-                    return new ReadResults(true, null);
+                    return ReadResults.Success();
                 }
             } else if (ReadNormalCriterion(criterion))
             {
                 result = new ObjectiveCriterion(criterion);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             result = default;
-            return new ReadResults(false, CommandError.UnknownCriterion(criterion));
+            return ReadResults.Failure(CommandError.UnknownCriterion(criterion));
         }
 
         private bool ReadNormalCriterion(string input)

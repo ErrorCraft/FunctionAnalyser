@@ -33,15 +33,15 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
                 } else if (!child.Value.Optional && !MatchFirst)
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, ComponentCommandError.IncompleteComponent(key, this).WithContext(reader));
+                    return ReadResults.Failure(ComponentCommandError.IncompleteComponent(key, this).WithContext(reader));
                 }
             }
             if (MatchFirst)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.UnknownComponent(obj).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.UnknownComponent(obj).WithContext(reader));
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public string StringifyChildrenKeys()

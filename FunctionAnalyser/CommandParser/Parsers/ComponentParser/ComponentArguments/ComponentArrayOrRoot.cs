@@ -19,7 +19,7 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
                 return componentRoot.Validate(obj, key, componentReader, components, reader, start, resources);
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

@@ -12,9 +12,9 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (obj.GetChild(key) is not JsonNumber)
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.Number, obj.GetChild(key).GetArgumentType()).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.InvalidComponent(key, JsonArgumentType.Number, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

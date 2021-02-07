@@ -29,7 +29,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -42,7 +42,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -65,7 +65,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec2CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec2CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -88,7 +88,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -101,7 +101,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -124,7 +124,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec2CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec2CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }

@@ -17,11 +17,11 @@ namespace CommandParser.Parsers.Coordinates
             result = default;
             if (!StringReader.CanRead())
             {
-                return new ReadResults(false, CommandError.ExpectedAngle().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.ExpectedAngle().WithContext(StringReader));
             }
             if (StringReader.Peek() == '^')
             {
-                return new ReadResults(false, CommandError.MixedCoordinateType().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
 
             bool isRelative = IsRelative();
@@ -29,7 +29,7 @@ namespace CommandParser.Parsers.Coordinates
             if (StringReader.AtEndOfArgument())
             {
                 result = new Angle(0.0f, isRelative);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             ReadResults readResults = StringReader.ReadFloat(out float value);

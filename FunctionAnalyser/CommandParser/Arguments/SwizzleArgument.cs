@@ -25,11 +25,11 @@ namespace CommandParser.Arguments
                 if (!Characters.Contains(c) || result.Contains(c))
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, CommandError.InvalidSwizzle(Characters).WithContext(reader));
+                    return ReadResults.Failure(CommandError.InvalidSwizzle(Characters).WithContext(reader));
                 }
                 result.Add(c);
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

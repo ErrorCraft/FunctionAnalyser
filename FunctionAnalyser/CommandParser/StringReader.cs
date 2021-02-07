@@ -124,16 +124,16 @@ namespace CommandParser
             if (string.IsNullOrEmpty(number))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.ExpectedInteger().WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedInteger().WithContext(this));
             }
 
             if (!int.TryParse(number, NumberStylesInteger, NumberFormatInfo, out value))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.InvalidInteger(number).WithContext(this));
+                return ReadResults.Failure(CommandError.InvalidInteger(number).WithContext(this));
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadLong(out long value)
@@ -148,16 +148,16 @@ namespace CommandParser
             if (string.IsNullOrEmpty(number))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.ExpectedLong().WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedLong().WithContext(this));
             }
 
             if (!long.TryParse(number, NumberStylesInteger, NumberFormatInfo, out value))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.InvalidLong(number).WithContext(this));
+                return ReadResults.Failure(CommandError.InvalidLong(number).WithContext(this));
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadFloat(out float value)
@@ -172,16 +172,16 @@ namespace CommandParser
             if (string.IsNullOrEmpty(number))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.ExpectedFloat().WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedFloat().WithContext(this));
             }
 
             if (!float.TryParse(number, NumberStylesFloating, NumberFormatInfo, out value))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.InvalidFloat(number).WithContext(this));
+                return ReadResults.Failure(CommandError.InvalidFloat(number).WithContext(this));
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadDouble(out double value)
@@ -196,16 +196,16 @@ namespace CommandParser
             if (string.IsNullOrEmpty(number))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.ExpectedDouble().WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedDouble().WithContext(this));
             }
 
             if (!double.TryParse(number, NumberStylesFloating, NumberFormatInfo, out value))
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.InvalidDouble(number).WithContext(this));
+                return ReadResults.Failure(CommandError.InvalidDouble(number).WithContext(this));
             }
 
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadBoolean(out bool result)
@@ -220,23 +220,23 @@ namespace CommandParser
             }
             if (string.IsNullOrEmpty(s))
             {
-                return new ReadResults(false, CommandError.ExpectedBoolean().WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedBoolean().WithContext(this));
             }
 
             if ("true".Equals(s))
             {
                 result = true;
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
             else if ("false".Equals(s))
             {
                 result = false;
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
             else
             {
                 Cursor = start;
-                return new ReadResults(false, CommandError.InvalidBoolean(s).WithContext(this));
+                return ReadResults.Failure(CommandError.InvalidBoolean(s).WithContext(this));
             }
         }
 
@@ -245,7 +245,7 @@ namespace CommandParser
             if (!CanRead())
             {
                 result = "";
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             char next = Peek();
@@ -265,7 +265,7 @@ namespace CommandParser
                 Skip();
             }
             result = Command[start..Cursor];
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadQuotedString(out string result)
@@ -274,13 +274,13 @@ namespace CommandParser
             if (!CanRead())
             {
                 result = "";
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             char next = Peek();
             if (!IsQuotedStringStart(next))
             {
-                return new ReadResults(false, CommandError.ExpectedStartOfQuote().WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedStartOfQuote().WithContext(this));
             }
 
             Skip();
@@ -305,7 +305,7 @@ namespace CommandParser
                     else
                     {
                         Cursor--;
-                        return new ReadResults(false, CommandError.InvalidEscapeSequence(c).WithContext(this));
+                        return ReadResults.Failure(CommandError.InvalidEscapeSequence(c).WithContext(this));
                     }
                 }
                 else if (c == '\\')
@@ -314,7 +314,7 @@ namespace CommandParser
                 }
                 else if (c == terminator)
                 {
-                    return new ReadResults(true, null);
+                    return ReadResults.Success();
                 }
                 else
                 {
@@ -322,17 +322,17 @@ namespace CommandParser
                 }
             }
 
-            return new ReadResults(false, CommandError.ExpectedEndOfQuote().WithContext(this));
+            return ReadResults.Failure(CommandError.ExpectedEndOfQuote().WithContext(this));
         }
 
         public ReadResults Expect(char c)
         {
             if (!CanRead() || Peek() != c)
             {
-                return new ReadResults(false, CommandError.ExpectedCharacter(c).WithContext(this));
+                return ReadResults.Failure(CommandError.ExpectedCharacter(c).WithContext(this));
             }
             Skip();
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static bool IsWhitespace(char c)

@@ -26,10 +26,10 @@ namespace CommandParser.Parsers
                 if (contents.Read(slot.Substring(values[0].Length), Resources))
                 {
                     result = new ScoreboardSlot(slot);
-                    return new ReadResults(true, null);
+                    return ReadResults.Success();
                 }
             }
-            return new ReadResults(false, CommandError.UnknownDisplaySlot(slot));
+            return ReadResults.Failure(CommandError.UnknownDisplaySlot(slot));
         }
     }
 }

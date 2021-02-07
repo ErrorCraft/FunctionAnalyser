@@ -14,11 +14,11 @@ namespace CommandParser.Arguments
 
             if (!resources.StructureRotations.Contains(structureRotation))
             {
-                return new ReadResults(false, CommandError.UnknownStructureRotation(structureRotation));
+                return ReadResults.Failure(CommandError.UnknownStructureRotation(structureRotation));
             }
 
             result = new StructureRotation(structureRotation);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private static bool IsUnquotedStringPart(char c)

@@ -19,11 +19,11 @@ namespace CommandParser.Parsers.Coordinates
             result = default;
             if (!StringReader.CanRead())
             {
-                return new ReadResults(false, CommandError.ExpectedBlockPosition().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.ExpectedBlockPosition().WithContext(StringReader));
             }
             if (StringReader.Peek() == '^')
             {
-                return new ReadResults(false, CommandError.MixedCoordinateType().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
 
             bool isRelative = IsRelative();
@@ -34,7 +34,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (UseBedrock && !IsNumberPart(StringReader.Peek()))
                 {
                     result = new WorldCoordinate(value, isRelative);
-                    return new ReadResults(true, null);
+                    return ReadResults.Success();
                 }
                 
                 ReadResults readResults;
@@ -51,7 +51,7 @@ namespace CommandParser.Parsers.Coordinates
             }
 
             result = new WorldCoordinate(value, isRelative);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadDouble(out WorldCoordinate result)
@@ -59,11 +59,11 @@ namespace CommandParser.Parsers.Coordinates
             result = default;
             if (!StringReader.CanRead())
             {
-                return new ReadResults(false, CommandError.ExpectedCoordinate().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.ExpectedCoordinate().WithContext(StringReader));
             }
             if (StringReader.Peek() == '^')
             {
-                return new ReadResults(false, CommandError.MixedCoordinateType().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
 
             bool isRelative = IsRelative();
@@ -72,7 +72,7 @@ namespace CommandParser.Parsers.Coordinates
             if (StringReader.AtEndOfArgument() || (UseBedrock && !IsNumberPart(StringReader.Peek())))
             {
                 result = new WorldCoordinate(isRelative ? 0.0d : 0.5d, isRelative);
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             }
 
             ReadResults readResults = StringReader.ReadDouble(out double value);
@@ -82,7 +82,7 @@ namespace CommandParser.Parsers.Coordinates
             if (!isRelative && !number.Contains('.')) value += 0.5d;
 
             result = new WorldCoordinate(value, isRelative);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         private bool IsRelative()

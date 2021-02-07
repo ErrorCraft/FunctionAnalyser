@@ -12,15 +12,15 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (!IsText(obj.GetChild(key)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(key).GetArgumentType()).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
             UuidParser uuidParser = new UuidParser(obj.GetChild(key).ToString());
             if (!uuidParser.Parse(out _))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.InvalidUuid().WithContext(reader));
+                return ReadResults.Failure(CommandError.InvalidUuid().WithContext(reader));
             }
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -41,7 +41,7 @@ namespace CommandParser.Parsers.Coordinates
                 if (!StringReader.AtEndOfArgument())
                 {
                     StringReader.SetCursor(Start);
-                    return new ReadResults(false, CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
+                    return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
                 StringReader.Skip();
             }
@@ -56,17 +56,17 @@ namespace CommandParser.Parsers.Coordinates
             result = default;
             if (!StringReader.CanRead())
             {
-                return new ReadResults(false, CommandError.ExpectedCoordinate().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.ExpectedCoordinate().WithContext(StringReader));
             }
             if (StringReader.Peek() != '^')
             {
-                return new ReadResults(false, CommandError.MixedCoordinateType().WithContext(StringReader));
+                return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
             StringReader.Skip();
             if (StringReader.AtEndOfArgument() || (UseBedrock && !IsNumberPart(StringReader.Peek())))
             {
                 result = 0.0d;
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             } else
             {
                 return StringReader.ReadDouble(out result);

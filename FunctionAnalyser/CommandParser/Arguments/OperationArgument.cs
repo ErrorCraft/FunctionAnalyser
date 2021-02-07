@@ -14,11 +14,11 @@ namespace CommandParser.Arguments
 
             if (!resources.Operations.Contains(operation))
             {
-                return new ReadResults(false, CommandError.InvalidOperation());
+                return ReadResults.Failure(CommandError.InvalidOperation());
             }
 
             result = new Operation(operation);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

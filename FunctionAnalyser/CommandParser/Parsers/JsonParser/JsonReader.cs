@@ -21,7 +21,7 @@ namespace CommandParser.Parsers.JsonParser
             result = new JsonNull();
 
             SkipWhitespace();
-            if (!StringReader.CanRead()) return new ReadResults(true, null);
+            if (!StringReader.CanRead()) return ReadResults.Success();
 
             ReadResults readResults;
             switch (StringReader.Peek())
@@ -47,7 +47,7 @@ namespace CommandParser.Parsers.JsonParser
         {
             result = new JsonObject();
 
-            if (!StringReader.CanRead() || StringReader.Peek() != OBJECT_OPEN_CHARACTER) return new ReadResults(false, JsonCommandError.MalformedJson());
+            if (!StringReader.CanRead() || StringReader.Peek() != OBJECT_OPEN_CHARACTER) return ReadResults.Failure(JsonCommandError.MalformedJson());
             StringReader.Skip();
 
             SkipWhitespace();
@@ -59,7 +59,7 @@ namespace CommandParser.Parsers.JsonParser
                 if (!readResults.Successful) return readResults;
 
                 SkipWhitespace();
-                if (!StringReader.CanRead() || StringReader.Peek() != NAME_VALUE_SEPARATOR) return new ReadResults(false, JsonCommandError.ExpectedNameValueSeparator().WithContext(StringReader));
+                if (!StringReader.CanRead() || StringReader.Peek() != NAME_VALUE_SEPARATOR) return ReadResults.Failure(JsonCommandError.ExpectedNameValueSeparator().WithContext(StringReader));
                 StringReader.Skip();
 
                 SkipWhitespace();
@@ -71,16 +71,16 @@ namespace CommandParser.Parsers.JsonParser
                 if (!StringReader.CanRead() || StringReader.Peek() != ARGUMENT_SEPARATOR) break;
                 StringReader.Skip();
             }
-            if (!StringReader.CanRead() || StringReader.Peek() != OBJECT_CLOSE_CHARACTER) return new ReadResults(false, JsonCommandError.EndOfInput().WithContext(StringReader));
+            if (!StringReader.CanRead() || StringReader.Peek() != OBJECT_CLOSE_CHARACTER) return ReadResults.Failure(JsonCommandError.EndOfInput().WithContext(StringReader));
             StringReader.Skip();
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadArray(out JsonArray result)
         {
             result = new JsonArray();
 
-            if (!StringReader.CanRead() || StringReader.Peek() != ARRAY_OPEN_CHARACTER) return new ReadResults(false, JsonCommandError.MalformedJson());
+            if (!StringReader.CanRead() || StringReader.Peek() != ARRAY_OPEN_CHARACTER) return ReadResults.Failure(JsonCommandError.MalformedJson());
             StringReader.Skip();
 
             SkipWhitespace();
@@ -96,9 +96,9 @@ namespace CommandParser.Parsers.JsonParser
                 if (!StringReader.CanRead() || StringReader.Peek() != ARGUMENT_SEPARATOR) break;
                 StringReader.Skip();
             }
-            if (!StringReader.CanRead() || StringReader.Peek() != ARRAY_CLOSE_CHARACTER) return new ReadResults(false, JsonCommandError.EndOfInput().WithContext(StringReader));
+            if (!StringReader.CanRead() || StringReader.Peek() != ARRAY_CLOSE_CHARACTER) return ReadResults.Failure(JsonCommandError.EndOfInput().WithContext(StringReader));
             StringReader.Skip();
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
 
         public ReadResults ReadString(out JsonString result)
@@ -106,7 +106,7 @@ namespace CommandParser.Parsers.JsonParser
             result = default;
             string actualString = "";
 
-            if (!StringReader.CanRead() || StringReader.Peek() != STRING_CHARACTER) return new ReadResults(false, JsonCommandError.MalformedJson().WithContext(StringReader));
+            if (!StringReader.CanRead() || StringReader.Peek() != STRING_CHARACTER) return ReadResults.Failure(JsonCommandError.MalformedJson().WithContext(StringReader));
             StringReader.Skip();
 
             bool escaped = false;
@@ -117,9 +117,9 @@ namespace CommandParser.Parsers.JsonParser
                 {
                     if (c == UNICODE_CHARACTER)
                     {
-                        if (!StringReader.CanRead(4)) return new ReadResults(false, JsonCommandError.UnterminatedEscapeSequence().WithContext(StringReader));
+                        if (!StringReader.CanRead(4)) return ReadResults.Failure(JsonCommandError.UnterminatedEscapeSequence().WithContext(StringReader));
                         string unicode = StringReader.Read(4);
-                        if (!short.TryParse(unicode, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out _)) return new ReadResults(false, JsonCommandError.InvalidUnicodeCharacter(unicode).WithContext(StringReader));
+                        if (!short.TryParse(unicode, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out _)) return ReadResults.Failure(JsonCommandError.InvalidUnicodeCharacter(unicode).WithContext(StringReader));
                         escaped = false;
                         actualString += c + unicode;
                     } else if (ESCAPABLE_CHARACTERS.Contains(c))
@@ -128,7 +128,7 @@ namespace CommandParser.Parsers.JsonParser
                         actualString += c;
                     } else
                     {
-                        return new ReadResults(false, JsonCommandError.InvalidEscapeSequence().WithContext(StringReader));
+                        return ReadResults.Failure(JsonCommandError.InvalidEscapeSequence().WithContext(StringReader));
                     }
                 } else if (c == ESCAPE_CHARACTER)
                 {
@@ -137,14 +137,14 @@ namespace CommandParser.Parsers.JsonParser
                 } else if (c == STRING_CHARACTER)
                 {
                     result = new JsonString(actualString);
-                    return new ReadResults(true, null);
+                    return ReadResults.Success();
                 } else
                 {
                     actualString += c;
                 }
             }
 
-            return new ReadResults(false, JsonCommandError.UnterminatedString().WithContext(StringReader));
+            return ReadResults.Failure(JsonCommandError.UnterminatedString().WithContext(StringReader));
         }
 
         public ReadResults ReadSpecial(out IJsonArgument result)
@@ -161,8 +161,7 @@ namespace CommandParser.Parsers.JsonParser
                 _ => default
             };
             if (double.TryParse(s, out _)) result = new JsonNumber(s);
-            return result is null ? new ReadResults(false, JsonCommandError.MalformedJson().WithContext(StringReader)) :
-                                    new ReadResults(true, null);
+            return result == null ? ReadResults.Failure(JsonCommandError.MalformedJson().WithContext(StringReader)) : ReadResults.Success();
         }
 
         private void SkipWhitespace()

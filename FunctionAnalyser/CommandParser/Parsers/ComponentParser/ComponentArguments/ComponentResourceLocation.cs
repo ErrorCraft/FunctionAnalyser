@@ -13,16 +13,16 @@ namespace CommandParser.Parsers.ComponentParser.ComponentArguments
             if (!IsText(obj.GetChild(key)))
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(key).GetArgumentType()).WithContext(reader));
+                return ReadResults.Failure(ComponentCommandError.InvalidComponent(key, JsonArgumentType.String, obj.GetChild(key).GetArgumentType()).WithContext(reader));
             }
 
             if (ResourceLocation.TryParse(obj.GetChild(key).ToString(), out _))
             {
-                return new ReadResults(true, null);
+                return ReadResults.Success();
             } else
             {
                 reader.SetCursor(start);
-                return new ReadResults(false, CommandError.InvalidId().WithContext(reader));
+                return ReadResults.Failure(CommandError.InvalidId().WithContext(reader));
             }
         }
     }

@@ -13,7 +13,7 @@ namespace CommandParser.Arguments
 
             if (time < 0.0f)
             {
-                return new ReadResults(false, CommandError.InvalidTickCount());
+                return ReadResults.Failure(CommandError.InvalidTickCount());
             }
 
             if (!reader.AtEndOfArgument())
@@ -24,12 +24,12 @@ namespace CommandParser.Arguments
                     reader.Skip();
                 } else
                 {
-                    return new ReadResults(false, CommandError.InvalidTimeUnit().WithContext(reader));
+                    return ReadResults.Failure(CommandError.InvalidTimeUnit().WithContext(reader));
                 }
             }
 
             result = new Time((int)time);
-            return new ReadResults(true, null);
+            return ReadResults.Success();
         }
     }
 }

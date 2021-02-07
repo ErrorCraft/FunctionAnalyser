@@ -25,13 +25,13 @@ namespace CommandParser.Arguments
                 if (result < Minimum)
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, CommandError.IntegerTooLow(result, Minimum).WithContext(reader));
+                    return ReadResults.Failure(CommandError.IntegerTooLow(result, Minimum).WithContext(reader));
                 }
 
                 if (result > Maximum)
                 {
                     reader.SetCursor(start);
-                    return new ReadResults(false, CommandError.IntegerTooHigh(result, Maximum).WithContext(reader));
+                    return ReadResults.Failure(CommandError.IntegerTooHigh(result, Maximum).WithContext(reader));
                 }
             }
 
