@@ -18,6 +18,8 @@
 			"particles": "java",
 			"scoreboard_slots": "bedrock",
 			"selector_arguments": "bedrock",
+			"structure_mirrors": "bedrock",
+			"structure_rotations": "bedrock",
 			"time_scalars": "java"
 		}
 	},
@@ -28,7 +30,7 @@
 			"blocks": "java-snapshot",
 			"colours": "java",
 			"commands": "java-snapshot",
-			"components": "java-test",
+			"components": "java",
 			"enchantments": "java",
 			"entities": "java-snapshot",
 			"gamemodes": "java",
