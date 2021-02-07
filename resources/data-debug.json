@@ -29,7 +29,7 @@
 			"anchors": "java",
 			"blocks": "java-snapshot",
 			"colours": "java",
-			"commands": "java-snapshot",
+			"commands": "java-test",
 			"components": "java",
 			"enchantments": "java",
 			"entities": "java-snapshot",
