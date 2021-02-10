@@ -2,18 +2,16 @@
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace CommandParser.Minecraft
-{
+namespace CommandParser.Minecraft {
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum GameType
-    {
+    public enum GameType {
         [EnumMember(Value = "survival")]
-        Survival = 0,
+        SURVIVAL = 0,
         [EnumMember(Value = "creative")]
-        Creative = 1,
+        CREATIVE = 1,
         [EnumMember(Value = "adventure")]
-        Adventure = 2,
+        ADVENTURE = 2,
         [EnumMember(Value = "spectator")]
-        Spectator = 3
+        SPECTATOR = 3
     }
 }
