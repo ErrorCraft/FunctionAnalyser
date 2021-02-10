@@ -1,6 +1,8 @@
 ﻿using AdvancedText;
 using CommandParser;
 using CommandParser.Context;
+using CommandParser.Minecraft.Nbt.Path;
+using CommandParser.Minecraft.Nbt.Tags;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using FunctionAnalyser.Builders;
@@ -11,10 +13,8 @@ using System.IO;
 using System.Threading.Tasks;
 using static AdvancedText.Colour;
 
-namespace FunctionAnalyser
-{
-    public class FunctionReader
-    {
+namespace FunctionAnalyser {
+    public class FunctionReader {
         private Dictionary<string, Dispatcher> Versions;
 
         private string BasePath;
@@ -22,36 +22,30 @@ namespace FunctionAnalyser
         private readonly ILogger Logger;
         private FunctionOptions Options;
 
-        public async Task LoadVersions()
-        {
+        public async Task LoadVersions() {
             ResourceBuilder resourceBuilder = new ResourceBuilder(Logger);
             Versions = await resourceBuilder.GetResources();
         }
 
-        public List<VersionName> GetVersionNames()
-        {
+        public List<VersionName> GetVersionNames() {
             List<VersionName> versionNames = new List<VersionName>();
 
-            foreach (KeyValuePair<string, Dispatcher> kvp in Versions)
-            {
+            foreach (KeyValuePair<string, Dispatcher> kvp in Versions) {
                 versionNames.Add(new VersionName(kvp.Key, kvp.Value.GetName()));
             }
 
             return versionNames;
         }
 
-        public FunctionReader(ILogger logger, System.IProgress<FunctionProgress> progress)
-        {
+        public FunctionReader(ILogger logger, System.IProgress<FunctionProgress> progress) {
             Logger = logger;
             Progress = progress;
         }
 
-        public void Analyse(string basePath, string version, FunctionOptions options)
-        {
+        public void Analyse(string basePath, string version, FunctionOptions options) {
             BasePath = basePath;
             Options = options;
-            if (!Directory.Exists(BasePath))
-            {
+            if (!Directory.Exists(BasePath)) {
                 Logger.Log(MessageProvider.FolderDoesNotExist(BasePath));
                 return;
             }
@@ -65,8 +59,7 @@ namespace FunctionAnalyser
             Report(results);
         }
 
-        private FunctionData AnalyseFunctions(string version)
-        {
+        private FunctionData AnalyseFunctions(string version) {
             // Results
             FunctionData results = new FunctionData();
 
@@ -79,8 +72,7 @@ namespace FunctionAnalyser
             Progress.Report(functionProgress);
 
             // Analyse all files
-            for (int i = 0; i < totalFiles; i++)
-            {
+            for (int i = 0; i < totalFiles; i++) {
                 if (!File.Exists(files[i])) continue;
                 FunctionData functionData = AnalyseFunction(files[i], version);
 
@@ -97,8 +89,7 @@ namespace FunctionAnalyser
             return results;
         }
 
-        private FunctionData AnalyseFunction(string path, string version)
-        {
+        private FunctionData AnalyseFunction(string path, string version) {
             // Data to return
             FunctionData functionData = new FunctionData();
 
@@ -108,35 +99,28 @@ namespace FunctionAnalyser
             // Errors
             Dictionary<int, CommandError> errors = new Dictionary<int, CommandError>();
 
-            for (int i = 0; i < lines.Length; i++)
-            {
+            for (int i = 0; i < lines.Length; i++) {
                 string command = lines[i].Trim();
 
-                if (string.IsNullOrEmpty(command))
-                {
+                if (string.IsNullOrEmpty(command)) {
                     // Empty line
                     functionData.EmptyLines.Increase();
                     continue;
-                } else if (command.StartsWith('#'))
-                {
+                } else if (command.StartsWith('#')) {
                     // Comment
                     functionData.Comments.Increase();
                     continue;
-                } else
-                {
+                } else {
                     CommandResults commandResults = Versions[version].Parse(command);
-                    if (commandResults.Successful)
-                    {
+                    if (commandResults.Successful) {
                         functionData.Commands.Increase();
                         // Analyse Arguments
                         bool isFirstArgument = true;
-                        for (int j = 0; j < commandResults.Arguments.Count; j++)
-                        {
+                        for (int j = 0; j < commandResults.Arguments.Count; j++) {
                             AnalyseArgument(commandResults.Arguments[j], functionData, isFirstArgument, false);
                             isFirstArgument = false;
                         }
-                    } else
-                    {
+                    } else {
                         // Error
                         errors.Add(i, commandResults.Error);
                         if (Options.SkipFunctionOnError) break;
@@ -144,21 +128,16 @@ namespace FunctionAnalyser
                 }
             }
 
-            if (errors.Count > 0)
-            {
-                if (Options.ShowCommandErrors)
-                {
+            if (errors.Count > 0) {
+                if (Options.ShowCommandErrors) {
                     functionData.Messages.Add(MessageProvider.ErrorsFound(errors.Count, GetShortFileName(path), Options.SkipFunctionOnError));
-                    foreach (KeyValuePair<int, CommandError> kvp in errors)
-                    {
+                    foreach (KeyValuePair<int, CommandError> kvp in errors) {
                         functionData.Messages.Add(MessageProvider.Error(kvp.Key + 1, kvp.Value));
                     }
                 }
                 if (Options.SkipFunctionOnError) return functionData;
-            } else if (functionData.Commands.GetTotal() == 0)
-            {
-                if (Options.ShowEmptyFunctions)
-                {
+            } else if (functionData.Commands.GetTotal() == 0) {
+                if (Options.ShowEmptyFunctions) {
                     functionData.Messages.Add(MessageProvider.EmptyFunction(GetShortFileName(path)));
                 }
             }
@@ -167,34 +146,26 @@ namespace FunctionAnalyser
             return functionData;
         }
 
-        private static void AnalyseArgument(ParsedArgument argument, FunctionData data, bool firstArgument, bool inSelector)
-        {
+        private static void AnalyseArgument(ParsedArgument argument, FunctionData data, bool firstArgument, bool inSelector) {
             object result = argument.GetResult();
-            if (argument.IsFromRoot())
-            {
+            if (argument.IsFromRoot()) {
                 if (result is Literal literal) data.UsedCommands.Increase(literal.Value, !firstArgument);
-            }
-            else if (result is Function) data.FunctionCalls.Increase();
+            } else if (result is Function) data.FunctionCalls.Increase();
             else if (result is EntitySelector entitySelector) AnalyseSelector(entitySelector, data);
             else if (result is ScoreHolder scoreHolder && scoreHolder.Selector != null) AnalyseSelector(scoreHolder.Selector, data);
-            else if (result is Message message)
-            {
+            else if (result is Message message) {
                 foreach (EntitySelector messageEntitySelector in message.Selectors.Values) AnalyseSelector(messageEntitySelector, data);
-            }
-            else if (result is Predicate) data.PredicateCalls.Increase(inSelector);
+            } else if (result is Predicate) data.PredicateCalls.Increase(inSelector);
             else if (result is NbtPath) data.NbtAccess.Increase(false);
-            else if (result is Nbt && inSelector) data.NbtAccess.Increase(true);
+            else if (result is INbtTag && inSelector) data.NbtAccess.Increase(true);
             else if (result is Storage) data.StorageUsage.Increase();
             else if (result is LootTable) data.LootTableUsage.Increase();
             else if (result is ItemModifier) data.ItemModifierUsage.Increase();
             else if (result is Attribute) data.AttributeUsage.Increase();
         }
 
-        private static void AnalyseSelector(EntitySelector entitySelector, FunctionData data)
-        {
-            // Selector type
-            switch (entitySelector.SelectorType)
-            {
+        private static void AnalyseSelector(EntitySelector entitySelector, FunctionData data) {
+            switch (entitySelector.SelectorType) {
                 case SelectorType.NearestPlayer:
                     data.Selectors.NearestPlayer++;
                     break;
@@ -212,23 +183,18 @@ namespace FunctionAnalyser
                     break;
             }
 
-            // Analyse selector arguments
-            for (int i = 0; i < entitySelector.Arguments.Count; i++)
-            {
+            for (int i = 0; i < entitySelector.Arguments.Count; i++) {
                 AnalyseArgument(entitySelector.Arguments[i], data, false, true);
             }
         }
 
-        private string GetShortFileName(string file)
-        {
+        private string GetShortFileName(string file) {
             return $".{file[BasePath.Length..]}";
         }
 
-        private void Report(FunctionData data)
-        {
+        private void Report(FunctionData data) {
             int totalLines = data.Comments.GetTotal() + data.EmptyLines.GetTotal() + data.Commands.GetTotal();
-            List<TextComponent> components = new List<TextComponent>
-            {
+            List<TextComponent> components = new List<TextComponent> {
                 new TextComponent($"Information:\n").WithColour(BuiltinColours.GREY).WithStyle(false, true),
                 MessageProvider.Result($"Number of functions", data.Functions),
                 MessageProvider.Result($"Number of comments", data.Comments, totalLines),
@@ -236,8 +202,7 @@ namespace FunctionAnalyser
                 MessageProvider.Result($"Number of commands", data.Commands, totalLines)
             };
 
-            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSortType))
-            {
+            foreach (KeyValuePair<string, Command> command in data.UsedCommands.GetSorted(Options.CommandSortType)) {
                 components.Add(MessageProvider.CommandResult(command.Key, command.Value));
             }
 

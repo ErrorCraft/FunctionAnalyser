@@ -1,14 +1,12 @@
 ﻿using CommandParser.Minecraft;
-using CommandParser.Parsers.NbtParser;
-using CommandParser.Parsers.NbtParser.NbtArguments;
+using CommandParser.Minecraft.Nbt;
+using CommandParser.Minecraft.Nbt.Tags;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using System.Collections.Generic;
 
-namespace CommandParser.Parsers
-{
-    public class BlockParser
-    {
+namespace CommandParser.Parsers {
+    public class BlockParser {
         private readonly IStringReader StringReader;
         private readonly bool ForTesting;
         private readonly DispatcherResources Resources;
@@ -17,8 +15,7 @@ namespace CommandParser.Parsers
         private ResourceLocation Block;
         private bool IsTag = false;
 
-        public BlockParser(IStringReader stringReader, bool forTesting, DispatcherResources resources, bool useBedrock)
-        {
+        public BlockParser(IStringReader stringReader, bool forTesting, DispatcherResources resources, bool useBedrock) {
             StringReader = stringReader;
             ForTesting = forTesting;
             Resources = resources;
@@ -28,8 +25,7 @@ namespace CommandParser.Parsers
             IsTag = false;
         }
 
-        public ReadResults Parse(out Block result)
-        {
+        public ReadResults Parse(out Block result) {
             result = default;
 
             ReadResults readResults = ReadTag();
@@ -39,28 +35,24 @@ namespace CommandParser.Parsers
             if (!readResults.Successful) return readResults;
 
             // Temporary
-            if (UseBedrock)
-            {
+            if (UseBedrock) {
                 result = new Block(Block, null, null, IsTag);
                 return ReadResults.Success();
             }
 
-            if (!IsTag && !Resources.Blocks.ContainsBlock(Block))
-            {
+            if (!IsTag && !Resources.Blocks.ContainsBlock(Block)) {
                 return ReadResults.Failure(CommandError.UnknownBlock(Block));
             }
 
             Dictionary<string, string> blockStates = null;
-            if (StringReader.CanRead() && StringReader.Peek() == '[')
-            {
+            if (StringReader.CanRead() && StringReader.Peek() == '[') {
                 readResults = ReadBlockStates(out blockStates);
                 if (!readResults.Successful) return readResults;
             }
 
-            NbtCompound nbt = null;
-            if (StringReader.CanRead() && StringReader.Peek() == '{')
-            {
-                readResults = NbtReader.ReadCompound(StringReader, out nbt);
+            INbtTag nbt = null;
+            if (StringReader.CanRead() && StringReader.Peek() == '{') {
+                readResults = new NbtParser(StringReader).ReadCompound(out nbt);
                 if (!readResults.Successful) return readResults;
             }
 
@@ -68,10 +60,8 @@ namespace CommandParser.Parsers
             return ReadResults.Success();
         }
 
-        private ReadResults ReadTag()
-        {
-            if (StringReader.CanRead() && StringReader.Peek() == '#')
-            {
+        private ReadResults ReadTag() {
+            if (StringReader.CanRead() && StringReader.Peek() == '#') {
                 if (!ForTesting) return ReadResults.Failure(CommandError.BlockTagsNotAllowed().WithContext(StringReader));
                 IsTag = true;
                 StringReader.Skip();
@@ -79,29 +69,25 @@ namespace CommandParser.Parsers
             return ReadResults.Success();
         }
 
-        private ReadResults ReadBlockStates(out Dictionary<string, string> result)
-        {
+        private ReadResults ReadBlockStates(out Dictionary<string, string> result) {
             result = new Dictionary<string, string>();
 
             ReadResults readResults = StringReader.Expect('[');
             if (!readResults.Successful) return readResults;
             StringReader.SkipWhitespace();
 
-            while (StringReader.CanRead() && StringReader.Peek() != ']')
-            {
+            while (StringReader.CanRead() && StringReader.Peek() != ']') {
                 StringReader.SkipWhitespace();
                 int start = StringReader.GetCursor();
 
                 readResults = StringReader.ReadString(out string property);
                 if (!readResults.Successful) return readResults;
-                if (result.ContainsKey(property))
-                {
+                if (result.ContainsKey(property)) {
                     StringReader.SetCursor(start);
                     return ReadResults.Failure(CommandError.DuplicateBlockProperty(Block, property).WithContext(StringReader));
                 }
 
-                if (!IsTag && !Resources.Blocks.ContainsProperty(Block, property))
-                {
+                if (!IsTag && !Resources.Blocks.ContainsProperty(Block, property)) {
                     StringReader.SetCursor(start);
                     return ReadResults.Failure(CommandError.UnknownBlockProperty(Block, property).WithContext(StringReader));
                 }
@@ -109,8 +95,7 @@ namespace CommandParser.Parsers
                 StringReader.SkipWhitespace();
                 start = StringReader.GetCursor();
 
-                if (!StringReader.CanRead() || StringReader.Peek() != '=')
-                {
+                if (!StringReader.CanRead() || StringReader.Peek() != '=') {
                     return ReadResults.Failure(CommandError.ExpectedValueForBlockProperty(Block, property));
                 }
                 StringReader.Skip();
@@ -119,8 +104,7 @@ namespace CommandParser.Parsers
                 readResults = StringReader.ReadString(out string value);
                 if (!readResults.Successful) return readResults;
 
-                if (!IsTag && !Resources.Blocks.PropertyContainsValue(Block, property, value))
-                {
+                if (!IsTag && !Resources.Blocks.PropertyContainsValue(Block, property, value)) {
                     StringReader.SetCursor(start);
                     return ReadResults.Failure(CommandError.UnknownBlockPropertyValue(Block, property, value).WithContext(StringReader));
                 }
@@ -128,16 +112,14 @@ namespace CommandParser.Parsers
                 result.Add(property, value);
 
                 StringReader.SkipWhitespace();
-                if (StringReader.CanRead() && StringReader.Peek() == ',')
-                {
+                if (StringReader.CanRead() && StringReader.Peek() == ',') {
                     StringReader.Skip();
                     continue;
                 }
                 break;
             }
 
-            if (!StringReader.CanRead() || StringReader.Peek() != ']')
-            {
+            if (!StringReader.CanRead() || StringReader.Peek() != ']') {
                 return ReadResults.Failure(CommandError.UnclosedBlockStateProperties().WithContext(StringReader));
             }
             StringReader.Skip();

@@ -1,17 +1,11 @@
-﻿using CommandParser.Parsers.NbtParser;
-using CommandParser.Parsers.NbtParser.NbtArguments;
+﻿using CommandParser.Minecraft.Nbt;
+using CommandParser.Minecraft.Nbt.Tags;
 using CommandParser.Results;
-using CommandParser.Results.Arguments;
 
-namespace CommandParser.Arguments
-{
-    public class NbtTagArgument : IArgument<Nbt>
-    {
-        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Nbt result)
-        {
-            ReadResults readResults = NbtReader.ReadValue(reader, out INbtArgument nbtResult);
-            result = new Nbt(nbtResult);
-            return readResults;
+namespace CommandParser.Arguments {
+    public class NbtTagArgument : IArgument<INbtTag> {
+        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out INbtTag result) {
+            return new NbtParser(reader).ReadValue(out result);
         }
     }
 }

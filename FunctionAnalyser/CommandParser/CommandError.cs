@@ -1,34 +1,28 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using CommandParser.Parsers.NbtParser.NbtArguments;
 using static CommandParser.Providers.NumberProvider;
 using CommandParser.Minecraft;
+using CommandParser.Minecraft.Nbt.Tags;
 
-namespace CommandParser
-{
-    public class CommandError
-    {
+namespace CommandParser {
+    public class CommandError {
         private string Message;
 
-        public CommandError(string message)
-        {
+        public CommandError(string message) {
             Message = message;
         }
 
-        public string GetMessage()
-        {
+        public string GetMessage() {
             return Message;
         }
 
-        public CommandError WithContext(IStringReader reader)
-        {
+        public CommandError WithContext(IStringReader reader) {
             Message += GetContext(reader);
             return this;
         }
 
-        private static string GetContext(IStringReader reader)
-        {
+        private static string GetContext(IStringReader reader) {
             int minimum = Math.Max(reader.GetCursor() - 10, 0);
             int maximum = Math.Min(reader.GetCursor(), reader.GetLength());
 
@@ -39,8 +33,7 @@ namespace CommandParser
             return builder.ToString();
         }
 
-        private static string QuoteCharacter(char character)
-        {
+        private static string QuoteCharacter(char character) {
             if (character == '\'') return $"\"{character}\"";
             else return $"'{character}'";
         }
@@ -96,7 +89,7 @@ namespace CommandParser
         public static CommandError ExpectedKey() => new CommandError($"Expected key");
         public static CommandError ExpectedValue() => new CommandError($"Expected value");
         public static CommandError InvalidArrayType(char type) => new CommandError($"Invalid array type {QuoteCharacter(type)}");
-        public static CommandError NbtCannotInsert(INbtArgument value, INbtArgument into) => new CommandError($"Cannot insert {value.GetName()} into {into.GetName()}");
+        public static CommandError NbtCannotInsert(INbtTag value, INbtTag into) => new CommandError($"Cannot insert {value.GetName()} into {into.GetName()}");
         public static CommandError InvalidNbtPath() => new CommandError($"Invalid NBT path element");
         public static CommandError ExpectedValueOrRange() => new CommandError($"Expected value or range of values");
         public static CommandError RangeMinBiggerThanMax() => new CommandError($"Min cannot be bigger than max");
