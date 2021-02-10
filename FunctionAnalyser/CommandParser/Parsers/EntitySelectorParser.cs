@@ -4,18 +4,16 @@ using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using System;
 using System.Collections.Generic;
+using Utilities;
 
-namespace CommandParser.Parsers
-{
-    public class EntitySelectorParser
-    {
+namespace CommandParser.Parsers {
+    public class EntitySelectorParser {
         private readonly IStringReader Reader;
         private readonly DispatcherResources Resources;
         private readonly int Start;
         private readonly bool UseBedrock;
 
-        public IStringReader GetReader()
-        {
+        public IStringReader GetReader() {
             return Reader;
         }
 
@@ -28,73 +26,57 @@ namespace CommandParser.Parsers
         private bool TypeLimited;
         private bool Sorted;
 
-        public void SetMaxResults(int maxResults)
-        {
+        public void SetMaxResults(int maxResults) {
             MaxResults = maxResults;
         }
 
-        public void SetIncludesEntities(bool includesEntities)
-        {
+        public void SetIncludesEntities(bool includesEntities) {
             IncludesEntities = includesEntities;
         }
 
-        public bool IsTypeLimited()
-        {
+        public bool IsTypeLimited() {
             return TypeLimited;
         }
 
-        public bool IsSorted()
-        {
+        public bool IsSorted() {
             return Sorted;
         }
 
 
-        public EntitySelectorParser(IStringReader reader, DispatcherResources resources, bool useBedrock)
-        {
+        public EntitySelectorParser(IStringReader reader, DispatcherResources resources, bool useBedrock) {
             Reader = reader;
             Start = reader.GetCursor();
             Resources = resources;
             UseBedrock = useBedrock;
         }
 
-        public ReadResults Parse(out EntitySelector result)
-        {
+        public ReadResults Parse(out EntitySelector result) {
             result = default;
             ReadResults readResults;
-            if (Reader.CanRead() && Reader.Peek() == '@')
-            {
+            if (Reader.CanRead() && Reader.Peek() == '@') {
                 Reader.Skip();
                 readResults = ParseSelector();
-            }
-            else
-            {
+            } else {
                 readResults = ParseNameOrUuid();
             }
 
-            if (readResults.Successful)
-            {
+            if (readResults.Successful) {
                 result = GetSelector();
             }
 
             return readResults;
         }
 
-        private ReadResults ParseNameOrUuid()
-        {
+        private ReadResults ParseNameOrUuid() {
             ReadResults readResults = Reader.ReadString(out string s);
-            if (!readResults.Successful)
-            {
+            if (!readResults.Successful) {
                 return readResults;
             }
 
-            UuidParser uuidParser = new UuidParser(s);
-            if (uuidParser.Parse(out _))
-            {
+            if (UUID.TryParse(s, out _)) {
                 IncludesEntities = true;
-            } else
-            {
-                if (string.IsNullOrEmpty(s) || s.Length > 16)
-                {
+            } else {
+                if (string.IsNullOrEmpty(s) || s.Length > 16) {
                     Reader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.InvalidNameOrUuid().WithContext(Reader));
                 }
@@ -106,17 +88,14 @@ namespace CommandParser.Parsers
             return ReadResults.Success();
         }
 
-        private ReadResults ParseSelector()
-        {
-            if (!Reader.CanRead())
-            {
+        private ReadResults ParseSelector() {
+            if (!Reader.CanRead()) {
                 Reader.SetCursor(Start);
                 return ReadResults.Failure(CommandError.MissingSelectorType().WithContext(Reader));
             }
             int currentPosition = Reader.GetCursor();
             char c = Reader.Read();
-            switch (c)
-            {
+            switch (c) {
                 case 'p':
                     MaxResults = 1;
                     IncludesEntities = false;
@@ -161,70 +140,58 @@ namespace CommandParser.Parsers
                     Reader.SetCursor(currentPosition);
                     return ReadResults.Failure(CommandError.UnknownSelectorType(c).WithContext(Reader));
             }
-            if (UseBedrock)
-            {
+            if (UseBedrock) {
                 currentPosition = Reader.GetCursor();
                 Reader.SkipWhitespace();
                 if (!Reader.CanRead() || Reader.Peek() != '[') Reader.SetCursor(currentPosition);
             }
-            if (Reader.CanRead() && Reader.Peek() == '[')
-            {
+            if (Reader.CanRead() && Reader.Peek() == '[') {
                 Reader.Skip();
                 ReadResults readResults = ParseOptions();
-                if (!readResults.Successful)
-                {
+                if (!readResults.Successful) {
                     return readResults;
                 }
             }
             return ReadResults.Success();
         }
 
-        private bool MayApply(string name, EntitySelectorOption option)
-        {
-            if (AppliedOptions.TryGetValue(name, out bool inverted))
-            {
+        private bool MayApply(string name, EntitySelectorOption option) {
+            if (AppliedOptions.TryGetValue(name, out bool inverted)) {
                 ReapplicationType reapplicationType = option.GetReapplicationType();
-                return reapplicationType switch
-                {
+                return reapplicationType switch {
                     ReapplicationType.Never => false,
                     ReapplicationType.Always => true,
                     ReapplicationType.OnlyIfInverted => inverted && WillBeInverted(),
                     _ => throw new InvalidOperationException()
                 };
-            } else
-            {
+            } else {
                 return true;
             }
         }
 
-        private ReadResults ParseOptions()
-        {
+        private ReadResults ParseOptions() {
             Reader.SkipWhitespace();
 
             ReadResults readResults;
 
-            while (Reader.CanRead() && Reader.Peek() != ']')
-            {
+            while (Reader.CanRead() && Reader.Peek() != ']') {
                 Reader.SkipWhitespace();
                 int start = Reader.GetCursor();
                 readResults = Reader.ReadString(out string name);
                 if (!readResults.Successful) return readResults;
-                if (!Resources.SelectorArguments.TryGet(name, out EntitySelectorOption option))
-                {
+                if (!Resources.SelectorArguments.TryGet(name, out EntitySelectorOption option)) {
                     Reader.SetCursor(start);
                     return ReadResults.Failure(CommandError.UnknownSelectorOption(name).WithContext(Reader));
                 }
 
                 Reader.SkipWhitespace();
-                if (!Reader.CanRead() || Reader.Peek() != '=')
-                {
+                if (!Reader.CanRead() || Reader.Peek() != '=') {
                     return ReadResults.Failure(CommandError.ExpectedValueForSelectorOption(name).WithContext(Reader));
                 }
                 Reader.Skip();
                 Reader.SkipWhitespace();
 
-                if (!MayApply(name, option))
-                {
+                if (!MayApply(name, option)) {
                     Reader.SetCursor(start);
                     return ReadResults.Failure(CommandError.InapplicableOption(name).WithContext(Reader));
                 }
@@ -234,36 +201,30 @@ namespace CommandParser.Parsers
 
                 Reader.SkipWhitespace();
                 if (!Reader.CanRead()) break;
-                if (Reader.Peek() == ',')
-                {
+                if (Reader.Peek() == ',') {
                     Reader.Skip();
                     continue;
                 }
-                if (Reader.Peek() == ']')
-                {
+                if (Reader.Peek() == ']') {
                     Reader.Skip();
                     return ReadResults.Success();
                 }
                 break;
             }
-            if (Reader.CanRead() && Reader.Peek() == ']')
-            {
+            if (Reader.CanRead() && Reader.Peek() == ']') {
                 Reader.Skip();
                 return ReadResults.Success();
             }
             return ReadResults.Failure(CommandError.SelectorExpectedEndOfOptions().WithContext(Reader));
         }
 
-        private bool WillBeInverted()
-        {
+        private bool WillBeInverted() {
             return Reader.CanRead() && Reader.Peek() == '!';
         }
 
-        public bool ShouldInvertValue()
-        {
+        public bool ShouldInvertValue() {
             Reader.SkipWhitespace();
-            if (WillBeInverted())
-            {
+            if (WillBeInverted()) {
                 Reader.Skip();
                 Reader.SkipWhitespace();
                 return true;
@@ -271,21 +232,17 @@ namespace CommandParser.Parsers
             return false;
         }
 
-        public void Apply(string name, bool wasInverted)
-        {
-            if (!AppliedOptions.ContainsKey(name))
-            {
+        public void Apply(string name, bool wasInverted) {
+            if (!AppliedOptions.ContainsKey(name)) {
                 AppliedOptions.Add(name, wasInverted);
             }
         }
 
-        public void AddArgument(ParsedArgument value)
-        {
+        public void AddArgument(ParsedArgument value) {
             if (value != null) Arguments.Add(value);
         }
 
-        private EntitySelector GetSelector()
-        {
+        private EntitySelector GetSelector() {
             return new EntitySelector(IncludesEntities, MaxResults, IsSelf, SelectorType, Arguments);
         }
     }
