@@ -1,32 +1,26 @@
-﻿using CommandParser.Results;
-using CommandParser.Results.Arguments.Coordinates;
+﻿using CommandParser.Minecraft.Coordinates;
+using CommandParser.Results;
 
-namespace CommandParser.Parsers.Coordinates
-{
-    public class RotationParser
-    {
+namespace CommandParser.Parsers.Coordinates {
+    public class RotationParser {
         private readonly IStringReader StringReader;
         private readonly int Start;
         private readonly bool UseBedrock;
 
-        public RotationParser(IStringReader stringReader, bool useBedrock)
-        {
+        public RotationParser(IStringReader stringReader, bool useBedrock) {
             StringReader = stringReader;
             Start = stringReader.GetCursor();
             UseBedrock = useBedrock;
         }
 
-        public ReadResults Parse(out Rotation result)
-        {
+        public ReadResults Parse(out Rotation result) {
             result = default;
             AngleParser angleParser = new AngleParser(StringReader);
 
             ReadResults readResults = angleParser.Read(out Angle yRotation);
             if (!readResults.Successful) return readResults;
-            if (!StringReader.AtEndOfArgument())
-            {
-                if (!UseBedrock)
-                {
+            if (!StringReader.AtEndOfArgument()) {
+                if (!UseBedrock) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.RotationIncomplete().WithContext(StringReader));
                 }

@@ -1,33 +1,27 @@
-﻿using CommandParser.Results;
-using CommandParser.Results.Arguments.Coordinates;
+﻿using CommandParser.Minecraft.Coordinates;
+using CommandParser.Results;
 
-namespace CommandParser.Parsers.Coordinates
-{
-    public class WorldCoordinatesParser
-    {
+namespace CommandParser.Parsers.Coordinates {
+    public class WorldCoordinatesParser {
         private readonly IStringReader StringReader;
         private readonly int Start;
         private readonly bool UseBedrock;
 
-        public WorldCoordinatesParser(IStringReader stringReader, bool useBedrock)
-        {
+        public WorldCoordinatesParser(IStringReader stringReader, bool useBedrock) {
             StringReader = stringReader;
             Start = stringReader.GetCursor();
             UseBedrock = useBedrock;
         }
 
-        public ReadResults ParseInteger(out ICoordinates result)
-        {
+        public ReadResults ParseInteger(out ICoordinates result) {
             result = default;
             WorldCoordinateParser worldCoordinateParser = new WorldCoordinateParser(StringReader, UseBedrock);
 
             ReadResults readResults = worldCoordinateParser.ReadInteger(out WorldCoordinate x);
             if (!readResults.Successful) return readResults;
             if (UseBedrock) StringReader.SkipWhitespace();
-            else
-            {
-                if (!StringReader.AtEndOfArgument())
-                {
+            else {
+                if (!StringReader.AtEndOfArgument()) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
@@ -37,10 +31,8 @@ namespace CommandParser.Parsers.Coordinates
             readResults = worldCoordinateParser.ReadInteger(out WorldCoordinate y);
             if (!readResults.Successful) return readResults;
             if (UseBedrock) StringReader.SkipWhitespace();
-            else
-            {
-                if (!StringReader.AtEndOfArgument())
-                {
+            else {
+                if (!StringReader.AtEndOfArgument()) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
@@ -52,18 +44,15 @@ namespace CommandParser.Parsers.Coordinates
             return readResults;
         }
 
-        public ReadResults ParseIntegerFlat(out ICoordinates result)
-        {
+        public ReadResults ParseIntegerFlat(out ICoordinates result) {
             result = default;
             WorldCoordinateParser worldCoordinateParser = new WorldCoordinateParser(StringReader, UseBedrock);
 
             ReadResults readResults = worldCoordinateParser.ReadInteger(out WorldCoordinate x);
             if (!readResults.Successful) return readResults;
             if (UseBedrock) StringReader.SkipWhitespace();
-            else
-            {
-                if (!StringReader.AtEndOfArgument())
-                {
+            else {
+                if (!StringReader.AtEndOfArgument()) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.Vec2CoordinatesIncomplete().WithContext(StringReader));
                 }
@@ -75,18 +64,15 @@ namespace CommandParser.Parsers.Coordinates
             return readResults;
         }
 
-        public ReadResults ParseDouble(out ICoordinates result)
-        {
+        public ReadResults ParseDouble(out ICoordinates result) {
             result = default;
             WorldCoordinateParser worldCoordinateParser = new WorldCoordinateParser(StringReader, UseBedrock);
 
             ReadResults readResults = worldCoordinateParser.ReadDouble(out WorldCoordinate x);
             if (!readResults.Successful) return readResults;
             if (UseBedrock) StringReader.SkipWhitespace();
-            else
-            {
-                if (!StringReader.AtEndOfArgument())
-                {
+            else {
+                if (!StringReader.AtEndOfArgument()) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
@@ -96,10 +82,8 @@ namespace CommandParser.Parsers.Coordinates
             readResults = worldCoordinateParser.ReadDouble(out WorldCoordinate y);
             if (!readResults.Successful) return readResults;
             if (UseBedrock) StringReader.SkipWhitespace();
-            else
-            {
-                if (!StringReader.AtEndOfArgument())
-                {
+            else {
+                if (!StringReader.AtEndOfArgument()) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.Vec3CoordinatesIncomplete().WithContext(StringReader));
                 }
@@ -111,18 +95,15 @@ namespace CommandParser.Parsers.Coordinates
             return readResults;
         }
 
-        public ReadResults ParseDoubleFlat(out ICoordinates result)
-        {
+        public ReadResults ParseDoubleFlat(out ICoordinates result) {
             result = default;
             WorldCoordinateParser worldCoordinateParser = new WorldCoordinateParser(StringReader, UseBedrock);
 
             ReadResults readResults = worldCoordinateParser.ReadDouble(out WorldCoordinate x);
             if (!readResults.Successful) return readResults;
             if (UseBedrock) StringReader.SkipWhitespace();
-            else
-            {
-                if (!StringReader.AtEndOfArgument())
-                {
+            else {
+                if (!StringReader.AtEndOfArgument()) {
                     StringReader.SetCursor(Start);
                     return ReadResults.Failure(CommandError.Vec2CoordinatesIncomplete().WithContext(StringReader));
                 }

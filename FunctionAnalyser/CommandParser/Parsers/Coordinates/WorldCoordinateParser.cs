@@ -1,49 +1,38 @@
-﻿using CommandParser.Results;
-using CommandParser.Results.Arguments.Coordinates;
+﻿using CommandParser.Minecraft.Coordinates;
+using CommandParser.Results;
 
-namespace CommandParser.Parsers.Coordinates
-{
-    public class WorldCoordinateParser
-    {
+namespace CommandParser.Parsers.Coordinates {
+    public class WorldCoordinateParser {
         private readonly IStringReader StringReader;
         private readonly bool UseBedrock;
 
-        public WorldCoordinateParser(IStringReader stringReader, bool useBedrock)
-        {
+        public WorldCoordinateParser(IStringReader stringReader, bool useBedrock) {
             StringReader = stringReader;
             UseBedrock = useBedrock;
         }
 
-        public ReadResults ReadInteger(out WorldCoordinate result)
-        {
+        public ReadResults ReadInteger(out WorldCoordinate result) {
             result = default;
-            if (!StringReader.CanRead())
-            {
+            if (!StringReader.CanRead()) {
                 return ReadResults.Failure(CommandError.ExpectedBlockPosition().WithContext(StringReader));
             }
-            if (StringReader.Peek() == '^')
-            {
+            if (StringReader.Peek() == '^') {
                 return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
 
             bool isRelative = IsRelative();
 
             double value = 0.0d;
-            if (!StringReader.AtEndOfArgument())
-            {
-                if (UseBedrock && !IsNumberPart(StringReader.Peek()))
-                {
+            if (!StringReader.AtEndOfArgument()) {
+                if (UseBedrock && !IsNumberPart(StringReader.Peek())) {
                     result = new WorldCoordinate(value, isRelative);
                     return ReadResults.Success();
                 }
-                
+
                 ReadResults readResults;
-                if (isRelative)
-                {
+                if (isRelative) {
                     readResults = StringReader.ReadDouble(out value);
-                }
-                else
-                {
+                } else {
                     readResults = StringReader.ReadInteger(out int integerValue);
                     value = integerValue;
                 }
@@ -54,23 +43,19 @@ namespace CommandParser.Parsers.Coordinates
             return ReadResults.Success();
         }
 
-        public ReadResults ReadDouble(out WorldCoordinate result)
-        {
+        public ReadResults ReadDouble(out WorldCoordinate result) {
             result = default;
-            if (!StringReader.CanRead())
-            {
+            if (!StringReader.CanRead()) {
                 return ReadResults.Failure(CommandError.ExpectedCoordinate().WithContext(StringReader));
             }
-            if (StringReader.Peek() == '^')
-            {
+            if (StringReader.Peek() == '^') {
                 return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
 
             bool isRelative = IsRelative();
             int start = StringReader.GetCursor();
 
-            if (StringReader.AtEndOfArgument() || (UseBedrock && !IsNumberPart(StringReader.Peek())))
-            {
+            if (StringReader.AtEndOfArgument() || (UseBedrock && !IsNumberPart(StringReader.Peek()))) {
                 result = new WorldCoordinate(isRelative ? 0.0d : 0.5d, isRelative);
                 return ReadResults.Success();
             }
@@ -85,18 +70,15 @@ namespace CommandParser.Parsers.Coordinates
             return ReadResults.Success();
         }
 
-        private bool IsRelative()
-        {
-            if (StringReader.CanRead() && StringReader.Peek() == '~')
-            {
+        private bool IsRelative() {
+            if (StringReader.CanRead() && StringReader.Peek() == '~') {
                 StringReader.Skip();
                 return true;
             }
             return false;
         }
 
-        private static bool IsNumberPart(char c)
-        {
+        private static bool IsNumberPart(char c) {
             return c >= '0' && c <= '9' || c == '.' || c == '-';
         }
     }

@@ -1,33 +1,26 @@
-﻿using CommandParser.Results;
-using CommandParser.Results.Arguments.Coordinates;
+﻿using CommandParser.Minecraft.Coordinates;
+using CommandParser.Results;
 
-namespace CommandParser.Parsers.Coordinates
-{
-    public class AngleParser
-    {
+namespace CommandParser.Parsers.Coordinates {
+    public class AngleParser {
         private readonly IStringReader StringReader;
 
-        public AngleParser(IStringReader stringReader)
-        {
+        public AngleParser(IStringReader stringReader) {
             StringReader = stringReader;
         }
 
-        public ReadResults Read(out Angle result)
-        {
+        public ReadResults Read(out Angle result) {
             result = default;
-            if (!StringReader.CanRead())
-            {
+            if (!StringReader.CanRead()) {
                 return ReadResults.Failure(CommandError.ExpectedAngle().WithContext(StringReader));
             }
-            if (StringReader.Peek() == '^')
-            {
+            if (StringReader.Peek() == '^') {
                 return ReadResults.Failure(CommandError.MixedCoordinateType().WithContext(StringReader));
             }
 
             bool isRelative = IsRelative();
 
-            if (StringReader.AtEndOfArgument())
-            {
+            if (StringReader.AtEndOfArgument()) {
                 result = new Angle(0.0f, isRelative);
                 return ReadResults.Success();
             }
@@ -37,10 +30,8 @@ namespace CommandParser.Parsers.Coordinates
             return readResults;
         }
 
-        private bool IsRelative()
-        {
-            if (StringReader.CanRead() && StringReader.Peek() == '~')
-            {
+        private bool IsRelative() {
+            if (StringReader.CanRead() && StringReader.Peek() == '~') {
                 StringReader.Skip();
                 return true;
             }
