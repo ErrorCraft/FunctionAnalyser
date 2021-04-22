@@ -1,6 +1,6 @@
 {
 	"java-snapshot": {
-		"name": "Java 21w05a",
+		"name": "Java 21w16a",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-snapshot",

@@ -115,6 +115,9 @@
 					}
 				}
 			}
+		},
+		"separator": {
+			"type": "any"
 		}
 	}
 }
