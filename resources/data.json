@@ -1,6 +1,6 @@
 {
 	"java-snapshot": {
-		"name": "Java 21w16a",
+		"name": "Java 21w19a",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-snapshot",
@@ -23,7 +23,7 @@
 		}
 	},
 	"java-release": {
-		"name": "Java 1.16.4",
+		"name": "Java 1.16.5",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-release",

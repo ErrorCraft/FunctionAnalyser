@@ -5,99 +5,186 @@
 			"item": {
 				"type": "literal",
 				"children": {
-					"block": {
+					"replace": {
 						"type": "literal",
 						"children": {
-							"pos": {
-								"type": "argument",
-								"parser": "block_pos",
+							"block": {
+								"type": "literal",
 								"children": {
-									"slot": {
+									"pos": {
 										"type": "argument",
-										"parser": "slot",
+										"parser": "block_pos",
 										"children": {
-											"copy": {
-												"type": "literal",
+											"slot": {
+												"type": "argument",
+												"parser": "item_slot",
 												"children": {
-													"block": {
+													"with": {
 														"type": "literal",
 														"children": {
-															"source": {
+															"item": {
 																"type": "argument",
-																"parser": "block_pos",
+																"parser": "item",
 																"children": {
-																	"sourceSlot": {
+																	"count": {
 																		"type": "argument",
-																		"parser": "slot",
-																		"children": {
-																			"modifier": {
-																				"type": "argument",
-																				"parser": "item_modifier",
-																				"executable": true
-																			}
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
 																		},
 																		"executable": true
 																	}
-																}
-															}
-														}
-													},
-													"entity": {
-														"type": "literal",
-														"children": {
-															"source": {
-																"type": "argument",
-																"parser": "entity",
-																"properties": {
-																	"single_entity": true
-																},
-																"children": {
-																	"sourceSlot": {
-																		"type": "argument",
-																		"parser": "slot",
-																		"children": {
-																			"modifier": {
-																				"type": "argument",
-																				"parser": "item_modifier",
-																				"executable": true
-																			}
-																		},
-																		"executable": true
-																	}
-																}
-															}
-														}
-													}
-												}
-											},
-											"modify": {
-												"type": "literal",
-												"children": {
-													"modifier": {
-														"type": "argument",
-														"parser": "item_modifier",
-														"executable": true
-													}
-												}
-											},
-											"replace": {
-												"type": "literal",
-												"children": {
-													"item": {
-														"type": "argument",
-														"parser": "item",
-														"children": {
-															"count": {
-																"type": "argument",
-																"parser": "integer",
-																"properties": {
-																	"min": 1,
-																	"max": 64
 																},
 																"executable": true
 															}
-														},
-														"executable": true
+														}
+													},
+													"from": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "block_pos",
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "item_slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															},
+															"entity": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "entity",
+																		"properties": {
+																			"single_entity": true
+																		},
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "item_slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"entity": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "entity",
+										"children": {
+											"slot": {
+												"type": "argument",
+												"parser": "item_slot",
+												"children": {
+													"with": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"children": {
+																	"count": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"from": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "block_pos",
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "item_slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															},
+															"entity": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "entity",
+																		"properties": {
+																			"single_entity": true
+																		},
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "item_slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															}
+														}
 													}
 												}
 											}
@@ -107,73 +194,19 @@
 							}
 						}
 					},
-					"entity": {
+					"modify": {
 						"type": "literal",
 						"children": {
-							"targets": {
-								"type": "argument",
-								"parser": "entity",
+							"block": {
+								"type": "literal",
 								"children": {
-									"slot": {
+									"pos": {
 										"type": "argument",
-										"parser": "slot",
+										"parser": "block_pos",
 										"children": {
-											"copy": {
-												"type": "literal",
-												"children": {
-													"block": {
-														"type": "literal",
-														"children": {
-															"source": {
-																"type": "argument",
-																"parser": "block_pos",
-																"children": {
-																	"sourceSlot": {
-																		"type": "argument",
-																		"parser": "slot",
-																		"children": {
-																			"modifier": {
-																				"type": "argument",
-																				"parser": "item_modifier",
-																				"executable": true
-																			}
-																		},
-																		"executable": true
-																	}
-																}
-															}
-														}
-													},
-													"entity": {
-														"type": "literal",
-														"children": {
-															"source": {
-																"type": "argument",
-																"parser": "entity",
-																"properties": {
-																	"single_entity": true
-																},
-																"children": {
-																	"sourceSlot": {
-																		"type": "argument",
-																		"parser": "slot",
-																		"children": {
-																			"modifier": {
-																				"type": "argument",
-																				"parser": "item_modifier",
-																				"executable": true
-																			}
-																		},
-																		"executable": true
-																	}
-																}
-															}
-														}
-													}
-												}
-											},
-											"modify": {
-												"type": "literal",
+											"slot": {
+												"type": "argument",
+												"parser": "item_slot",
 												"children": {
 													"modifier": {
 														"type": "argument",
@@ -181,24 +214,25 @@
 														"executable": true
 													}
 												}
-											},
-											"replace": {
-												"type": "literal",
+											}
+										}
+									}
+								}
+							},
+							"entity": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "entity",
+										"children": {
+											"slot": {
+												"type": "argument",
+												"parser": "item_slot",
 												"children": {
-													"item": {
+													"modifier": {
 														"type": "argument",
-														"parser": "item",
-														"children": {
-															"count": {
-																"type": "argument",
-																"parser": "integer",
-																"properties": {
-																	"min": 1,
-																	"max": 64
-																},
-																"executable": true
-															}
-														},
+														"parser": "item_modifier",
 														"executable": true
 													}
 												}
