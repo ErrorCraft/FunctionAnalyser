@@ -17,7 +17,7 @@
 										"children": {
 											"slot": {
 												"type": "argument",
-												"parser": "item_slot",
+												"parser": "slot",
 												"children": {
 													"with": {
 														"type": "literal",
@@ -52,7 +52,7 @@
 																		"children": {
 																			"sourceSlot": {
 																				"type": "argument",
-																				"parser": "item_slot",
+																				"parser": "slot",
 																				"children": {
 																					"modifier": {
 																						"type": "argument",
@@ -78,7 +78,7 @@
 																		"children": {
 																			"sourceSlot": {
 																				"type": "argument",
-																				"parser": "item_slot",
+																				"parser": "slot",
 																				"children": {
 																					"modifier": {
 																						"type": "argument",
@@ -109,7 +109,7 @@
 										"children": {
 											"slot": {
 												"type": "argument",
-												"parser": "item_slot",
+												"parser": "slot",
 												"children": {
 													"with": {
 														"type": "literal",
@@ -144,7 +144,7 @@
 																		"children": {
 																			"sourceSlot": {
 																				"type": "argument",
-																				"parser": "item_slot",
+																				"parser": "slot",
 																				"children": {
 																					"modifier": {
 																						"type": "argument",
@@ -170,7 +170,7 @@
 																		"children": {
 																			"sourceSlot": {
 																				"type": "argument",
-																				"parser": "item_slot",
+																				"parser": "slot",
 																				"children": {
 																					"modifier": {
 																						"type": "argument",
@@ -206,7 +206,7 @@
 										"children": {
 											"slot": {
 												"type": "argument",
-												"parser": "item_slot",
+												"parser": "slot",
 												"children": {
 													"modifier": {
 														"type": "argument",
@@ -228,7 +228,7 @@
 										"children": {
 											"slot": {
 												"type": "argument",
-												"parser": "item_slot",
+												"parser": "slot",
 												"children": {
 													"modifier": {
 														"type": "argument",
