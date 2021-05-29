@@ -1,6 +1,6 @@
 {
 	"java-snapshot": {
-		"name": "Java 21w19a",
+		"name": "Java 1.17 Pre-release 1",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-snapshot",
