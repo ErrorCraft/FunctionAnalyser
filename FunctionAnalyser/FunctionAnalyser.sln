@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandParser", "CommandPar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{9BB2A853-CD6D-496F-B3E4-FB45747BE2F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{F3E6E6C4-CD5E-4CDE-8582-CB3900F77AD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{F3E6E6C4-CD5E-4CDE-8582-CB3900F77AD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.CommandParser", "ErrorCraft.CommandParser\ErrorCraft.CommandParser.csproj", "{623120B4-2FDB-4649-975C-66FBF6842E7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.CommandParser.Tests", "ErrorCraft.CommandParser.Tests\ErrorCraft.CommandParser.Tests.csproj", "{EFE1EA07-1957-45A4-A96B-6138DF7CF232}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{F3E6E6C4-CD5E-4CDE-8582-CB3900F77AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E6E6C4-CD5E-4CDE-8582-CB3900F77AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E6E6C4-CD5E-4CDE-8582-CB3900F77AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{623120B4-2FDB-4649-975C-66FBF6842E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{623120B4-2FDB-4649-975C-66FBF6842E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{623120B4-2FDB-4649-975C-66FBF6842E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{623120B4-2FDB-4649-975C-66FBF6842E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
