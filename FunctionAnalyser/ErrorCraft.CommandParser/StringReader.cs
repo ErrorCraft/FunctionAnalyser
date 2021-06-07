@@ -15,5 +15,13 @@
         public int GetCursor() {
             return Cursor;
         }
+
+        public bool CanRead() {
+            return CanRead(1);
+        }
+
+        public bool CanRead(int length) {
+            return Cursor + length <= Command.Length;
+        }
     }
 }
