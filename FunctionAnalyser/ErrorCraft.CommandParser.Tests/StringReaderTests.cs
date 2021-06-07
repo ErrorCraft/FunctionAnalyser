@@ -1,3 +1,4 @@
+using ErrorCraft.CommandParser.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ErrorCraft.CommandParser.Tests {
@@ -71,6 +72,27 @@ namespace ErrorCraft.CommandParser.Tests {
             StringReader stringReader = new StringReader("foo");
             stringReader.Skip();
             Assert.AreEqual(1, stringReader.GetCursor());
+        }
+
+        [TestMethod]
+        public void ReadBoolean_ReadsCorrectValue() {
+            StringReader stringReader = new StringReader("true");
+            stringReader.ReadBoolean(out bool result);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void ReadBoolean_ReadsCorrectValue_WithAllCapitals() {
+            StringReader stringReader = new StringReader("TRUE");
+            stringReader.ReadBoolean(out bool result);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void ReadBoolean_IsUnsuccessful_BecauseValueReadIsNotABoolean() {
+            StringReader stringReader = new StringReader("foo");
+            ReadResults readResults = stringReader.ReadBoolean(out _);
+            Assert.IsFalse(readResults.Successful);
         }
     }
 }

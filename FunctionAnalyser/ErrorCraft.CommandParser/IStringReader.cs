@@ -1,4 +1,6 @@
-﻿namespace ErrorCraft.CommandParser {
+﻿using ErrorCraft.CommandParser.Results;
+
+namespace ErrorCraft.CommandParser {
     public interface IStringReader {
         string GetString();
         int GetCursor();
@@ -7,5 +9,7 @@
         char Peek();
         char Read();
         void Skip();
+
+        ReadResults ReadBoolean(out bool result);
     }
 }
