@@ -1,6 +1,6 @@
 {
 	"java-snapshot": {
-		"name": "Java 1.17 Pre-release 1",
+		"name": "Java 1.17 Release Candidate 1",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java-snapshot",
