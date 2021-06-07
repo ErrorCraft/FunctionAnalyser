@@ -23,5 +23,17 @@
         public bool CanRead(int length) {
             return Cursor + length <= Command.Length;
         }
+
+        public char Peek() {
+            return Command[Cursor];
+        }
+
+        public char Read() {
+            return Command[Cursor++];
+        }
+
+        public void Skip() {
+            Cursor++;
+        }
     }
 }

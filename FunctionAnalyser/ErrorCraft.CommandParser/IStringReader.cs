@@ -4,5 +4,8 @@
         int GetCursor();
         bool CanRead();
         bool CanRead(int length);
+        char Peek();
+        char Read();
+        void Skip();
     }
 }
