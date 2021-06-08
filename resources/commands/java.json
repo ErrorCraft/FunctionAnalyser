@@ -6835,6 +6835,378 @@
 			"xp": {
 				"type": "literal",
 				"redirect": ["experience"]
+			},
+			"item": {
+				"type": "literal",
+				"children": {
+					"replace": {
+						"type": "literal",
+						"children": {
+							"block": {
+								"type": "literal",
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "block_pos",
+										"children": {
+											"slot": {
+												"type": "argument",
+												"parser": "slot",
+												"children": {
+													"with": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"children": {
+																	"count": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"from": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "block_pos",
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															},
+															"entity": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "entity",
+																		"properties": {
+																			"single_entity": true
+																		},
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"entity": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "entity",
+										"children": {
+											"slot": {
+												"type": "argument",
+												"parser": "slot",
+												"children": {
+													"with": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"children": {
+																	"count": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"from": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "block_pos",
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															},
+															"entity": {
+																"type": "literal",
+																"children": {
+																	"source": {
+																		"type": "argument",
+																		"parser": "entity",
+																		"properties": {
+																			"single_entity": true
+																		},
+																		"children": {
+																			"sourceSlot": {
+																				"type": "argument",
+																				"parser": "slot",
+																				"children": {
+																					"modifier": {
+																						"type": "argument",
+																						"parser": "item_modifier",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"modify": {
+						"type": "literal",
+						"children": {
+							"block": {
+								"type": "literal",
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "block_pos",
+										"children": {
+											"slot": {
+												"type": "argument",
+												"parser": "slot",
+												"children": {
+													"modifier": {
+														"type": "argument",
+														"parser": "item_modifier",
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"entity": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "entity",
+										"children": {
+											"slot": {
+												"type": "argument",
+												"parser": "slot",
+												"children": {
+													"modifier": {
+														"type": "argument",
+														"parser": "item_modifier",
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"worldborder": {
+				"type": "literal",
+				"children": {
+					"add": {
+						"type": "literal",
+						"children": {
+							"distance": {
+								"type": "argument",
+								"parser": "double",
+								"properties": {
+									"min": -5.9999968E7,
+									"max": 5.9999968E7
+								},
+								"children": {
+									"time": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 0
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					},
+					"center": {
+						"type": "literal",
+						"children": {
+							"pos": {
+								"type": "argument",
+								"parser": "vec2",
+								"executable": true
+							}
+						}
+					},
+					"damage": {
+						"type": "literal",
+						"children": {
+							"amount": {
+								"type": "literal",
+								"children": {
+									"damagePerBlock": {
+										"type": "argument",
+										"parser": "float",
+										"properties": {
+											"min": 0.0
+										},
+										"executable": true
+									}
+								}
+							},
+							"buffer": {
+								"type": "literal",
+								"children": {
+									"distance": {
+										"type": "argument",
+										"parser": "float",
+										"properties": {
+											"min": 0.0
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					},
+					"get": {
+						"type": "literal",
+						"executable": true
+					},
+					"set": {
+						"type": "literal",
+						"children": {
+							"distance": {
+								"type": "argument",
+								"parser": "double",
+								"properties": {
+									"min": -5.9999968E7,
+									"max": 5.9999968E7
+								},
+								"children": {
+									"time": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 0
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					},
+					"warning": {
+						"type": "literal",
+						"children": {
+							"distance": {
+								"type": "literal",
+								"children": {
+									"distance": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 0
+										},
+										"executable": true
+									}
+								}
+							},
+							"time": {
+								"type": "literal",
+								"children": {
+									"time": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 0
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}

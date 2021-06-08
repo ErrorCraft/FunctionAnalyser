@@ -107,6 +107,11 @@
 		"zombie_villager",
 		"zombified_piglin",
 		"player",
-		"fishing_bobber"
+		"fishing_bobber",
+		"axolotl",
+		"glow_squid",
+		"glow_item_frame",
+		"goat",
+		"marker"
 	]
 }

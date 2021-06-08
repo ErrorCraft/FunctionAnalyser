@@ -1,39 +1,16 @@
 {
-	"java-snapshot": {
-		"name": "Java 1.17 Release Candidate 1",
-		"resources": {
-			"anchors": "java",
-			"blocks": "java-snapshot",
-			"colours": "java",
-			"commands": "java-snapshot",
-			"components": "java",
-			"enchantments": "java",
-			"entities": "java-snapshot",
-			"gamemodes": "java",
-			"items": "java-snapshot",
-			"item_slots": "java",
-			"mob_effects": "java",
-			"objective_criteria": "java",
-			"operations": "java",
-			"particles": "java-snapshot",
-			"scoreboard_slots": "java",
-			"selector_arguments": "java",
-			"sorts": "java",
-			"time_scalars": "java"
-		}
-	},
 	"java-release": {
-		"name": "Java 1.16.5",
+		"name": "Java 1.17",
 		"resources": {
 			"anchors": "java",
-			"blocks": "java-release",
+			"blocks": "java",
 			"colours": "java",
-			"commands": "java-release",
+			"commands": "java",
 			"components": "java",
 			"enchantments": "java",
 			"entities": "java",
 			"gamemodes": "java",
-			"items": "java-release",
+			"items": "java",
 			"item_slots": "java",
 			"mob_effects": "java",
 			"objective_criteria": "java",
