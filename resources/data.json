@@ -1,6 +1,6 @@
 {
 	"java-release": {
-		"name": "Java 1.17",
+		"name": "Java 1.17.1",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java",
