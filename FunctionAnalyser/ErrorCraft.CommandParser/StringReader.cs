@@ -47,7 +47,7 @@ namespace ErrorCraft.CommandParser {
             if (bool.TryParse(Command[start..Cursor], out result)) {
                 return ParseResults.Success();
             }
-            return ParseResults.Failure();
+            return ParseResults.Failure(CommandError.InvalidBoolean());
         }
 
         private static bool IsUnquotedStringPart(char c) {

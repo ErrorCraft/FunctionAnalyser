@@ -9,5 +9,7 @@
         public string GetMessage() {
             return Message;
         }
+
+        public static CommandError InvalidBoolean() => new CommandError("Invalid boolean");
     }
 }
