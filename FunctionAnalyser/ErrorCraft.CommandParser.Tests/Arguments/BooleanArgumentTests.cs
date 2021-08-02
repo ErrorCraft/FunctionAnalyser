@@ -25,8 +25,8 @@ namespace ErrorCraft.CommandParser.Tests.Arguments {
         public void Parse_IsUnsuccessful_BecauseValueReadIsNotABoolean() {
             BooleanArgument booleanArgument = new BooleanArgument();
             StringReader stringReader = new StringReader("foo");
-            ReadResults readResults = booleanArgument.Parse(stringReader, out _);
-            Assert.IsFalse(readResults.Successful);
+            ParseResults parseResults = booleanArgument.Parse(stringReader, out _);
+            Assert.IsFalse(parseResults.Successful);
         }
     }
 }

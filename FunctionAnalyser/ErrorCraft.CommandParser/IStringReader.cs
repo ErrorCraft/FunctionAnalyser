@@ -10,6 +10,6 @@ namespace ErrorCraft.CommandParser {
         char Read();
         void Skip();
 
-        ReadResults ReadBoolean(out bool result);
+        ParseResults ReadBoolean(out bool result);
     }
 }

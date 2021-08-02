@@ -91,8 +91,8 @@ namespace ErrorCraft.CommandParser.Tests {
         [TestMethod]
         public void ReadBoolean_IsUnsuccessful_BecauseValueReadIsNotABoolean() {
             StringReader stringReader = new StringReader("foo");
-            ReadResults readResults = stringReader.ReadBoolean(out _);
-            Assert.IsFalse(readResults.Successful);
+            ParseResults parseResults = stringReader.ReadBoolean(out _);
+            Assert.IsFalse(parseResults.Successful);
         }
     }
 }

@@ -39,15 +39,15 @@ namespace ErrorCraft.CommandParser {
             Cursor++;
         }
 
-        public ReadResults ReadBoolean(out bool result) {
+        public ParseResults ReadBoolean(out bool result) {
             int start = Cursor;
             while (CanRead() && IsUnquotedStringPart(Peek())) {
                 Skip();
             }
             if (bool.TryParse(Command[start..Cursor], out result)) {
-                return ReadResults.Success();
+                return ParseResults.Success();
             }
-            return ReadResults.Failure();
+            return ParseResults.Failure();
         }
 
         private static bool IsUnquotedStringPart(char c) {
