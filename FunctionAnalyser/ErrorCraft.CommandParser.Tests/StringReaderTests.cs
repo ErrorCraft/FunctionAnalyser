@@ -82,6 +82,13 @@ namespace ErrorCraft.CommandParser.Tests {
         }
 
         [TestMethod]
+        public void Skip_WithLength_IsAtNewPosition() {
+            StringReader stringReader = new StringReader("foo");
+            stringReader.Skip(2);
+            Assert.AreEqual(2, stringReader.GetCursor());
+        }
+
+        [TestMethod]
         public void ReadBoolean_ReadsCorrectValue() {
             StringReader stringReader = new StringReader("true");
             stringReader.ReadBoolean(out bool result);
