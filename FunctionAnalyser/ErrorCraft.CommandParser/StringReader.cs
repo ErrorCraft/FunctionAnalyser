@@ -1,5 +1,4 @@
 ﻿using ErrorCraft.CommandParser.Results;
-using System;
 
 namespace ErrorCraft.CommandParser {
     public class StringReader : IStringReader {
@@ -17,6 +16,10 @@ namespace ErrorCraft.CommandParser {
 
         public int GetCursor() {
             return Cursor;
+        }
+
+        public void SetCursor(int cursor) {
+            Cursor = cursor;
         }
 
         public bool CanRead() {

@@ -19,6 +19,13 @@ namespace ErrorCraft.CommandParser.Tests {
         }
 
         [TestMethod]
+        public void SetCursor_SetsCorrectValue() {
+            StringReader stringReader = new StringReader("foo");
+            stringReader.SetCursor(2);
+            Assert.AreEqual(2, stringReader.GetCursor());
+        }
+
+        [TestMethod]
         public void CanRead_ReturnsTrue() {
             StringReader stringReader = new StringReader("foo");
             bool successful = stringReader.CanRead();
