@@ -11,6 +11,7 @@ namespace ErrorCraft.CommandParser {
         char Read();
         void Skip();
         void Skip(int length);
+        bool IsNext(char c);
 
         ParseResults ReadBoolean(out bool result);
     }

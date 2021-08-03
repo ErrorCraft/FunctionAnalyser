@@ -89,6 +89,20 @@ namespace ErrorCraft.CommandParser.Tests {
         }
 
         [TestMethod]
+        public void IsNext_ReturnsTrue() {
+            StringReader stringReader = new StringReader("abc");
+            bool successful = stringReader.IsNext('a');
+            Assert.IsTrue(successful);
+        }
+
+        [TestMethod]
+        public void IsNext_ReturnsFalse() {
+            StringReader stringReader = new StringReader("abc");
+            bool successful = stringReader.IsNext('b');
+            Assert.IsFalse(successful);
+        }
+
+        [TestMethod]
         public void ReadBoolean_ReadsCorrectValue() {
             StringReader stringReader = new StringReader("true");
             stringReader.ReadBoolean(out bool result);

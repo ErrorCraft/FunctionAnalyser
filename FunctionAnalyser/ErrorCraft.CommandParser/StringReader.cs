@@ -46,6 +46,10 @@ namespace ErrorCraft.CommandParser {
             Cursor += length;
         }
 
+        public bool IsNext(char c) {
+            return CanRead() && Peek() == c;
+        }
+
         public ParseResults ReadBoolean(out bool result) {
             int start = Cursor;
             while (CanRead() && IsUnquotedStringPart(Peek())) {
