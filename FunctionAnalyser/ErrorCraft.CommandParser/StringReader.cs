@@ -57,7 +57,7 @@ namespace ErrorCraft.CommandParser {
 
         public ParseResults ReadBoolean(out bool result) {
             int start = Cursor;
-            while (CanRead() && IsUnquotedStringPart(Peek())) {
+            while (IsNext(IsUnquotedStringPart)) {
                 Skip();
             }
             if (bool.TryParse(Command[start..Cursor], out result)) {
