@@ -1,11 +1,14 @@
-﻿using ErrorCraft.CommandParser.Results;
+﻿using ErrorCraft.CommandParser.Arguments;
+using ErrorCraft.CommandParser.Results;
 
 namespace ErrorCraft.CommandParser.Tree {
     public class ArgumentNode<T> : Node {
         private readonly string Name;
+        private readonly IArgument<T> Argument;
 
-        public ArgumentNode(string name) {
+        public ArgumentNode(string name, IArgument<T> argument) {
             Name = name;
+            Argument = argument;
         }
 
         public override string GetName() {
@@ -13,7 +16,7 @@ namespace ErrorCraft.CommandParser.Tree {
         }
 
         public override ParseResults Parse(IStringReader reader) {
-            throw new System.NotImplementedException();
+            return Argument.Parse(reader, out _);
         }
     }
 }
