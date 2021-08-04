@@ -1,5 +1,6 @@
 using ErrorCraft.CommandParser.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ErrorCraft.CommandParser.Tests {
     [TestClass]
@@ -99,6 +100,20 @@ namespace ErrorCraft.CommandParser.Tests {
         public void IsNext_ReturnsFalse() {
             StringReader stringReader = new StringReader("abc");
             bool successful = stringReader.IsNext('b');
+            Assert.IsFalse(successful);
+        }
+
+        [TestMethod]
+        public void IsNext_WithPredicate_ReturnsTrue() {
+            StringReader stringReader = new StringReader("abc");
+            bool successful = stringReader.IsNext(c => { return c == 'a' || c == 'b'; });
+            Assert.IsTrue(successful);
+        }
+
+        [TestMethod]
+        public void IsNext_WithPredicate_ReturnsFalse() {
+            StringReader stringReader = new StringReader("abc");
+            bool successful = stringReader.IsNext(c => { return c == 'c' || c == 'd'; });
             Assert.IsFalse(successful);
         }
 

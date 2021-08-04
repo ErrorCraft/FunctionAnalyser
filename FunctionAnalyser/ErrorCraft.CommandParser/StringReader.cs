@@ -1,4 +1,5 @@
 ﻿using ErrorCraft.CommandParser.Results;
+using System;
 
 namespace ErrorCraft.CommandParser {
     public class StringReader : IStringReader {
@@ -48,6 +49,10 @@ namespace ErrorCraft.CommandParser {
 
         public bool IsNext(char c) {
             return CanRead() && Peek() == c;
+        }
+
+        public bool IsNext(Predicate<char> predicate) {
+            return CanRead() && predicate(Peek());
         }
 
         public ParseResults ReadBoolean(out bool result) {

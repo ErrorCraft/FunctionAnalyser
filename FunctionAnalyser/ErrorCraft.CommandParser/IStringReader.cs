@@ -1,4 +1,5 @@
 ﻿using ErrorCraft.CommandParser.Results;
+using System;
 
 namespace ErrorCraft.CommandParser {
     public interface IStringReader {
@@ -12,6 +13,7 @@ namespace ErrorCraft.CommandParser {
         void Skip();
         void Skip(int length);
         bool IsNext(char c);
+        bool IsNext(Predicate<char> predicate);
 
         ParseResults ReadBoolean(out bool result);
     }
