@@ -66,9 +66,29 @@ namespace ErrorCraft.CommandParser {
             return ParseResults.Failure(CommandError.InvalidBoolean());
         }
 
+        public ParseResults ReadInteger(out int result) {
+            int start = Cursor;
+            while (IsNext(IsNumberPart)) {
+                Skip();
+            }
+            if (start == Cursor) {
+                result = 0;
+                return ParseResults.Failure(CommandError.ExpectedInteger());
+            }
+            string number = Command[start..Cursor];
+            if (!int.TryParse(number, out result)) {
+                return ParseResults.Failure(CommandError.InvalidInteger(number));
+            }
+            return ParseResults.Success();
+        }
+
         private static bool IsUnquotedStringPart(char c) {
             return c >= 'A' && c <= 'Z'
                 || c >= 'a' && c <= 'z';
+        }
+
+        private static bool IsNumberPart(char c) {
+            return c >= '0' && c <= '9' || c == '.' || c == '-';
         }
     }
 }

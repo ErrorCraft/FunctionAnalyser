@@ -137,5 +137,26 @@ namespace ErrorCraft.CommandParser.Tests {
             ParseResults parseResults = stringReader.ReadBoolean(out _);
             Assert.IsFalse(parseResults.Successful);
         }
+
+        [TestMethod]
+        public void ReadInteger_ReadsCorrectValue() {
+            StringReader stringReader = new StringReader("100");
+            stringReader.ReadInteger(out int result);
+            Assert.AreEqual(100, result);
+        }
+
+        [TestMethod]
+        public void ReadInteger_IsUnsuccessful_BecauseStringIsEmpty() {
+            StringReader stringReader = new StringReader("");
+            ParseResults parseResults = stringReader.ReadInteger(out _);
+            Assert.IsFalse(parseResults.Successful);
+        }
+
+        [TestMethod]
+        public void ReadInteger_IsUnsuccessful_BecauseIntegerIsInvalid() {
+            StringReader stringReader = new StringReader("--1");
+            ParseResults parseResults = stringReader.ReadInteger(out _);
+            Assert.IsFalse(parseResults.Successful);
+        }
     }
 }

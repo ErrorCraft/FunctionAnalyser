@@ -12,5 +12,7 @@
 
         public static CommandError ExpectedLiteral(string literal) => new CommandError($"Expected literal {literal}");
         public static CommandError InvalidBoolean() => new CommandError("Invalid boolean");
+        public static CommandError ExpectedInteger() => new CommandError("Expected integer");
+        public static CommandError InvalidInteger(string integer) => new CommandError($"Invalid integer {integer}");
     }
 }

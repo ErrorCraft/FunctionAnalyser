@@ -16,5 +16,6 @@ namespace ErrorCraft.CommandParser {
         bool IsNext(Predicate<char> predicate);
 
         ParseResults ReadBoolean(out bool result);
+        ParseResults ReadInteger(out int result);
     }
 }
