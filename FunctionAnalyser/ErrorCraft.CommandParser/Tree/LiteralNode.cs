@@ -4,7 +4,9 @@ namespace ErrorCraft.CommandParser.Tree {
     public class LiteralNode : Node {
         private readonly string Literal;
 
-        public LiteralNode(string literal) {
+        public LiteralNode(string literal) : this(literal, false) { }
+
+        public LiteralNode(string literal, bool executable) : base(executable) {
             Literal = literal;
         }
 

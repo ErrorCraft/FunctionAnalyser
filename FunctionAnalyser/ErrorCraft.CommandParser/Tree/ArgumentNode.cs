@@ -6,7 +6,9 @@ namespace ErrorCraft.CommandParser.Tree {
         private readonly string Name;
         private readonly IArgument<T> Argument;
 
-        public ArgumentNode(string name, IArgument<T> argument) {
+        public ArgumentNode(string name, IArgument<T> argument) : this(name, argument, false) { }
+
+        public ArgumentNode(string name, IArgument<T> argument, bool executable) : base(executable) {
             Name = name;
             Argument = argument;
         }

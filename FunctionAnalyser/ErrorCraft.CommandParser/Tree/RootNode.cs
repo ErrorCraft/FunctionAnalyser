@@ -3,6 +3,8 @@ using System;
 
 namespace ErrorCraft.CommandParser.Tree {
     public class RootNode : Node {
+        public RootNode() : base(false) { }
+
         public override string GetName() {
             return "";
         }

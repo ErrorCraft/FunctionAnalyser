@@ -4,11 +4,16 @@ using System.Collections.Generic;
 namespace ErrorCraft.CommandParser.Tree {
     public abstract class Node {
         private readonly Dictionary<string, Node> Children = new Dictionary<string, Node>();
+        private readonly bool Executable;
 
         public int ChildCount {
             get {
                 return Children.Count;
             }
+        }
+
+        protected Node(bool executable) {
+            Executable = executable;
         }
 
         public abstract string GetName();
@@ -22,6 +27,10 @@ namespace ErrorCraft.CommandParser.Tree {
             foreach (Node child in Children.Values) {
                 yield return child;
             }
+        }
+
+        public bool IsExecutable() {
+            return Executable;
         }
     }
 }
