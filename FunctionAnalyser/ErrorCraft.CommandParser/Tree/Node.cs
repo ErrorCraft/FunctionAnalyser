@@ -5,6 +5,12 @@ namespace ErrorCraft.CommandParser.Tree {
     public abstract class Node {
         private readonly Dictionary<string, Node> Children = new Dictionary<string, Node>();
 
+        public int ChildCount {
+            get {
+                return Children.Count;
+            }
+        }
+
         public abstract string GetName();
         public abstract ParseResults Parse(IStringReader reader);
 
