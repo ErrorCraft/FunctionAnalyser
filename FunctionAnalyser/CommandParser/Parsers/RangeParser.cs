@@ -1,93 +1,98 @@
 ﻿using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using System;
+using System.Globalization;
 
-namespace CommandParser.Parsers
-{
-    public class RangeParser<T> where T : struct, IComparable
-    {
-        public delegate bool Converter<S>(S input, out T result);
-        private readonly IStringReader StringReader;
+namespace CommandParser.Parsers;
 
-        public RangeParser(IStringReader stringReader)
-        {
-            StringReader = stringReader;
+public class RangeParser<T> where T : struct, INumber<T>, IMinMaxValue<T> {
+    private readonly T Minimum;
+    private readonly T Maximum;
+    private readonly bool Loopable;
+
+    public RangeParser() : this(false, T.MinValue, T.MaxValue) { }
+
+    public RangeParser(bool loopable) : this(loopable, T.MinValue, T.MaxValue) { }
+
+    public RangeParser(bool loopable, T minimum, T maximum) {
+        Loopable = loopable;
+        Minimum = minimum;
+        Maximum = maximum;
+    }
+
+    public ReadResults Read(IStringReader reader, Func<string, CommandError> invalidNumberErrorProvider, out Range<T> result) {
+        result = default;
+        if (!reader.CanRead()) {
+            return ReadResults.Failure(CommandError.ExpectedValueOrRange().WithContext(reader));
         }
 
-        public ReadResults Read(Converter<string> function, Func<string, CommandError> invalidNumberErrorProvider, T minimum, T maximum, bool loopable, out Range<T> result)
-        {
-            result = default;
-            if (!StringReader.CanRead())
-            {
-                return ReadResults.Failure(CommandError.ExpectedValueOrRange().WithContext(StringReader));
+        int start = reader.GetCursor();
+        ReadResults readResults = ReadNumber(reader, invalidNumberErrorProvider, out T? left);
+        if (!readResults.Successful) {
+            return readResults;
+        }
+
+        T? right;
+        if (reader.CanRead(2) && reader.Peek() == '.' && reader.Peek(1) == '.') {
+            reader.Skip(2);
+            readResults = ReadNumber(reader, invalidNumberErrorProvider, out right);
+            if (!readResults.Successful) {
+                return readResults;
             }
+        } else {
+            right = left;
+        }
 
-            int start = StringReader.GetCursor();
-            T? right;
-            ReadResults readResults = ReadNumber(function, invalidNumberErrorProvider, out T? left);
-            if (!readResults.Successful) return readResults;
-            if (StringReader.CanRead(2) && StringReader.Peek() == '.' && StringReader.Peek(1) == '.')
-            {
-                StringReader.Skip(2);
-                readResults = ReadNumber(function, invalidNumberErrorProvider, out right);
-                if (!readResults.Successful) return readResults;
-            } else
-            {
-                right = left;
-            }
+        if (left == null && right == null) {
+            return ReadResults.Failure(CommandError.ExpectedValueOrRange().WithContext(reader));
+        }
 
-            if (left == null && right == null)
-            {
-                return ReadResults.Failure(CommandError.ExpectedValueOrRange().WithContext(StringReader));
-            }
+        if (left == null) {
+            left = Minimum;
+        }
+        if (right == null) {
+            right = Maximum;
+        }
 
-            if (left == null) left = minimum;
-            if (right == null) right = maximum;
+        if (!Loopable && left > right) {
+            reader.SetCursor(start);
+            return ReadResults.Failure(CommandError.RangeMinBiggerThanMax().WithContext(reader));
+        }
 
-            if (!loopable && ((T)left).CompareTo((T)right) > 0)
-            {
-                StringReader.SetCursor(start);
-                return ReadResults.Failure(CommandError.RangeMinBiggerThanMax().WithContext(StringReader));
-            }
+        result = new Range<T>(left!.Value, right!.Value);
+        return ReadResults.Success();
+    }
 
-            result = new Range<T>((T)left, (T)right);
+    private ReadResults ReadNumber(IStringReader reader, Func<string, CommandError> invalidNumberErrorProvider, out T? result) {
+        result = default;
+        int start = reader.GetCursor();
+
+        while (reader.CanRead() && IsAllowedInput(reader)) {
+            reader.Skip();
+        }
+        string numberString = reader.GetString()[start..reader.GetCursor()];
+
+        if (string.IsNullOrEmpty(numberString)) {
+            result = null;
+            return ReadResults.Success();
+        }
+        if (T.TryParse(numberString, CultureInfo.InvariantCulture, out T number)) {
+            result = number;
             return ReadResults.Success();
         }
 
-        public ReadResults ReadNumber(Converter<string> function, Func<string, CommandError> invalidNumberErrorProvider, out T? result)
-        {
-            result = default;
-            int start = StringReader.GetCursor();
+        reader.SetCursor(start);
+        return ReadResults.Failure(invalidNumberErrorProvider(numberString).WithContext(reader));
+    }
 
-            while (StringReader.CanRead() && IsAllowedInput(StringReader))
-            {
-                StringReader.Skip();
-            }
-            string number = StringReader.GetString()[start..StringReader.GetCursor()];
-
-            if (string.IsNullOrEmpty(number))
-            {
-                result = null;
-                return ReadResults.Success();
-            } else if (function.Invoke(number, out T actualResult))
-            {
-                result = actualResult;
-                return ReadResults.Success();
-            }
-
-            StringReader.SetCursor(start);
-            return ReadResults.Failure(invalidNumberErrorProvider.Invoke(number).WithContext(StringReader));
+    private static bool IsAllowedInput(IStringReader reader) {
+        char c = reader.Peek();
+        if (c >= '0' && c <= '9' || c == '-') {
+            return true;
         }
-
-        private static bool IsAllowedInput(IStringReader reader)
-        {
-            char c = reader.Peek();
-            if (c >= '0' && c <= '9' || c == '-') return true;
-            else if (c == '.')
-            {
-                return !reader.CanRead(2) || reader.Peek(1) != '.';
-            }
-            else return false;
+        if (c == '.') {
+            return !reader.CanRead(2) || reader.Peek(1) != '.';
         }
+        return false;
     }
 }

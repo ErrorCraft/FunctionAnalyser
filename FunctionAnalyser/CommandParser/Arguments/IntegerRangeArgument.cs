@@ -3,21 +3,17 @@ using CommandParser.Results;
 using CommandParser.Results.Arguments;
 using Newtonsoft.Json;
 
-namespace CommandParser.Arguments
-{
-    public class IntegerRangeArgument : IArgument<Range<int>>
-    {
-        [JsonProperty("loopable")]
-        private readonly bool Loopable;
+namespace CommandParser.Arguments;
 
-        public IntegerRangeArgument(bool loopable = false)
-        {
-            Loopable = loopable;
-        }
+public class IntegerRangeArgument : IArgument<Range<int>> {
+    [JsonProperty("loopable")]
+    private readonly bool Loopable;
 
-        public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Range<int> result)
-        {
-            return new RangeParser<int>(reader).Read(int.TryParse, CommandError.InvalidInteger, int.MinValue, int.MaxValue, Loopable, out result);
-        }
+    public IntegerRangeArgument(bool loopable = false) {
+        Loopable = loopable;
+    }
+
+    public ReadResults Parse(IStringReader reader, DispatcherResources resources, out Range<int> result) {
+        return new RangeParser<int>(Loopable).Read(reader, CommandError.InvalidInteger, out result);
     }
 }
