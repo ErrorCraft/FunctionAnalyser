@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30309.148
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionAnalyser", "FunctionAnalyser\FunctionAnalyser.csproj", "{6A0EC86D-45E3-4D51-ACB3-DA90DD67158C}"
 EndProject
@@ -17,9 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{F3E6E6C4-CD5E-4CDE-8582-CB3900F77AD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.CommandParser", "ErrorCraft.CommandParser\ErrorCraft.CommandParser.csproj", "{623120B4-2FDB-4649-975C-66FBF6842E7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorCraft.CommandParser", "ErrorCraft.CommandParser\ErrorCraft.CommandParser.csproj", "{623120B4-2FDB-4649-975C-66FBF6842E7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.CommandParser.Tests", "ErrorCraft.CommandParser.Tests\ErrorCraft.CommandParser.Tests.csproj", "{EFE1EA07-1957-45A4-A96B-6138DF7CF232}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorCraft.CommandParser.Tests", "ErrorCraft.CommandParser.Tests\ErrorCraft.CommandParser.Tests.csproj", "{EFE1EA07-1957-45A4-A96B-6138DF7CF232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.Minecraft", "ErrorCraft.Minecraft\ErrorCraft.Minecraft.csproj", "{FF4A8E0F-BA53-4971-BDF0-10FF0802244F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.Minecraft.Tests", "ErrorCraft.Minecraft.Tests\ErrorCraft.Minecraft.Tests.csproj", "{1A088183-4EF3-4038-A965-2E43AEE0B9FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,14 @@ Global
 		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFE1EA07-1957-45A4-A96B-6138DF7CF232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF4A8E0F-BA53-4971-BDF0-10FF0802244F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF4A8E0F-BA53-4971-BDF0-10FF0802244F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF4A8E0F-BA53-4971-BDF0-10FF0802244F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF4A8E0F-BA53-4971-BDF0-10FF0802244F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A088183-4EF3-4038-A965-2E43AEE0B9FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A088183-4EF3-4038-A965-2E43AEE0B9FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A088183-4EF3-4038-A965-2E43AEE0B9FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A088183-4EF3-4038-A965-2E43AEE0B9FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
