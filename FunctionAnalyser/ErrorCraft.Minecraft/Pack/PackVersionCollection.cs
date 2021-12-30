@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
-namespace ErrorCraft.Minecraft.Game;
+namespace ErrorCraft.Minecraft.Pack;
 
 public class PackVersionCollection {
     private const string VERSION_FILE = "version.json";
@@ -10,6 +12,13 @@ public class PackVersionCollection {
 
     private PackVersionCollection(Dictionary<string, PackVersion> versions) {
         Versions = versions;
+    }
+
+    public void Write() {
+        Console.WriteLine("Versions:");
+        foreach (KeyValuePair<string, PackVersion> pair in Versions) {
+            Console.WriteLine($"{pair.Key}");
+        }
     }
 
     public static PackVersionCollection LoadVersions(string path) {
@@ -32,6 +41,8 @@ public class PackVersionCollection {
         if (!File.Exists(versionFile)) {
             return null;
         }
-        return new PackVersion();
+        string json = File.ReadAllText(versionFile);
+        PackVersion packVersion = JsonConvert.DeserializeObject<PackVersion>(json, new PackVersion.Serialiser(), new PackRoot.Serialiser())!;
+        return packVersion;
     }
 }
