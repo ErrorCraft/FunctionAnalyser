@@ -9,6 +9,22 @@ namespace ErrorCraft.Minecraft.Tests.Json;
 [TestClass]
 public class JsonReaderTests {
     [TestMethod]
+    public void Read_ReturnsJsonNumber() {
+        IStringReader stringReader = new StringReaderMock("-1.5");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonNumber));
+    }
+
+    [TestMethod]
+    public void Read_WithExtraWhitespace_ReturnsJsonNumber() {
+        IStringReader stringReader = new StringReaderMock("   -1.5   ");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonNumber));
+    }
+
+    [TestMethod]
     public void Read_ReturnsJsonBoolean() {
         IStringReader stringReader = new StringReaderMock("true");
         JsonReader jsonReader = new JsonReader(stringReader);
@@ -33,8 +49,16 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
+    public void Read_WithExtraWhitespace_ReturnsJsonNull() {
+        IStringReader stringReader = new StringReaderMock("   null   ");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonNull));
+    }
+
+    [TestMethod]
     public void Read_IsUnsuccessful_BecauseInputIsInvalid() {
-        IStringReader stringReader = new StringReaderMock("INVALID");
+        IStringReader stringReader = new StringReaderMock("invalid");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
         Assert.IsFalse(result.Successful);

@@ -17,6 +17,9 @@ public class JsonReader {
 
     private Result<IJsonElement> ReadElement() {
         string literal = ReadLiteral();
+        if (JsonNumber.TryParse(literal, out JsonNumber? jsonNumber)) {
+            return Result<IJsonElement>.Success(jsonNumber);
+        }
         if (JsonBoolean.TryParse(literal, out JsonBoolean? jsonBoolean)) {
             return Result<IJsonElement>.Success(jsonBoolean);
         }
