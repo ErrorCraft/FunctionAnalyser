@@ -9,4 +9,18 @@ public class JsonNullTests {
     public void GetElementType_ReturnsCorrectValue() {
         Assert.AreEqual(JsonElementType.NULL, JsonNull.INSTANCE.GetElementType());
     }
+
+    [TestMethod]
+    public void TryParse_ReturnsTrue() {
+        string s = "null";
+        bool successful = JsonNull.TryParse(s, out _);
+        Assert.IsTrue(successful);
+    }
+
+    [TestMethod]
+    public void TryParse_ReturnsFalse_BecauseInputIsInvalid() {
+        string s = "invalid";
+        bool successful = JsonNull.TryParse(s, out _);
+        Assert.IsFalse(successful);
+    }
 }

@@ -20,6 +20,9 @@ public class JsonReader {
         if (JsonBoolean.TryParse(literal, out JsonBoolean? jsonBoolean)) {
             return Result<IJsonElement>.Success(jsonBoolean);
         }
+        if (JsonNull.TryParse(literal, out JsonNull? jsonNull)) {
+            return Result<IJsonElement>.Success(jsonNull);
+        }
         return Result<IJsonElement>.Failure(new Message("Unable to parse JSON"));
     }
 

@@ -25,6 +25,14 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
+    public void Read_ReturnsJsonNull() {
+        IStringReader stringReader = new StringReaderMock("null");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonNull));
+    }
+
+    [TestMethod]
     public void Read_IsUnsuccessful_BecauseInputIsInvalid() {
         IStringReader stringReader = new StringReaderMock("INVALID");
         JsonReader jsonReader = new JsonReader(stringReader);
