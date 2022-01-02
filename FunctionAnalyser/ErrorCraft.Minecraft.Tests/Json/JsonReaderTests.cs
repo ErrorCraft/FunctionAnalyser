@@ -106,7 +106,7 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
-    public void Read_WithWhitespace_ReturnsJsonObject() {
+    public void Read_WithExtraWhitespace_ReturnsJsonObject() {
         IStringReader stringReader = new StringReaderMock("   {   \"example\"   :   1,   \"another_example\"   :   true   }   ");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
@@ -122,7 +122,7 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
-    public void Read_IsUnsuccessful_BecauseObjectWasNotClosed() {
+    public void Read_IsUnsuccessful_BecauseObjectIsNotClosed() {
         IStringReader stringReader = new StringReaderMock("{");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
@@ -130,7 +130,7 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
-    public void Read_IsUnsuccessful_BecauseNameSeparatorWasNotPresent() {
+    public void Read_IsUnsuccessful_BecauseNameSeparatorIsNotPresent() {
         IStringReader stringReader = new StringReaderMock("{\"key\"");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
@@ -139,14 +139,14 @@ public class JsonReaderTests {
 
     [TestMethod]
     public void Read_IsUnsuccessful_BecauseNameIsNotPresent() {
-        IStringReader stringReader = new StringReaderMock("{invalid");
+        IStringReader stringReader = new StringReaderMock("{:1}");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
         Assert.IsFalse(result.Successful);
     }
 
     [TestMethod]
-    public void Read_IsUnsuccessful_BecauseValueWasNotPresent() {
+    public void Read_IsUnsuccessful_BecauseValueIsNotPresent() {
         IStringReader stringReader = new StringReaderMock("{\"key\":");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
@@ -154,7 +154,7 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
-    public void Read_IsUnsuccessful_BecauseThereWasNoItemAfterValueSeparator() {
+    public void Read_IsUnsuccessful_BecauseThereIsNoItemAfterValueSeparatorInObject() {
         IStringReader stringReader = new StringReaderMock("{\"key\":1,");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
@@ -170,7 +170,7 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
-    public void Read_WithWhitespace_ReturnsJsonArray() {
+    public void Read_WithExtraWhitespace_ReturnsJsonArray() {
         IStringReader stringReader = new StringReaderMock("   [   1   ,   2   ,   3   ]   ");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
@@ -202,7 +202,7 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
-    public void Read_IsUnsuccessful_BecauseThereIsNoItemAfterValueSeparator() {
+    public void Read_IsUnsuccessful_BecauseThereIsNoItemAfterValueSeparatorInArray() {
         IStringReader stringReader = new StringReaderMock("[1,");
         JsonReader jsonReader = new JsonReader(stringReader);
         Result<IJsonElement> result = jsonReader.Read();
