@@ -73,6 +73,14 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
+    public void Read_WithExtraWhitespace_ReturnsJsonString() {
+        IStringReader stringReader = new StringReaderMock("   \"text\"   ");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonString));
+    }
+
+    [TestMethod]
     public void Read_WithEscapedValues_ReturnsJsonString() {
         IStringReader stringReader = new StringReaderMock("\"text\\u0020and more\\ttext!\"");
         JsonReader jsonReader = new JsonReader(stringReader);
