@@ -160,4 +160,52 @@ public class JsonReaderTests {
         Result<IJsonElement> result = jsonReader.Read();
         Assert.IsFalse(result.Successful);
     }
+
+    [TestMethod]
+    public void Read_ReturnsJsonArray() {
+        IStringReader stringReader = new StringReaderMock("[1,2,3]");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonArray));
+    }
+
+    [TestMethod]
+    public void Read_WithWhitespace_ReturnsJsonArray() {
+        IStringReader stringReader = new StringReaderMock("   [   1   ,   2   ,   3   ]   ");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonArray));
+    }
+
+    [TestMethod]
+    public void Read_WithNoContents_ReturnsJsonArray() {
+        IStringReader stringReader = new StringReaderMock("[]");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonArray));
+    }
+
+    [TestMethod]
+    public void Read_WithMixedElements_ReturnsJsonArray() {
+        IStringReader stringReader = new StringReaderMock("[1,true,[\"text\"]]");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonArray));
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseArrayIsNotClosed() {
+        IStringReader stringReader = new StringReaderMock("[");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseThereIsNoItemAfterValueSeparator() {
+        IStringReader stringReader = new StringReaderMock("[1,");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
 }

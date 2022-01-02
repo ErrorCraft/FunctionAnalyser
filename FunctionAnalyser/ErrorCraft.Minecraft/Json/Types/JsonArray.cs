@@ -3,6 +3,9 @@
 namespace ErrorCraft.Minecraft.Json.Types;
 
 public class JsonArray : IJsonElement {
+    internal const char ARRAY_OPEN_CHARACTER = '[';
+    internal const char ARRAY_CLOSE_CHARACTER = ']';
+
     private readonly List<IJsonElement> Items;
 
     public JsonArray() {

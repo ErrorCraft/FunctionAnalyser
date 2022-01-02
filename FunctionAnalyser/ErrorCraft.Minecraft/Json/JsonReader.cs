@@ -18,6 +18,9 @@ public class JsonReader {
         if (Reader.IsNext(JsonObject.OBJECT_OPEN_CHARACTER)) {
             return ReadObject();
         }
+        if (Reader.IsNext(JsonArray.ARRAY_OPEN_CHARACTER)) {
+            return ReadArray();
+        }
         if (Reader.IsNext(JsonString.QUOTE_CHARACTER)) {
             return Result<IJsonElement>.From(ReadString(), (value) => new JsonString(value));
         }
@@ -69,6 +72,44 @@ public class JsonReader {
             if (Reader.IsNext(JsonObject.OBJECT_CLOSE_CHARACTER)) {
                 Reader.Skip();
                 return Result<IJsonElement>.Success(new JsonObject(children));
+            }
+        }
+        return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+    }
+
+    private Result<IJsonElement> ReadArray() {
+        if (!Reader.IsNext(JsonArray.ARRAY_OPEN_CHARACTER)) {
+            return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+        }
+        Reader.Skip();
+        SkipWhitespace();
+        if (!Reader.IsNext(JsonArray.ARRAY_CLOSE_CHARACTER)) {
+            return ReadArrayContents();
+        }
+        Reader.Skip();
+        return Result<IJsonElement>.Success(new JsonArray());
+    }
+
+    private Result<IJsonElement> ReadArrayContents() {
+        List<IJsonElement> items = new List<IJsonElement>();
+        while (Reader.CanRead()) {
+            SkipWhitespace();
+            Result<IJsonElement> itemResult = Read();
+            if (!itemResult.Successful) {
+                return itemResult;
+            }
+
+            items.Add(itemResult.Value!);
+
+            SkipWhitespace();
+            if (Reader.IsNext(JsonObject.VALUE_SEPARATOR)) {
+                Reader.Skip();
+                continue;
+            }
+
+            if (Reader.IsNext(JsonArray.ARRAY_CLOSE_CHARACTER)) {
+                Reader.Skip();
+                return Result<IJsonElement>.Success(new JsonArray(items));
             }
         }
         return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
