@@ -17,6 +17,14 @@ public class JsonReaderTests {
     }
 
     [TestMethod]
+    public void Read_WithExponent_ReturnsJsonNumber() {
+        IStringReader stringReader = new StringReaderMock("-1.5e2");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonNumber));
+    }
+
+    [TestMethod]
     public void Read_WithExtraWhitespace_ReturnsJsonNumber() {
         IStringReader stringReader = new StringReaderMock("   -1.5   ");
         JsonReader jsonReader = new JsonReader(stringReader);
