@@ -1,5 +1,6 @@
 ﻿using ErrorCraft.Minecraft.Json.Types;
 using ErrorCraft.Minecraft.Util;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -14,20 +15,71 @@ public class JsonReader {
 
     public Result<IJsonElement> Read() {
         SkipWhitespace();
+        if (Reader.IsNext(JsonObject.OBJECT_OPEN_CHARACTER)) {
+            return ReadObject();
+        }
         if (Reader.IsNext(JsonString.QUOTE_CHARACTER)) {
-            return ReadString();
+            return Result<IJsonElement>.From(ReadString(), (value) => new JsonString(value));
         }
         return ReadElement();
     }
 
-    private Result<IJsonElement> ReadString() {
-        if (!Reader.IsNext(JsonString.QUOTE_CHARACTER)) {
+    private Result<IJsonElement> ReadObject() {
+        if (!Reader.IsNext(JsonObject.OBJECT_OPEN_CHARACTER)) {
             return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
         }
         Reader.Skip();
+        SkipWhitespace();
+        if (!Reader.IsNext(JsonObject.OBJECT_CLOSE_CHARACTER)) {
+            return ReadObjectContents();
+        }
+        Reader.Skip();
+        return Result<IJsonElement>.Success(new JsonObject());
+    }
 
-        Result<string> stringResult = ReadCharacters();
-        return Result<IJsonElement>.From(stringResult, (value) => new JsonString(value));
+    private Result<IJsonElement> ReadObjectContents() {
+        Dictionary<string, IJsonElement> children = new Dictionary<string, IJsonElement>();
+        while (Reader.CanRead()) {
+            SkipWhitespace();
+            Result<string> keyResult = ReadString();
+            if (!keyResult.Successful) {
+                return Result<IJsonElement>.Failure(keyResult);
+            }
+
+            SkipWhitespace();
+            if (!Reader.IsNext(JsonObject.NAME_SEPARATOR)) {
+                return Result<IJsonElement>.Failure(new Message($"Expected '{JsonObject.NAME_SEPARATOR}'"));
+            }
+            Reader.Skip();
+
+            SkipWhitespace();
+            Result<IJsonElement> valueResult = Read();
+            if (!valueResult.Successful) {
+                return valueResult;
+            }
+
+            children.Add(keyResult.Value!, valueResult.Value!);
+
+            SkipWhitespace();
+            if (Reader.IsNext(JsonObject.VALUE_SEPARATOR)) {
+                Reader.Skip();
+                continue;
+            }
+
+            if (Reader.IsNext(JsonObject.OBJECT_CLOSE_CHARACTER)) {
+                Reader.Skip();
+                return Result<IJsonElement>.Success(new JsonObject(children));
+            }
+        }
+        return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+    }
+
+    private Result<string> ReadString() {
+        if (!Reader.IsNext(JsonString.QUOTE_CHARACTER)) {
+            return Result<string>.Failure(new Message("Malformed JSON"));
+        }
+        Reader.Skip();
+        return ReadCharacters();
     }
 
     private Result<string> ReadCharacters() {

@@ -96,4 +96,68 @@ public class JsonReaderTests {
         Result<IJsonElement> result = jsonReader.Read();
         Assert.IsFalse(result.Successful);
     }
+
+    [TestMethod]
+    public void Read_ReturnsJsonObject() {
+        IStringReader stringReader = new StringReaderMock("{\"example\":1,\"another_example\":true}");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonObject));
+    }
+
+    [TestMethod]
+    public void Read_WithWhitespace_ReturnsJsonObject() {
+        IStringReader stringReader = new StringReaderMock("   {   \"example\"   :   1,   \"another_example\"   :   true   }   ");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonObject));
+    }
+
+    [TestMethod]
+    public void Read_WithNoContents_ReturnsJsonObject() {
+        IStringReader stringReader = new StringReaderMock("{}");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonObject));
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseObjectWasNotClosed() {
+        IStringReader stringReader = new StringReaderMock("{");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseNameSeparatorWasNotPresent() {
+        IStringReader stringReader = new StringReaderMock("{\"key\"");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseNameIsNotPresent() {
+        IStringReader stringReader = new StringReaderMock("{invalid");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseValueWasNotPresent() {
+        IStringReader stringReader = new StringReaderMock("{\"key\":");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseThereWasNoItemAfterValueSeparator() {
+        IStringReader stringReader = new StringReaderMock("{\"key\":1,");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
 }
