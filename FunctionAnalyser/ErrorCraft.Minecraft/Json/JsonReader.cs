@@ -7,6 +7,12 @@ using System.Text;
 namespace ErrorCraft.Minecraft.Json;
 
 public class JsonReader {
+    private const string MALFORMED_JSON_MESSAGE = "Malformed JSON";
+    private const string EXPECTED_NAME_SEPARATOR_MESSAGE = "Expected ':'";
+    private const string UNTERMINATED_STRING_MESSAGE = "Unterminated string";
+    private const string INVALID_ESCAPE_SEQUENCE_MESSAGE = "Invalid escape sequence";
+    private const string UNTERMINATED_ESCAPE_SEQUENCE_MESSAGE = "Unterminated escape sequence";
+
     private readonly IStringReader Reader;
 
     public JsonReader(IStringReader reader) {
@@ -29,7 +35,7 @@ public class JsonReader {
 
     private Result<IJsonElement> ReadObject() {
         if (!Reader.IsNext(JsonObject.OBJECT_OPEN_CHARACTER)) {
-            return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+            return Result<IJsonElement>.Failure(new Message(MALFORMED_JSON_MESSAGE));
         }
         Reader.Skip();
         SkipWhitespace();
@@ -51,7 +57,7 @@ public class JsonReader {
 
             SkipWhitespace();
             if (!Reader.IsNext(JsonObject.NAME_SEPARATOR)) {
-                return Result<IJsonElement>.Failure(new Message($"Expected '{JsonObject.NAME_SEPARATOR}'"));
+                return Result<IJsonElement>.Failure(new Message(EXPECTED_NAME_SEPARATOR_MESSAGE));
             }
             Reader.Skip();
 
@@ -74,12 +80,12 @@ public class JsonReader {
                 return Result<IJsonElement>.Success(new JsonObject(children));
             }
         }
-        return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+        return Result<IJsonElement>.Failure(new Message(MALFORMED_JSON_MESSAGE));
     }
 
     private Result<IJsonElement> ReadArray() {
         if (!Reader.IsNext(JsonArray.ARRAY_OPEN_CHARACTER)) {
-            return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+            return Result<IJsonElement>.Failure(new Message(MALFORMED_JSON_MESSAGE));
         }
         Reader.Skip();
         SkipWhitespace();
@@ -112,12 +118,12 @@ public class JsonReader {
                 return Result<IJsonElement>.Success(new JsonArray(items));
             }
         }
-        return Result<IJsonElement>.Failure(new Message("Malformed JSON"));
+        return Result<IJsonElement>.Failure(new Message(MALFORMED_JSON_MESSAGE));
     }
 
     private Result<string> ReadString() {
         if (!Reader.IsNext(JsonString.QUOTE_CHARACTER)) {
-            return Result<string>.Failure(new Message("Malformed JSON"));
+            return Result<string>.Failure(new Message(MALFORMED_JSON_MESSAGE));
         }
         Reader.Skip();
         return ReadCharacters();
@@ -141,12 +147,12 @@ public class JsonReader {
             stringBuilder.Append(c);
         }
 
-        return Result<string>.Failure(new Message("Unterminated string"));
+        return Result<string>.Failure(new Message(UNTERMINATED_STRING_MESSAGE));
     }
 
     private Result<char> ReadEscapeCharacter() {
         if (!Reader.CanRead()) {
-            return Result<char>.Failure(new Message("Unterminated escape sequence"));
+            return Result<char>.Failure(new Message(UNTERMINATED_ESCAPE_SEQUENCE_MESSAGE));
         }
 
         char c = Reader.Read();
@@ -157,18 +163,18 @@ public class JsonReader {
             return ReadUnicodeCharacter();
         }
 
-        return Result<char>.Failure(new Message("Invalid escape sequence"));
+        return Result<char>.Failure(new Message(INVALID_ESCAPE_SEQUENCE_MESSAGE));
     }
 
     private Result<char> ReadUnicodeCharacter() {
         if (!Reader.CanRead(4)) {
-            return Result<char>.Failure(new Message("Unterminated escape sequence"));
+            return Result<char>.Failure(new Message(UNTERMINATED_ESCAPE_SEQUENCE_MESSAGE));
         }
         string unicode = Reader.Read(4);
         if (ushort.TryParse(unicode, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ushort character)) {
             return Result<char>.Success((char)character);
         }
-        return Result<char>.Failure(new Message("Invalid escape sequence"));
+        return Result<char>.Failure(new Message(INVALID_ESCAPE_SEQUENCE_MESSAGE));
     }
 
     private Result<IJsonElement> ReadElement() {
@@ -182,7 +188,7 @@ public class JsonReader {
         if (JsonNull.TryParse(literal, out JsonNull? jsonNull)) {
             return Result<IJsonElement>.Success(jsonNull);
         }
-        return Result<IJsonElement>.Failure(new Message("Unable to parse JSON"));
+        return Result<IJsonElement>.Failure(new Message(MALFORMED_JSON_MESSAGE));
     }
 
     private string ReadLiteral() {
