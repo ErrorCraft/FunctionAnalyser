@@ -23,6 +23,12 @@ internal class StringReaderMock : IStringReader {
         return Text[Cursor++];
     }
 
+    public string Read(int length) {
+        int start = Cursor;
+        Cursor += length;
+        return Text.Substring(start, length);
+    }
+
     public char Peek() {
         return Text[Cursor];
     }

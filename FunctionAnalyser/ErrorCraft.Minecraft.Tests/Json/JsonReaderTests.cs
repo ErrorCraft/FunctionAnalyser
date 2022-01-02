@@ -63,4 +63,37 @@ public class JsonReaderTests {
         Result<IJsonElement> result = jsonReader.Read();
         Assert.IsFalse(result.Successful);
     }
+
+    [TestMethod]
+    public void Read_ReturnsJsonString() {
+        IStringReader stringReader = new StringReaderMock("\"text\"");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsInstanceOfType(result.Value, typeof(JsonString));
+    }
+
+    [TestMethod]
+    public void Read_WithEscapedValues_ReturnsJsonString() {
+        IStringReader stringReader = new StringReaderMock("\"text\\u0020and more\\ttext!\"");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        JsonString jsonString = (JsonString)result.Value!;
+        Assert.AreEqual("text and more\ttext!", (string)jsonString);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseStringIsUnterminated() {
+        IStringReader stringReader = new StringReaderMock("\"text");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
+
+    [TestMethod]
+    public void Read_IsUnsuccessful_BecauseStringEscapeSequenceIsInvalid() {
+        IStringReader stringReader = new StringReaderMock("\"text\\ \"");
+        JsonReader jsonReader = new JsonReader(stringReader);
+        Result<IJsonElement> result = jsonReader.Read();
+        Assert.IsFalse(result.Successful);
+    }
 }

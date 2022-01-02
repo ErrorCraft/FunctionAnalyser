@@ -9,6 +9,7 @@ public interface IStringReader {
     bool CanRead();
     bool CanRead(int length);
     char Read();
+    string Read(int length);
     char Peek();
     void Skip();
     
