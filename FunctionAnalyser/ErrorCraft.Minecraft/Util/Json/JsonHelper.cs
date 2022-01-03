@@ -18,6 +18,27 @@ internal static class JsonHelper {
         return json.Value<string>()!;
     }
 
+    public static bool GetBoolean(this JObject json, string key) {
+        if (!json.TryGetValue(key, out JToken? token)) {
+            throw new JsonException($"Missing {key}, expected to find a boolean");
+        }
+        return AsBoolean(token, key);
+    }
+
+    public static bool GetBoolean(this JObject json, string key, bool defaultValue) {
+        if (!json.TryGetValue(key, out JToken? token)) {
+            return defaultValue;
+        }
+        return AsBoolean(token, key);
+    }
+
+    public static bool AsBoolean(this JToken json, string name) {
+        if (json.Type != JTokenType.Boolean) {
+            throw new JsonException($"Expected {name} to be a boolean, was {json.Type}");
+        }
+        return json.Value<bool>()!;
+    }
+
     public static T Deserialise<T>(this JObject json, string key, JsonSerializer serialiser) {
         if (!json.TryGetValue(key, out JToken? token)) {
             throw new JsonException($"Missing {key}");

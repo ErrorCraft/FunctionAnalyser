@@ -39,9 +39,62 @@ public class JsonHelperTests {
         Assert.ThrowsException<JsonException>(() => json.AsString(""));
     }
 
+    [TestMethod]
+    public void GetBoolean_ReturnsCorrectValue() {
+        JObject json = GetJson();
+        bool result = json.GetBoolean("example_boolean");
+        Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
+    public void GetBoolean_ThrowsException_BecauseItemDoesNotExist() {
+        JObject json = GetJson();
+        Assert.ThrowsException<JsonException>(() => json.GetBoolean("invalid"));
+    }
+
+    [TestMethod]
+    public void GetBoolean_ThrowsException_BecauseItemTypeIsIncorrect() {
+        JObject json = GetJson();
+        Assert.ThrowsException<JsonException>(() => json.GetBoolean("example_integer"));
+    }
+
+    [TestMethod]
+    public void GetBoolean_WithDefaultValue_ReturnsCorrectValue() {
+        JObject json = GetJson();
+        bool result = json.GetBoolean("example_boolean", false);
+        Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
+    public void GetBoolean_WithDefaultValue_ReturnsDefaultValue_BecauseItemDoesNotExist() {
+        JObject json = GetJson();
+        bool result = json.GetBoolean("invalid", false);
+        Assert.AreEqual(false, result);
+    }
+
+    [TestMethod]
+    public void GetBoolean_WithDefaultValue_ThrowsException_BecauseItemTypeIsIncorrect() {
+        JObject json = GetJson();
+        Assert.ThrowsException<JsonException>(() => json.GetBoolean("example_integer"));
+    }
+
+    [TestMethod]
+    public void AsBoolean_ReturnsCorrectValue() {
+        JToken json = true;
+        bool result = json.AsBoolean("");
+        Assert.AreEqual(true, result);
+    }
+
+    [TestMethod]
+    public void AsBoolean_ThrowsException_BecauseTypeIsIncorrect() {
+        JToken json = 10;
+        Assert.ThrowsException<JsonException>(() => json.AsString(""));
+    }
+
     private static JObject GetJson() {
         return new JObject() {
             { "example_string", "text" },
+            { "example_boolean", true },
             { "example_integer", 10 }
         };
     }

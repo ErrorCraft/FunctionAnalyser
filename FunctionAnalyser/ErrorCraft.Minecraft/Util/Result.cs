@@ -2,6 +2,24 @@
 
 namespace ErrorCraft.Minecraft.Util;
 
+public class Result {
+    public bool Successful { get; }
+    public Message? Message { get; }
+
+    private Result(bool successful, Message? message) {
+        Successful = successful;
+        Message = message;
+    }
+
+    public static Result Success() {
+        return new Result(true, null);
+    }
+
+    public static Result Failure(Message message) {
+        return new Result(false, message);
+    }
+}
+
 public class Result<T> {
     public bool Successful { get; }
     public T? Value { get; }
