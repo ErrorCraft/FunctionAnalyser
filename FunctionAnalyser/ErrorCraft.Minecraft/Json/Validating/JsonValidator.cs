@@ -4,7 +4,7 @@ using ErrorCraft.Minecraft.Util.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ErrorCraft.Minecraft.Json.Validators;
+namespace ErrorCraft.Minecraft.Json.Validating;
 
 public abstract class JsonValidator {
     protected readonly bool Optional;

@@ -3,7 +3,7 @@ using ErrorCraft.Minecraft.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ErrorCraft.Minecraft.Json.Validators;
+namespace ErrorCraft.Minecraft.Json.Validating.Validators;
 
 public class NumberJsonValidator : JsonValidator {
     public NumberJsonValidator(bool optional) : base(optional) { }
