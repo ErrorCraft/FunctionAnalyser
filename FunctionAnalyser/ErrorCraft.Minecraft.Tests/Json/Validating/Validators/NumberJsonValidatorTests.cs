@@ -1,9 +1,9 @@
 ﻿using ErrorCraft.Minecraft.Json.Types;
-using ErrorCraft.Minecraft.Json.Validators;
+using ErrorCraft.Minecraft.Json.Validating.Validators;
 using ErrorCraft.Minecraft.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ErrorCraft.Minecraft.Tests.Json.Validators;
+namespace ErrorCraft.Minecraft.Tests.Json.Validating.Validators;
 
 [TestClass]
 public class NumberJsonValidatorTests {

@@ -1,22 +1,22 @@
 ﻿using ErrorCraft.Minecraft.Json.Types;
-using ErrorCraft.Minecraft.Json.Validators;
+using ErrorCraft.Minecraft.Json.Validating.Validators;
 using ErrorCraft.Minecraft.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ErrorCraft.Minecraft.Tests.Json.Validators;
+namespace ErrorCraft.Minecraft.Tests.Json.Validating.Validators;
 
 [TestClass]
-public class ObjectJsonValidatorTests {
+public class BooleanJsonValidatorTests {
     [TestMethod]
     public void Validate_IsSuccessful() {
-        ObjectJsonValidator validator = new ObjectJsonValidator(false);
-        Result result = validator.Validate(new JsonObject(), "");
+        BooleanJsonValidator validator = new BooleanJsonValidator(false);
+        Result result = validator.Validate(new JsonBoolean(true), "");
         Assert.IsTrue(result.Successful);
     }
 
     [TestMethod]
     public void Validate_IsUnsuccessful_BecauseTypeIsIncorrect() {
-        ObjectJsonValidator validator = new ObjectJsonValidator(false);
+        BooleanJsonValidator validator = new BooleanJsonValidator(false);
         Result result = validator.Validate(JsonNull.INSTANCE, "");
         Assert.IsFalse(result.Successful);
     }
