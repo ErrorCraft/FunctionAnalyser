@@ -13,13 +13,13 @@ public class PackRoot {
         Metadata = metadata;
     }
 
-    public class Serialiser : JsonSerialiser<PackRoot> {
-        public override void ToJson(JObject json, PackRoot value, JsonSerializer serialiser) {
+    public class Serialiser : IJsonSerialiser<PackRoot> {
+        public void ToJson(JObject json, PackRoot value, JsonSerializer serialiser) {
             json.Add("folder", value.Folder);
             json.Add("metadata", value.Metadata);
         }
 
-        public override PackRoot FromJson(JObject json, JsonSerializer serialiser) {
+        public PackRoot FromJson(JObject json, JsonSerializer serialiser) {
             string folder = json.GetString("folder");
             string metadata = json.GetString("metadata");
             return new PackRoot(folder, metadata);

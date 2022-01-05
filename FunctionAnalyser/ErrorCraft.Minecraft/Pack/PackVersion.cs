@@ -11,12 +11,12 @@ public class PackVersion {
         Root = root;
     }
 
-    public class Serialiser : JsonSerialiser<PackVersion> {
-        public override void ToJson(JObject json, PackVersion value, JsonSerializer serialiser) {
+    public class Serialiser : IJsonSerialiser<PackVersion> {
+        public void ToJson(JObject json, PackVersion value, JsonSerializer serialiser) {
             json.Add("root", serialiser.Serialise(value.Root));
         }
 
-        public override PackVersion FromJson(JObject json, JsonSerializer serialiser) {
+        public PackVersion FromJson(JObject json, JsonSerializer serialiser) {
             PackRoot root = json.Deserialise<PackRoot>("root", serialiser);
             return new PackVersion(root);
         }

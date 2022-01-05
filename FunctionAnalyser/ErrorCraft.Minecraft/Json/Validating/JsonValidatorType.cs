@@ -3,5 +3,5 @@
 namespace ErrorCraft.Minecraft.Json.Validating;
 
 public class JsonValidatorType : JsonSerialiserType<JsonValidator> {
-    public JsonValidatorType(JsonSerialiser<JsonValidator> serialiser) : base(serialiser) { }
+    public JsonValidatorType(IJsonSerialiser<JsonValidator> serialiser) : base(serialiser) { }
 }

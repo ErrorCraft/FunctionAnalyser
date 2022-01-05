@@ -1,9 +1,9 @@
 ﻿namespace ErrorCraft.Minecraft.Util.Json;
 
 public abstract class JsonSerialiserType<T> {
-    public JsonSerialiser<T> Serialiser { get; }
+    public IJsonSerialiser<T> Serialiser { get; }
 
-    public JsonSerialiserType(JsonSerialiser<T> serialiser) {
+    public JsonSerialiserType(IJsonSerialiser<T> serialiser) {
         Serialiser = serialiser;
     }
 }
