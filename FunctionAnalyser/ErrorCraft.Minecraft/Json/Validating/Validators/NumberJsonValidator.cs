@@ -15,7 +15,7 @@ public class NumberJsonValidator : JsonValidator {
         return Result.Failure(new Message($"Expected {name} to be a number"));
     }
 
-    public class Serialiser : Serialiser<NumberJsonValidator> {
+    public new class Serialiser : JsonValidator.Serialiser {
         public override NumberJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             return new NumberJsonValidator(optional);
         }

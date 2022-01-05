@@ -2,7 +2,7 @@
 
 namespace ErrorCraft.Minecraft.Util;
 
-internal class Registry<T> {
+public class Registry<T> {
     private readonly Dictionary<ResourceLocation, T> Items = new Dictionary<ResourceLocation, T>();
 
     public T this[ResourceLocation resourceLocation] {

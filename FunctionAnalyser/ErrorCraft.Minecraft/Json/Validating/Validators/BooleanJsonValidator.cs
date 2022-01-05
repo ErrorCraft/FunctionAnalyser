@@ -15,7 +15,7 @@ public class BooleanJsonValidator : JsonValidator {
         return Result.Failure(new Message($"Expected {name} to be a boolean"));
     }
 
-    public class Serialiser : Serialiser<BooleanJsonValidator> {
+    public new class Serialiser : JsonValidator.Serialiser {
         public override BooleanJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             return new BooleanJsonValidator(optional);
         }

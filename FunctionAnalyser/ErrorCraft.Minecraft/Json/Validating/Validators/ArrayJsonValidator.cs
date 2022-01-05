@@ -15,7 +15,7 @@ public class ArrayJsonValidator : JsonValidator {
         return Result.Failure(new Message($"Expected {name} to be an array"));
     }
 
-    public class Serialiser : Serialiser<ArrayJsonValidator> {
+    public new class Serialiser : JsonValidator.Serialiser {
         public override ArrayJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             return new ArrayJsonValidator(optional);
         }

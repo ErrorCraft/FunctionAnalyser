@@ -15,16 +15,16 @@ public abstract class JsonValidator {
 
     public abstract Result Validate(IJsonElement json, string name);
 
-    public abstract class Serialiser<T> : JsonSerialiser<T> where T : JsonValidator {
-        public override void ToJson(JObject json, T value, JsonSerializer serialiser) {
+    public abstract class Serialiser : JsonSerialiser<JsonValidator> {
+        public override void ToJson(JObject json, JsonValidator value, JsonSerializer serialiser) {
             json.Add("optional", value.Optional);
         }
 
-        public sealed override T FromJson(JObject json, JsonSerializer serialiser) {
+        public sealed override JsonValidator FromJson(JObject json, JsonSerializer serialiser) {
             bool optional = json.GetBoolean("optional", false);
             return FromJson(json, serialiser, optional);
         }
 
-        public abstract T FromJson(JObject json, JsonSerializer serialiser, bool optional);
+        public abstract JsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional);
     }
 }
