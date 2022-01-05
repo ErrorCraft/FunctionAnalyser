@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ErrorCraft.Minecraft.Util.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +43,7 @@ public class PackVersionCollection {
             return null;
         }
         string json = File.ReadAllText(versionFile);
-        PackVersion packVersion = JsonConvert.DeserializeObject<PackVersion>(json, new PackVersion.Serialiser(), new PackRoot.Serialiser())!;
+        PackVersion packVersion = JsonConvert.DeserializeObject<PackVersion>(json, new JsonSerialiserConverter<PackVersion>(new PackVersion.Serialiser()), new JsonSerialiserConverter<PackRoot>(new PackRoot.Serialiser()))!;
         return packVersion;
     }
 }
