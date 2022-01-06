@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ErrorCraft.Minecraft.Util;
+namespace ErrorCraft.Minecraft.Util.Registries;
 
 public class Registry<T> {
     private readonly Dictionary<ResourceLocation, T> Items = new Dictionary<ResourceLocation, T>();
