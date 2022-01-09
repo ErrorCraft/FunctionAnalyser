@@ -43,7 +43,7 @@ public class PackVersionCollection {
             return null;
         }
         string json = File.ReadAllText(versionFile);
-        PackVersion packVersion = JsonConvert.DeserializeObject<PackVersion>(json, new JsonSerialiserConverter<PackVersion>(new PackVersion.Serialiser()), new JsonSerialiserConverter<PackRoot>(new PackRoot.Serialiser()))!;
-        return packVersion;
+        PackDefinition packDefinition = JsonConvert.DeserializeObject<PackDefinition>(json, new JsonSerialiserConverter<PackDefinition>(new PackDefinition.Serialiser()))!;
+        return new PackVersion(packDefinition);
     }
 }
