@@ -1,4 +1,6 @@
-﻿using ErrorCraft.Minecraft.Util.Json;
+﻿using ErrorCraft.Minecraft.Json.Validating;
+using ErrorCraft.Minecraft.Resources.Json;
+using ErrorCraft.Minecraft.Util.Json;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ namespace ErrorCraft.Minecraft.Pack;
 
 public class PackVersionCollection {
     private const string VERSION_FILE = "version.json";
+    private static readonly RequiredLoadableJsonResource<PackMetadata> METADATA_LOADER = new RequiredLoadableJsonResource<PackMetadata>("metadata.json", new JsonSerialiserConverter<PackMetadata>(new PackMetadata.Serialiser()), new JsonSerialiserConverter<JsonValidator>(JsonValidatorTypes.CreateJsonSerialiser()));
 
     private readonly Dictionary<string, PackVersion> Versions;
 
@@ -44,6 +47,7 @@ public class PackVersionCollection {
         }
         string json = File.ReadAllText(versionFile);
         PackDefinition packDefinition = JsonConvert.DeserializeObject<PackDefinition>(json, new JsonSerialiserConverter<PackDefinition>(new PackDefinition.Serialiser()))!;
-        return new PackVersion(packDefinition);
+        PackMetadata metadata = METADATA_LOADER.Load(path);
+        return new PackVersion(packDefinition, metadata);
     }
 }
