@@ -1,7 +1,10 @@
-﻿using ErrorCraft.Minecraft.Json.Validating;
+﻿using ErrorCraft.Minecraft.Json.Types;
+using ErrorCraft.Minecraft.Json.Validating;
+using ErrorCraft.Minecraft.Util;
 using ErrorCraft.Minecraft.Util.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace ErrorCraft.Minecraft.Pack;
 
@@ -12,6 +15,18 @@ public class PackMetadata {
     public PackMetadata(string fileName, JsonValidator validator) {
         FileName = fileName;
         Validator = validator;
+    }
+
+    public Result Analyse(string path) {
+        string metadataFile = Path.Combine(path, FileName);
+        if (!File.Exists(metadataFile)) {
+            return Result.Failure(new Message($"Metadata file ({FileName}) does not exist"));
+        }
+        Result<IJsonElement> jsonResult = Json.JsonReader.ReadFromFile(metadataFile);
+        if (!jsonResult.Successful) {
+            return Result.Failure(jsonResult.Message!);
+        }
+        return Validator.Validate(jsonResult.Value!, "root");
     }
 
     public class Serialiser : IJsonSerialiser<PackMetadata> {

@@ -1,4 +1,6 @@
-﻿namespace ErrorCraft.Minecraft.Pack;
+﻿using ErrorCraft.Minecraft.Util;
+
+namespace ErrorCraft.Minecraft.Pack;
 
 public class PackVersion {
     private readonly PackDefinition Definition;
@@ -7,5 +9,10 @@ public class PackVersion {
     public PackVersion(PackDefinition definition, PackMetadata metadata) {
         Definition = definition;
         Metadata = metadata;
+    }
+
+    public Result Analyse(string path) {
+        Result metadataResult = Metadata.Analyse(path);
+        return metadataResult;
     }
 }

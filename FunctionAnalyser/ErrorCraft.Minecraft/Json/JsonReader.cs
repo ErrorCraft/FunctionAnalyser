@@ -2,6 +2,7 @@
 using ErrorCraft.Minecraft.Util;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 
 namespace ErrorCraft.Minecraft.Json;
@@ -31,6 +32,16 @@ public class JsonReader {
             return Result<IJsonElement>.From(ReadString(), (value) => new JsonString(value));
         }
         return ReadElement();
+    }
+
+    public static Result<IJsonElement> ReadFromFile(string file) {
+        if (!File.Exists(file)) {
+            return Result<IJsonElement>.Failure(new Message($"File '{file}' does not exist"));
+        }
+        string fileContents = File.ReadAllText(file);
+        Util.StringReader stringReader = new Util.StringReader(fileContents);
+        JsonReader jsonReader = new JsonReader(stringReader);
+        return jsonReader.Read();
     }
 
     private Result<IJsonElement> ReadObject() {

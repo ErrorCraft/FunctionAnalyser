@@ -18,6 +18,10 @@ public class PackVersionCollection {
         Versions = versions;
     }
 
+    public PackVersion this[string name] {
+        get { return Versions[name]; }
+    }
+
     public void Write() {
         Console.WriteLine("Versions:");
         foreach (KeyValuePair<string, PackVersion> pair in Versions) {
