@@ -1,4 +1,5 @@
 ﻿using ErrorCraft.Minecraft.Util.Json;
+using ErrorCraft.Minecraft.Util.ResourceLocations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -20,7 +21,7 @@ public class RegistryJsonSerialiser<U, T> : IJsonSerialiser<U> where T : JsonSer
 
     public U FromJson(JObject json, JsonSerializer serialiser) {
         string s = json.GetString(RootField);
-        if (!ResourceLocation.TryParse(s, out ResourceLocation? resourceLocation)) {
+        if (!ExactResourceLocation.TryParse(s, out ExactResourceLocation? resourceLocation)) {
             throw new JsonException($"Invalid resource location {s}");
         }
         T item = Registry[resourceLocation];

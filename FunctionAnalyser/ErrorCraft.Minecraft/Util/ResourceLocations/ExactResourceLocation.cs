@@ -1,37 +1,21 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ErrorCraft.Minecraft.Util;
+namespace ErrorCraft.Minecraft.Util.ResourceLocations;
 
-public class ResourceLocation : IEquatable<ResourceLocation> {
-    private const char NAMESPACE_SEPARATOR = ':';
-    private const string DEFAULT_NAMESPACE = "minecraft";
+public class ExactResourceLocation : ResourceLocation {
+    public ExactResourceLocation(string path) : base(DEFAULT_NAMESPACE, path) { }
 
-    public string Namespace { get; }
-    public string Path { get; }
-
-    public ResourceLocation(string path) : this(DEFAULT_NAMESPACE, path) { }
-
-    public ResourceLocation(string ns, string path) {
-        Namespace = IsValidNamespace(ns) ? ns : throw new ArgumentException($"Invalid namespace for resource location: '{ns}'");
-        Path = IsValidPath(path) ? path : throw new ArgumentException($"Invalid path for resource location: '{path}");
+    public ExactResourceLocation(string ns, string path) : base(ns, path) {
+        if (!IsValidNamespace(ns)) {
+            throw new ArgumentException($"Invalid namespace for resource location: '{ns}'");
+        }
+        if (!IsValidPath(path)) {
+            throw new ArgumentException($"Invalid path for resource location: '{path}");
+        }
     }
 
-    public bool Equals(ResourceLocation? other) {
-        return other != null
-            && Namespace == other.Namespace
-            && Path == other.Path;
-    }
-
-    public override bool Equals(object? obj) {
-        return Equals(obj as ResourceLocation);
-    }
-
-    public override int GetHashCode() {
-        return HashCode.Combine(Namespace, Path);
-    }
-
-    public static bool TryParse(string input, [NotNullWhen(true)] out ResourceLocation? result) {
+    public static bool TryParse(string input, [NotNullWhen(true)] out ExactResourceLocation? result) {
         result = null;
         string[] items = Split(input);
         if (!IsValidNamespace(items[0])) {
@@ -40,7 +24,7 @@ public class ResourceLocation : IEquatable<ResourceLocation> {
         if (!IsValidPath(items[1])) {
             return false;
         }
-        result = new ResourceLocation(items[0], items[1]);
+        result = new ExactResourceLocation(items[0], items[1]);
         return true;
     }
 

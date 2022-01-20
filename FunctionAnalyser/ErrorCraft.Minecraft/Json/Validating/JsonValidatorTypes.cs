@@ -1,7 +1,7 @@
 ﻿using ErrorCraft.Minecraft.Json.Validating.Validators;
-using ErrorCraft.Minecraft.Util;
 using ErrorCraft.Minecraft.Util.Json;
 using ErrorCraft.Minecraft.Util.Registries;
+using ErrorCraft.Minecraft.Util.ResourceLocations;
 
 namespace ErrorCraft.Minecraft.Json.Validating;
 
@@ -19,6 +19,6 @@ public static class JsonValidatorTypes {
     }
 
     private static JsonValidatorType Register(string id, JsonValidator.Serialiser jsonValidator) {
-        return JSON_VALIDATOR_TYPE.Register(new ResourceLocation("json", id), new JsonValidatorType(jsonValidator));
+        return JSON_VALIDATOR_TYPE.Register(new ExactResourceLocation("json", id), new JsonValidatorType(jsonValidator));
     }
 }
