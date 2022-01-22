@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ErrorCraft.Minecraft.Util;
 
 public class Result {
+    [MemberNotNullWhen(false, nameof(Message))]
     public bool Successful { get; }
     public Message? Message { get; }
 
@@ -21,6 +23,8 @@ public class Result {
 }
 
 public class Result<T> {
+    [MemberNotNullWhen(true, nameof(Value))]
+    [MemberNotNullWhen(false, nameof(Message))]
     public bool Successful { get; }
     public T? Value { get; }
     public Message? Message { get; }
@@ -44,7 +48,7 @@ public class Result<T> {
     }
 
     public static Result<T> From<U>(Result<U> other, Func<U, T> converter) {
-        T? convertedValue = other.Successful ? converter(other.Value!) : default;
+        T? convertedValue = other.Successful ? converter(other.Value) : default;
         return new Result<T>(other.Successful, convertedValue, other.Message);
     }
 }

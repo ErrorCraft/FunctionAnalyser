@@ -78,7 +78,7 @@ public class JsonReader {
                 return valueResult;
             }
 
-            children.Add(keyResult.Value!, valueResult.Value!);
+            children.Add(keyResult.Value, valueResult.Value);
 
             SkipWhitespace();
             if (Reader.IsNext(JsonObject.VALUE_SEPARATOR)) {
@@ -116,7 +116,7 @@ public class JsonReader {
                 return itemResult;
             }
 
-            items.Add(itemResult.Value!);
+            items.Add(itemResult.Value);
 
             SkipWhitespace();
             if (Reader.IsNext(JsonObject.VALUE_SEPARATOR)) {

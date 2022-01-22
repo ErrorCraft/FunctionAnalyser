@@ -24,9 +24,9 @@ public class PackMetadata {
         }
         Result<IJsonElement> jsonResult = Json.JsonReader.ReadFromFile(metadataFile);
         if (!jsonResult.Successful) {
-            return Result.Failure(jsonResult.Message!);
+            return Result.Failure(jsonResult.Message);
         }
-        return Validator.Validate(jsonResult.Value!, "root");
+        return Validator.Validate(jsonResult.Value, "root");
     }
 
     public class Serialiser : IJsonSerialiser<PackMetadata> {
