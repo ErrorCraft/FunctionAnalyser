@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ErrorCraft.Minecraft.Json.Types;
 
@@ -23,5 +24,9 @@ public class JsonObject : IJsonElement {
 
     public JsonElementType GetElementType() {
         return JsonElementType.OBJECT;
+    }
+
+    public bool TryGetValue(string key, [NotNullWhen(true)] out IJsonElement? result) {
+        return Items.TryGetValue(key, out result);
     }
 }
