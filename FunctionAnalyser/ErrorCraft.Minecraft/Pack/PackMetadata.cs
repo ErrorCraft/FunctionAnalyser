@@ -17,14 +17,14 @@ public class PackMetadata {
         Validator = validator;
     }
 
-    public Result Analyse(string path) {
+    public Result<IJsonValidated> Analyse(string path) {
         string metadataFile = Path.Combine(path, FileName);
         if (!File.Exists(metadataFile)) {
-            return Result.Failure(new Message($"Metadata file ({FileName}) does not exist"));
+            return Result<IJsonValidated>.Failure(new Message($"Metadata file ({FileName}) does not exist"));
         }
         Result<IJsonElement> jsonResult = Json.JsonReader.ReadFromFile(metadataFile);
         if (!jsonResult.Successful) {
-            return Result.Failure(jsonResult.Message);
+            return Result<IJsonValidated>.Failure(jsonResult.Message);
         }
         return Validator.Validate(jsonResult.Value, "root");
     }

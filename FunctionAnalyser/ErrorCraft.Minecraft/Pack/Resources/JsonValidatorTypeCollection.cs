@@ -1,5 +1,6 @@
 ﻿using ErrorCraft.Minecraft.Json;
 using ErrorCraft.Minecraft.Json.Types;
+using ErrorCraft.Minecraft.Json.Validating;
 using ErrorCraft.Minecraft.Json.Validating.Validators;
 using ErrorCraft.Minecraft.Util;
 using ErrorCraft.Minecraft.Util.Json;
@@ -33,14 +34,14 @@ public class JsonValidatorTypeCollection {
             return Result.Failure(new Message($"Invalid {Key} '{resourceLocation}'"));
         }
 
-        Result itemValidateResult = validator.Validate(json, "item");
+        Result<IJsonValidated> itemValidateResult = validator.Validate(json, "item");
         if (!itemValidateResult.Successful) {
-            return itemValidateResult;
+            return Result.Failure(itemValidateResult.Message);
         }
 
-        Result templateValidateResult = Template.Validate(json, "item");
+        Result<IJsonValidated> templateValidateResult = Template.Validate(json, "item");
         if (!templateValidateResult.Successful) {
-            return templateValidateResult;
+            return Result.Failure(templateValidateResult.Message);
         }
 
         return Result.Success();

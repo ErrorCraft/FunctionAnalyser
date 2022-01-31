@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace ErrorCraft.Minecraft.Json.Types;
 
-public class JsonArray : IJsonElement {
+public class JsonArray : IJsonElement, IEnumerable<IJsonElement> {
     internal const char ARRAY_OPEN_CHARACTER = '[';
     internal const char ARRAY_CLOSE_CHARACTER = ']';
 
@@ -23,5 +24,15 @@ public class JsonArray : IJsonElement {
 
     public JsonElementType GetElementType() {
         return JsonElementType.ARRAY;
+    }
+
+    public IEnumerator<IJsonElement> GetEnumerator() {
+        foreach (IJsonElement item in Items) {
+            yield return item;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        return GetEnumerator();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ErrorCraft.Minecraft.Json.Types;
+using ErrorCraft.Minecraft.Json.Validating.Validated;
 using ErrorCraft.Minecraft.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -8,11 +9,12 @@ namespace ErrorCraft.Minecraft.Json.Validating.Validators;
 public class BooleanJsonValidator : JsonValidator {
     public BooleanJsonValidator(bool optional) : base(optional) { }
 
-    public override Result Validate(IJsonElement json, string name) {
-        if (json.GetElementType() == JsonElementType.BOOLEAN) {
-            return Result.Success();
+    public override Result<IJsonValidated> Validate(IJsonElement json, string name) {
+        Result<bool> result = json.AsBoolean(name);
+        if (result.Successful) {
+            return Result<IJsonValidated>.Success(new ValidatedJsonBoolean(result.Value));
         }
-        return Result.Failure(new Message($"Expected {name} to be a boolean"));
+        return Result<IJsonValidated>.Failure(result);
     }
 
     public new class Serialiser : JsonValidator.Serialiser {

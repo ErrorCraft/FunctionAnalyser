@@ -1,4 +1,5 @@
-﻿using ErrorCraft.Minecraft.Util;
+﻿using ErrorCraft.Minecraft.Json.Validating;
+using ErrorCraft.Minecraft.Util;
 
 namespace ErrorCraft.Minecraft.Pack;
 
@@ -13,8 +14,8 @@ public class PackVersion {
         Resources = null!;
     }
 
-    public Result Analyse(string path) {
-        Result metadataResult = Metadata.Analyse(path);
+    public Result<IJsonValidated> Analyse(string path) {
+        Result<IJsonValidated> metadataResult = Metadata.Analyse(path);
         return metadataResult;
     }
 }

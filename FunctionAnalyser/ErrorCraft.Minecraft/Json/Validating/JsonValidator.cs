@@ -13,7 +13,7 @@ public abstract class JsonValidator {
         Optional = optional;
     }
 
-    public abstract Result Validate(IJsonElement json, string name);
+    public abstract Result<IJsonValidated> Validate(IJsonElement json, string name);
 
     public abstract class Serialiser : IJsonSerialiser<JsonValidator> {
         public virtual void ToJson(JObject json, JsonValidator value, JsonSerializer serialiser) {

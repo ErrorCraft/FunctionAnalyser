@@ -16,6 +16,20 @@ internal static class JsonHelper {
         return Result<ExactResourceLocation>.Success(resourceLocation);
     }
 
+    public static Result<bool> AsBoolean(this IJsonElement json, string name) {
+        if (json is JsonBoolean jsonBoolean) {
+            return Result<bool>.Success((bool)jsonBoolean);
+        }
+        return Result<bool>.Failure(new Message($"Expected {name} to be a boolean"));
+    }
+
+    public static Result<double> AsDouble(this IJsonElement json, string name) {
+        if (json is JsonNumber jsonNumber) {
+            return Result<double>.Success((double)jsonNumber);
+        }
+        return Result<double>.Failure(new Message($"Expected {name} to be a number"));
+    }
+
     public static Result<string> GetString(this JsonObject json, string key) {
         if (!json.TryGetValue(key, out IJsonElement? jsonElement)) {
             return Result<string>.Failure(new Message($"Missing {key}, expected to find a string"));
@@ -28,5 +42,19 @@ internal static class JsonHelper {
             return Result<string>.Success((string)jsonString);
         }
         return Result<string>.Failure(new Message($"Expected {name} to be a string"));
+    }
+
+    public static Result<JsonObject> AsObject(this IJsonElement json, string name) {
+        if (json is JsonObject jsonObject) {
+            return Result<JsonObject>.Success(jsonObject);
+        }
+        return Result<JsonObject>.Failure(new Message($"Expected {name} to be an object"));
+    }
+
+    public static Result<JsonArray> AsArray(this IJsonElement json, string name) {
+        if (json is JsonArray jsonArray) {
+            return Result<JsonArray>.Success(jsonArray);
+        }
+        return Result<JsonArray>.Failure(new Message($"Expected {name} to be an array"));
     }
 }
