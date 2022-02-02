@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ErrorCraft.Minecraft.Json;
 
@@ -39,6 +40,16 @@ public class JsonReader {
             return Result<IJsonElement>.Failure(new Message($"File '{file}' does not exist"));
         }
         string fileContents = File.ReadAllText(file);
+        Util.StringReader stringReader = new Util.StringReader(fileContents);
+        JsonReader jsonReader = new JsonReader(stringReader);
+        return jsonReader.Read();
+    }
+
+    public static async Task<Result<IJsonElement>> ReadFromFileAsync(string file) {
+        if (!File.Exists(file)) {
+            return Result<IJsonElement>.Failure(new Message($"File '{file}' does not exist"));
+        }
+        string fileContents = await File.ReadAllTextAsync(file);
         Util.StringReader stringReader = new Util.StringReader(fileContents);
         JsonReader jsonReader = new JsonReader(stringReader);
         return jsonReader.Read();
