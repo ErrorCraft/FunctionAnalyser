@@ -34,7 +34,7 @@ public class ArrayJsonValidator : JsonValidator {
         return Result<IJsonValidated>.Success(resultingArray);
     }
 
-    public new class Serialiser : JsonValidator.Serialiser {
+    public class Serialiser : Serialiser<ArrayJsonValidator> {
         public override ArrayJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             JsonValidator content = json.Deserialise<JsonValidator>("items", serialiser);
             return new ArrayJsonValidator(optional, content);

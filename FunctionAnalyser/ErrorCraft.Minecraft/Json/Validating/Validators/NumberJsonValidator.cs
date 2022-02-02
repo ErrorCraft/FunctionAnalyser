@@ -17,7 +17,7 @@ public class NumberJsonValidator : JsonValidator {
         return Result<IJsonValidated>.Failure(result);
     }
 
-    public new class Serialiser : JsonValidator.Serialiser {
+    public class Serialiser : Serialiser<NumberJsonValidator> {
         public override NumberJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             return new NumberJsonValidator(optional);
         }

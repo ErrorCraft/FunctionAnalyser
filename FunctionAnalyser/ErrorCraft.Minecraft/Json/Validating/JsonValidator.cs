@@ -15,12 +15,12 @@ public abstract class JsonValidator {
 
     public abstract Result<IJsonValidated> Validate(IJsonElement json, string name);
 
-    public abstract class Serialiser : IJsonSerialiser<JsonValidator> {
-        public JsonValidator FromJson(JObject json, JsonSerializer serialiser) {
+    public abstract class Serialiser<T> : IJsonSerialiser<T> where T : JsonValidator {
+        public T FromJson(JObject json, JsonSerializer serialiser) {
             bool optional = json.GetBoolean("optional", false);
             return FromJson(json, serialiser, optional);
         }
 
-        public abstract JsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional);
+        public abstract T FromJson(JObject json, JsonSerializer serialiser, bool optional);
     }
 }

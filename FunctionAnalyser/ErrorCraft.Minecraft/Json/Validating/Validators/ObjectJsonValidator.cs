@@ -45,7 +45,7 @@ public class ObjectJsonValidator : JsonValidator {
         return validator.Validate(child, name);
     }
 
-    public new class Serialiser : JsonValidator.Serialiser {
+    public class Serialiser : Serialiser<ObjectJsonValidator> {
         public override ObjectJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             Dictionary<string, JsonValidator> children = json.Deserialise<Dictionary<string, JsonValidator>>("children", serialiser);
             return new ObjectJsonValidator(optional, children);

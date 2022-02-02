@@ -18,7 +18,7 @@ public static class JsonValidatorTypes {
         return new RegistryJsonSerialiser<JsonValidator, JsonValidatorType>(JSON_VALIDATOR_TYPE, "type");
     }
 
-    private static JsonValidatorType Register(string id, JsonValidator.Serialiser jsonValidator) {
+    private static JsonValidatorType Register<T>(string id, JsonValidator.Serialiser<T> jsonValidator) where T : JsonValidator {
         return JSON_VALIDATOR_TYPE.Register(new ExactResourceLocation("json", id), new JsonValidatorType(jsonValidator));
     }
 }

@@ -17,7 +17,7 @@ public class StringJsonValidator : JsonValidator {
         return Result<IJsonValidated>.Failure(result);
     }
 
-    public new class Serialiser : JsonValidator.Serialiser {
+    public class Serialiser : Serialiser<StringJsonValidator> {
         public override StringJsonValidator FromJson(JObject json, JsonSerializer serialiser, bool optional) {
             return new StringJsonValidator(optional);
         }
