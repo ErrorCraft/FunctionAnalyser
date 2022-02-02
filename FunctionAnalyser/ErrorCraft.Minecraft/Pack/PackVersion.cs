@@ -6,12 +6,13 @@ namespace ErrorCraft.Minecraft.Pack;
 public class PackVersion {
     private readonly PackDefinition Definition;
     private readonly PackMetadata Metadata;
-    private readonly PackResources Resources;
 
-    public PackVersion(PackDefinition definition, PackMetadata metadata) {
+    public PackResources Resources { get; }
+
+    public PackVersion(PackDefinition definition, PackMetadata metadata, PackResources resources) {
         Definition = definition;
         Metadata = metadata;
-        Resources = null!;
+        Resources = resources;
     }
 
     public Result<IJsonValidated> Analyse(string path) {

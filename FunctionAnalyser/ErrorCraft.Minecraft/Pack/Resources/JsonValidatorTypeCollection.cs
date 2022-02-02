@@ -2,7 +2,9 @@
 using ErrorCraft.Minecraft.Json.Types;
 using ErrorCraft.Minecraft.Json.Validating;
 using ErrorCraft.Minecraft.Json.Validating.Validators;
+using ErrorCraft.Minecraft.Resources.Json;
 using ErrorCraft.Minecraft.Util;
+using ErrorCraft.Minecraft.Util.Extensions;
 using ErrorCraft.Minecraft.Util.Json;
 using ErrorCraft.Minecraft.Util.ResourceLocations;
 using Newtonsoft.Json;
@@ -27,6 +29,14 @@ public class JsonValidatorTypeCollection {
             return Result.Failure(resourceLocationResult.Message);
         }
         return Validate(json, resourceLocationResult.Value);
+    }
+
+    public static OptionalLoadableJsonResource<JsonValidatorTypeCollection> CreateLoader(string fileName) {
+        return new OptionalLoadableJsonResource<JsonValidatorTypeCollection>(fileName,
+            JsonSerialiserConverterExtensions.Create(new Serialiser()),
+            JsonSerialiserConverterExtensions.Create(new ResourceLocationCollection<ObjectJsonValidator>.Serialiser()),
+            JsonSerialiserConverterExtensions.Create(new ObjectJsonValidator.Serialiser()),
+            JsonSerialiserConverterExtensions.Create(JsonValidatorTypes.CreateJsonSerialiser()));
     }
 
     private Result Validate(JsonObject json, ExactResourceLocation resourceLocation) {

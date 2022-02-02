@@ -10,6 +10,7 @@ namespace ErrorCraft.Minecraft.Pack;
 
 public class PackVersionCollection {
     private const string VERSION_FILE = "version.json";
+    private const string RESOURCES_DIRECTORY = "resources";
     private static readonly RequiredLoadableJsonResource<PackMetadata> METADATA_LOADER = new RequiredLoadableJsonResource<PackMetadata>("metadata.json", new JsonSerialiserConverter<PackMetadata>(new PackMetadata.Serialiser()), new JsonSerialiserConverter<JsonValidator>(JsonValidatorTypes.CreateJsonSerialiser()));
 
     private readonly Dictionary<string, PackVersion> Versions;
@@ -52,6 +53,8 @@ public class PackVersionCollection {
         string json = File.ReadAllText(versionFile);
         PackDefinition packDefinition = JsonConvert.DeserializeObject<PackDefinition>(json, new JsonSerialiserConverter<PackDefinition>(new PackDefinition.Serialiser()))!;
         PackMetadata metadata = METADATA_LOADER.Load(path);
-        return new PackVersion(packDefinition, metadata);
+        string resourcesPath = Path.Combine(path, RESOURCES_DIRECTORY);
+        PackResources resources = PackResources.Loader.Load(resourcesPath);
+        return new PackVersion(packDefinition, metadata, resources);
     }
 }
