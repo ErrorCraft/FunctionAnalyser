@@ -35,12 +35,6 @@ public class ResourceLocationCollection<T> : IEnumerable<KeyValuePair<ExactResou
     }
 
     public class Serialiser : IJsonSerialiser<ResourceLocationCollection<T>> {
-        public void ToJson(JObject json, ResourceLocationCollection<T> value, JsonSerializer serialiser) {
-            foreach (KeyValuePair<ExactResourceLocation, T> pair in value.Items) {
-                json.Add(pair.Key.ToString(), serialiser.Serialise<T>(pair.Value));
-            }
-        }
-
         public ResourceLocationCollection<T> FromJson(JObject json, JsonSerializer serialiser) {
             Dictionary<ExactResourceLocation, T> items = new Dictionary<ExactResourceLocation, T>();
             foreach (KeyValuePair<string, JToken?> pair in json) {

@@ -16,10 +16,6 @@ public abstract class JsonValidator {
     public abstract Result<IJsonValidated> Validate(IJsonElement json, string name);
 
     public abstract class Serialiser : IJsonSerialiser<JsonValidator> {
-        public virtual void ToJson(JObject json, JsonValidator value, JsonSerializer serialiser) {
-            json.Add("optional", value.Optional);
-        }
-
         public JsonValidator FromJson(JObject json, JsonSerializer serialiser) {
             bool optional = json.GetBoolean("optional", false);
             return FromJson(json, serialiser, optional);

@@ -48,12 +48,6 @@ public class JsonValidatorTypeCollection {
     }
 
     public class Serialiser : IJsonSerialiser<JsonValidatorTypeCollection> {
-        public void ToJson(JObject json, JsonValidatorTypeCollection value, JsonSerializer serialiser) {
-            json.Add("key", value.Key);
-            json.Add("template", serialiser.Serialise(value.Template));
-            json.Add("types", serialiser.Serialise(value.Types));
-        }
-
         public JsonValidatorTypeCollection FromJson(JObject json, JsonSerializer serialiser) {
             string key = json.GetString("key");
             ObjectJsonValidator template = json.Deserialise<ObjectJsonValidator>("template", serialiser);

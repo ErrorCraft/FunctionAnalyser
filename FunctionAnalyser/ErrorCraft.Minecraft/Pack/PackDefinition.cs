@@ -12,10 +12,6 @@ public class PackDefinition {
     }
 
     public class Serialiser : IJsonSerialiser<PackDefinition> {
-        public void ToJson(JObject json, PackDefinition value, JsonSerializer serialiser) {
-            json.Add("root", value.Root);
-        }
-
         public PackDefinition FromJson(JObject json, JsonSerializer serialiser) {
             string folder = json.GetString("root");
             return new PackDefinition(folder);

@@ -30,11 +30,6 @@ public class PackMetadata {
     }
 
     public class Serialiser : IJsonSerialiser<PackMetadata> {
-        public void ToJson(JObject json, PackMetadata value, JsonSerializer serialiser) {
-            json.Add("file", value.FileName);
-            json.Add("validator", serialiser.Serialise(value.Validator));
-        }
-
         public PackMetadata FromJson(JObject json, JsonSerializer serialiser) {
             string fileName = json.GetString("file");
             JsonValidator validator = json.Deserialise<JsonValidator>("validator", serialiser);

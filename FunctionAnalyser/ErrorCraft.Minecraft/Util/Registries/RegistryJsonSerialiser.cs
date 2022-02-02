@@ -15,10 +15,6 @@ public class RegistryJsonSerialiser<U, T> : IJsonSerialiser<U> where T : JsonSer
         RootField = rootField;
     }
 
-    public void ToJson(JObject json, U value, JsonSerializer serialiser) {
-        throw new NotImplementedException();
-    }
-
     public U FromJson(JObject json, JsonSerializer serialiser) {
         string s = json.GetString(RootField);
         if (!ExactResourceLocation.TryParse(s, out ExactResourceLocation? resourceLocation)) {
