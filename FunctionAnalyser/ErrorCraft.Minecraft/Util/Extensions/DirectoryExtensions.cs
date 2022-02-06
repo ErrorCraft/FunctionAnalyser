@@ -10,6 +10,7 @@ internal static class DirectoryExtensions {
         }
 
         int directoryLength = GetDirectoryLength(directory);
+        int extensionLength = extension.Length;
 
         Queue<string> directories = new Queue<string>();
         directories.Enqueue(directory);
@@ -18,7 +19,7 @@ internal static class DirectoryExtensions {
             directories.Enqueue(Directory.EnumerateDirectories(currentDirectory));
             foreach (string file in Directory.EnumerateFiles(currentDirectory)) {
                 if (file.EndsWith(extension)) {
-                    yield return file[directoryLength..].Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                    yield return file[directoryLength..^extensionLength].Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
                 }
             }
         }

@@ -38,4 +38,10 @@ public class ValidatedJsonObject : IJsonValidated, IEnumerable<KeyValuePair<stri
     public void Add(string key, IJsonValidated value) {
         Items.Add(key, value);
     }
+
+    public void Merge(ValidatedJsonObject other) {
+        foreach (KeyValuePair<string, IJsonValidated> pair in other.Items) {
+            Items[pair.Key] = pair.Value;
+        }
+    }
 }

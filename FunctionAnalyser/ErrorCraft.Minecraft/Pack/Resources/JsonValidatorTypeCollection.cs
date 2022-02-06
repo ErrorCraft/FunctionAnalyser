@@ -1,6 +1,7 @@
 ﻿using ErrorCraft.Minecraft.Json;
 using ErrorCraft.Minecraft.Json.Types;
 using ErrorCraft.Minecraft.Json.Validating;
+using ErrorCraft.Minecraft.Json.Validating.Validated;
 using ErrorCraft.Minecraft.Json.Validating.Validators;
 using ErrorCraft.Minecraft.Resources.Json;
 using ErrorCraft.Minecraft.Util;
@@ -23,10 +24,10 @@ public class JsonValidatorTypeCollection {
         Types = types;
     }
 
-    public Result Validate(JsonObject json) {
+    public Result<ValidatedJsonObject> Validate(JsonObject json) {
         Result<ExactResourceLocation> resourceLocationResult = json.GetResourceLocation(Key);
         if (!resourceLocationResult.Successful) {
-            return Result.Failure(resourceLocationResult.Message);
+            return Result<ValidatedJsonObject>.Failure(resourceLocationResult.Message);
         }
         return Validate(json, resourceLocationResult.Value);
     }
@@ -39,22 +40,23 @@ public class JsonValidatorTypeCollection {
             JsonSerialiserConverterExtensions.Create(JsonValidatorTypes.CreateJsonSerialiser()));
     }
 
-    private Result Validate(JsonObject json, ExactResourceLocation resourceLocation) {
+    private Result<ValidatedJsonObject> Validate(JsonObject json, ExactResourceLocation resourceLocation) {
         if (!Types.TryGetValue(resourceLocation, out ObjectJsonValidator? validator)) {
-            return Result.Failure(new Message($"Invalid {Key} '{resourceLocation}'"));
+            return Result<ValidatedJsonObject>.Failure(new Message($"Invalid {Key} '{resourceLocation}'"));
         }
 
-        Result<IJsonValidated> itemValidateResult = validator.Validate(json, "item");
+        Result<ValidatedJsonObject> itemValidateResult = validator.Validate(json, "item");
         if (!itemValidateResult.Successful) {
-            return Result.Failure(itemValidateResult.Message);
+            return itemValidateResult;
         }
 
-        Result<IJsonValidated> templateValidateResult = Template.Validate(json, "item");
+        Result<ValidatedJsonObject> templateValidateResult = Template.Validate(json, "item");
         if (!templateValidateResult.Successful) {
-            return Result.Failure(templateValidateResult.Message);
+            return templateValidateResult;
         }
 
-        return Result.Success();
+        itemValidateResult.Value.Merge(templateValidateResult.Value);
+        return Result<ValidatedJsonObject>.Success(itemValidateResult.Value);
     }
 
     public class Serialiser : IJsonSerialiser<JsonValidatorTypeCollection> {
