@@ -24,6 +24,14 @@ public class JsonValidatorTypeCollection {
         Types = types;
     }
 
+    public Result<ValidatedJsonObject> Validate(IJsonElement json) {
+        Result<JsonObject> objectResult = json.AsObject("item");
+        if (!objectResult.Successful) {
+            return Result<ValidatedJsonObject>.Failure(objectResult);
+        }
+        return Validate(objectResult.Value);
+    }
+
     public Result<ValidatedJsonObject> Validate(JsonObject json) {
         Result<ExactResourceLocation> resourceLocationResult = json.GetResourceLocation(Key);
         if (!resourceLocationResult.Successful) {

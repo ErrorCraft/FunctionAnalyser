@@ -5,16 +5,10 @@ using System.Threading.Tasks;
 
 namespace ErrorCraft.Minecraft.Pack.Loading.Loaders;
 
-public abstract class JsonResourceLoader<T> : ResourceLoader<T> {
+public abstract class JsonResourceLoader<T> : ResourceLoader<IJsonElement, T> {
     protected JsonResourceLoader(string folder, string fileExtension) : base(folder, fileExtension) { }
 
-    protected override async Task<Result<T>> Apply(string file, PackVersion version) {
-        Result<IJsonElement> jsonResult = await JsonReader.ReadFromFileAsync(file);
-        if (!jsonResult.Successful) {
-            return Result<T>.Failure(jsonResult);
-        }
-        return Apply(jsonResult.Value, version);
+    protected override async Task<Result<IJsonElement>> Prepare(string file) {
+        return await JsonReader.ReadFromFileAsync(file);
     }
-
-    protected abstract Result<T> Apply(IJsonElement json, PackVersion version);
 }
