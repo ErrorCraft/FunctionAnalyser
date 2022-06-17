@@ -1,0 +1,3799 @@
+{
+	"root": {
+		"children": {
+			"?": {
+				"type": "literal",
+				"redirect": ["help"]
+			},
+			"ability": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"worldbuilder": {
+								"type": "literal",
+								"children": {
+									"value": {
+										"type": "argument",
+										"parser": "boolean",
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"mayfly": {
+								"type": "literal",
+								"children": {
+									"value": {
+										"type": "argument",
+										"parser": "boolean",
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"mute": {
+								"type": "literal",
+								"children": {
+									"value": {
+										"type": "argument",
+										"parser": "boolean",
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"alwaysday": {
+				"type": "literal",
+				"redirect": ["daylock"]
+			},
+			"camerashake": {
+				"type": "literal",
+				"children": {
+					"add": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"children": {
+									"intensity": {
+										"type": "argument",
+										"parser": "float",
+										"properties": {
+											"min": 0,
+											"max": 4
+										},
+										"children": {
+											"seconds": {
+												"type": "argument",
+												"parser": "float",
+												"properties": {
+													"min": 0
+												},
+												"children": {
+													"positional": {
+														"type": "literal",
+														"executable": true
+													},
+													"rotational": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					},
+					"stop": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"clear": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"item": {
+								"type": "argument",
+								"parser": "item",
+								"properties": {
+									"for_testing": true,
+									"use_bedrock": true
+								},
+								"children": {
+									"data": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": -1
+										},
+										"children": {
+											"maxCount": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 0
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"clearspawnpoint": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"executable": true
+					}
+				}
+			},
+			"clone": {
+				"type": "literal",
+				"children": {
+					"begin": {
+						"type": "argument",
+						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"end": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"destination": {
+										"type": "argument",
+										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"filtered": {
+												"type": "literal",
+												"children": {
+													"force": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "argument",
+																"parser": "block",
+																"properties": {
+																	"for_testing": true,
+																	"use_bedrock": true
+																},
+																"children": {
+																	"data": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": -1
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"move": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "argument",
+																"parser": "block",
+																"properties": {
+																	"for_testing": true,
+																	"use_bedrock": true
+																},
+																"children": {
+																	"data": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": -1
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"normal": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "argument",
+																"parser": "block",
+																"properties": {
+																	"for_testing": true,
+																	"use_bedrock": true
+																},
+																"children": {
+																	"data": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": -1
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													}
+												}
+											},
+											"masked": {
+												"type": "literal",
+												"children": {
+													"force": {
+														"type": "literal",
+														"executable": true
+													},
+													"move": {
+														"type": "literal",
+														"executable": true
+													},
+													"normal": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											},
+											"replace": {
+												"type": "literal",
+												"children": {
+													"force": {
+														"type": "literal",
+														"executable": true
+													},
+													"move": {
+														"type": "literal",
+														"executable": true
+													},
+													"normal": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"connect": {
+				"type": "literal",
+				"children": {
+					"serverUri": {
+						"type": "argument",
+						"parser": "string",
+						"properties": {
+							"type": "greedy"
+						},
+						"executable": true
+					},
+					"out": {
+						"type": "literal",
+						"executable": true
+					}
+				}
+			},
+			"daylock": {
+				"type": "literal",
+				"children": {
+					"lock": {
+						"type": "argument",
+						"parser": "boolean",
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"difficulty": {
+				"type": "literal",
+				"children": {
+					"easy": {
+						"type": "literal",
+						"executable": true
+					},
+					"hard": {
+						"type": "literal",
+						"executable": true
+					},
+					"normal": {
+						"type": "literal",
+						"executable": true
+					},
+					"peaceful": {
+						"type": "literal",
+						"executable": true
+					},
+					"value": {
+						"type": "argument",
+						"parser": "integer",
+						"properties": {
+							"min": 0,
+							"max": 3
+						},
+						"executable": true
+					}
+				}
+			},
+			"effect": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"effect": {
+								"type": "argument",
+								"parser": "mob_effect",
+								"children": {
+									"seconds": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 1,
+											"max": 1000000
+										},
+										"children": {
+											"amplifier": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 0,
+													"max": 255
+												},
+												"children": {
+													"hideParticles": {
+														"type": "argument",
+														"parser": "boolean",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"clear": {
+								"type": "literal",
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"enchant": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"enchantmentName": {
+								"type": "argument",
+								"parser": "item_enchantment",
+								"children": {
+									"level": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 1
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"enchantmentId": {
+								"type": "argument",
+								"parser": "integer",
+								"children": {
+									"level": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 1
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"execute": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"pos": {
+								"type": "argument",
+								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"detect": {
+										"type": "literal",
+										"children": {
+											"detectPos": {
+												"type": "argument",
+												"parser": "block_pos",
+												"properties": {
+													"use_bedrock": true
+												},
+												"children": {
+													"block": {
+														"type": "argument",
+														"parser": "block",
+														"properties": {
+															"for_testing": true,
+															"use_bedrock": true
+														},
+														"children": {
+															"data": {
+																"type": "argument",
+																"parser": "integer",
+																"properties": {
+																	"min": -1
+																},
+																"redirect": []
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								"redirect": []
+							}
+						}
+					}
+				}
+			},
+			"event": {
+				"type": "literal",
+				"children": {
+					"entity": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"eventName": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "greedy"
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"fill": {
+				"type": "literal",
+				"children": {
+					"from": {
+						"type": "argument",
+						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"to": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"block": {
+										"type": "argument",
+										"parser": "block",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"data": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 0
+												},
+												"children": {
+													"destroy": {
+														"type": "literal",
+														"executable": true
+													},
+													"hollow": {
+														"type": "literal",
+														"executable": true
+													},
+													"keep": {
+														"type": "literal",
+														"executable": true
+													},
+													"outline": {
+														"type": "literal",
+														"executable": true
+													},
+													"replace": {
+														"type": "literal",
+														"children": {
+															"block": {
+																"type": "argument",
+																"parser": "block",
+																"properties": {
+																	"for_testing": true,
+																	"use_bedrock": true
+																},
+																"children": {
+																	"data": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": -1
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											},
+											"destroy": {
+												"type": "literal",
+												"executable": true
+											},
+											"hollow": {
+												"type": "literal",
+												"executable": true
+											},
+											"keep": {
+												"type": "literal",
+												"executable": true
+											},
+											"outline": {
+												"type": "literal",
+												"executable": true
+											},
+											"replace": {
+												"type": "literal",
+												"children": {
+													"block": {
+														"type": "argument",
+														"parser": "block",
+														"properties": {
+															"for_testing": true,
+															"use_bedrock": true
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"fog": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"push": {
+								"type": "literal",
+								"children": {
+									"fogId": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "phrase"
+										},
+										"children": {
+											"userProvidedId": {
+												"type": "argument",
+												"parser": "string",
+												"properties": {
+													"type": "greedy"
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							},
+							"pop": {
+								"type": "literal",
+								"children": {
+									"userProvidedId": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "greedy"
+										},
+										"executable": true
+									}
+								}
+							},
+							"remove": {
+								"type": "literal",
+								"children": {
+									"userProvidedId": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "greedy"
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"function": {
+				"type": "literal",
+				"children": {
+					"name": {
+						"type": "argument",
+						"parser": "function",
+						"executable": true
+					}
+				}
+			},
+			"gamemode": {
+				"type": "literal",
+				"children": {
+					"value": {
+						"type": "argument",
+						"parser": "integer",
+						"properties": {
+							"min": 0,
+							"max": 2
+						},
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"a": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"adventure": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"c": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"creative": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"d": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"default": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"s": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"survival": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"gamerule": {
+				"type": "literal",
+				"children": {
+					"commandblockoutput": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"commandblocksenabled": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"dodaylightcycle": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"doentitydrops": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"dofiretick": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"doimmediaterespawn": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"doinsomnia": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"domobloot": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"domobspawning": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"dotiledrops": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"doweathercycle": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"drowningdamage": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"falldamage": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"firedamage": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"functioncommandlimit": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"keepinventory": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"maxcommandchainlength": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"mobgriefing": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"naturalregeneration": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"pvp": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"randomtickspeed": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"sendcommandfeedback": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"showcoordinates": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"showdeathmessages": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"showtags": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"spawnradius": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"tntexplodes": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"give": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"item": {
+								"type": "argument",
+								"parser": "item",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"amount": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 1
+										},
+										"children": {
+											"data": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": -1
+												},
+												"children": {
+													"components": {
+														"type": "argument",
+														"parser": "item_component",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"help": {
+				"type": "literal",
+				"children": {
+					"command": {
+						"type": "argument",
+						"parser": "string",
+						"properties": {
+							"type": "greedy"
+						},
+						"executable": true
+					},
+					"page": {
+						"type": "argument",
+						"parser": "integer",
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"immutableworld": {
+				"type": "literal",
+				"children": {
+					"value": {
+						"type": "argument",
+						"parser": "boolean",
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"kick": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"reason": {
+								"type": "argument",
+								"parser": "message",
+								"properties": {
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"kill": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"list": {
+				"type": "literal",
+				"executable": true
+			},
+			"locate": {
+				"type": "literal",
+				"children": {
+					"bastionremnant": {
+						"type": "literal",
+						"executable": true
+					},
+					"buriedtreasure": {
+						"type": "literal",
+						"executable": true
+					},
+					"endcity": {
+						"type": "literal",
+						"executable": true
+					},
+					"fortress": {
+						"type": "literal",
+						"executable": true
+					},
+					"mansion": {
+						"type": "literal",
+						"executable": true
+					},
+					"mineshaft": {
+						"type": "literal",
+						"executable": true
+					},
+					"monument": {
+						"type": "literal",
+						"executable": true
+					},
+					"pillageroutpost": {
+						"type": "literal",
+						"executable": true
+					},
+					"ruinedportal": {
+						"type": "literal",
+						"executable": true
+					},
+					"ruins": {
+						"type": "literal",
+						"executable": true
+					},
+					"shipwreck": {
+						"type": "literal",
+						"executable": true
+					},
+					"stronghold": {
+						"type": "literal",
+						"executable": true
+					},
+					"temple": {
+						"type": "literal",
+						"executable": true
+					},
+					"village": {
+						"type": "literal",
+						"executable": true
+					}
+				}
+			},
+			"me": {
+				"type": "literal",
+				"children": {
+					"action": {
+						"type": "argument",
+						"parser": "string",
+						"properties": {
+							"type": "greedy"
+						},
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"mobevent": {
+				"type": "literal",
+				"children": {
+					"events_enabled": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"minecraft:ender_dragon_event": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"minecraft:pillager_patrols_event": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"minecraft:wandering_trader_event": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"msg": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"message": {
+								"type": "argument",
+								"parser": "message",
+								"properties": {
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"music": {
+				"type": "literal",
+				"children": {
+					"queue": {
+						"type": "literal",
+						"children": {
+							"sound": {
+								"type": "argument",
+								"parser": "resource_location",
+								"children": {
+									"volume": {
+										"type": "argument",
+										"parser": "float",
+										"properties": {
+											"min": 0.0,
+											"max": 1.0
+										},
+										"children": {
+											"fadeSeconds": {
+												"type": "argument",
+												"parser": "float",
+												"properties": {
+													"min": 0.0
+												},
+												"children": {
+													"loop": {
+														"type": "literal",
+														"executable": true
+													},
+													"play_once": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					},
+					"play": {
+						"type": "literal",
+						"children": {
+							"sound": {
+								"type": "argument",
+								"parser": "resource_location",
+								"children": {
+									"volume": {
+										"type": "argument",
+										"parser": "float",
+										"properties": {
+											"min": 0.0,
+											"max": 1.0
+										},
+										"children": {
+											"fadeSeconds": {
+												"type": "argument",
+												"parser": "float",
+												"properties": {
+													"min": 0.0
+												},
+												"children": {
+													"loop": {
+														"type": "literal",
+														"executable": true
+													},
+													"play_once": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					},
+					"stop": {
+						"type": "literal",
+						"children": {
+							"fadeSeconds": {
+								"type": "argument",
+								"parser": "float",
+								"properties": {
+									"min": 0.0
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"volume": {
+						"type": "literal",
+						"children": {
+							"volume": {
+								"type": "argument",
+								"parser": "float",
+								"properties": {
+									"min": 0.0,
+									"max": 1.0
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"particle": {
+				"type": "literal",
+				"children": {
+					"name": {
+						"type": "argument",
+						"parser": "particle",
+						"children": {
+							"pos": {
+								"type": "argument",
+								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"playanimation": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"animation": {
+								"type": "argument",
+								"parser": "string",
+								"properties": {
+									"type": "phrase"
+								},
+								"children": {
+									"next_state": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "phrase"
+										},
+										"children": {
+											"blend_out_time": {
+												"type": "argument",
+												"parser": "float",
+												"children": {
+													"stop_expression": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "phrase"
+														},
+														"children": {
+															"controller": {
+																"type": "argument",
+																"parser": "string",
+																"properties": {
+																	"type": "phrase"
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"playsound": {
+				"type": "literal",
+				"children": {
+					"sound": {
+						"type": "argument",
+						"parser": "resource_location",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"volume": {
+												"type": "argument",
+												"parser": "float",
+												"properties": {
+													"min": 0.0
+												},
+												"children": {
+													"pitch": {
+														"type": "argument",
+														"parser": "float",
+														"properties": {
+															"min": 0.0,
+															"max": 2.0
+														},
+														"children": {
+															"minVolume": {
+																"type": "argument",
+																"parser": "float",
+																"properties": {
+																	"min": 0.0,
+																	"max": 1.0
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"reload": {
+				"type": "literal",
+				"executable": true
+			},
+			"replaceitem": {
+				"type": "literal",
+				"children": {
+					"block": {
+						"type": "literal",
+						"children": {
+							"pos": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"slot.container": {
+										"type": "literal",
+										"children": {
+											"slotId": {
+												"type": "argument",
+												"parser": "integer",
+												"children": {
+													"item": {
+														"type": "argument",
+														"parser": "item",
+														"properties": {
+															"use_bedrock": true
+														},
+														"children": {
+															"amount": {
+																"type": "argument",
+																"parser": "integer",
+																"properties": {
+																	"min": 1,
+																	"max": 64
+																},
+																"children": {
+																	"data": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": -1
+																		},
+																		"children": {
+																			"components": {
+																				"type": "argument",
+																				"parser": "item_component",
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													},
+													"destroy": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
+																"children": {
+																	"amount": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"children": {
+																			"data": {
+																				"type": "argument",
+																				"parser": "integer",
+																				"properties": {
+																					"min": -1
+																				},
+																				"children": {
+																					"components": {
+																						"type": "argument",
+																						"parser": "item_component",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"keep": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
+																"children": {
+																	"amount": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"children": {
+																			"data": {
+																				"type": "argument",
+																				"parser": "integer",
+																				"properties": {
+																					"min": -1
+																				},
+																				"children": {
+																					"components": {
+																						"type": "argument",
+																						"parser": "item_component",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"entity": {
+						"type": "literal",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"slot": {
+										"type": "argument",
+										"parser": "slot",
+										"children": {
+											"slotId": {
+												"type": "argument",
+												"parser": "integer",
+												"children": {
+													"item": {
+														"type": "argument",
+														"parser": "item",
+														"properties": {
+															"use_bedrock": true
+														},
+														"children": {
+															"amount": {
+																"type": "argument",
+																"parser": "integer",
+																"properties": {
+																	"min": 1,
+																	"max": 64
+																},
+																"children": {
+																	"data": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": -1
+																		},
+																		"children": {
+																			"components": {
+																				"type": "argument",
+																				"parser": "item_component",
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													},
+													"destroy": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
+																"children": {
+																	"amount": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"children": {
+																			"data": {
+																				"type": "argument",
+																				"parser": "integer",
+																				"properties": {
+																					"min": -1
+																				},
+																				"children": {
+																					"components": {
+																						"type": "argument",
+																						"parser": "item_component",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													},
+													"keep": {
+														"type": "literal",
+														"children": {
+															"item": {
+																"type": "argument",
+																"parser": "item",
+																"properties": {
+																	"use_bedrock": true
+																},
+																"children": {
+																	"amount": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"properties": {
+																			"min": 1,
+																			"max": 64
+																		},
+																		"children": {
+																			"data": {
+																				"type": "argument",
+																				"parser": "integer",
+																				"properties": {
+																					"min": -1
+																				},
+																				"children": {
+																					"components": {
+																						"type": "argument",
+																						"parser": "item_component",
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"ride": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"start_riding": {
+								"type": "literal",
+								"children": {
+									"target": {
+										"type": "argument",
+										"parser": "entity",
+										"properties": {
+											"single_entity": true,
+											"use_bedrock": true
+										},
+										"children": {
+											"teleport_ride": {
+												"type": "literal",
+												"children": {
+													"if_group_fits": {
+														"type": "literal",
+														"executable": true
+													},
+													"until_full": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											},
+											"teleport_rider": {
+												"type": "literal",
+												"children": {
+													"if_group_fits": {
+														"type": "literal",
+														"executable": true
+													},
+													"until_full": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							},
+							"stop_riding": {
+								"type": "literal",
+								"executable": true
+							},
+							"evict_riders": {
+								"type": "literal",
+								"executable": true
+							},
+							"summon_rider": {
+								"type": "literal",
+								"children": {
+									"entity": {
+										"type": "argument",
+										"parser": "entity_summon",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"spawnEvent": {
+												"type": "argument",
+												"parser": "string",
+												"properties": {
+													"type": "phrase"
+												},
+												"children": {
+													"name": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "greedy"
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							},
+							"summon_ride": {
+								"type": "literal",
+								"children": {
+									"entity": {
+										"type": "argument",
+										"parser": "entity_summon",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"no_ride_change": {
+												"type": "literal",
+												"children": {
+													"spawnEvent": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "phrase"
+														},
+														"children": {
+															"name": {
+																"type": "argument",
+																"parser": "string",
+																"properties": {
+																	"type": "greedy"
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											},
+											"reassign_rides": {
+												"type": "literal",
+												"children": {
+													"spawnEvent": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "phrase"
+														},
+														"children": {
+															"name": {
+																"type": "argument",
+																"parser": "string",
+																"properties": {
+																	"type": "greedy"
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											},
+											"skip_riders": {
+												"type": "literal",
+												"children": {
+													"spawnEvent": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "phrase"
+														},
+														"children": {
+															"name": {
+																"type": "argument",
+																"parser": "string",
+																"properties": {
+																	"type": "greedy"
+																},
+																"executable": true
+															}
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"save": {
+				"type": "literal",
+				"children": {
+					"hold": {
+						"type": "literal",
+						"executable": true
+					},
+					"query": {
+						"type": "literal",
+						"executable": true
+					},
+					"resume": {
+						"type": "literal",
+						"executable": true
+					}
+				}
+			},
+			"say": {
+				"type": "literal",
+				"children": {
+					"message": {
+						"type": "argument",
+						"parser": "message",
+						"properties": {
+							"use_bedrock": true
+						},
+						"executable": true
+					}
+				}
+			},
+			"schedule": {
+				"type": "literal",
+				"children": {
+					"on_area_loaded": {
+						"type": "literal",
+						"children": {
+							"add": {
+								"type": "literal",
+								"children": {
+									"from": {
+										"type": "argument",
+										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"to": {
+												"type": "argument",
+												"parser": "vec3",
+												"properties": {
+													"use_bedrock": true
+												},
+												"children": {
+													"function": {
+														"type": "argument",
+														"parser": "function",
+														"executable": true
+													}
+												}
+											}
+										}
+									},
+									"circle": {
+										"type": "literal",
+										"children": {
+											"center": {
+												"type": "argument",
+												"parser": "vec3",
+												"properties": {
+													"use_bedrock": true
+												},
+												"children": {
+													"radius": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 0
+														},
+														"children": {
+															"function": {
+																"type": "argument",
+																"parser": "function",
+																"executable": true
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									"tickingarea": {
+										"type": "literal",
+										"children": {
+											"name": {
+												"type": "argument",
+												"parser": "string",
+												"properties": {
+													"type": "word"
+												},
+												"children": {
+													"function": {
+														"type": "argument",
+														"parser": "function",
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"scoreboard": {
+				"type": "literal",
+				"children": {
+					"objectives": {
+						"type": "literal",
+						"children": {
+							"add": {
+								"type": "literal",
+								"children": {
+									"objective": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "word"
+										},
+										"children": {
+											"criteria": {
+												"type": "argument",
+												"parser": "objective_criterion",
+												"children": {
+													"displayName": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "greedy"
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							},
+							"list": {
+								"type": "literal",
+								"executable": true
+							},
+							"remove": {
+								"type": "literal",
+								"children": {
+									"objective": {
+										"type": "argument",
+										"parser": "objective",
+										"executable": true
+									}
+								}
+							},
+							"setdisplay": {
+								"type": "literal",
+								"children": {
+									"slot": {
+										"type": "argument",
+										"parser": "scoreboard_slot",
+										"children": {
+											"objective": {
+												"type": "argument",
+												"parser": "objective",
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					},
+					"players": {
+						"type": "literal",
+						"children": {
+							"add": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"objective": {
+												"type": "argument",
+												"parser": "objective",
+												"children": {
+													"score": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 0
+														},
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"list": {
+								"type": "literal",
+								"children": {
+									"target": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"single_entity": true,
+											"use_bedrock": true
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"operation": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"targetObjective": {
+												"type": "argument",
+												"parser": "objective",
+												"children": {
+													"operation": {
+														"type": "argument",
+														"parser": "operation",
+														"children": {
+															"source": {
+																"type": "argument",
+																"parser": "score_holder",
+																"properties": {
+																	"use_bedrock": true
+																},
+																"children": {
+																	"sourceObjective": {
+																		"type": "argument",
+																		"parser": "objective",
+																		"executable": true
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"random": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"objective": {
+												"type": "argument",
+												"parser": "objective",
+												"children": {
+													"min": {
+														"type": "argument",
+														"parser": "integer",
+														"children": {
+															"max": {
+																"type": "argument",
+																"parser": "integer",
+																"executable": true
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"remove": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"objective": {
+												"type": "argument",
+												"parser": "objective",
+												"children": {
+													"score": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 0
+														},
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"reset": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"objective": {
+												"type": "argument",
+												"parser": "objective",
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							},
+							"set": {
+								"type": "literal",
+								"children": {
+									"targets": {
+										"type": "argument",
+										"parser": "score_holder",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"objective": {
+												"type": "argument",
+												"parser": "objective",
+												"children": {
+													"score": {
+														"type": "argument",
+														"parser": "integer",
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"setblock": {
+				"type": "literal",
+				"children": {
+					"pos": {
+						"type": "argument",
+						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"block": {
+								"type": "argument",
+								"parser": "block",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"data": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": -1
+										},
+										"children": {
+											"destroy": {
+												"type": "literal",
+												"executable": true
+											},
+											"keep": {
+												"type": "literal",
+												"executable": true
+											},
+											"replace": {
+												"type": "literal",
+												"executable": true
+											}
+										},
+										"executable": true
+									},
+									"destroy": {
+										"type": "literal",
+										"executable": true
+									},
+									"keep": {
+										"type": "literal",
+										"executable": true
+									},
+									"replace": {
+										"type": "literal",
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"setmaxplayers": {
+				"type": "literal",
+				"children": {
+					"value": {
+						"type": "argument",
+						"parser": "integer",
+						"properties": {
+							"min": 1
+						},
+						"executable": true
+					}
+				}
+			},
+			"setworldspawn": {
+				"type": "literal",
+				"children": {
+					"pos": {
+						"type": "argument",
+						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"spawnpoint": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"pos": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				},
+				"executable": true
+			},
+			"spreadplayers": {
+				"type": "literal",
+				"children": {
+					"center": {
+						"type": "argument",
+						"parser": "vec2",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"spreadDistance": {
+								"type": "argument",
+								"parser": "float",
+								"properties": {
+									"min": 0.0
+								},
+								"children": {
+									"maxRange": {
+										"type": "argument",
+										"parser": "float",
+										"properties": {
+											"min": 1.0
+										},
+										"children": {
+											"targets": {
+												"type": "argument",
+												"parser": "entity",
+												"properties": {
+													"use_bedrock": true
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"stopsound": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"sound": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"structure": {
+				"type": "literal",
+				"children": {
+					"save": {
+						"type": "literal",
+						"children": {
+							"name": {
+								"type": "argument",
+								"parser": "string",
+								"properties": {
+									"type": "phrase"
+								},
+								"children": {
+									"from": {
+										"type": "argument",
+										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"to": {
+												"type": "argument",
+												"parser": "block_pos",
+												"properties": {
+													"use_bedrock": true
+												},
+												"children": {
+													"includeEntities": {
+														"type": "argument",
+														"parser": "boolean",
+														"children": {
+															"disk": {
+																"type": "literal",
+																"executable": true
+															},
+															"memory": {
+																"type": "literal",
+																"executable": true
+															}
+														},
+														"executable": true
+													},
+													"disk": {
+														"type": "literal",
+														"executable": true
+													},
+													"memory": {
+														"type": "literal",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"load": {
+						"type": "literal",
+						"children": {
+							"name": {
+								"type": "argument",
+								"parser": "string",
+								"properties": {
+									"type": "phrase"
+								},
+								"children": {
+									"to": {
+										"type": "argument",
+										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"rotation": {
+												"type": "argument",
+												"parser": "structure_rotation",
+												"children": {
+													"mirror": {
+														"type": "argument",
+														"parser": "structure_mirror",
+														"children": {
+															"includesEntities": {
+																"type": "argument",
+																"parser": "boolean",
+																"children": {
+																	"includesBlocks": {
+																		"type": "argument",
+																		"parser": "boolean",
+																		"children": {
+																			"integrity": {
+																				"type": "argument",
+																				"parser": "float",
+																				"properties": {
+																					"min": 0.0,
+																					"max": 1.0
+																				},
+																				"children": {
+																					"seed": {
+																						"type": "argument",
+																						"parser": "string",
+																						"properties": {
+																							"type": "word"
+																						},
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															},
+															"animationMode": {
+																"type": "argument",
+																"parser": "string",
+																"properties": {
+																	"type": "word"
+																},
+																"children": {
+																	"animationSeconds": {
+																		"type": "argument",
+																		"parser": "float",
+																		"properties": {
+																			"min": 0.0
+																		},
+																		"children": {
+																			"includesEntities": {
+																				"type": "argument",
+																				"parser": "boolean",
+																				"children": {
+																					"includesBlocks": {
+																						"type": "argument",
+																						"parser": "boolean",
+																						"children": {
+																							"integrity": {
+																								"type": "argument",
+																								"parser": "float",
+																								"properties": {
+																									"min": 0.0,
+																									"max": 1.0
+																								},
+																								"children": {
+																									"seed": {
+																										"type": "argument",
+																										"parser": "string",
+																										"properties": {
+																											"type": "word"
+																										},
+																										"executable": true
+																									}
+																								},
+																								"executable": true
+																							}
+																						},
+																						"executable": true
+																					}
+																				},
+																				"executable": true
+																			}
+																		},
+																		"executable": true
+																	}
+																},
+																"executable": true
+															}											   
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					},
+					"delete": {
+						"type": "literal",
+						"children": {
+							"name": {
+								"type": "argument",
+								"parser": "string",
+								"properties": {
+									"type": "greedy"
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"summon": {
+				"type": "literal",
+				"children": {
+					"entity": {
+						"type": "argument",
+						"parser": "entity_summon",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"name": {
+								"type": "argument",
+								"parser": "string",
+								"properties": {
+									"type": "phrase"
+								},
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"pos": {
+								"type": "argument",
+								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"spawnEvent": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "phrase"
+										},
+										"children": {
+											"name": {
+												"type": "argument",
+												"parser": "string",
+												"properties": {
+													"type": "greedy"
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"tag": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"add": {
+								"type": "literal",
+								"children": {
+									"name": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "word"
+										},
+										"executable": true
+									}
+								}
+							},
+							"list": {
+								"type": "literal",
+								"executable": true
+							},
+							"remove": {
+								"type": "literal",
+								"children": {
+									"name": {
+										"type": "argument",
+										"parser": "string",
+										"properties": {
+											"type": "word"
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"teleport": {
+				"type": "literal",
+				"children": {
+					"destination": {
+						"type": "argument",
+						"parser": "vec3",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"checkForBlocks": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							},
+							"rotation": {
+								"type": "argument",
+								"parser": "vec2",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"checkForBlocks": {
+										"type": "argument",
+										"parser": "boolean",
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"facing": {
+								"type": "literal",
+								"children": {
+									"facingLocation": {
+										"type": "argument",
+										"parser": "vec3",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"checkForBlocks": {
+												"type": "argument",
+												"parser": "boolean",
+												"executable": true
+											}
+										},
+										"executable": true
+									},
+									"facingEntity": {
+										"type": "argument",
+										"parser": "entity",
+										"properties": {
+											"single_entity": true,
+											"use_bedrock": true
+										},
+										"children": {
+											"checkForBlocks": {
+												"type": "argument",
+												"parser": "boolean",
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						},
+						"executable": true
+					},
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"checkForBlocks": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							},
+							"target": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"single_entity": true,
+									"use_bedrock": true
+								},
+								"children": {
+									"checkForBlocks": {
+										"type": "argument",
+										"parser": "boolean",
+										"executable": true
+									}
+								},
+								"executable": true
+							},
+							"destination": {
+								"type": "argument",
+								"parser": "vec3",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"rotation": {
+										"type": "argument",
+										"parser": "vec2",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"checkForBlocks": {
+												"type": "argument",
+												"parser": "boolean",
+												"executable": true
+											}
+										},
+										"executable": true
+									},
+									"facing": {
+										"type": "literal",
+										"children": {
+											"facingLocation": {
+												"type": "argument",
+												"parser": "vec3",
+												"properties": {
+													"use_bedrock": true
+												},
+												"children": {
+													"checkForBlocks": {
+														"type": "argument",
+														"parser": "boolean",
+														"executable": true
+													}
+												},
+												"executable": true
+											},
+											"facingEntity": {
+												"type": "argument",
+												"parser": "entity",
+												"properties": {
+													"single_entity": true,
+													"use_bedrock": true
+												},
+												"children": {
+													"checkForBlocks": {
+														"type": "argument",
+														"parser": "boolean",
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										}
+									}
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"tell": {
+				"type": "literal",
+				"redirect": ["msg"]
+			},
+			"tellraw": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"message": {
+								"type": "argument",
+								"parser": "component",
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"testfor": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"use_bedrock": true
+						},
+						"executable": true
+					}
+				}
+			},
+			"testforblock": {
+				"type": "literal",
+				"children": {
+					"pos": {
+						"type": "argument",
+						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"block": {
+								"type": "argument",
+								"parser": "block",
+								"properties": {
+									"for_testing": true,
+									"use_bedrock": true
+								},
+								"children": {
+									"data": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": -1
+										},
+										"executable": true
+									}
+								},
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"testforblocks": {
+				"type": "literal",
+				"children": {
+					"begin": {
+						"type": "argument",
+						"parser": "block_pos",
+						"properties": {
+							"use_bedrock": true
+						},
+						"children": {
+							"end": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"destination": {
+										"type": "argument",
+										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"all": {
+												"type": "literal",
+												"executable": true
+											},
+											"masked": {
+												"type": "literal",
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"tickingarea": {
+				"type": "literal",
+				"children": {
+					"add": {
+						"type": "literal",
+						"children": {
+							"from": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"children": {
+									"to": {
+										"type": "argument",
+										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"name": {
+												"type": "argument",
+												"parser": "string",
+												"properties": {
+													"type": "greedy"
+												},
+												"executable": true
+											}
+										},
+										"executable": true
+									}
+								}
+							},
+							"circle": {
+								"type": "literal",
+								"children": {
+									"center": {
+										"type": "argument",
+										"parser": "block_pos",
+										"properties": {
+											"use_bedrock": true
+										},
+										"children": {
+											"radius": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 0
+												},
+												"children": {
+													"name": {
+														"type": "argument",
+														"parser": "string",
+														"properties": {
+															"type": "greedy"
+														},
+														"executable": true
+													}
+												},
+												"executable": true
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"remove": {
+						"type": "literal",
+						"children": {
+							"name": {
+								"type": "argument",
+								"parser": "string",
+								"properties": {
+									"type": "greedy"
+								},
+								"executable": true
+							},
+							"pos": {
+								"type": "argument",
+								"parser": "block_pos",
+								"properties": {
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						}
+					},
+					"remove_all": {
+						"type": "literal",
+						"executable": true
+					},
+					"list": {
+						"type": "literal",
+						"children": {
+							"all-dimensions": {
+								"type": "literal",
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			},
+			"time": {
+				"type": "literal",
+				"children": {
+					"add": {
+						"type": "literal",
+						"children": {
+							"time": {
+								"type": "argument",
+								"parser": "time",
+								"executable": true
+							}
+						}
+					},
+					"query": {
+						"type": "literal",
+						"children": {
+							"day": {
+								"type": "literal",
+								"executable": true
+							},
+							"daytime": {
+								"type": "literal",
+								"executable": true
+							},
+							"gametime": {
+								"type": "literal",
+								"executable": true
+							}
+						}
+					},
+					"set": {
+						"type": "literal",
+						"children": {
+							"day": {
+								"type": "literal",
+								"executable": true
+							},
+							"midnight": {
+								"type": "literal",
+								"executable": true
+							},
+							"night": {
+								"type": "literal",
+								"executable": true
+							},
+							"noon": {
+								"type": "literal",
+								"executable": true
+							},
+							"sunrise": {
+								"type": "literal",
+								"executable": true
+							},
+							"sunset": {
+								"type": "literal",
+								"executable": true
+							},
+							"time": {
+								"type": "argument",
+								"parser": "time",
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"title": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"actionbar": {
+								"type": "literal",
+								"children": {
+									"title": {
+										"type": "argument",
+										"parser": "message",
+										"properties": {
+											"use_bedrock": true
+										},
+										"executable": true
+									}
+								}
+							},
+							"clear": {
+								"type": "literal",
+								"executable": true
+							},
+							"reset": {
+								"type": "literal",
+								"executable": true
+							},
+							"subtitle": {
+								"type": "literal",
+								"children": {
+									"title": {
+										"type": "argument",
+										"parser": "message",
+										"properties": {
+											"use_bedrock": true
+										},
+										"executable": true
+									}
+								}
+							},
+							"times": {
+								"type": "literal",
+								"children": {
+									"fadeIn": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 0
+										},
+										"children": {
+											"stay": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 0
+												},
+												"children": {
+													"fadeOut": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 0
+														},
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"title": {
+								"type": "literal",
+								"children": {
+									"title": {
+										"type": "argument",
+										"parser": "message",
+										"properties": {
+											"use_bedrock": true
+										},
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"titleraw": {
+				"type": "literal",
+				"children": {
+					"targets": {
+						"type": "argument",
+						"parser": "entity",
+						"properties": {
+							"players_only": true,
+							"use_bedrock": true
+						},
+						"children": {
+							"actionbar": {
+								"type": "literal",
+								"children": {
+									"title": {
+										"type": "argument",
+										"parser": "component",
+										"executable": true
+									}
+								}
+							},
+							"clear": {
+								"type": "literal",
+								"executable": true
+							},
+							"reset": {
+								"type": "literal",
+								"executable": true
+							},
+							"subtitle": {
+								"type": "literal",
+								"children": {
+									"title": {
+										"type": "argument",
+										"parser": "component",
+										"executable": true
+									}
+								}
+							},
+							"times": {
+								"type": "literal",
+								"children": {
+									"fadeIn": {
+										"type": "argument",
+										"parser": "integer",
+										"properties": {
+											"min": 0
+										},
+										"children": {
+											"stay": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 0
+												},
+												"children": {
+													"fadeOut": {
+														"type": "argument",
+														"parser": "integer",
+														"properties": {
+															"min": 0
+														},
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"title": {
+								"type": "literal",
+								"children": {
+									"title": {
+										"type": "argument",
+										"parser": "component",
+										"executable": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"toggledownfall": {
+				"type": "literal",
+				"executable": true
+			},
+			"tp": {
+				"type": "literal",
+				"redirect": ["teleport"]
+			},
+			"transferserver": {
+				"type": "literal",
+				"children": {
+					"server": {
+						"type": "argument",
+						"parser": "string",
+						"properties": {
+							"type": "phrase"
+						},
+						"children": {
+							"port": {
+								"type": "argument",
+								"parser": "integer",
+								"executable": true
+							}
+						}
+					}
+				}
+			},
+			"w": {
+				"type": "literal",
+				"redirect": ["msg"]
+			},
+			"weather": {
+				"type": "literal",
+				"children": {
+					"clear": {
+						"type": "literal",
+						"children": {
+							"duration": {
+								"type": "argument",
+								"parser": "integer",
+								"properties": {
+									"min": 0,
+									"max": 1000000
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"rain": {
+						"type": "literal",
+						"children": {
+							"duration": {
+								"type": "argument",
+								"parser": "integer",
+								"properties": {
+									"min": 0,
+									"max": 1000000
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"thunder": {
+						"type": "literal",
+						"children": {
+							"duration": {
+								"type": "argument",
+								"parser": "integer",
+								"properties": {
+									"min": 0,
+									"max": 1000000
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					},
+					"query": {
+						"type": "literal",
+						"executable": true
+					}
+				}
+			},
+			"worldbuilder": {
+				"type": "literal",
+				"executable": true
+			},
+			"wsserver": {
+				"type": "literal",
+				"redirect": ["connect"]
+			},
+			"xp": {
+				"type": "literal",
+				"children": {
+					"amount": {
+						"type": "argument",
+						"parser": "integer",
+						"children": {
+							"targets": {
+								"type": "argument",
+								"parser": "entity",
+								"properties": {
+									"players_only": true,
+									"use_bedrock": true
+								},
+								"executable": true
+							}
+						},
+						"executable": true
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,49 @@
+{
+	"java-release": {
+		"name": "Java 1.17.1",
+		"resources": {
+			"anchors": "java",
+			"blocks": "java",
+			"colours": "java",
+			"commands": "java",
+			"components": "java",
+			"enchantments": "java",
+			"entities": "java",
+			"gamemodes": "java",
+			"items": "java",
+			"item_slots": "java",
+			"mob_effects": "java",
+			"objective_criteria": "java",
+			"operations": "java",
+			"particles": "java",
+			"scoreboard_slots": "java",
+			"selector_arguments": "java",
+			"sorts": "java",
+			"time_scalars": "java"
+		}
+	},
+	"bedrock": {
+		"name": "Bedrock",
+		"use_bedrock_string_reader": true,
+		"resources": {
+			"blocks": "java",
+			"commands": "bedrock",
+			"components": "bedrock",
+			"enchantments": "java",
+			"entities": "java",
+			"gamemodes": "bedrock",
+			"items": "java",
+			"item_slots": "bedrock",
+			"item_components": "bedrock",
+			"mob_effects": "java",
+			"objective_criteria": "bedrock",
+			"operations": "java",
+			"particles": "java",
+			"scoreboard_slots": "bedrock",
+			"selector_arguments": "bedrock",
+			"structure_mirrors": "bedrock",
+			"structure_rotations": "bedrock",
+			"time_scalars": "java"
+		}
+	}
+}

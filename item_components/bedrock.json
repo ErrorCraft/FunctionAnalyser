@@ -1,0 +1,41 @@
+{
+	"root": {
+		"type": "root_object"
+	},
+	"primary": {
+		"can_place_on": {
+			"type": "object",
+			"key_resource_location": true,
+			"children": {
+				"blocks": {
+					"type": "array",
+					"array_contents": "string"
+				}
+			}
+		},
+		"can_destroy": {
+			"type": "object",
+			"key_resource_location": true,
+			"children": {
+				"blocks": {
+					"type": "array",
+					"array_contents": "string"
+				}
+			}
+		},
+		"item_lock": {
+			"type": "object",
+			"key_resource_location": true,
+			"children": {
+				"mode": {
+					"type": "string"
+				}
+			}
+		},
+		"keep_on_death": {
+			"type": "object",
+			"key_resource_location": true
+		}
+	},
+	"optional": {}
+}

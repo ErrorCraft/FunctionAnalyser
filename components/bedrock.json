@@ -1,0 +1,42 @@
+{
+	"root": {
+		"type": "object",
+		"children": {
+			"rawtext": {
+				"type": "array",
+				"array_contents": "object"
+			}
+		}
+	},
+	"primary": {
+		"text": {
+			"type": "string"
+		},
+		"translate": {
+			"type": "string",
+			"children": {
+				"with": {
+					"type": "array_or_root",
+					"array_contents": "string",
+					"may_be_empty": true,
+					"optional": true
+				}
+			}
+		},
+		"score": {
+			"type": "object",
+			"children": {
+				"name": {
+					"type": "string"
+				},
+				"objective": {
+					"type": "string"
+				}
+			}
+		},
+		"selector": {
+			"type": "string"
+		}
+	},
+	"optional": {}
+}

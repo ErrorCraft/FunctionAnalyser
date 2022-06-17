@@ -1,0 +1,23 @@
+{
+	"anchors": ["java"],
+	"blocks": ["java"],
+	"colours": ["java"],
+	"commands": ["java","bedrock"],
+	"components": ["java","bedrock"],
+	"enchantments": ["java"],
+	"entities": ["java"],
+	"gamemodes": ["java","bedrock"],
+	"items": ["java"],
+	"item_components": ["bedrock"],
+	"item_slots": ["java","bedrock"],
+	"mob_effects": ["java"],
+	"objective_criteria": ["java","bedrock"],
+	"operations": ["java"],
+	"particles": ["java"],
+	"scoreboard_slots": ["java","bedrock"],
+	"selector_arguments": ["java","bedrock"],
+	"sorts": ["java"],
+	"time_scalars": ["java"],
+	"structure_rotations": ["bedrock"],
+	"structure_mirrors": ["bedrock"]
+}
