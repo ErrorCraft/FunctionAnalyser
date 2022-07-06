@@ -18,6 +18,6 @@
 	"selector_arguments": ["java","bedrock"],
 	"sorts": ["java"],
 	"time_scalars": ["java"],
-	"structure_rotations": ["bedrock"],
-	"structure_mirrors": ["bedrock"]
+	"structure_rotations": ["java","bedrock"],
+	"structure_mirrors": ["java","bedrock"]
 }

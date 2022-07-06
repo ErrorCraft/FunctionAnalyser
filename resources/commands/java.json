@@ -3832,6 +3832,17 @@
 						},
 						"executable": true
 					},
+					"doWardenSpawning": {
+						"type": "literal",
+						"children": {
+							"value": {
+								"type": "argument",
+								"parser": "boolean",
+								"executable": true
+							}
+						},
+						"executable": true
+					},
 					"doWeatherCycle": {
 						"type": "literal",
 						"children": {
@@ -4121,87 +4132,35 @@
 			"locate": {
 				"type": "literal",
 				"children": {
-					"bastion_remnant": {
-						"type": "literal",
-						"executable": true
-					},
-					"buried_treasure": {
-						"type": "literal",
-						"executable": true
-					},
-					"desert_pyramid": {
-						"type": "literal",
-						"executable": true
-					},
-					"endcity": {
-						"type": "literal",
-						"executable": true
-					},
-					"fortress": {
-						"type": "literal",
-						"executable": true
-					},
-					"igloo": {
-						"type": "literal",
-						"executable": true
-					},
-					"jungle_pyramid": {
-						"type": "literal",
-						"executable": true
-					},
-					"mansion": {
-						"type": "literal",
-						"executable": true
-					},
-					"mineshaft": {
-						"type": "literal",
-						"executable": true
-					},
-					"monument": {
-						"type": "literal",
-						"executable": true
-					},
-					"nether_fossil": {
-						"type": "literal",
-						"executable": true
-					},
-					"ocean_ruin": {
-						"type": "literal",
-						"executable": true
-					},
-					"pillager_outpost": {
-						"type": "literal",
-						"executable": true
-					},
-					"ruined_portal": {
-						"type": "literal",
-						"executable": true
-					},
-					"shipwreck": {
-						"type": "literal",
-						"executable": true
-					},
-					"stronghold": {
-						"type": "literal",
-						"executable": true
-					},
-					"swamp_hut": {
-						"type": "literal",
-						"executable": true
-					},
-					"village": {
-						"type": "literal",
-						"executable": true
-					}
-				}
-			},
-			"locatebiome": {
-				"type": "literal",
-				"children": {
 					"biome": {
-						"type": "argument",
-						"parser": "biome",
-						"executable": true
+						"type": "literal",
+						"children": {
+							"biome": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true
+							}
+						}
+					},
+					"poi": {
+						"type": "literal",
+						"children": {
+							"poi": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true
+							}
+						}
+					},
+					"structure": {
+						"type": "literal",
+						"children": {
+							"structure": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true
+							}
+						}
 					}
 				}
 			},
@@ -4957,6 +4916,127 @@
 							}
 						},
 						"executable": true
+					}
+				}
+			},
+			"place": {
+				"type": "literal",
+				"children": {
+					"feature": {
+						"type": "literal",
+						"children": {
+							"feature": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true,
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "block_pos",
+										"executable": true
+									}
+								}
+							}
+						}
+					},
+					"jigsaw": {
+						"type": "literal",
+						"children": {
+							"pool": {
+								"type": "argument",
+								"parser": "resource_location",
+								"children": {
+									"start": {
+										"type": "argument",
+										"parser": "resource_location",
+										"children": {
+											"depth": {
+												"type": "argument",
+												"parser": "integer",
+												"properties": {
+													"min": 1,
+													"max": 7
+												},
+												"executable": true,
+												"children": {
+													"pos": {
+														"type": "argument",
+														"parser": "block_pos",
+														"executable": true
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"structure": {
+						"type": "literal",
+						"children": {
+							"structure": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true,
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "block_pos",
+										"executable": true
+									}
+								}
+							}
+						}
+					},
+					"template": {
+						"type": "literal",
+						"children": {
+							"template": {
+								"type": "argument",
+								"parser": "resource_location",
+								"executable": true,
+								"children": {
+									"pos": {
+										"type": "argument",
+										"parser": "block_pos",
+										"executable": true,
+										"children": {
+											"rotation": {
+												"type": "argument",
+												"parser": "structure_rotation",
+												"executable": true,
+												"children": {
+													"mirror": {
+														"type": "argument",
+														"parser": "structure_mirror",
+														"executable": true,
+														"children": {
+															"integrity": {
+																"type": "argument",
+																"parser": "float",
+																"properties": {
+																	"min": 0.0,
+																	"max": 1.0
+																},
+																"executable": true,
+																"children": {
+																	"seed": {
+																		"type": "argument",
+																		"parser": "integer",
+																		"executable": true
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			},

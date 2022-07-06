@@ -112,6 +112,11 @@
 		"glow_squid",
 		"glow_item_frame",
 		"goat",
-		"marker"
+		"marker",
+		"allay",
+		"frog",
+		"tadpole",
+		"warden",
+		"chest_boat"
 	]
 }

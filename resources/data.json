@@ -1,6 +1,6 @@
 {
 	"java-release": {
-		"name": "Java 1.17.1",
+		"name": "Java 1.19",
 		"resources": {
 			"anchors": "java",
 			"blocks": "java",
@@ -19,6 +19,8 @@
 			"scoreboard_slots": "java",
 			"selector_arguments": "java",
 			"sorts": "java",
+			"structure_mirrors": "java",
+			"structure_rotations": "java",
 			"time_scalars": "java"
 		}
 	},
