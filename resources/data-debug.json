@@ -3,22 +3,24 @@
 		"name": "Java (Testing)",
 		"resources": {
 			"anchors": "java",
-			"blocks": "java-snapshot",
+			"blocks": "java",
 			"colours": "java",
 			"commands": "java-test",
 			"components": "java",
 			"enchantments": "java",
-			"entities": "java-snapshot",
+			"entities": "java",
 			"gamemodes": "java-test",
-			"items": "java-snapshot",
 			"item_slots": "java",
+			"items": "java",
 			"mob_effects": "java",
 			"objective_criteria": "java",
 			"operations": "java",
-			"particles": "java-snapshot",
+			"particles": "java",
 			"scoreboard_slots": "java",
 			"selector_arguments": "java",
 			"sorts": "java",
+			"structure_mirrors": "java",
+			"structure_rotations": "java",
 			"time_scalars": "java"
 		}
 	}
