@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:c="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.Controls"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ErrorCraft.FunctionAnalyser.UI.Avalonia.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ErrorCraft.FunctionAnalyser.UI.Avalonia"
+		Loaded="WindowLoaded">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="Select Folder" Click="SelectFolder"></MenuItem>
+		</Menu>
+		<Grid Margin="3">
+			<c:BorderedPanel>
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<RichTextBlock Background="LightGray" Inlines="{Binding Output}" Foreground="Black"></RichTextBlock>
+				</ScrollViewer>
+			</c:BorderedPanel>
+		</Grid>
+	</DockPanel>
+</Window>
