@@ -42,12 +42,12 @@ namespace FunctionAnalyser {
             Progress = progress;
         }
 
-        public void Analyse(string basePath, string version, FunctionOptions options) {
+        public FunctionData Analyse(string basePath, string version, FunctionOptions options) {
             BasePath = basePath;
             Options = options;
             if (!Directory.Exists(BasePath)) {
                 Logger.Log(MessageProvider.FolderDoesNotExist(BasePath));
-                return;
+                return FunctionData.Empty();
             }
 
             Logger.Log(MessageProvider.AnalyseFunctions(BasePath, Versions[version]));
@@ -57,6 +57,7 @@ namespace FunctionAnalyser {
 
             Logger.Log(MessageProvider.Time(timer));
             Report(results);
+            return results;
         }
 
         private FunctionData AnalyseFunctions(string version) {

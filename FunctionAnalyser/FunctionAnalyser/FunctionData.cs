@@ -23,6 +23,10 @@ namespace FunctionAnalyser
 
         public List<TextComponent> Messages { get; } = new List<TextComponent>();
 
+        public static FunctionData Empty() {
+            return new FunctionData();
+        }
+
         public static FunctionData operator +(FunctionData a, FunctionData b)
         {
             return new FunctionData()
