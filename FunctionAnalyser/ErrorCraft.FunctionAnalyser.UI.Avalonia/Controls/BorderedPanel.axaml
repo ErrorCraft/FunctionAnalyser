@@ -1,30 +1,45 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.Controls">
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:controls="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.Controls"
+		xmlns:converters="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.Converters">
 	<Design.PreviewWith>
-		<controls:BorderedPanel Width="100" Height="100">
-			<TextBlock Text="Hello"></TextBlock>
-			<TextBlock Text="There"></TextBlock>
-		</controls:BorderedPanel>
+		<Border Padding="20">
+			<controls:BorderedPanel Padding="10">
+				<StackPanel>
+					<TextBlock Text="Hello"></TextBlock>
+					<TextBlock Text="There"></TextBlock>
+				</StackPanel>
+			</controls:BorderedPanel>
+		</Border>
 	</Design.PreviewWith>
 
 	<Style Selector="controls|BorderedPanel">
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Border Background="White"
-						BorderBrush="White"
-						BorderThickness="0 0 0 2"
+				<Border Name="outer"
+						Background="{TemplateBinding BackgroundColour}"
 						CornerRadius="5"
 						Margin="{TemplateBinding Margin}">
-					<Border BoxShadow="inset 0 1 5 #999999"
-							Margin="0"
+					<Border BoxShadow="{TemplateBinding ShadowColour, Converter={x:Static converters:BorderedPanelBoxShadowConverter.Converter}}"
 							CornerRadius="5"
 							Padding="{TemplateBinding Padding}">
-						<ItemsRepeater Items="{TemplateBinding Items}"></ItemsRepeater>
+						<ItemsControl VerticalAlignment="Stretch" Items="{TemplateBinding Items}">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<Grid />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+						</ItemsControl>
 					</Border>
 				</Border>
 			</ControlTemplate>
 		</Setter>
-		<Setter Property="Padding" Value="15 20 15 5"></Setter>
+		<Setter Property="BackgroundColour" Value="#FFFFFF"></Setter>
+		<Setter Property="ShadowColour" Value="#666666"></Setter>
+
+		<Style Selector="^[HasEdge=true] Border#outer">
+			<Setter Property="BorderBrush" Value="White"></Setter>
+			<Setter Property="BorderThickness" Value="0 0 0 2"></Setter>
+		</Style>
 	</Style>
 </Styles>
