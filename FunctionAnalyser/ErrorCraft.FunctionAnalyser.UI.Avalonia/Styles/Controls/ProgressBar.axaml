@@ -1,0 +1,31 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:c="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.Controls">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<ProgressBar Minimum="0" Maximum="1" Value="0.75" />
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="ProgressBar">
+		<Setter Property="Height" Value="{DynamicResource ProgressBarHeight}" />
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid>
+					<c:BorderedPanel>
+						<Panel>
+							<Border Name="PART_Indicator"
+									IsVisible="{Binding !IsIndeterminate, RelativeSource={RelativeSource TemplatedParent}}">
+								<c:BorderedPanel BackgroundColour="{DynamicResource ProgressBarColour}" ShadowColour="{DynamicResource ProgressBarShadowColour}"></c:BorderedPanel>
+							</Border>
+							<Border Name="PART_IndeterminateIndicator"
+									IsVisible="{Binding IsIndeterminate, RelativeSource={RelativeSource TemplatedParent}}">
+								<c:BorderedPanel BackgroundColour="{DynamicResource ProgressBarColour}" ShadowColour="{DynamicResource ProgressBarShadowColour}"></c:BorderedPanel>
+							</Border>
+						</Panel>
+					</c:BorderedPanel>
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

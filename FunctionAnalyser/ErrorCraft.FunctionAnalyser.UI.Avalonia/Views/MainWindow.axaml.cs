@@ -26,7 +26,9 @@ public partial class MainWindow : Window {
         Reader = new FunctionReader(Logger, Progress);
     }
 
-    private void ProgressChanged(object? sender, FunctionProgress e) { }
+    private void ProgressChanged(object? sender, FunctionProgress e) {
+        ViewModel.AnalyseProgress = e.Completion;
+    }
 
     private async void WindowLoaded(object sender, RoutedEventArgs e) {
         try {

@@ -1,16 +1,22 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.PreviewWith>
-        <Border Padding="20"></Border>
-    </Design.PreviewWith>
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:s="using:System">
+	<Design.PreviewWith>
+		<Border Padding="20"></Border>
+	</Design.PreviewWith>
 
 	<Styles.Resources>
 		<SolidColorBrush x:Key="DataGridSeparatorColour" Color="#000000" />
 		<StreamGeometry x:Key="DataGridSortIconAscending">M 0, 0 L 3, 0 L 8, 5 L 13, 0 L 16, 0 L 8, 8 Z</StreamGeometry>
 		<StreamGeometry x:Key="DataGridSortIconDescending">M 0, 8 L 8, 0 L 16, 8 L 13, 8 L 8, 3 L 3, 8 Z</StreamGeometry>
+
+		<SolidColorBrush x:Key="ProgressBarColour" Color="#C3EC61" />
+		<SolidColorBrush x:Key="ProgressBarShadowColour" Color="#5D8600" />
+		<s:Double x:Key="ProgressBarHeight">8</s:Double>
 	</Styles.Resources>
 
-    <StyleInclude Source="/Styles/Controls/DataGrid.axaml" />
+	<StyleInclude Source="/Styles/Controls/ProgressBar.axaml" />
+	<StyleInclude Source="/Styles/Controls/DataGrid.axaml" />
 	<StyleInclude Source="/Controls/BorderedPanel.axaml" />
 	<StyleInclude Source="/Controls/TitledPanel.axaml" />
 </Styles>
