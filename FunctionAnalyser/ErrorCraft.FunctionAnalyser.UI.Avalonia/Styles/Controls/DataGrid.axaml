@@ -1,0 +1,71 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20"></Border>
+    </Design.PreviewWith>
+
+	<Style Selector="DataGridCell">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="*, auto">
+					<ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+									  Content="{TemplateBinding Content}"
+									  Margin="{TemplateBinding Padding}"
+									  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					<Rectangle x:Name="PART_RightGridLine" Grid.Column="1" />
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:not(:nth-last-child(1)) /template/ Rectangle#PART_RightGridLine">
+			<Setter Property="Width" Value="1"></Setter>
+		</Style>
+	</Style>
+
+	<Style Selector="DataGridColumnHeader">
+		<Setter Property="SeparatorBrush" Value="{DynamicResource DataGridSeparatorColour}"></Setter>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="*, auto">
+					<Grid ColumnDefinitions="*, auto"
+						  Margin="{TemplateBinding Padding}">
+						<ContentPresenter Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}" />
+						<Path x:Name="SortColumnIcon"
+							  Grid.Column="1"
+							  Fill="{TemplateBinding Foreground}"
+							  HorizontalAlignment="Left" VerticalAlignment="Center"
+							  Width="8"
+							  Margin="4 0 0 0"
+							  Stretch="Uniform"/>
+					</Grid>
+					<Rectangle x:Name="VerticalSeparator" Grid.Column="1" Fill="{TemplateBinding SeparatorBrush}" />
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:not(:nth-last-child(1)) /template/ Rectangle#VerticalSeparator">
+			<Setter Property="Width" Value="1"></Setter>
+		</Style>
+
+		<Style Selector="^:sortascending /template/ Path#SortColumnIcon">
+			<Setter Property="Data" Value="{DynamicResource DataGridSortIconAscending}"></Setter>
+		</Style>
+
+		<Style Selector="^:sortdescending /template/ Path#SortColumnIcon">
+			<Setter Property="Data" Value="{DynamicResource DataGridSortIconDescending}"></Setter>
+		</Style>
+	</Style>
+
+	<Style Selector="DataGrid">
+		<Setter Property="GridLinesVisibility" Value="Vertical"></Setter>
+		<Setter Property="VerticalGridLinesBrush" Value="{DynamicResource DataGridSeparatorColour}"></Setter>
+		<Setter Property="RowBackground" Value="WhiteSmoke"></Setter>
+		<Setter Property="FontSize" Value="12"></Setter>
+		<Style Selector="^ /template/ DataGridColumnHeader#PART_TopRightCornerHeader">
+			<Setter Property="Width" Value="0"></Setter>
+			<Setter Property="Margin" Value="10 0"></Setter>
+		</Style>
+	</Style>
+</Styles>

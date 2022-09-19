@@ -8,6 +8,7 @@
 
 	<Application.Styles>
 		<FluentTheme Mode="Light"/>
-		<StyleInclude Source="/Controls/BorderedPanel.axaml" />
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Simple.xaml"/>
+		<StyleInclude Source="/Styles/Style.axaml" />
 	</Application.Styles>
 </Application>

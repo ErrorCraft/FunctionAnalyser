@@ -45,6 +45,7 @@ public partial class MainWindow : Window {
         string path = uri.LocalPath;
 
         Logger.Clear();
+        ViewModel.Commands.Clear();
 
         FunctionOptions options = new FunctionOptions() {
             SkipFunctionOnError = false,
@@ -52,6 +53,9 @@ public partial class MainWindow : Window {
             ShowEmptyFunctions = true,
             CommandSortType = SortType.Alphabetical
         };
-        await Task.Run(() => Reader.Analyse(path, Reader.GetVersionNames()[0].CommandName, options));
+        FunctionData functionData = await Task.Run(() => Reader.Analyse(path, Reader.GetVersionNames()[0].CommandName, options));
+        foreach (KeyValuePair<string, Command> pair in functionData.UsedCommands.GetSorted(SortType.TimesUsed)) {
+            ViewModel.Commands.Add(new CommandCountViewModel(pair.Key, pair.Value.Commands, pair.Value.BehindExecute));
+        }
     }
 }

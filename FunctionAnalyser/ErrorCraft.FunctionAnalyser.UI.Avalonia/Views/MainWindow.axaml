@@ -18,11 +18,32 @@
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Select Folder" Click="SelectFolder"></MenuItem>
 		</Menu>
-		<Grid Margin="3">
+		<Grid Margin="3" ColumnDefinitions="*, 3, auto">
 			<c:BorderedPanel>
 				<ScrollViewer VerticalScrollBarVisibility="Auto">
 					<RichTextBlock Background="LightGray" Inlines="{Binding Output}" Foreground="Black"></RichTextBlock>
 				</ScrollViewer>
+			</c:BorderedPanel>
+			<c:BorderedPanel Grid.Column="2">
+				<DataGrid Items="{Binding Commands}">
+					<DataGrid.Columns>
+						<DataGridTextColumn Binding="{Binding Command}">
+							<DataGridTextColumn.Header>
+								<TextBlock Text="Command" FontWeight="Bold"></TextBlock>
+							</DataGridTextColumn.Header>
+						</DataGridTextColumn>
+						<DataGridTextColumn Binding="{Binding Count}">
+							<DataGridTextColumn.Header>
+								<TextBlock Text="Times Used" FontWeight="Bold"></TextBlock>
+							</DataGridTextColumn.Header>
+						</DataGridTextColumn>
+						<DataGridTextColumn Binding="{Binding ExecuteCount}">
+							<DataGridTextColumn.Header>
+								<TextBlock Text="In execute" FontWeight="Bold"></TextBlock>
+							</DataGridTextColumn.Header>
+						</DataGridTextColumn>
+					</DataGrid.Columns>
+				</DataGrid>
 			</c:BorderedPanel>
 		</Grid>
 	</DockPanel>
