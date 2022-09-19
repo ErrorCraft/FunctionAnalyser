@@ -12,4 +12,5 @@
 
     <StyleInclude Source="/Styles/Controls/DataGrid.axaml" />
 	<StyleInclude Source="/Controls/BorderedPanel.axaml" />
+	<StyleInclude Source="/Controls/TitledPanel.axaml" />
 </Styles>

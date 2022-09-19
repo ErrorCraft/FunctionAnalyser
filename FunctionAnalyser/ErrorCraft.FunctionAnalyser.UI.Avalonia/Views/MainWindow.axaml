@@ -19,12 +19,12 @@
 			<MenuItem Header="Select Folder" Click="SelectFolder"></MenuItem>
 		</Menu>
 		<Grid Margin="3" ColumnDefinitions="*, 3, auto">
-			<c:BorderedPanel>
+			<c:TitledPanel Title="Output">
 				<ScrollViewer VerticalScrollBarVisibility="Auto">
 					<RichTextBlock Background="LightGray" Inlines="{Binding Output}" Foreground="Black"></RichTextBlock>
 				</ScrollViewer>
-			</c:BorderedPanel>
-			<c:BorderedPanel Grid.Column="2">
+			</c:TitledPanel>
+			<c:TitledPanel Grid.Column="2" Title="Commands">
 				<DataGrid Items="{Binding Commands}">
 					<DataGrid.Columns>
 						<DataGridTextColumn Binding="{Binding Command}">
@@ -44,7 +44,7 @@
 						</DataGridTextColumn>
 					</DataGrid.Columns>
 				</DataGrid>
-			</c:BorderedPanel>
+			</c:TitledPanel>
 		</Grid>
 	</DockPanel>
 </Window>

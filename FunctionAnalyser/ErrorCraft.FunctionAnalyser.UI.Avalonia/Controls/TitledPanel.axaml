@@ -1,0 +1,36 @@
+<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:controls="using:ErrorCraft.FunctionAnalyser.UI.Avalonia.Controls">
+	<Design.PreviewWith>
+		<controls:TitledPanel Title="Title">
+			<StackPanel>
+				<TextBlock Text="Hello"></TextBlock>
+				<TextBlock Text="There"></TextBlock>
+			</StackPanel>
+		</controls:TitledPanel>
+	</Design.PreviewWith>
+
+	<Style Selector="controls|TitledPanel">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<controls:BorderedPanel Padding="15 20 15 5">
+					<Grid RowDefinitions="auto, *">
+						<TextBlock Name="title" Text="{TemplateBinding Title}" />
+						<ItemsControl Grid.Row="1" Items="{TemplateBinding Items}">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<Grid />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+						</ItemsControl>
+					</Grid>
+				</controls:BorderedPanel>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+	<Style Selector="controls|TitledPanel /template/ TextBlock#title">
+		<Setter Property="FontSize" Value="24"></Setter>
+		<Setter Property="HorizontalAlignment" Value="Center"></Setter>
+	</Style>
+</Styles>
