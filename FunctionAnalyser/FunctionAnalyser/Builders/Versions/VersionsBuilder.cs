@@ -1,37 +1,31 @@
 ﻿using CommandParser;
 using CommandParser.Collections;
 using CommandParser.Tree;
-using FunctionAnalyser.Builders.Collections;
+using ErrorCraft.PackAnalyser.Builders;
+using ErrorCraft.PackAnalyser.Builders.Collections;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace FunctionAnalyser.Builders.Versions
-{
-    public class VersionsBuilder
-    {
+namespace ErrorCraft.PackAnalyser.Builders.Versions {
+    public class VersionsBuilder {
         private readonly Dictionary<string, VersionResources> Versions;
 
-        public VersionsBuilder(Dictionary<string, VersionResources> versions)
-        {
+        public VersionsBuilder(Dictionary<string, VersionResources> versions) {
             Versions = versions;
         }
 
-        public Dictionary<string, Dispatcher> Build(DispatcherResourcesBuilder resources)
-        {
+        public Dictionary<string, Dispatcher> Build(DispatcherResourcesBuilder resources) {
             Dictionary<string, Dispatcher> dispatchers = new Dictionary<string, Dispatcher>();
-            foreach (KeyValuePair<string, VersionResources> pair in Versions)
-            {
+            foreach (KeyValuePair<string, VersionResources> pair in Versions) {
                 dispatchers.Add(pair.Key, GetDispatcher(resources, pair.Value));
             }
             return dispatchers;
         }
 
-        private static Dispatcher GetDispatcher(DispatcherResourcesBuilder dispatcherResources, VersionResources versionResources)
-        {
+        private static Dispatcher GetDispatcher(DispatcherResourcesBuilder dispatcherResources, VersionResources versionResources) {
             VersionResourceKeys keys = versionResources.GetResourceKeys();
             RootNode commandRootNode = GetResources<CommandsBuilder, RootNode>(dispatcherResources.Commands, keys.GetCommandsKey());
-            DispatcherResources commandResources = new DispatcherResources()
-            {
+            DispatcherResources commandResources = new DispatcherResources() {
                 Anchors = GetResources<AnchorsBuilder, Anchors>(dispatcherResources.Anchors, keys.GetAnchorsKey()),
                 Blocks = GetResources<BlocksBuilder, Blocks>(dispatcherResources.Blocks, keys.GetBlocksKey()),
                 Colours = GetResources<ColoursBuilder, Colours>(dispatcherResources.Colours, keys.GetColoursKey()),
@@ -58,14 +52,12 @@ namespace FunctionAnalyser.Builders.Versions
             return dispatcher;
         }
 
-        private static U GetResources<T, U>(Dictionary<string, T> resources, string key) where T : IBuilder<T, U> where U : class, new()
-        {
+        private static U GetResources<T, U>(Dictionary<string, T> resources, string key) where T : IBuilder<T, U> where U : class, new() {
             if (key == null) return new U();
             return resources[key].Build(resources);
         }
 
-        public static VersionsBuilder FromJson(string json)
-        {
+        public static VersionsBuilder FromJson(string json) {
             Dictionary<string, VersionResources> versions = JsonConvert.DeserializeObject<Dictionary<string, VersionResources>>(json);
             return new VersionsBuilder(versions);
         }

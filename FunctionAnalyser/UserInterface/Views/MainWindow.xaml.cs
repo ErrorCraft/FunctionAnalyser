@@ -1,6 +1,5 @@
 ﻿using AdvancedText;
 using ProgramUpdater;
-using FunctionAnalyser;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.IO;
@@ -8,9 +7,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using UserInterface.ViewModels;
+using ErrorCraft.PackAnalyser;
 
-namespace UserInterface
-{
+namespace UserInterface {
     public partial class MainWindow : Window
     {
         private readonly FunctionReader Reader;

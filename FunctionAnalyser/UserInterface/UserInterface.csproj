@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProgramUpdater\ProgramUpdater.csproj" />
-    <ProjectReference Include="..\FunctionAnalyser\FunctionAnalyser.csproj" />
+    <ProjectReference Include="..\FunctionAnalyser\ErrorCraft.PackAnalyser.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 

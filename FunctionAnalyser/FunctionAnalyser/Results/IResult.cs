@@ -1,9 +1,7 @@
 ﻿using AdvancedText;
 
-namespace FunctionAnalyser.Results
-{
-    public interface IResult
-    {
+namespace ErrorCraft.PackAnalyser.Results {
+    public interface IResult {
         int GetTotal();
         TextComponent ToTextComponent();
     }

@@ -1,8 +1,7 @@
-﻿using FunctionAnalyser.Results;
+﻿using ErrorCraft.PackAnalyser.Results;
 using Utilities;
 
-namespace UserInterface.ViewModels
-{
+namespace UserInterface.ViewModels {
     public class SortTypeViewModel
     {
         public SortType Value { get; }

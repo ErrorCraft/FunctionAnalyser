@@ -1,9 +1,7 @@
-﻿using FunctionAnalyser.Results;
+﻿using ErrorCraft.PackAnalyser.Results;
 
-namespace FunctionAnalyser
-{
-    public class FunctionOptions
-    {
+namespace ErrorCraft.PackAnalyser {
+    public class FunctionOptions {
         public bool SkipFunctionOnError { get; init; }
         public bool ShowCommandErrors { get; init; }
         public bool ShowEmptyFunctions { get; init; }

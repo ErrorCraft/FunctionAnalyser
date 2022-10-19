@@ -3,15 +3,12 @@ using CommandParser.Minecraft;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace FunctionAnalyser.Builders.Collections
-{
-    public class GamemodesBuilder : IBuilder<GamemodesBuilder, Gamemodes>
-    {
+namespace ErrorCraft.PackAnalyser.Builders.Collections {
+    public class GamemodesBuilder : IBuilder<GamemodesBuilder, Gamemodes> {
         [JsonProperty("values")]
         private readonly Dictionary<GameType, HashSet<string>> Values;
 
-        public Gamemodes Build(Dictionary<string, GamemodesBuilder> resources)
-        {
+        public Gamemodes Build(Dictionary<string, GamemodesBuilder> resources) {
             return new Gamemodes(Values);
         }
     }

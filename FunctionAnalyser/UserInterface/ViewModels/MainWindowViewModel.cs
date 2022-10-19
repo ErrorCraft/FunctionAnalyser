@@ -1,4 +1,4 @@
-﻿using FunctionAnalyser.Results;
+﻿using ErrorCraft.PackAnalyser.Results;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,8 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
-namespace UserInterface.ViewModels
-{
+namespace UserInterface.ViewModels {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         public string SkipFunctionOnErrorTitle { get; } = "Skip function on error";

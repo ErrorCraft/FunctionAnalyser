@@ -1,5 +1,5 @@
 ﻿using AdvancedText;
-using static FunctionAnalyser.MessageProvider;
+using static ErrorCraft.PackAnalyser.MessageProvider;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,21 +7,17 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CommandParser;
-using FunctionAnalyser.Builders.Collections;
-using FunctionAnalyser.Builders.Versions;
 using static Utilities.Generic;
+using ErrorCraft.PackAnalyser.Builders.Collections;
+using ErrorCraft.PackAnalyser.Builders.Versions;
 
-namespace FunctionAnalyser.Builders
-{
-    public class ResourceBuilder
-    {
+namespace ErrorCraft.PackAnalyser.Builders {
+    public class ResourceBuilder {
         private readonly HttpClient Client;
         private readonly ILogger Logger;
 
-        public ResourceBuilder(ILogger logger)
-        {
-            Client = new HttpClient()
-            {
+        public ResourceBuilder(ILogger logger) {
+            Client = new HttpClient() {
                 BaseAddress = new Uri("https://raw.githubusercontent.com/ErrorCraft/FunctionAnalyser/master/resources/")
             };
             Client.DefaultRequestHeaders.Accept.Clear();
@@ -29,11 +25,9 @@ namespace FunctionAnalyser.Builders
             Logger = logger;
         }
 
-        public async Task<Dictionary<string, Dispatcher>> GetResources()
-        {
+        public async Task<Dictionary<string, Dispatcher>> GetResources() {
             Definitions definitions = await GetDefinitions();
-            DispatcherResourcesBuilder resources = new DispatcherResourcesBuilder()
-            {
+            DispatcherResourcesBuilder resources = new DispatcherResourcesBuilder() {
                 Anchors = await GetResources<AnchorsBuilder>("anchors", definitions.GetAnchors()),
                 Blocks = await GetResources<BlocksBuilder>("blocks", definitions.GetBlocks()),
                 Colours = await GetResources<ColoursBuilder>("colours", definitions.GetColours()),
@@ -62,8 +56,7 @@ namespace FunctionAnalyser.Builders
             return versionsBuilder.Build(resources);
         }
 
-        private async Task<Definitions> GetDefinitions()
-        {
+        private async Task<Definitions> GetDefinitions() {
 #if DEBUG
             string json = await GetContents("definitions-debug.json");
 #else
@@ -72,8 +65,7 @@ namespace FunctionAnalyser.Builders
             return JsonConvert.DeserializeObject<Definitions>(json);
         }
 
-        private async Task<VersionsBuilder> GetData()
-        {
+        private async Task<VersionsBuilder> GetData() {
 #if DEBUG
             string json = await GetContents("data-debug.json");
 #else
@@ -82,13 +74,11 @@ namespace FunctionAnalyser.Builders
             return VersionsBuilder.FromJson(json);
         }
 
-        private async Task<Dictionary<string, T>> GetResources<T>(string from, string[] paths)
-        {
+        private async Task<Dictionary<string, T>> GetResources<T>(string from, string[] paths) {
             Logger.Log(GettingFile(from));
             Dictionary<string, T> resources = new Dictionary<string, T>();
             if (paths == null || paths.Length == 0) return resources;
-            for (int i = 0; i < paths.Length; i++)
-            {
+            for (int i = 0; i < paths.Length; i++) {
                 string url = CombinePaths(from, paths[i] + ".json");
                 string json = await GetContents(url);
                 resources.Add(paths[i], JsonConvert.DeserializeObject<T>(json));
@@ -96,15 +86,11 @@ namespace FunctionAnalyser.Builders
             return resources;
         }
 
-        private async Task<string> GetContents(string from)
-        {
+        private async Task<string> GetContents(string from) {
             using HttpResponseMessage response = await Client.GetAsync(from);
-            if (response.IsSuccessStatusCode)
-            {
+            if (response.IsSuccessStatusCode) {
                 return await response.Content.ReadAsStringAsync();
-            }
-            else
-            {
+            } else {
                 throw new ResponseException(from, response);
             }
         }

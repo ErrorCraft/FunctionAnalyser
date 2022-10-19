@@ -2,23 +2,19 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace FunctionAnalyser.Builders.Collections
-{
-    public class CommandsBuilder: IBuilder<CommandsBuilder, RootNode>
-    {
+namespace ErrorCraft.PackAnalyser.Builders.Collections {
+    public class CommandsBuilder : IBuilder<CommandsBuilder, RootNode> {
         [JsonProperty("parent")]
         private readonly string Parent;
         [JsonProperty("root")]
         private readonly RootNode Root;
 
-        public RootNode Build(Dictionary<string, CommandsBuilder> resources)
-        {
+        public RootNode Build(Dictionary<string, CommandsBuilder> resources) {
             RootNode all = new RootNode();
             all.Merge(Root);
 
             CommandsBuilder builder = this;
-            while (builder.Parent != null)
-            {
+            while (builder.Parent != null) {
                 builder = resources[builder.Parent];
                 all.Merge(builder.Root);
             }

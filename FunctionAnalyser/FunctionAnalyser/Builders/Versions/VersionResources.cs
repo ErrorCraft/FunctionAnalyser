@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-namespace FunctionAnalyser.Builders.Versions
-{
-    public class VersionResources
-    {
+namespace ErrorCraft.PackAnalyser.Builders.Versions {
+    public class VersionResources {
         [JsonProperty("name")]
         private readonly string Name;
         [JsonProperty("resources")]
@@ -11,18 +9,15 @@ namespace FunctionAnalyser.Builders.Versions
         [JsonProperty("use_bedrock_string_reader")]
         private readonly bool UseBedrockStringReader;
 
-        public string GetName()
-        {
+        public string GetName() {
             return Name;
         }
 
-        public VersionResourceKeys GetResourceKeys()
-        {
+        public VersionResourceKeys GetResourceKeys() {
             return ResourceKeys;
         }
 
-        public bool GetUseBedrockStringReader()
-        {
+        public bool GetUseBedrockStringReader() {
             return UseBedrockStringReader;
         }
     }

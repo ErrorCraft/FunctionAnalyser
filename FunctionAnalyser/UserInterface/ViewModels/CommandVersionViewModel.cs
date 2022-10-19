@@ -1,8 +1,7 @@
-﻿using FunctionAnalyser;
+﻿using ErrorCraft.PackAnalyser;
 using System.Collections.Generic;
 
-namespace UserInterface.ViewModels
-{
+namespace UserInterface.ViewModels {
     public class CommandVersionViewModel
     {
         private readonly string CommandName;

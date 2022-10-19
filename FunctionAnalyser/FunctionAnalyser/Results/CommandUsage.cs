@@ -1,39 +1,31 @@
 ﻿using System.Collections.Generic;
 
-namespace FunctionAnalyser.Results
-{
-    public class CommandUsage
-    {
+namespace ErrorCraft.PackAnalyser.Results {
+    public class CommandUsage {
         private readonly Dictionary<string, Command> Commands;
 
-        public CommandUsage()
-        {
+        public CommandUsage() {
             Commands = new Dictionary<string, Command>();
         }
 
-        public void Increase(string command, bool behindExecute)
-        {
+        public void Increase(string command, bool behindExecute) {
             if (!Commands.ContainsKey(command)) Commands[command] = new Command();
 
             Commands[command].Commands++;
             if (behindExecute) Commands[command].BehindExecute++;
         }
 
-        public CommandUsage Merge(CommandUsage other)
-        {
-            foreach (KeyValuePair<string, Command> otherPair in other.Commands)
-            {
+        public CommandUsage Merge(CommandUsage other) {
+            foreach (KeyValuePair<string, Command> otherPair in other.Commands) {
                 if (Commands.ContainsKey(otherPair.Key)) Commands[otherPair.Key] += otherPair.Value;
                 else Commands[otherPair.Key] = otherPair.Value;
             }
             return this;
         }
 
-        public Dictionary<string, Command> GetSorted(SortType sortType)
-        {
+        public Dictionary<string, Command> GetSorted(SortType sortType) {
             List<string> keys = new List<string>(Commands.Keys);
-            switch (sortType)
-            {
+            switch (sortType) {
                 case SortType.CommandLength:
                     keys.Sort((a, b) => -a.Length.CompareTo(b.Length));
                     break;
@@ -47,8 +39,7 @@ namespace FunctionAnalyser.Results
             }
 
             Dictionary<string, Command> newValues = new Dictionary<string, Command>();
-            for (int i = 0; i < keys.Count; i++)
-            {
+            for (int i = 0; i < keys.Count; i++) {
                 newValues.Add(keys[i], Commands[keys[i]]);
             }
             return newValues;

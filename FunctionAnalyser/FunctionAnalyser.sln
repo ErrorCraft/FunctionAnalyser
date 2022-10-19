@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32611.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionAnalyser", "FunctionAnalyser\FunctionAnalyser.csproj", "{6A0EC86D-45E3-4D51-ACB3-DA90DD67158C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorCraft.PackAnalyser", "FunctionAnalyser\ErrorCraft.PackAnalyser.csproj", "{6A0EC86D-45E3-4D51-ACB3-DA90DD67158C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedText", "AdvancedText\AdvancedText.csproj", "{EAB1B72E-449C-451B-B5B0-97E5574F7F4D}"
 EndProject
@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorCraft.CommandParser", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorCraft.CommandParser.Tests", "ErrorCraft.CommandParser.Tests\ErrorCraft.CommandParser.Tests.csproj", "{EFE1EA07-1957-45A4-A96B-6138DF7CF232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErrorCraft.FunctionAnalyser.UI.Avalonia", "ErrorCraft.FunctionAnalyser.UI.Avalonia\ErrorCraft.FunctionAnalyser.UI.Avalonia.csproj", "{C83A9909-0DB6-4B7A-A606-F83325F28928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErrorCraft.FunctionAnalyser.UI.Avalonia", "ErrorCraft.FunctionAnalyser.UI.Avalonia\ErrorCraft.FunctionAnalyser.UI.Avalonia.csproj", "{C83A9909-0DB6-4B7A-A606-F83325F28928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

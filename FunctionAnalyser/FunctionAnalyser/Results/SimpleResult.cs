@@ -1,35 +1,28 @@
 ﻿using AdvancedText;
 
-namespace FunctionAnalyser.Results
-{
-    public class SimpleResult : IResult
-    {
+namespace ErrorCraft.PackAnalyser.Results {
+    public class SimpleResult : IResult {
         private int Total;
 
         public SimpleResult() : this(0) { }
 
-        private SimpleResult(int total)
-        {
+        private SimpleResult(int total) {
             Total = total;
         }
 
-        public void Increase()
-        {
+        public void Increase() {
             Total++;
         }
 
-        public int GetTotal()
-        {
+        public int GetTotal() {
             return Total;
         }
 
-        public TextComponent ToTextComponent()
-        {
+        public TextComponent ToTextComponent() {
             return new TextComponent(Total.ToString());
         }
 
-        public static SimpleResult operator +(SimpleResult a, SimpleResult b)
-        {
+        public static SimpleResult operator +(SimpleResult a, SimpleResult b) {
             return new SimpleResult(a.Total + b.Total);
         }
     }

@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-namespace FunctionAnalyser.Builders
-{
-    class Definitions
-    {
+namespace ErrorCraft.PackAnalyser.Builders {
+    class Definitions {
         [JsonProperty("anchors")]
         private readonly string[] Anchors;
         [JsonProperty("blocks")]
@@ -47,108 +45,87 @@ namespace FunctionAnalyser.Builders
         [JsonProperty("structure_mirrors")]
         private readonly string[] StructureMirrors;
 
-        public string[] GetAnchors()
-        {
+        public string[] GetAnchors() {
             return Anchors;
         }
 
-        public string[] GetBlocks()
-        {
+        public string[] GetBlocks() {
             return Blocks;
         }
 
-        public string[] GetColours()
-        {
+        public string[] GetColours() {
             return Colours;
         }
 
-        public string[] GetCommands()
-        {
+        public string[] GetCommands() {
             return Commands;
         }
 
-        public string[] GetComponents()
-        {
+        public string[] GetComponents() {
             return Components;
         }
 
-        public string[] GetEnchantments()
-        {
+        public string[] GetEnchantments() {
             return Enchantments;
         }
 
-        public string[] GetEntities()
-        {
+        public string[] GetEntities() {
             return Entities;
         }
 
-        public string[] GetGamemodes()
-        {
+        public string[] GetGamemodes() {
             return Gamemodes;
         }
 
-        public string[] GetItems()
-        {
+        public string[] GetItems() {
             return Items;
         }
 
-        public string[] GetItemComponents()
-        {
+        public string[] GetItemComponents() {
             return ItemComponents;
         }
 
-        public string[] GetItemSlots()
-        {
+        public string[] GetItemSlots() {
             return ItemSlots;
         }
 
-        public string[] GetMobEffects()
-        {
+        public string[] GetMobEffects() {
             return MobEffects;
         }
 
-        public string[] GetObjectiveCriteria()
-        {
+        public string[] GetObjectiveCriteria() {
             return ObjectiveCriteria;
         }
 
-        public string[] GetOperations()
-        {
+        public string[] GetOperations() {
             return Operations;
         }
 
-        public string[] GetParticles()
-        {
+        public string[] GetParticles() {
             return Particles;
         }
 
-        public string[] GetScoreboardSlots()
-        {
+        public string[] GetScoreboardSlots() {
             return ScoreboardSlots;
         }
 
-        public string[] GetSelectorArguments()
-        {
+        public string[] GetSelectorArguments() {
             return SelectorArguments;
         }
 
-        public string[] GetSorts()
-        {
+        public string[] GetSorts() {
             return Sorts;
         }
 
-        public string[] GetTimeScalars()
-        {
+        public string[] GetTimeScalars() {
             return TimeScalars;
         }
 
-        public string[] GetStructureRotations()
-        {
+        public string[] GetStructureRotations() {
             return StructureRotations;
         }
 
-        public string[] GetStructureMirrors()
-        {
+        public string[] GetStructureMirrors() {
             return StructureMirrors;
         }
     }

@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 
-namespace FunctionAnalyser.Builders.Versions
-{
-    public class VersionResourceKeys
-    {
+namespace ErrorCraft.PackAnalyser.Builders.Versions {
+    public class VersionResourceKeys {
         [JsonProperty("anchors")]
         private readonly string Anchors;
 
@@ -67,108 +65,87 @@ namespace FunctionAnalyser.Builders.Versions
         [JsonProperty("structure_mirrors")]
         private readonly string StructureMirrors;
 
-        public string GetAnchorsKey()
-        {
+        public string GetAnchorsKey() {
             return Anchors;
         }
 
-        public string GetBlocksKey()
-        {
+        public string GetBlocksKey() {
             return Blocks;
         }
 
-        public string GetColoursKey()
-        {
+        public string GetColoursKey() {
             return Colours;
         }
 
-        public string GetCommandsKey()
-        {
+        public string GetCommandsKey() {
             return Commands;
         }
 
-        public string GetComponentsKey()
-        {
+        public string GetComponentsKey() {
             return Components;
         }
 
-        public string GetEnchantmentsKey()
-        {
+        public string GetEnchantmentsKey() {
             return Enchantments;
         }
 
-        public string GetEntitiesKey()
-        {
+        public string GetEntitiesKey() {
             return Entities;
         }
 
-        public string GetGamemodesKey()
-        {
+        public string GetGamemodesKey() {
             return Gamemodes;
         }
 
-        public string GetItemsKey()
-        {
+        public string GetItemsKey() {
             return Items;
         }
 
-        public string GetItemComponentsKey()
-        {
+        public string GetItemComponentsKey() {
             return ItemComponents;
         }
 
-        public string GetItemSlotsKey()
-        {
+        public string GetItemSlotsKey() {
             return ItemSlots;
         }
 
-        public string GetMobEffectsKey()
-        {
+        public string GetMobEffectsKey() {
             return MobEffects;
         }
 
-        public string GetObjectiveCriteriaKey()
-        {
+        public string GetObjectiveCriteriaKey() {
             return ObjectiveCriteria;
         }
 
-        public string GetOperationsKey()
-        {
+        public string GetOperationsKey() {
             return Operations;
         }
 
-        public string GetParticlesKey()
-        {
+        public string GetParticlesKey() {
             return Particles;
         }
 
-        public string GetScoreboardSlotsKey()
-        {
+        public string GetScoreboardSlotsKey() {
             return ScoreboardSlots;
         }
 
-        public string GetSelectorArgumentsKey()
-        {
+        public string GetSelectorArgumentsKey() {
             return SelectorArguments;
         }
 
-        public string GetSortsKey()
-        {
+        public string GetSortsKey() {
             return Sorts;
         }
 
-        public string GetTimeScalarsKey()
-        {
+        public string GetTimeScalarsKey() {
             return TimeScalars;
         }
 
-        public string GetStructureRotationsKey()
-        {
+        public string GetStructureRotationsKey() {
             return StructureRotations;
         }
 
-        public string GetStructureMirrorsKey()
-        {
+        public string GetStructureMirrorsKey() {
             return StructureMirrors;
         }
     }

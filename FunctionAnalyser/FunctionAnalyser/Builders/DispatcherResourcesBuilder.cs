@@ -1,10 +1,8 @@
-﻿using FunctionAnalyser.Builders.Collections;
+﻿using ErrorCraft.PackAnalyser.Builders.Collections;
 using System.Collections.Generic;
 
-namespace FunctionAnalyser.Builders
-{
-    public class DispatcherResourcesBuilder
-    {
+namespace ErrorCraft.PackAnalyser.Builders {
+    public class DispatcherResourcesBuilder {
         public Dictionary<string, AnchorsBuilder> Anchors { get; init; }
         public Dictionary<string, BlocksBuilder> Blocks { get; init; }
         public Dictionary<string, CommandsBuilder> Commands { get; init; }

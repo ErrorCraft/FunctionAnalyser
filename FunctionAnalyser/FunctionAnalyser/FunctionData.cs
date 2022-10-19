@@ -1,11 +1,9 @@
 ﻿using AdvancedText;
-using FunctionAnalyser.Results;
+using ErrorCraft.PackAnalyser.Results;
 using System.Collections.Generic;
 
-namespace FunctionAnalyser
-{
-    public class FunctionData
-    {
+namespace ErrorCraft.PackAnalyser {
+    public class FunctionData {
         public SimpleResult Functions { get; private init; } = new SimpleResult();
         public SimpleResult Comments { get; private init; } = new SimpleResult();
         public SimpleResult EmptyLines { get; private init; } = new SimpleResult();
@@ -27,10 +25,8 @@ namespace FunctionAnalyser
             return new FunctionData();
         }
 
-        public static FunctionData operator +(FunctionData a, FunctionData b)
-        {
-            return new FunctionData()
-            {
+        public static FunctionData operator +(FunctionData a, FunctionData b) {
+            return new FunctionData() {
                 Functions = a.Functions + b.Functions,
                 Comments = a.Comments + b.Comments,
                 EmptyLines = a.EmptyLines + b.EmptyLines,
@@ -41,8 +37,8 @@ namespace FunctionAnalyser
                 PredicateCalls = a.PredicateCalls + b.PredicateCalls,
                 NbtAccess = a.NbtAccess + b.NbtAccess,
                 StorageUsage = a.StorageUsage + b.StorageUsage,
-                LootTableUsage = a.LootTableUsage+ b.LootTableUsage,
-                ItemModifierUsage = a.ItemModifierUsage+ b.ItemModifierUsage,
+                LootTableUsage = a.LootTableUsage + b.LootTableUsage,
+                ItemModifierUsage = a.ItemModifierUsage + b.ItemModifierUsage,
                 AttributeUsage = a.AttributeUsage + b.AttributeUsage
             };
         }

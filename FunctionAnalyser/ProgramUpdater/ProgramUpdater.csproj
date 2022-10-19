@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AdvancedText\AdvancedText.csproj" />
     <ProjectReference Include="..\CommandParser\CommandParser.csproj" />
-    <ProjectReference Include="..\FunctionAnalyser\FunctionAnalyser.csproj" />
+    <ProjectReference Include="..\FunctionAnalyser\ErrorCraft.PackAnalyser.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,15 +5,15 @@ using CommandParser.Minecraft.Nbt.Path;
 using CommandParser.Minecraft.Nbt.Tags;
 using CommandParser.Results;
 using CommandParser.Results.Arguments;
-using FunctionAnalyser.Builders;
-using FunctionAnalyser.Results;
+using ErrorCraft.PackAnalyser.Builders;
+using ErrorCraft.PackAnalyser.Results;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using static AdvancedText.Colour;
 
-namespace FunctionAnalyser {
+namespace ErrorCraft.PackAnalyser {
     public class FunctionReader {
         private Dictionary<string, Dispatcher> Versions;
 
